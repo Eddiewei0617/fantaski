@@ -13,9 +13,11 @@ $font-family-base: "Noto Sans Traditional Chinese, Hobo Std";
 // $border-radius: 30px;
 
 $shadow: 0 0 30 rgba(19, 72, 101, 0.4);
+// 以上為 fantaski專題共用樣式
 
+$light: rgb(235, 235, 235);
 @import "~bootstrap/scss/bootstrap";
 body {
   background-color: $background-color;
-  font-family: $font-family-base;
+  font-family: Noto Sans TC;
 }

@@ -25,3 +25,33 @@
   justify-content: flex-end;
   margin-right: 10rem;
 }
+
+// 側邊欄設定
+.side_bar {
+  margin-left: 10rem;
+  width: 14rem;
+}
+
+.product_word {
+  color: black;
+  width: 14rem;
+  text-align: left;
+}
+.product_area:hover {
+  cursor: pointer;
+  background-color: $light;
+}
+
+.detail_word {
+  text-align: right;
+  padding-right: 3rem;
+  cursor: pointer;
+  border-bottom: 1px solid rgb(230, 230, 230);
+}
+.detail_word:hover {
+  background-color: $light;
+}
+
+.collapse-css-transition {
+  transition: 1s;
+}
