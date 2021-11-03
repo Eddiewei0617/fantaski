@@ -1,0 +1,45 @@
+.comments-wrapper {
+  max-width: 800px;
+  height: 500px;
+  border: 1px solid #134865;
+  border-radius: 30px;
+  margin: 0 auto;
+  padding: 15px 30px;
+  overflow: auto;
+}
+.comment-wrapper {
+  border-bottom: 1px solid rgba(83, 82, 82, 0.5);
+  padding-bottom: 12px;
+  line-height: 40px;
+  position: relative;
+  margin-bottom: 15px;
+}
+.comment-box {
+  line-height: 25px;
+}
+.ellipsis {
+  overflow: hidden;
+  /* text-overflow: clip; */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.comment-avatar-box {
+  height: 40px;
+  margin-bottom: 5px;
+}
+.object-fit-height {
+  height: 100%;
+}
+.star {
+  line-height: 80px;
+}
+.empty-star {
+  color: rgba(173, 173, 173, 0.5);
+}
+.full-star {
+  color: rgb(237, 240, 97);
+}
+
+.commit-more {
+  line-height: 16px;
+}

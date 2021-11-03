@@ -1,0 +1,23 @@
+$main-blue: #3587b5;
+$main-red: #ec6855;
+$main-text-darkblue: #134865;
+$background-color: #fefcee;
+$assist-white: #ffffff;
+
+$font-m: 16px;
+$font-l: $font-m * 1.5;
+$font-xl: $font-l * 1.5;
+
+$font-family-base: "Noto Sans Traditional Chinese, Hobo Std";
+
+// $border-radius: 30px;
+
+$shadow: 0 0 30 rgba(19, 72, 101, 0.4);
+// 以上為 fantaski專題共用樣式
+
+$light: rgb(235, 235, 235);
+@import "~bootstrap/scss/bootstrap";
+body {
+  background-color: $background-color;
+  font-family: Noto Sans TC;
+}

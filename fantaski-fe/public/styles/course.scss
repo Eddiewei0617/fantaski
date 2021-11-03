@@ -1,0 +1,142 @@
+//--------------------------------影片--------------------------------//
+.video-wrap {
+  width: 100%;
+  height: 70vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+//-----------------------------課程通用按鈕-----------------------------//
+.buttons {
+  height: 30px;
+}
+.buttons a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px;
+  /* transform: translateX(-25px); */
+}
+.buttons img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  filter: invert(23%) sepia(10%) saturate(4743%) hue-rotate(163deg)
+    brightness(70%) contrast(89%);
+}
+/* 初體驗hover& 點選後效果 */
+.buttons .course0:hover img,
+.buttons .course0 .showCourseBtn {
+  filter: invert(45%) sepia(33%) saturate(839%) hue-rotate(81deg)
+    brightness(65%) contrast(88%);
+}
+/* 技能班hover& 點選後效果 */
+.buttons .course1:hover img,
+.buttons .course1 .showCourseBtn {
+  filter: invert(62%) sepia(56%) saturate(4147%) hue-rotate(324deg)
+    brightness(85%) contrast(108%);
+}
+/* 雪橇車hover & 點選後效果 */
+
+.buttons .course2:hover img,
+.buttons .course2 .showCourseBtn {
+  filter: brightness(0);
+}
+/* 建冰屋hover& 點選後效果 */
+
+.buttons .course3:hover img,
+.buttons .course3 .showCourseBtn {
+  filter: invert(45%) sepia(33%) saturate(839%) hue-rotate(81deg)
+    brightness(65%) contrast(88%);
+}
+
+.buttons span {
+  font-size: 22px;
+  color: #134865;
+}
+//------------------------------內文標題------------------------------//
+.title {
+  font-weight: bolder;
+  text-align: center;
+  margin: 30px 0 10px 0;
+  color: #134865;
+}
+//------------------------------課程介紹------------------------------//
+.skillCourseIntro {
+  text-align: center;
+  color: #134865;
+}
+//------------------------------課程導覽------------------------------//
+.course-map-wrapper {
+  max-width: 800px;
+  text-align: center;
+  margin: 0 auto;
+}
+.course-map-wrapper .col {
+  cursor: pointer;
+  line-height: 150px;
+  height: 150px;
+  margin: 2px;
+  padding: 0;
+  box-shadow: 2px 2px 3px gray;
+  position: relative;
+  /* 讓旋轉看起來更立體 */
+  perspective: 23rem;
+}
+/* 將圖片與文字面重疊 */
+.course-map-wrapper .col .front,
+.course-map-wrapper .col .back {
+  background: #c9eaf6;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  /* 設定某一面為旋轉-180deg時hidden */
+  backface-visibility: hidden;
+  transition: 0.3s;
+}
+/* 先各給兩面旋轉初始值 */
+.course-map-wrapper .col .front {
+  transform: rotateY(0deg);
+}
+.course-map-wrapper .col .back {
+  font-size: 0;
+  transform: rotateY(-180deg);
+}
+/* 翻轉時 */
+.course-map-wrapper .rotate-effect .front {
+  transition: 0.3s;
+  transform: rotateY(180deg);
+}
+.course-map-wrapper .rotate-effect .back {
+  transition: 0.3s;
+  transform: rotateY(0deg);
+}
+
+.object-fit {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* hover課程時字跟格子都變大一點 */
+.course-map-wrapper .col:hover {
+  transform: scale(1.01);
+  transition: 0.4s;
+}
+.course-map-wrapper .col:hover .front {
+  transition: 0.2s;
+  font-size: 20px;
+}
+.course-map-wrapper .total-hour-box {
+  /* 偷吃步置中 */
+  line-height: 39px;
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+  height: 304px;
+  background: #134865;
+  color: white;
+  margin: 3px;
+  box-shadow: 2px 2px 3px gray;
+}

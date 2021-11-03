@@ -1,0 +1,112 @@
+.swiper-wrapper {
+  position: relative;
+  width: 680px;
+  height: 310px;
+  margin: 0 auto;
+}
+.visibleBox {
+  width: 680px;
+  overflow: hidden;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.swiper-arrow-box:focus {
+  outline: none;
+}
+.swiper-arrow-box {
+  width: 40px;
+  height: 40px;
+  background: #ec6855;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 25px;
+  position: absolute;
+  top: calc(50% - 20px);
+}
+.swiper-arrow-box-unavailable {
+  background: #dbaaa3;
+}
+.swiper-arrow-left {
+  left: 0;
+  transform: translateX(-50%);
+}
+.swiper-arrow-right {
+  right: 0;
+  transform: translateX(50%);
+}
+.all-products {
+  width: 2000px;
+  transition: 0.6s;
+  display: flex;
+  flex-shrink: 0;
+}
+.advice-product-box-selected {
+  /* transition: 0.2s; */
+  width: 350px;
+  height: 300px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border: 3px solid rgba(31, 91, 148, 0.5);
+  border-radius: 10px;
+  box-shadow: 3px 3px rgb(205, 222, 228), -3px -3px rgb(205, 222, 228),
+    3px -3px rgb(205, 222, 228), -3px 3px rgb(205, 222, 228);
+}
+.advice-product-box {
+  /* transition: 0.4s; */
+  width: 150px;
+  height: 250px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border: 3px solid rgba(31, 91, 148, 0.5);
+  border-radius: 10px;
+  box-shadow: 3px 3px rgb(205, 222, 228), -3px -3px rgb(205, 222, 228),
+    3px -3px rgb(205, 222, 228), -3px 3px rgb(205, 222, 228);
+  position: relative;
+}
+.advice-product-box h6 {
+  color: var(--main-text-darkblue);
+  position: absolute;
+  width: 100%;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.advice-product-intro {
+  color: var(--main-text-darkblue);
+  width: 170px;
+  height: 80%;
+}
+.advice-product-intro .price {
+  color: var(--main-red);
+}
+.advice-product-intro .p-normal,
+.advice-product-intro .button-normal {
+  /* transition: 0.4s; */
+  width: 170px;
+  opacity: 0;
+}
+.advice-product-intro .p-selected,
+.advice-product-intro .button-selected {
+  transition: 0.6s;
+  opacity: 100;
+  width: 170px;
+}
+
+.img-box-selected {
+  transition: 0.4s;
+  width: 155px;
+  height: 250px;
+}
+.img-box {
+  /* transition: 0.4s; */
+  position: absolute;
+  bottom: 5%;
+  width: 90%;
+  height: 70%;
+}
+.object-fit {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

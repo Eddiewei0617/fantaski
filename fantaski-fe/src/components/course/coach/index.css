@@ -1,0 +1,86 @@
+.coach-wrapper {
+  height: 400px;
+}
+.coach-shadow {
+  filter: drop-shadow(2px 2px 3px gray);
+  position: relative;
+  z-index: 1;
+}
+/* pointer-events可用來點選下層標籤 -->被選取的教練z-index跑到上層後，svg的部分會遮住下層欲點選的教練2區塊，所以要讓上層教練區可穿透 */
+.coach-shadow-selected {
+  pointer-events: none;
+}
+.coach-shadow-unselected {
+  z-index: 0;
+}
+.coach {
+  width: 700px;
+  height: 400px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.coach-box-bg {
+  fill: #3681ab;
+}
+.coach-box-bg-unselected {
+  fill: #cbdfe7;
+}
+.click-area {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  left: 0;
+}
+.click-area1 {
+  top: 0;
+}
+.click-area2 {
+  bottom: 0;
+}
+.avatar {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.avatar1 {
+  top: 5%;
+}
+.avatar2 {
+  top: 5%;
+}
+
+.object-fit {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.coach-info {
+  width: 100%;
+  text-align: center;
+  color: white;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.coach-info-unselected {
+  color: black;
+}
+.coach-info1 {
+  bottom: 8%;
+}
+.coach-info2 {
+  bottom: 8%;
+}
+.coach-file {
+  width: 70%;
+  line-height: 27px;
+  color: white;
+  position: absolute;
+  top: 5%;
+  right: 0;
+}
