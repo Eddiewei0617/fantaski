@@ -5,7 +5,6 @@
   margin: 0 auto;
   overflow: hidden;
 }
-
 .size {
   width: 100%;
   height: 100%;
@@ -17,6 +16,17 @@
   display: flex;
   justify-content: center;
   margin: 15px auto;
+  background-color: transparent;
+  border: transparent;
+}
+.scrolldown:hover {
+  background-color: transparent;
+  border: transparent;
+}
+
+.down_hand:hover {
+  // animation: bounce;
+  color: $main-red;
 }
 
 // 切換版面小icon設定
@@ -25,23 +35,28 @@
   justify-content: flex-end;
   margin-right: 10rem;
 }
+.switch_icon Button:hover,
+.switch_icon Button:focus {
+  background-color: $main-red;
+}
 
 // 側邊欄設定
 .side_bar {
   margin-left: 10rem;
   width: 14rem;
+  position: relative;
+  font-size: $font-m * 1.2;
 }
-
 .product_word {
   color: black;
   width: 14rem;
   text-align: left;
+  font-size: $font-m * 1.2;
 }
 .product_area:hover {
   cursor: pointer;
   background-color: $light;
 }
-
 .detail_word {
   text-align: right;
   padding-right: 3rem;
@@ -52,6 +67,74 @@
   background-color: $light;
 }
 
-.collapse-css-transition {
-  transition: 1s;
+// 分隔線
+.separate {
+  width: 1px;
+  height: 100%;
+  border-right: 1px solid rgb(121, 121, 121);
+  left: 23%;
+  position: absolute;
+  display: inline;
+}
+
+// 商品小標題
+.product_title {
+  color: $main-blue;
+  height: 2.1rem;
+  display: block;
+  position: relative;
+  border-left: 6px solid $main-blue;
+  // padding: 3px;
+}
+
+// 方格式圖片設定
+.all_image_s {
+  position: absolute;
+  left: 25%;
+}
+.all_image_s li {
+  display: inline-block;
+  margin: 5rem;
+  text-align: center;
+}
+.product_image_s {
+  width: 15rem;
+  height: 24rem;
+}
+
+// 條列式圖片設定
+.all_image_l {
+  position: absolute;
+  left: 22%;
+}
+.all_image_l li {
+  display: flex;
+  margin: 5rem;
+}
+.product_image_l {
+  width: 15rem;
+  height: 24rem;
+}
+.product_description {
+  max-width: 900px;
+  margin-left: 2rem;
+  align-self: center;
+  font-size: $font-m * 1.2;
+}
+
+// 加入購物車button
+.cart {
+  color: black;
+  background-color: $background-color;
+  border: 1px solid $main-red;
+  width: 150px;
+  height: 45px;
+}
+.cart:hover,
+.cart:active,
+.cart:focus,
+.cart:link {
+  color: white;
+  background-color: $main-red;
+  border: 1px solid $main-red;
 }

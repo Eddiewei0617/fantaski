@@ -5,15 +5,21 @@ import CarouselP from "../components/products/CarouselP";
 import ScrolldownIcon from "../components/products/ScrolldownIcon";
 import SwitchIcon from "../components/products/SwitchIcon";
 import NavSide from "../components/products/NavSide";
+// import ProductSquare from "../components/products/ProductSquare";
+import ProductList from "../components/products/ProductList";
 
-function ProductList() {
+function Products() {
   return (
     <>
       <CarouselP />
       <ScrolldownIcon />
       <SwitchIcon />
-      <NavSide />
+      <div className="d-flex">
+        <NavSide />
+        {/* <ProductSquare /> */}
+        <ProductList />
+      </div>
     </>
   );
 }
-export default ProductList;
+export default Products;

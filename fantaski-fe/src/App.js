@@ -1,16 +1,16 @@
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { useState } from "react";
-import ProductList from "./pages/ProductList";
+import Products from "./pages/Products";
 
 function App() {
   return (
     <Router>
       <>
-        <Link to="/ProductList"></Link>
+        <Link tp="/Products"></Link>
 
         <Switch>
-          <Route path="/ProductList">
-            <ProductList />
+          <Route path="/products">
+            <Products />
           </Route>
         </Switch>
       </>

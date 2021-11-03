@@ -6,9 +6,9 @@ function ScrolldownIcon() {
     <>
       <Button
         variant="light"
-        className="scrolldown animate__animated animate__bounce"
+        className="scrolldown animate__animated animate__bounce animate__repeat-2	2	"
       >
-        <ImPointDown size="2rem" />
+        <ImPointDown size="2rem" className="down_hand" />
       </Button>
     </>
   );
