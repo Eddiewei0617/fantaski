@@ -1,4 +1,4 @@
-import ProgressBar from "../components/order/ProgressBar";
+import ProgressBar from "../components/orders/ProgressBar";
 
 function Orders() {
   return (

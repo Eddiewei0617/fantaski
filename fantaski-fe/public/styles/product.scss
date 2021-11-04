@@ -13,9 +13,11 @@
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  background-color: black;
-  padding: 20px;
+  background-color: $main-red;
+  border-radius: $border-radius;
+  padding: $font-l;
 }
+
 // 往下滑小icon設定
 .scrolldown {
   display: flex;
@@ -28,7 +30,6 @@
   background-color: transparent;
   border: transparent;
 }
-
 .down_hand:hover {
   // animation: bounce;
   color: $main-red;
@@ -39,6 +40,9 @@
   display: flex;
   justify-content: flex-end;
   margin-right: 10rem;
+}
+.switch_icon Button {
+  border: 0ch;
 }
 .switch_icon Button:hover,
 .switch_icon Button:focus {
@@ -51,6 +55,7 @@
   width: 14rem;
   position: relative;
   font-size: $font-m * 1.2;
+  border-radius: $border-radius-main;
 }
 .product_word {
   color: black;

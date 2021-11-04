@@ -41,8 +41,8 @@ function ProductSquare() {
             <div className="product_image_s">
               <img src={v.image} alt="" className="size" />
             </div>
-            <p>{v.name}</p>
-            <p>NT$ {v.price}</p>
+            <p className="mt-3 h5">{v.name}</p>
+            <p className="h5">NT$ {v.price}</p>
             <Button className="cart">加入購物車</Button>{" "}
           </li>
         );
