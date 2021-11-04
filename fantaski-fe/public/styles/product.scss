@@ -11,6 +11,11 @@
   object-fit: content;
 }
 
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: black;
+  padding: 20px;
+}
 // 往下滑小icon設定
 .scrolldown {
   display: flex;
