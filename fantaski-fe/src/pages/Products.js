@@ -13,14 +13,13 @@ function Products() {
 
   return (
     <>
+      <div className="navbar"></div>
       <CarouselP />
       <ScrolldownIcon />
       <SwitchIcon setSquare={setSquare} square={square} />
       <div className="d-flex">
         <NavSide />
         {square ? <ProductSquare /> : <ProductList />}
-        {/* <ProductSquare />
-        <ProductList /> */}
       </div>
     </>
   );

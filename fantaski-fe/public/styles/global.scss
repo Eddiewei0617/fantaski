@@ -8,8 +8,7 @@ $font-m: 16px;
 $font-l: $font-m * 1.5;
 $font-xl: $font-l * 1.5;
 
-$font-family-base: "Noto Sans Traditional Chinese, Hobo Std, Noto Sans";
-
+$font-family-base: "Noto Sans Traditional Chinese", "Noto Sans"; //Hobo Std,
 $border-radius-main: 30px;
 
 $shadow: 0 0 30 rgba(19, 72, 101, 0.4);

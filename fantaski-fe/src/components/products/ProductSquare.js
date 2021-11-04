@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { IMAGE_URL } from "../../config/url";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const productFromServer = [
   {
@@ -43,7 +44,9 @@ function ProductSquare() {
             </div>
             <p className="mt-3 h5">{v.name}</p>
             <p className="h5">NT$ {v.price}</p>
-            <Button className="cart">加入購物車</Button>{" "}
+            <Link to={"/orders?id=" + v.id}>
+              <Button className="cart">加入購物車</Button>
+            </Link>
           </li>
         );
       })}
@@ -54,6 +57,12 @@ function ProductSquare() {
     <>
       <h3 className="product_title pl-1">雪板類</h3>
       {display}
+      <div className="page_button">
+        <Button>{`<`}</Button>
+        <Button>{`1`}</Button>
+        {/* <Button>{`2`}</Button> */}
+        <Button>{`>`}</Button>
+      </div>
     </>
   );
 }

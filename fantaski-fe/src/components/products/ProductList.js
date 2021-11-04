@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { IMAGE_URL } from "../../config/url";
 import { Button } from "react-bootstrap";
+import { Link, withRouter } from "react-router-dom";
 
 const productFromServer = [
   {
@@ -55,7 +56,10 @@ function ProductList() {
               <p>{v.description}</p>
               <p>適合對象 : {v.suitable}</p>
               <p>租購價 : NT$ {v.price}</p>
-              <Button className="cart">加入購物車</Button>{" "}
+
+              <Link to={"/orders?id=" + v.id}>
+                <Button className="cart">加入購物車</Button>
+              </Link>
             </div>
           </li>
         );
@@ -67,8 +71,14 @@ function ProductList() {
     <>
       <h3 className="product_title pl-1">雪板類</h3>
       {display}
+      <div className="page_button">
+        <Button>{`<`}</Button>
+        <Button>{`1`}</Button>
+        <Button>{`2`}</Button>
+        <Button>{`>`}</Button>
+      </div>
     </>
   );
 }
 
-export default ProductList;
+export default withRouter(ProductList);

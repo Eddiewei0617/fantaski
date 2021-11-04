@@ -1,7 +1,16 @@
+.navbar {
+  width: auto;
+  height: 100px;
+  background-color: $main-blue;
+  margin-bottom: 40px;
+}
+
+//---------------商品頁面-------------------------------------------
+
 // 圖片輪播設定
 .image_range {
-  width: 1422px;
-  height: 666px;
+  width: 1500px;
+  height: 700px;
   margin: 0 auto;
   overflow: hidden;
 }
@@ -13,8 +22,7 @@
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  background-color: $main-red;
-  border-radius: $border-radius;
+  filter: brightness(0.7);
   padding: $font-l;
 }
 
@@ -140,6 +148,10 @@
   width: 150px;
   height: 45px;
 }
+.cart Link {
+  width: 150px;
+  height: 45px;
+}
 .cart:hover,
 .cart:active,
 .cart:focus,
@@ -147,4 +159,55 @@
   color: white;
   background-color: $main-red;
   border: 1px solid $main-red;
+}
+
+// 切換頁面按鈕
+.page_button {
+  display: flex;
+  // height: 50px;
+  position: absolute;
+  top: 220%;
+  left: 50%;
+}
+.page_button Button {
+  border: 1px solid white;
+}
+
+//---------------購物車-------------------------------------------
+
+// 進度圖案文字條樣式設定
+.md-50 {
+  font-size: 50px;
+  cursor: pointer;
+}
+.md-blue {
+  color: $main-text-darkblue;
+}
+.md-grey {
+  color: rgb(163, 163, 163);
+}
+// .md-blue:hover {
+//   opacity: 0.7;
+// }
+.number_icon {
+  display: flex;
+  justify-content: center;
+}
+.order_progress_word {
+  font-size: $font-l;
+  font-weight: 700;
+}
+.progress_line {
+  width: 15rem;
+  height: 5px;
+  background-color: rgb(163, 163, 163);
+  margin: 30px 3rem;
+}
+
+// 購物車內容
+.cart_content-bg {
+  width: 1400px;
+  height: 600px;
+  background-color: $main-blue;
+  margin: 30px auto;
 }
