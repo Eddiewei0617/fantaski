@@ -57,12 +57,6 @@ function ProductSquare() {
     <>
       <h3 className="product_title pl-1">雪板類</h3>
       {display}
-      <div className="page_button">
-        <Button>{`<`}</Button>
-        <Button>{`1`}</Button>
-        {/* <Button>{`2`}</Button> */}
-        <Button>{`>`}</Button>
-      </div>
     </>
   );
 }

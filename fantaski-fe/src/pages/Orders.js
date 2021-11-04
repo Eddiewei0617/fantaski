@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import ProgressBar from "../components/orders/ProgressBar";
 import CartContent from "../components/orders/CartContent";
+import OrderContent from "../components/orders/OrderContent";
+import Step from "../components/orders/Step";
 import { IMAGE_URL } from "../config/url";
 
 const productFromServer = [
@@ -81,10 +83,9 @@ function Orders(props) {
 
       <CartContent />
       {/* </div> */}
-      <div className="box border border-primary m-5 p-5 h2">總訂單內容</div>
+      <OrderContent />
       <div className="box3 d-flex justify-content-end m-5">
-        <div className="box2 border border-primary m-3">上一步</div>
-        <div className="box2 border border-primary m-3">下一步</div>
+        <Step />
       </div>
       {display}
     </>
