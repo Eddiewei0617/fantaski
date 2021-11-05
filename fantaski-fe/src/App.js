@@ -14,7 +14,7 @@ const courses = ["初體驗", "技能班", "雪橇車", "建冰屋"];
 
 function App() {
   //傳入course狀態(使用者要看哪個course)
-  const [showCourse, setShowCourse] = useState(courses[1]);
+  const [showCourse, setShowCourse] = useState();
 
   return (
     <Router>
@@ -24,9 +24,17 @@ function App() {
         {/* 匹配路由表(路徑單一匹配) */}
         {/* 切換顯示的元件畫面放在這下面 */}
         {/* ScrollToTop是為了讓連到另一頁內容時，頁面回到最上方 */}
-
-        <Link to="/Products"></Link>
-        <Link to="/Orders"></Link>
+        暫時代替navbar <br />
+        <Link to="/Products">到產品</Link>&nbsp;<Link to="/Orders">到訂單</Link>
+        &nbsp;
+        <Link
+          to="/course/beginner"
+          onClick={() => {
+            setShowCourse(courses[0]);
+          }}
+        >
+          到課程-初體驗
+        </Link>
         <ScrollToTop>
           <Switch>
             <Route path="/course/beginner">
