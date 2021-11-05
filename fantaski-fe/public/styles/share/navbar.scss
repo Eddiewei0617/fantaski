@@ -1,0 +1,82 @@
+// @import url(global.css);
+
+body {
+  height: 200vh;
+  background-color: $main-blue;
+}
+
+.navbar {
+  background-color: $main-blue;
+  border-bottom: 3px solid $assist-white;
+}
+.navbar-header {
+  margin-left: 10%;
+}
+
+// navbar文字顏色 & hover效果
+.nav-link {
+  color: $assist-white;
+  font-size: 18px;
+  // font-family: $font-family-base;
+  // font-weight: 600;
+}
+.nav-link {
+  &:hover {
+    color: $main-text-darkblue;
+  }
+}
+
+// =================右邊 區域===================
+
+// 天氣、購物車 & 會員登入 前的左線條
+.left-line {
+  background-color: $assist-white;
+  border: 1px solid $assist-white;
+  margin: 10px 20px;
+  height: 60px;
+}
+
+// 所有icon的間距
+.all-icon-nav {
+  margin: 3% 7% 0 0;
+}
+
+// 天氣小圖的溫度
+.warm-number {
+  font-size: 20px;
+  position: absolute;
+  top: 25%;
+}
+// 天氣小圖下的地區&時間文字
+.area-time {
+  font-size: 12px;
+  display: block;
+  padding: 5px 0 0;
+}
+
+// 購物車的 圈圈數字
+.shopping-cart-circle {
+  width: 24px;
+  height: 24px;
+  background-color: $main-red;
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  border-radius: 50%;
+  font-size: 14px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// 註冊登入的寬，沒有設定文字會跑版
+.user-login {
+  width: 200px;
+}
+
+//  註冊/登入的文字間距
+.login {
+  position: relative;
+  top: 5px;
+}
