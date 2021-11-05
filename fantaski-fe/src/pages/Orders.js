@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import ProgressBar from "../components/orders/ProgressBar";
-import CartContent from "../components/orders/CartContent";
-import OrderContent from "../components/orders/OrderContent";
-import Step from "../components/orders/Step";
+// import ProgressBar from "../components/orders/ProgressBar";
+// import CartContent from "../components/orders/CartContent";
+// import OrderContent from "../components/orders/OrderContent";
+// import NextStepIcon from "../components/orders/NextStepIcon";
+import FirstStep from "../components/orders/FirstStep";
+import SecondStep from "../components/orders/SecondStep";
+
 import { IMAGE_URL } from "../config/url";
 
 const productFromServer = [
@@ -75,18 +78,8 @@ function Orders(props) {
 
   return (
     <>
-      <div className="navbar"></div>
-      <div className="d-flex justify-content-center">
-        <ProgressBar />
-      </div>
-      {/* <div className="box border border-primary m-5 p-5 h2"> */}
-
-      <CartContent />
-      {/* </div> */}
-      <OrderContent />
-      <div className="box3 d-flex justify-content-end m-5">
-        <Step />
-      </div>
+      <FirstStep orderProduct={orderProduct} />
+      <SecondStep orderProduct={orderProduct} />
       {display}
     </>
   );
