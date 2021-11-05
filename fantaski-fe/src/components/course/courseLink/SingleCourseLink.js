@@ -1,0 +1,41 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
+const coursesinEng = {
+  初體驗: "beginner",
+  技能班: "skill",
+  雪橇車: "sled",
+  建冰屋: "igloo",
+};
+
+function SingleCourseLink(props) {
+  const { course, courseDescription, imgSrc, setShowCourse } = props;
+  return (
+    <>
+      <div className="single-course-wrap col-5 p-0 m-1">
+        <Link
+          to={`/course/${coursesinEng[course]}`}
+          onClick={() => {
+            setShowCourse(course);
+          }}
+        >
+          <div className="single-course-mask">
+            <div className="single-course-box">
+              <div className="single-course-name">{course}課程</div>
+              <div className="single-course-description">
+                {courseDescription}
+              </div>
+            </div>
+          </div>
+          <img
+            className="object-fit"
+            src={`/assets/img_course/${imgSrc}`}
+            alt=""
+          ></img>
+        </Link>
+      </div>
+    </>
+  );
+}
+
+export default SingleCourseLink;
