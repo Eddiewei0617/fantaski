@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import useStatePromise from "use-state-promise";
+import "use-state-promise";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 const starMapping = {
@@ -39,7 +39,7 @@ function Comment(props) {
         <div className="comment-avatar-box col-1">
           <img
             className="object-fit-height"
-            src="/assets/img/avatar-default.png"
+            src="/assets/img_course/avatar-default.png"
             alt=""
           />
         </div>
@@ -61,7 +61,7 @@ function Comment(props) {
           {comment.content}
         </div>
         {hasMore && (
-          <a
+          <span
             href="#/"
             className="col-12 commit-more"
             onClick={() => {
@@ -70,7 +70,7 @@ function Comment(props) {
             }}
           >
             ...more
-          </a>
+          </span>
         )}
       </div>
     </>

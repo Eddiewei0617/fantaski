@@ -18,7 +18,7 @@ function ProductCard(props) {
         >
           <img
             className="object-fit"
-            src={`assets/img/${product.img}`}
+            src={`/assets/img_course/${product.img}`}
             alt=""
           ></img>
         </div>

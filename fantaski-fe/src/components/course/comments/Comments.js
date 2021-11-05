@@ -1,4 +1,3 @@
-import "./index.css";
 import React from "react";
 import Comment from "./comment";
 const comments = [
@@ -52,7 +51,8 @@ const comments = [
   },
 ];
 
-function Comments() {
+function Comments({ showCourse }) {
+  //後端依據showCourse抓評論回填
   return (
     <>
       <div className="comments-wrapper">

@@ -1,7 +1,5 @@
 import React, { useState, useRef } from "react";
 import ProductCard from "./ProductCard";
-import "../../../node_modules/animate.css";
-import "./index.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
@@ -34,14 +32,15 @@ const adviceProducts = [
   },
   {
     id: 4,
-    name: "3",
+    name: "最強護目鏡",
     intro: "防雪防滑防寒還能放糖果！安心滑雪首選！",
     price: 2000,
-    img: "1631004818.jpg",
+    img: "1630914036.jpg",
   },
 ];
 
-function Swiper() {
+function Swiper({ showCourse }) {
+  //後端依據 showCourse抓資料回來
   const [selectedAdvice, setSelectedAdvice] = useState(0);
   const [ifArrowUnavailable, setIfArrowUnavailable] = useState({
     left: true,
@@ -109,6 +108,13 @@ function Swiper() {
   return (
     <>
       <div className="swiper-wrapper">
+        <div className="decoration-skill">
+          <img
+            className="object-fit"
+            src="/assets/img_course/all-advice.png"
+            alt=""
+          />
+        </div>
         <div className="visibleBox">
           {/* 這裡開始是產品的卡片串 */}
           <div

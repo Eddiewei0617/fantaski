@@ -3,7 +3,10 @@ import { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // 頁面用元件
-import Skill from "./pages/course/skill/Skill";
+import Skill from "./pages/course/Skill";
+import Beginner from "./pages/course/Beginner";
+import Sled from "./pages/course/Sled";
+import Igloo from "./pages/course/Igloo";
 
 // 組合用元件
 import ScrollToTop from "./components/ScrollToTop";
@@ -24,14 +27,9 @@ function App() {
           {/* 切換顯示的元件畫面放在這下面 */}
           {/* ScrollToTop是為了讓連到另一頁內容時，頁面回到最上方 */}
           <ScrollToTop>
-            <Skill
-              courses={courses}
-              showCourse={showCourse}
-              setShowCourse={setShowCourse}
-            />
             <Switch>
               <Route path="/course/beginner">
-                <Skill
+                <Beginner
                   courses={courses}
                   showCourse={showCourse}
                   setShowCourse={setShowCourse}
@@ -45,14 +43,14 @@ function App() {
                 />
               </Route>
               <Route path="/course/sled">
-                <Skill
+                <Sled
                   courses={courses}
                   showCourse={showCourse}
                   setShowCourse={setShowCourse}
                 />
               </Route>
               <Route path="/course/igloo">
-                <Skill
+                <Igloo
                   courses={courses}
                   showCourse={showCourse}
                   setShowCourse={setShowCourse}

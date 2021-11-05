@@ -1,5 +1,5 @@
 import React from "react";
-import * as moment from "../../../node_modules/moment";
+import moment from "moment";
 
 const today = moment().format("YYYY-MM-DD");
 
@@ -13,6 +13,7 @@ function isLeapYear(year) {
 }
 //判斷某月有幾天
 function daysInMonth(year, month) {
+  if (month === 0) month = 12;
   let days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   let day = days[month - 1];
   if (month === 2 && isLeapYear(year) === true) day = 29;
@@ -25,56 +26,67 @@ function firstWeekday(year, month) {
 }
 //判斷本月1號前上個月有多少天並回傳陣列
 const weekDayInLastMonth = (year, month) => {
+  let lastMonth = month - 1;
+  let yearForLastMonth = year;
+  if (lastMonth === 0) {
+    lastMonth = 12;
+    yearForLastMonth -= 1;
+  }
   //上個月有幾天
-  let daysInLastMonth = daysInMonth(year, month - 1);
+  let daysInLastMonth = daysInMonth(yearForLastMonth, lastMonth);
   //這個月1號是星期幾
   let firstDayInThisMonth = firstWeekday(year, month);
   let days = [];
   //本月要顯示幾天上個月的日期
   for (let i = 0; i < firstDayInThisMonth; i++) {
-    days.push(
-      `<a href="#/" key = ${month - 1}_${i} class="text-secondary">${
-        daysInLastMonth - firstDayInThisMonth + 1
-      }</a>`
-    );
+    let day = daysInLastMonth - firstDayInThisMonth + 1;
+    days.push({ y: Number(yearForLastMonth), m: Number(lastMonth), d: day });
     daysInLastMonth++;
   }
   return days;
 };
 //本月的天數陣列
-const daysInThisMonth = (year, month, day) => {
+const daysInThisMonth = (year, month) => {
   let days = [];
   let j;
   for (let i = 1; i <= daysInMonth(year, month); i++) {
-    if (i < 10) j = `0${i}`;
-    let selectedDay = `${year}-${month}-${j}`;
-    if (selectedDay !== today) {
-      days.push(`<a href="#/" key = ${month}_${i} class="text-dark">${i}</a>`);
-    } else {
-      days.push(
-        `<a href="#/" key = ${month}_${i} class="text-danger">${i}</a>`
-      );
-    }
+    days.push({ y: Number(year), m: Number(month), d: i });
   }
   return days;
 };
-const daysInNextMonth = (daysThisLastMonth, month) => {
+//次月的天數陣列
+const daysInNextMonth = (daysThisLastMonth, month, year) => {
+  let yearForNextMonth = year;
+  let nextMonth = Number(month) + 1;
+  if (month === 12) {
+    yearForNextMonth += 1;
+    nextMonth = 1;
+  }
   let daysNextMonth = 7 - (daysThisLastMonth % 7);
   let days = [];
   for (let i = 1; i <= daysNextMonth; i++) {
-    days.push(
-      `<a href="#/" key = ${month + 1}_${i} class="text-secondary">${i}</a>`
-    );
+    days.push({ y: Number(yearForNextMonth), m: Number(nextMonth), d: i });
   }
   return days;
 };
+
 function DatesInMonth(props) {
-  const { selectedYear, selectedMonth, day } = props;
+  const {
+    selectedYear,
+    selectedMonth,
+    day,
+    setCustomerChoose,
+    setShowCalendar,
+    setShowCalendarFloat,
+  } = props;
+
   let totalDaysLT = weekDayInLastMonth(selectedYear, selectedMonth).concat(
     daysInThisMonth(selectedYear, selectedMonth, day)
   );
   //一整個日曆的天數存成一個陣列
-  let totalDays = totalDaysLT.concat(daysInNextMonth(totalDaysLT.length));
+  let totalDays = totalDaysLT.concat(
+    daysInNextMonth(totalDaysLT.length, selectedMonth, selectedYear)
+  );
   //整個日曆的天數再分成七天一組，渲染時：先map一整排，裡面再map一整排的天數(幾號)
   let totaldata = [],
     tempdata = [];
@@ -83,6 +95,36 @@ function DatesInMonth(props) {
     if (i % 7 === 6) {
       totaldata.push(tempdata);
       tempdata = [];
+    }
+  }
+  const handleChange = (year, month, day) => {
+    console.log(setShowCalendarFloat, setShowCalendar);
+    if (setShowCalendarFloat === undefined) {
+      setShowCalendar(false);
+    } else if (setShowCalendar === undefined) {
+      setShowCalendarFloat(false);
+    }
+    let newValue = `${year}-${month}-${day}`;
+    setCustomerChoose((cur) => {
+      return { ...cur, date: newValue };
+    });
+  };
+  function handleStyleChange(y, m, d) {
+    if (d < 10) d = `0${d}`;
+    let lastNextStyle = "calendar-dates-box-last";
+    let thisMonthStyle = "calendar-dates-box-this";
+    let thisMonth = `${y}-${m}`;
+    let selectMonth = `${selectedYear}-${selectedMonth}`;
+    let Columntoday = `${y}-${m}-${d}`;
+    if (thisMonth === selectMonth) {
+      if (Columntoday !== today) {
+        return thisMonthStyle;
+      } else {
+        let todayStyle = "calendar-dates-box-this-today";
+        return thisMonthStyle, todayStyle;
+      }
+    } else if (thisMonth !== selectMonth) {
+      return lastNextStyle;
     }
   }
   return (
@@ -94,8 +136,16 @@ function DatesInMonth(props) {
               {vr.map((vc, vci) => {
                 return (
                   <>
-                    {/* jsx不支援innerHTML功能(會整串標籤變字串)，需使用dangerouslySetInnerHTML */}
-                    <td dangerouslySetInnerHTML={{ __html: vc }}></td>
+                    <td
+                      className={`calendar-dates-box ${handleStyleChange(
+                        vc.y,
+                        vc.m,
+                        vc.d
+                      )}`}
+                      onClick={() => handleChange(vc.y, vc.m, vc.d)}
+                    >
+                      {vc.d}
+                    </td>
                   </>
                 );
               })}

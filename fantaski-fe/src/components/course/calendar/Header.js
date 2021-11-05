@@ -1,5 +1,4 @@
 import React from "react";
-import "./index.css";
 //只開放3年內的預約
 const yearsCanSelect = (year) => {
   let yearsOptions = [];

@@ -1,18 +1,9 @@
 import React, { useState } from "react";
-import "./index.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCalendarAlt,
-  faSortUp,
-  faSortDown,
-} from "@fortawesome/free-solid-svg-icons";
-import Calendar from "../calendar";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import Calendar from "../calendar/Calendar";
 
-function AddCartFix() {
-  const [customerChoose, setCustomerChoose] = useState({
-    date: "",
-    number: "",
-  });
+function AddCartFix({ customerChoose, setCustomerChoose }) {
   const [showCalendar, setShowCalendar] = useState(false);
 
   function handleChange(e) {
@@ -21,11 +12,17 @@ function AddCartFix() {
     setCustomerChoose((cur) => {
       return { ...cur, [name]: newValue };
     });
-    console.log(name, newValue);
   }
   return (
     <>
       <div className="add-cart-fix-wrapper">
+        <div className="decoration-skill">
+          <img
+            className="object-fit"
+            src="/assets/img_course/skillPeople.png"
+            alt=""
+          />
+        </div>
         <div className="row text-center content">
           <div className="col-2"></div>
           <div className="col-2 day-choose-box">
@@ -34,12 +31,12 @@ function AddCartFix() {
               type="text"
               name="date"
               value={customerChoose.date}
-              placeholder="yyyy-mm-dd"
-              className="date"
+              placeholder="選擇日期"
+              className="date pl-4"
               onChange={handleChange}
             ></input>
             <FontAwesomeIcon
-              className="icons calendar-icon"
+              className="icons"
               icon={faCalendarAlt}
               onClick={() => {
                 setShowCalendar(!showCalendar);
@@ -47,7 +44,10 @@ function AddCartFix() {
             />
             {showCalendar && (
               <div className="custom-calendar">
-                <Calendar />
+                <Calendar
+                  setCustomerChoose={setCustomerChoose}
+                  setShowCalendar={setShowCalendar}
+                />
               </div>
             )}
           </div>
@@ -58,11 +58,10 @@ function AddCartFix() {
               name="number"
               value={customerChoose.number}
               placeholder="1"
+              min="1"
               className="number"
               onChange={handleChange}
             ></input>
-            <FontAwesomeIcon className="icons number-icon" icon={faSortUp} />
-            <FontAwesomeIcon className="icons number-icon" icon={faSortDown} />
           </div>
           <div className="col-2">
             <h5>價格</h5>

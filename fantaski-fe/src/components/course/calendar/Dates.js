@@ -4,13 +4,20 @@ import DatesInMonth from "./DatesInMonth";
 const weekdays = ["日", "一", "二", "三", "四", "五", "六"];
 
 function Dates(props) {
-  const { selectedYear, selectedMonth, day } = props;
+  const {
+    selectedYear,
+    selectedMonth,
+    day,
+    setCustomerChoose,
+    setShowCalendar,
+    setShowCalendarFloat,
+  } = props;
 
   return (
     <>
       <table className="table table-bordered text-center">
         <thead>
-          <tr>
+          <tr className="calendar-dates-week">
             {weekdays.map((v, i) => {
               return (
                 <>
@@ -25,6 +32,9 @@ function Dates(props) {
             selectedYear={selectedYear}
             selectedMonth={selectedMonth}
             day={day}
+            setCustomerChoose={setCustomerChoose}
+            setShowCalendar={setShowCalendar}
+            setShowCalendarFloat={setShowCalendarFloat}
           />
         </tbody>
       </table>
