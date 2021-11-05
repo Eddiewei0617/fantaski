@@ -1,6 +1,6 @@
 //---------------購物車-------------------------------------------
 
-// 進度圖案文字條樣式設定
+// ***進度圖案文字條樣式設定
 
 // 企鵝--------
 @keyframes skiing {
@@ -208,6 +208,7 @@
   color: $main-red;
 }
 
+// ***第二階段
 // 信用卡區域設定
 .credit_content_bg {
   width: 1400px;
@@ -227,7 +228,93 @@
   border-radius: 0, 0, 20px, 20px;
 }
 
-// 上一步下一步按鈕
+// ***第三階段
+// ***最後訂單明細背景設定
+.order_final_bg {
+  width: 1200px;
+  height: 1000px;
+  background-color: $main-blue;
+  margin: 30px auto;
+  border-radius: 20px;
+  box-shadow: 0px 15px 15px -15px #000;
+  position: relative;
+}
+.order_final_bg2 {
+  width: 1200px;
+  height: 900px;
+  background-color: #fff;
+  position: absolute;
+  top: 100px;
+  border-radius: 0, 0, 20px, 20px;
+}
+.order_final_bg h2 {
+  text-align: center;
+  padding: 30px 0;
+  color: #fff;
+  font-weight: 600;
+}
+
+// 最後訂單四行
+.final_title {
+  height: 50px;
+  background-color: $main-blue;
+  color: #fff;
+  font-size: $font-l;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px auto;
+}
+.col-3 {
+  max-width: 15%;
+}
+.final_word {
+  display: flex;
+  align-items: center;
+  color: $main-text-darkblue;
+  font-size: $font-l;
+}
+.border-bottoms {
+  border-bottom: 3px solid rgb(168, 168, 168);
+}
+
+// 中間分隔線
+.middle_line {
+  width: 1140px;
+  height: 8px;
+  background-color: $main-text-darkblue;
+  margin: 40px auto;
+}
+
+// 下方最終購買明細
+.final_form {
+  border: 3px solid $main-text-darkblue;
+  margin: 10px 30px;
+}
+.final_table {
+  width: 1135px;
+}
+.final_thead {
+  background-color: $main-blue;
+  color: #fff;
+  text-align: center;
+  font-size: 20px;
+}
+.final_thead tr {
+  display: flex;
+  justify-content: space-around;
+}
+.final_tbody tr {
+  display: flex;
+  justify-content: flex-end;
+}
+.final_tbody input {
+  width: 180px;
+  outline: 0ch;
+  border: 0ch;
+}
+
+// ***上一步下一步按鈕
 .prevstep {
   margin-right: 1rem;
   width: 8%;

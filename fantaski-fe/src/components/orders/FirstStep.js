@@ -4,14 +4,16 @@ import CartContent from "./CartContent";
 import OrderContent from "./OrderContent";
 import NextStepIcon from "./NextStepIcon";
 
-function FirstStep({ orderProduct, step2, setStep2 }) {
-  //   console.log("123", orderProduct);
-
+function FirstStep({ orderProduct, step2, setStep2, progressMoving }) {
   return (
     <>
       <div className="navbar"></div>
       <div className="d-flex justify-content-center">
-        <ProgressBar setStep2={setStep2} step2={step2} />
+        <ProgressBar
+          setStep2={setStep2}
+          step2={step2}
+          progressMoving={progressMoving}
+        />
       </div>
 
       <CartContent orderProduct={orderProduct} />

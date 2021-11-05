@@ -1,6 +1,7 @@
 import { IMAGE_URL } from "../../config/url";
 
 function ProgressBar({ setStep2, step2, progressMoving }) {
+  // console.log("111", progressMoving);
   return (
     <>
       <section>
@@ -22,8 +23,7 @@ function ProgressBar({ setStep2, step2, progressMoving }) {
             <button
               className="progress_button2"
               onClick={() => {
-                progressMoving();
-                console.log("456456");
+                // progressMoving
                 setStep2(true);
               }}
             >

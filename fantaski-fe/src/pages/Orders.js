@@ -6,6 +6,7 @@ import { withRouter } from "react-router-dom";
 // import NextStepIcon from "../components/orders/NextStepIcon";
 import FirstStep from "../components/orders/FirstStep";
 import SecondStep from "../components/orders/SecondStep";
+import ThirdStep from "../components/orders/ThirdStep";
 
 import { IMAGE_URL } from "../config/url";
 
@@ -76,6 +77,20 @@ function Orders(props) {
     </>
   );
   const [step2, setStep2] = useState(false);
+
+  // 企鵝和進度條移動
+  let penguin = document.querySelector(".penguin");
+  let progressLine = document.querySelector(".first_during");
+  let number2 = document.querySelector(".progress_button2 div");
+  let word2 = document.querySelector(".progress_button2 p");
+  function progressMoving() {
+    penguin.classList.add("penguinMove");
+    progressLine.classList.add("first_during_move");
+    number2.style.color = "#134865";
+    word2.style.color = "#134865";
+    console.log("888");
+  }
+  // classList.add 是在原本的樣式加上新的樣式；style.className是覆蓋原本樣式
   return (
     <>
       {step2 ? (
@@ -85,10 +100,12 @@ function Orders(props) {
           setStep2={setStep2}
           step2={step2}
           orderProduct={orderProduct}
+          progressMoving={progressMoving}
         />
       )}
       {/* <FirstStep orderProduct={orderProduct} /> */}
-      <SecondStep orderProduct={orderProduct} />
+      <SecondStep orderProduct={orderProduct} progressMoving={progressMoving} />
+      <ThirdStep />
       {display}
     </>
   );
