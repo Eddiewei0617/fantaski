@@ -1,6 +1,6 @@
 import { IMAGE_URL } from "../../config/url";
 
-function ProgressBar() {
+function ProgressBar({ setStep2, step2, progressMoving }) {
   return (
     <>
       <section>
@@ -15,12 +15,23 @@ function ProgressBar() {
             </div>
             <p className="order_progress_word md-blue">確認訂單</p>
           </div>
-          <div className="progress_line "> </div>
+          <div className="progress_line">
+            <div className="first_during"></div>
+          </div>
           <div>
-            <div className="material-icons md-50 md-grey number_icon">
-              looks_two
-            </div>
-            <p className="order_progress_word md-grey">付款方式</p>
+            <button
+              className="progress_button2"
+              onClick={() => {
+                progressMoving();
+                console.log("456456");
+                setStep2(true);
+              }}
+            >
+              <div className="material-icons md-50 md-grey number_icon">
+                looks_two
+              </div>
+              <p className="order_progress_word md-grey">付款方式</p>
+            </button>
           </div>
           <div className="progress_line"> </div>
           <div>

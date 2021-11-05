@@ -1,0 +1,261 @@
+//---------------購物車-------------------------------------------
+
+// 進度圖案文字條樣式設定
+
+// 企鵝--------
+@keyframes skiing {
+  0% {
+    margin-left: 15px;
+  }
+  100% {
+    margin-left: 450px;
+  }
+}
+.penguin {
+  width: 65px;
+  height: 60px;
+  display: block;
+  margin-left: 15px;
+}
+// forwards 的意思是讓動畫停在最後的位置
+.penguinMove {
+  animation: skiing 4s forwards;
+}
+.penguin img {
+  width: 100%;
+  height: 100%;
+}
+// 企鵝結束------------
+
+.md-50 {
+  font-size: 50px;
+  cursor: pointer;
+}
+.md-blue {
+  color: $main-text-darkblue;
+}
+.md-grey {
+  color: rgb(163, 163, 163);
+}
+// .md-blue:hover {
+//   opacity: 0.7;
+// }
+.number_icon {
+  display: flex;
+  justify-content: center;
+}
+.order_progress_word {
+  font-size: $font-l;
+  font-weight: 700;
+}
+.progress_button2 {
+  border: 0ch;
+  background-color: $background-color;
+}
+.progress_button2 div:hover,
+.progress_button2 p:hover {
+  color: $main-text-darkblue;
+}
+
+@keyframes progressLine {
+  0% {
+    width: 0%;
+    background-color: rgb(163, 163, 163);
+  }
+  100% {
+    width: 100%;
+    background-color: $main-text-darkblue;
+  }
+}
+.progress_line {
+  width: 15rem;
+  height: 5px;
+  background-color: rgb(163, 163, 163);
+  margin: 30px 3rem;
+}
+.first_during {
+  background-color: rgb(163, 163, 163);
+  width: 0;
+  height: 5px;
+}
+.first_during_move {
+  animation: progressLine 3s forwards;
+}
+
+// 購物車底色
+.cart_content_bg {
+  width: 1400px;
+  height: 600px;
+  background-color: $main-blue;
+  margin: 30px auto;
+  border-radius: 20px;
+  box-shadow: 0px 15px 15px -15px #000;
+  position: relative;
+}
+.cart_content {
+  width: 1400px;
+  height: 500px;
+  background-color: #fff;
+  position: absolute;
+  top: 100px;
+  border-radius: 0, 0, 20px, 20px;
+}
+.header {
+  text-align: center;
+  padding: 30px 0;
+  color: #fff;
+  font-weight: 600;
+  font-size: $font-l;
+}
+
+// 購物車內容
+.cart_content .row {
+  width: 1400px;
+  border-bottom: 3px solid rgb(155, 155, 155);
+  margin: 0 auto;
+  display: flex;
+}
+.cart_content .row .col {
+  text-align: center;
+  justify-content: space-around;
+}
+.cart_content .col {
+  width: 200px;
+  // text-align: center;
+  font-size: $font-l;
+  color: $main-text-darkblue;
+  padding: 80px 5px;
+}
+.cart_image {
+  margin: 10px;
+  width: 180px;
+  height: 200px;
+  object-fit: cover;
+}
+.cart_image img {
+  width: 90%;
+  height: 100%;
+}
+.cart_content input {
+  width: 200px;
+  border-radius: 20px;
+  border: 4px solid $main-text-darkblue;
+}
+
+// 總訂單底色
+.order_content_bg {
+  width: 1400px;
+  height: 300px;
+  background-color: $main-blue;
+  margin: 30px auto;
+  border-radius: 20px;
+  box-shadow: 0px 15px 15px -15px #000;
+  position: relative;
+}
+.order_content {
+  width: 1400px;
+  height: 200px;
+  background-color: #fff;
+  position: absolute;
+  top: 100px;
+  border-radius: 0, 0, 20px, 20px;
+}
+.order_content_bg h2 {
+  text-align: center;
+  padding: 30px 0;
+  color: #fff;
+  font-weight: 600;
+}
+
+// 總訂單內容
+.order_detail {
+  padding: 10px 0;
+}
+.order_detail .col {
+  height: 80px;
+  // padding: 30px 0;
+  align-items: center;
+}
+.row1 {
+  // border: 1px solid black;
+  color: $main-text-darkblue;
+  font-size: $font-l;
+  font-weight: 600;
+}
+.row1 input {
+  outline: none;
+  border: 0ch;
+  width: 100px;
+}
+.row1 label {
+  width: 180px;
+}
+.order_total {
+  // border: 1px solid black;
+  color: $main-blue;
+  font-size: $font-l;
+  font-weight: 600;
+  padding: 60px 0;
+  align-items: center;
+}
+.order_total label {
+  width: 180px;
+}
+.order_total input {
+  width: 100px;
+  outline: none;
+  border: 0ch;
+  color: $main-red;
+}
+
+// 信用卡區域設定
+.credit_content_bg {
+  width: 1400px;
+  height: 600px;
+  background-color: $main-blue;
+  margin: 30px auto;
+  border-radius: 20px;
+  box-shadow: 0px 15px 15px -15px #000;
+  position: relative;
+}
+.credit_content {
+  width: 1400px;
+  height: 500px;
+  background-color: #fff;
+  position: absolute;
+  top: 100px;
+  border-radius: 0, 0, 20px, 20px;
+}
+
+// 上一步下一步按鈕
+.prevstep {
+  margin-right: 1rem;
+  width: 8%;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: $background-color;
+  color: $main-text-darkblue;
+  border: 4px solid $main-blue;
+}
+.prevstep:hover {
+  background-color: $main-blue;
+  color: #fff;
+  border: 4px solid $main-blue;
+}
+
+.nextstep {
+  margin-right: 20rem;
+  width: 8%;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: $background-color;
+  color: $main-text-darkblue;
+  border: 4px solid $main-red;
+}
+.nextstep:hover {
+  background-color: $main-red;
+  color: #fff;
+  border: 4px solid $main-red;
+}

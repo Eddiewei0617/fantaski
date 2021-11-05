@@ -75,10 +75,19 @@ function Orders(props) {
       <p>{orderProduct.name}</p>
     </>
   );
-
+  const [step2, setStep2] = useState(false);
   return (
     <>
-      <FirstStep orderProduct={orderProduct} />
+      {step2 ? (
+        <SecondStep orderProduct={orderProduct} />
+      ) : (
+        <FirstStep
+          setStep2={setStep2}
+          step2={step2}
+          orderProduct={orderProduct}
+        />
+      )}
+      {/* <FirstStep orderProduct={orderProduct} /> */}
       <SecondStep orderProduct={orderProduct} />
       {display}
     </>
