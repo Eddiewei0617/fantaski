@@ -88,13 +88,16 @@ function Orders(props) {
     progressLine.classList.add("first_during_move");
     number2.style.color = "#134865";
     word2.style.color = "#134865";
-    console.log("888");
+    // console.log("888");
   }
   // classList.add 是在原本的樣式加上新的樣式；style.className是覆蓋原本樣式
   return (
     <>
       {step2 ? (
-        <SecondStep orderProduct={orderProduct} />
+        <SecondStep
+          orderProduct={orderProduct}
+          progressMoving={progressMoving}
+        />
       ) : (
         <FirstStep
           setStep2={setStep2}
