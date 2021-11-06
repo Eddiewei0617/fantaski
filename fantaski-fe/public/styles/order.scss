@@ -199,7 +199,7 @@
   align-items: center;
 }
 .order_total label {
-  width: 180px;
+  width: 150px;
 }
 .order_total input {
   width: 100px;
@@ -256,16 +256,21 @@
 
 // 最後訂單四行
 .final_title {
-  height: 50px;
-  background-color: $main-blue;
+  height: 60px;
+  margin: 15px auto;
+}
+.final_title div {
+  width: 180px;
+  height: 60px;
   color: #fff;
   font-size: $font-l;
+  background-color: $main-blue;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 15px auto;
+  margin: 0 auto;
 }
-.col-3 {
+.border_bottoms .col-3 {
   max-width: 15%;
 }
 .final_word {
@@ -304,14 +309,43 @@
   display: flex;
   justify-content: space-around;
 }
+.final_tbody {
+  border-bottom: 3px solid rgb(168, 168, 168);
+}
 .final_tbody tr {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-around;
+}
+.final_tbody td {
+  padding: 10px;
+  font-size: 20px;
 }
 .final_tbody input {
+  width: 170px;
+  outline: 0ch;
+  border: 0ch;
+  text-align: left;
+  color: $main-text-darkblue;
+  font-weight: 600;
+}
+.type_number input {
+  width: 100px;
+  text-align: center;
+  color: $main-text-darkblue;
+  font-weight: 600;
+}
+.final_total {
+  text-align: right;
+  padding: 10px;
+  font-size: $font-l;
+}
+.final_total input {
   width: 180px;
   outline: 0ch;
   border: 0ch;
+  text-align: center;
+  color: $main-red;
+  font-weight: 600;
 }
 
 // ***上一步下一步按鈕
@@ -331,7 +365,8 @@
   border: 4px solid $main-blue;
 }
 
-.nextstep {
+.nextstep,
+.order_submit_icon {
   margin-right: 20rem;
   width: 8%;
   border-radius: 20px;
@@ -341,7 +376,8 @@
   color: $main-text-darkblue;
   border: 4px solid $main-red;
 }
-.nextstep:hover {
+.nextstep:hover,
+.order_submit_icon:hover {
   background-color: $main-red;
   color: #fff;
   border: 4px solid $main-red;
