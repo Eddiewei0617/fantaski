@@ -11,19 +11,27 @@ import PageButton from "../components/products/PageButton";
 
 function Products() {
   const [square, setSquare] = useState(true);
-  const productSection = useRef();
-  console.log("222", productSection.current);
+
+  // 用一個ref抓到要跳轉到的位置區塊，再寫一個function scrollTo
+  const productSection = useRef(null);
+  console.log(productSection);
   const scrollToProduct = () =>
     window.scrollTo({
       top: productSection.current.offsetTop,
       behavior: "smooth",
     });
+
   return (
     <>
       <div className="navbar"></div>
       <CarouselP />
-      <ScrolldownIcon scrollToProduct={scrollToProduct} />
+      <ScrolldownIcon
+        onClick={() => {
+          scrollToProduct();
+        }}
+      />
       <SwitchIcon setSquare={setSquare} square={square} />
+
       <div className="d-flex main_area" ref={productSection}>
         <NavSide />
         {square ? <ProductSquare /> : <ProductList />}

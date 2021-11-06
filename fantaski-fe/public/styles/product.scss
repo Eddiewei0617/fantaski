@@ -167,12 +167,12 @@
 
 // 切換頁面按鈕
 .page_button {
-  position: absolute;
-  left: 50%;
-  margin-bottom: 0;
-  // display: flex;
-  // justify-content: center;
-  // align-items: flex-end;
+  // position: absolute;
+  // left: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 99;
 }
 
 // .page_button {
