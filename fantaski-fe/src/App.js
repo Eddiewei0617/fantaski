@@ -7,6 +7,7 @@ import Skill from "./pages/course/Skill";
 import Beginner from "./pages/course/Beginner";
 import Sled from "./pages/course/Sled";
 import Igloo from "./pages/course/Igloo";
+import Member from "./pages/Member"
 // 組合用元件
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -17,8 +18,8 @@ function App() {
   const [showCourse, setShowCourse] = useState();
 
   return (
-    <Router>
       <>
+    <Router>
         {/* LOGO+標題+導覽列+上方選單 */}
         {/* 主內容區 */}
         {/* 匹配路由表(路徑單一匹配) */}
@@ -32,9 +33,10 @@ function App() {
           onClick={() => {
             setShowCourse(courses[0]);
           }}
-        >
+        >        
           到課程-初體驗
         </Link>
+        <Link to="/Member">到會員</Link>
         <ScrollToTop>
           <Switch>
             <Route path="/course/beginner">
@@ -71,12 +73,15 @@ function App() {
             <Route path="/Orders">
               <Orders />
             </Route>
+            <Route path="/Member">
+              <Member />
+            </Route>
           </Switch>
           {/* end 匹配路由表 */}
         </ScrollToTop>
         {/* 頁尾+版權訊息 */}
-      </>
     </Router>
+      </>
   );
 }
 
