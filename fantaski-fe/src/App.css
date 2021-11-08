@@ -1,38 +1,148 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+:root{
+    --main-blue: #3587B5;
+    --main-red: #EC6855;
+    --main-text-darkblue: #134865;
+    --background-color: #FEFCEE;
+    --assist-white: #FFFFFF;
+  
+    --font-m: 16px;
+    --font-l: 24px;
+    --font-xl: 36px;
+  
+    --font-family-base: "Noto Sans Traditional Chinese, Hobo Std";
+  
+    --border-radius: 30px;
+  
+    --shadow: 0 0 30 rgba(19,72,101,0.4)  
   }
-}
+/* Reset styles */
+html,body, body * { 
+    box-sizing: border-box; 
+    margin:0;
+    padding:0;
+    color:inherit;
+    background-color:inherit;
+    
+ }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+ body {
+    background-color:#FEFCEE;
+    
+  } 
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  .container {
+      width: 100%;
+      padding-top: 140px;
+      padding-bottom: 140px;
   }
-  to {
-    transform: rotate(360deg);
+
+
+  .login-register-wrapper {
+      font-size: 16px;
+      font-family: "Noto Sans Traditional Chinese, Hobo Std";  
+      height: 560px;
+      width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      padding:0 2em;
+      border-radius: 30px;
+      box-shadow: 0px 2px 7px rgba(0,0,0,0.2);
+      overflow: hidden; 
+      color:#3587B5;
+      background: #FFFFFF;
   }
-}
+  
+  /* Nav buttons */
+  .nav-buttons {
+    width: 100%;
+    height: 100px;
+    padding-top: 40px;
+    opacity: 1;
+    margin-bottom: 3em;
+  }
+
+  /* 表頭 */
+  button {
+      font-size: 36px;
+      font-family: "Noto Sans Traditional Chinese, Hobo Std";
+      margin-right:1em;
+      border:0px;
+      cursor: pointer;
+   
+  }
+  button:focus {
+      outline: 0px;
+  }
+  button.active {
+      padding-bottom: 10px;
+      border-bottom: solid 2px #1059FF;
+  } 
+  
+/* 忘記密碼 */
+   /* .forgot-panel {
+    position: relative;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding-top: 24px;
+    border-top: solid 1px rgba(255,255,255,.3);    
+} */
+
+/* 輸入框 */
+    .form-group input {
+        width: 100%;
+        height: 35px;
+        padding-left: 15px;
+        border: solid;
+        border-radius: 30px;
+        margin-bottom: 20px;
+        background: rgba(255,255,255,.5);
+    }
+    .form-group label {
+      text-transform: uppercase;
+    }
+
+/* 確認輸入 */
+    input.submit {
+        font-weight: 700;
+        font-size: 24px;
+        font-family: "Noto Sans Traditional Chinese, Hobo Std";
+        text-align: center;
+        color: rgba(255,255,255, 1);
+        padding: 8px 0px;
+        width: 100%;
+        height: 40px;
+        border: none;
+        border-radius: 30px;
+        margin-top: 23px;
+        background-color: rgba(16,89,255, 1);
+    
+    }
+
+/*切換頁面*/
+
+    form#registerform {
+        left:500px;
+        top:-230px;
+        position:relative;
+    }
+
+/* 忘記密碼 */
+
+    /* .forgot-panel {
+        margin-top:-300px;
+        color:gray;
+    } */
+
+    form, .forgot-panel { 
+        position: relative;
+        transition: all .2s ease;
+    }
+    
+    #loginBtn, #registerBtn {
+        transition: all .2s ease;
+
+    }
+
+    
