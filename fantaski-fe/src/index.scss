@@ -1,6 +1,9 @@
 @import "../public/styles/global.scss";
-@import "../public/styles/share/navbar.scss";
+@import "../public/styles/navbar.scss";
 
+html,
 body {
+  padding: 0;
+  margin: 0;
   font-family: $font-family-base;
 }

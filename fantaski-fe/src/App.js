@@ -1,5 +1,5 @@
 // import "./App.css";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/share/Navbar";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 // 引入各分頁(後續寫程式可更動)
