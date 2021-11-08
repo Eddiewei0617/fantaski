@@ -30,6 +30,7 @@ function CreditCard() {
               <input
                 type="tel"
                 name="number"
+                className="card_number"
                 placeholder="Card Number"
                 value={number}
                 onChange={(e) => setNumber(e.target.value)}
@@ -63,6 +64,7 @@ function CreditCard() {
               <input
                 type="tel"
                 name="cvc"
+                className="cvc"
                 placeholder="CVC"
                 value={cvc}
                 onChange={(e) => setCvc(e.target.value)}

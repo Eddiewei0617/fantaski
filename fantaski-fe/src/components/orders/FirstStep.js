@@ -1,20 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import ProgressBar from "./ProgressBar";
 import CartContent from "./CartContent";
 import OrderContent from "./OrderContent";
 import NextStepIcon from "./NextStepIcon";
 
-function FirstStep({ orderProduct, step2, setStep2, progressMoving }) {
+function FirstStep({ orderProduct, progressMoving, step, setStep }) {
+  // console.log(step);
+  // useEffect(() => {
+  //   setStep(1);
+  // }, []);
   return (
     <>
-      {/* <div className="d-flex justify-content-center">
-        <ProgressBar
-          setStep2={setStep2}
-          step2={step2}
-          progressMoving={progressMoving}
-        />
-      </div> */}
-
       <CartContent orderProduct={orderProduct} />
 
       <OrderContent />

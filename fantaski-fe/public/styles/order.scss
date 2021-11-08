@@ -26,6 +26,14 @@
     margin-left: 450px;
   }
 }
+@keyframes skiing2 {
+  0% {
+    margin-left: 450px;
+  }
+  100% {
+    margin-left: 875px;
+  }
+}
 .penguin {
   width: 65px;
   height: 60px;
@@ -35,6 +43,9 @@
 // forwards 的意思是讓動畫停在最後的位置
 .penguinMove {
   animation: skiing 3s forwards;
+}
+.penguinMove3 {
+  animation: skiing2 3s forwards;
 }
 .penguin img {
   width: 100%;
@@ -63,12 +74,15 @@
   font-size: $font-l;
   font-weight: 700;
 }
-.progress_button2 {
+.progress_button2,
+.progress_button3 {
   border: 0ch;
   background-color: $background-color;
 }
 .progress_button2 div:hover,
-.progress_button2 p:hover {
+.progress_button2 p:hover,
+.progress_button3 div:hover,
+.progress_button3 p:hover {
   color: $main-text-darkblue;
 }
 
@@ -82,18 +96,18 @@
     background-color: $main-text-darkblue;
   }
 }
-.progress_line {
+.progress_line,
+.progress_line3 {
   width: 15rem;
   height: 5px;
   background-color: rgb(163, 163, 163);
   margin: 30px 3rem;
-  border-radius: 20%;
 }
-.first_during {
+.first_during,
+.first_during3 {
   background-color: rgb(163, 163, 163);
   width: 0;
   height: 5px;
-  border-radius: 18%;
 }
 .first_during_move {
   animation: progressLine 3s forwards;
@@ -258,20 +272,22 @@
   margin: auto 160px !important;
 }
 .rccs__card--unknown > div {
-  background: linear-gradient(25deg, #ec6855, #ff7f6d57) !important;
+  background: linear-gradient(
+    25deg,
+    $main-text-darkblue,
+    rgb(159, 211, 253)
+  ) !important;
 }
 .rccs__card--front,
 .rccs__card--back {
   // width: 400 px !important;
   // height: 250 px !important;
-  color: $main-text-darkblue !important;
+  color: rgb(61, 61, 61) !important;
 }
 .card-input {
   width: 300px;
 }
-.card-input label {
-  font-weight: 600;
-}
+
 .card_input input {
   padding: 0.375rem 0.75rem;
   font-size: 18px;
@@ -285,6 +301,12 @@
   transition: red 2s !important;
   margin-left: 10px;
   margin-top: 10px;
+}
+.card_number {
+  margin-left: 29px !important;
+}
+.cvc {
+  margin-left: 50px !important;
 }
 
 // ***第三階段

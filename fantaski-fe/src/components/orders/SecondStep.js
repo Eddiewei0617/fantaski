@@ -1,16 +1,16 @@
-// import ProgressBar from "./ProgressBar";
+import { useState, useEffect } from "react";
 import CreditCard from "./CreditCard";
 import OrderContent from "./OrderContent";
 import PrevStepIcon from "./PrevStepIcon";
 import NextStepIcon from "./NextStepIcon";
 
-function SecondStep({ step2, setStep2, progressMoving }) {
-  console.log("202", progressMoving);
+function SecondStep({ progressMoving3, step, setStep }) {
+  // useEffect(() => {
+  //   console.log("2唷", progressMoving3());
+  // }, []);
   return (
     <>
-      <div className="d-flex justify-content-center">
-        {/* <ProgressBar progressMoving={progressMoving} /> */}
-      </div>
+      <div className="d-flex justify-content-center"></div>
 
       <CreditCard />
       <OrderContent />
