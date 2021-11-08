@@ -211,36 +211,60 @@
 // ***第二階段
 // 信用卡區域設定
 .credit_content_bg {
-  width: 1400px;
-  height: 600px;
+  width: 1100px;
+  height: 500px;
   background-color: $main-blue;
   margin: 30px auto;
   border-radius: 20px;
   box-shadow: 0px 15px 15px -15px #000;
   position: relative;
 }
+.credit_content_bg h2 {
+  text-align: center;
+  padding: 30px 0;
+  color: #fff;
+  font-weight: 600;
+}
 .credit_content {
-  width: 1400px;
-  height: 500px;
+  width: 1100px;
+  height: 400px;
   background-color: #fff;
   position: absolute;
   top: 100px;
   border-radius: 0, 0, 20px, 20px;
   display: flex;
 }
+.rccs {
+  margin: auto 160px !important;
+}
+.rccs__card--unknown > div {
+  background: linear-gradient(25deg, #ec6855, #ff7f6d57) !important;
+}
+.rccs__card--front,
+.rccs__card--back {
+  // width: 400 px !important;
+  // height: 250 px !important;
+  color: $main-text-darkblue !important;
+}
 .card-input {
   width: 300px;
 }
+.card-input label {
+  font-weight: 600;
+}
 .card_input input {
   padding: 0.375rem 0.75rem;
-  font-size: 1rem;
+  font-size: 18px;
+  font-weight: 600;
   line-height: 1.5;
   color: #495057;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  border: 2px solid #ced4da;
   border-radius: 0.25rem;
-  transition: blue 0.5s;
+  transition: red 2s !important;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
 // ***第三階段

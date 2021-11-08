@@ -119,6 +119,40 @@
 .product_image_s {
   width: 15rem;
   height: 24rem;
+  position: relative;
+}
+@keyframes pulsate-fwd {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+.product_image_s:hover {
+  animation: pulsate-fwd 0.9s 1 alternate;
+}
+.collect_tag {
+  font-size: 27px;
+  position: absolute;
+  right: 0;
+  color: $main-red;
+  opacity: 0.5;
+  background-color: transparent;
+  border: 0ch;
+  margin: 0;
+  padding: 0;
+}
+.collect_tag:hover {
+  font-size: 33px;
+  color: $main-red;
+  opacity: 1;
 }
 
 // 條列式圖片設定
@@ -133,6 +167,10 @@
 .product_image_l {
   width: 15rem;
   height: 24rem;
+  position: relative;
+}
+.product_image_l:hover {
+  animation: pulsate-fwd 0.9s 1 alternate;
 }
 .product_description {
   max-width: 900px;

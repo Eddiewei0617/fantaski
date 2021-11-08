@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { IMAGE_URL } from "../../config/url";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { BsTagsFill } from "react-icons/bs";
 
 const productFromServer = [
   {
@@ -39,7 +40,10 @@ function ProductSquare() {
       {products.map((v, i) => {
         return (
           <li key={v.id} className="list-unstyled ">
-            <div className="product_image_s">
+            <div className="product_image_s  ">
+              <button className="collect_tag">
+                <BsTagsFill />
+              </button>
               <img src={v.image} alt="" className="size" />
             </div>
             <p className="mt-3 h5">{v.name}</p>

@@ -12,6 +12,7 @@ function CreditCard() {
   return (
     <>
       <div className="credit_content_bg">
+        <h2>信用卡資訊</h2>
         <div className="credit_content">
           <Cards
             number={number}
@@ -20,7 +21,10 @@ function CreditCard() {
             cvc={cvc}
             focused={focus}
           />
-          <form action="" className="card_input d-flex flex-column">
+          <form
+            action=""
+            className="card_input d-flex flex-column justify-content-center h5 "
+          >
             <label htmlFor="">
               卡片號碼
               <input
@@ -43,22 +47,28 @@ function CreditCard() {
                 onFocus={(e) => setFocus(e.target.name)}
               />
             </label>
-            <input
-              type="text"
-              name="expory"
-              placeholder="MM/YY Expiry"
-              value={expiry}
-              onChange={(e) => setExpiry(e.target.value)}
-              onFocus={(e) => setFocus(e.target.name)}
-            />
-            <input
-              type="tel"
-              name="cvc"
-              placeholder="CVC"
-              value={cvc}
-              onChange={(e) => setCvc(e.target.value)}
-              onFocus={(e) => setFocus(e.target.name)}
-            />
+            <label htmlFor="">
+              卡片到期日
+              <input
+                type="text"
+                name="expory"
+                placeholder="MM/YY Expiry Date"
+                value={expiry}
+                onChange={(e) => setExpiry(e.target.value)}
+                onFocus={(e) => setFocus(e.target.name)}
+              />
+            </label>
+            <label htmlFor="">
+              安全碼
+              <input
+                type="tel"
+                name="cvc"
+                placeholder="CVC"
+                value={cvc}
+                onChange={(e) => setCvc(e.target.value)}
+                onFocus={(e) => setFocus(e.target.name)}
+              />
+            </label>
           </form>
         </div>
       </div>

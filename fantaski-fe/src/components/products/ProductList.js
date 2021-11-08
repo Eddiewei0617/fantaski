@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { IMAGE_URL } from "../../config/url";
 import { Button } from "react-bootstrap";
 import { Link, withRouter } from "react-router-dom";
+import { BsTagsFill } from "react-icons/bs";
 
 const productFromServer = [
   {
@@ -49,6 +50,9 @@ function ProductList() {
         return (
           <li key={v.id} className="list-unstyled ">
             <div className="product_image_l">
+              <button className="collect_tag">
+                <BsTagsFill />
+              </button>
               <img src={v.image} alt="" className="size" />
             </div>
             <div className="product_description">
