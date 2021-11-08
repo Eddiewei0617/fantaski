@@ -7,7 +7,7 @@ import Map from "../components/route/Map";
 import Place from "../components/route/Place";
 import Cablecar from "../components/route/Cablecar";
 import ProdoctRent from "../components/route/ProdoctRent";
-function Route() {
+function MountainRoute() {
   return (
     <div>
       <Navbar />
@@ -23,4 +23,4 @@ function Route() {
   );
 }
 
-export default Route;
+export default MountainRoute;
