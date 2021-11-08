@@ -1,5 +1,5 @@
 import { Carousel } from "react-bootstrap";
-import { IMAGE_URL } from "../../config/url";
+import { PRODUCTIMAGE_URL } from "../../config/url";
 
 function CarouselP() {
   return (
@@ -9,7 +9,7 @@ function CarouselP() {
           <div className="image_range">
             <img
               className="d-block size"
-              src={`${IMAGE_URL}/test.png`}
+              src={`${PRODUCTIMAGE_URL}/test.png`}
               alt="First slide"
             />
           </div>
@@ -19,7 +19,7 @@ function CarouselP() {
           <div className="image_range">
             <img
               className="d-block size"
-              src={`${IMAGE_URL}/santa1.jpg`}
+              src={`${PRODUCTIMAGE_URL}/santa1.jpg`}
               alt="Second slide"
             />
           </div>
@@ -30,7 +30,7 @@ function CarouselP() {
           <div className="image_range">
             <img
               className="d-block size"
-              src={`${IMAGE_URL}/snowboarding-test.jpg`}
+              src={`${PRODUCTIMAGE_URL}/snowboarding-test.jpg`}
               alt="Third slide"
             />
           </div>

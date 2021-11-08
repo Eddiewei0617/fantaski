@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { IMAGE_URL } from "../../config/url";
+import { PRODUCTIMAGE_URL } from "../../config/url";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { BsTagsFill } from "react-icons/bs";
@@ -9,21 +9,21 @@ const productFromServer = [
     id: 1,
     name: "暗黑滿點單板",
     category: "雪板類",
-    image: `${IMAGE_URL}/allblack.jfif`,
+    image: `${PRODUCTIMAGE_URL}/allblack.jfif`,
     price: 1200,
   },
   {
     id: 2,
     name: "可愛滿點單板",
     category: "雪板類",
-    image: `${IMAGE_URL}/Elmo.jfif`,
+    image: `${PRODUCTIMAGE_URL}/Elmo.jfif`,
     price: 1000,
   },
   {
     id: 3,
     name: "力量滿點單板",
     category: "雪板類",
-    image: `${IMAGE_URL}/hulk.jfif`,
+    image: `${PRODUCTIMAGE_URL}/hulk.jfif`,
     price: 1600,
   },
 ];

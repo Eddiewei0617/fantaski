@@ -1,4 +1,4 @@
-import { IMAGE_URL } from "../../config/url";
+import { ORDERIMAGE_URL } from "../../config/url";
 
 function ProgressBar({ setStep2, step2, progressMoving }) {
   console.log("666", setStep2);
@@ -7,7 +7,7 @@ function ProgressBar({ setStep2, step2, progressMoving }) {
     <>
       <section>
         <div className="penguin">
-          <img src={`${IMAGE_URL}/penguin.png`} alt="" />
+          <img src={`${ORDERIMAGE_URL}/penguin.png`} alt="" />
         </div>
 
         <section className="d-flex">
@@ -24,7 +24,7 @@ function ProgressBar({ setStep2, step2, progressMoving }) {
             <button
               className="progress_button2"
               onClick={() => {
-                // setStep2(true);
+                setStep2(true);
                 progressMoving();
               }}
             >

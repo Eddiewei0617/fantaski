@@ -4,11 +4,12 @@ import { withRouter } from "react-router-dom";
 // import CartContent from "../components/orders/CartContent";
 // import OrderContent from "../components/orders/OrderContent";
 // import NextStepIcon from "../components/orders/NextStepIcon";
+import ProgressBar from "../components/orders/ProgressBar";
 import FirstStep from "../components/orders/FirstStep";
 import SecondStep from "../components/orders/SecondStep";
 import ThirdStep from "../components/orders/ThirdStep";
 
-import { IMAGE_URL } from "../config/url";
+import { PRODUCTIMAGE_URL, ORDERIMAGE_URL } from "../config/url";
 
 const productFromServer = [
   {
@@ -18,7 +19,7 @@ const productFromServer = [
     suitable: "技能班",
     description:
       "此塊雪板由黑曜石製成，黑曜石產量相當稀少，其具有增強技能的力量，站上此塊雪板就能讓它帶著你滑雪，不管多高難度的動作都能輕而易舉完成。",
-    image: `${IMAGE_URL}/allblack.jfif`,
+    image: `${PRODUCTIMAGE_URL}/allblack.jfif`,
     price: 1200,
   },
   {
@@ -28,7 +29,7 @@ const productFromServer = [
     suitable: "技能班",
     description:
       "這款雪板相當適合青少年(女)或是童心未泯的諸位，卡通人物elmo在你滑雪時會輕輕播放著歡樂的音樂讓你享受其中!",
-    image: `${IMAGE_URL}/Elmo.jfif`,
+    image: `${PRODUCTIMAGE_URL}/Elmo.jfif`,
     price: 1000,
   },
   {
@@ -38,7 +39,7 @@ const productFromServer = [
     suitable: "技能班",
     description:
       "浩克的力量不必多說，大家眾所皆知，給正在訓練下坡加速的你前所未有的重力體驗!",
-    image: `${IMAGE_URL}/hulk.jfif`,
+    image: `${PRODUCTIMAGE_URL}/hulk.jfif`,
     price: 1600,
   },
 ];
@@ -93,6 +94,17 @@ function Orders(props) {
   // classList.add 是在原本的樣式加上新的樣式；style.className是覆蓋原本樣式
   return (
     <>
+      <div className="navbar"></div>
+      <div className="progress_bar_bg">
+        <div className="progress_bar">
+          <ProgressBar
+            setStep2={setStep2}
+            step2={step2}
+            progressMoving={progressMoving}
+          />
+        </div>
+      </div>
+
       {step2 ? (
         <SecondStep
           orderProduct={orderProduct}

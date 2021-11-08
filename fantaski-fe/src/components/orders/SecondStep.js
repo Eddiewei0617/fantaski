@@ -1,4 +1,4 @@
-import ProgressBar from "./ProgressBar";
+// import ProgressBar from "./ProgressBar";
 import CreditCard from "./CreditCard";
 import OrderContent from "./OrderContent";
 import PrevStepIcon from "./PrevStepIcon";
@@ -8,9 +8,8 @@ function SecondStep({ step2, setStep2, progressMoving }) {
   console.log("202", progressMoving);
   return (
     <>
-      <div className="navbar"></div>
       <div className="d-flex justify-content-center">
-        <ProgressBar progressMoving={progressMoving} />
+        {/* <ProgressBar progressMoving={progressMoving} /> */}
       </div>
 
       <CreditCard />
