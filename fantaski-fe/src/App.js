@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { useState } from "react";
+import Products from "./pages/product/Products";
+import Orders from "./pages/order/Orders";
 // 頁面用元件
-import Products from "./pages/Products";
-import Orders from "./pages/Orders";
 import Skill from "./pages/course/Skill";
 import Beginner from "./pages/course/Beginner";
 import Sled from "./pages/course/Sled";
@@ -12,6 +12,7 @@ import Member from "./pages/Member";
 import ScrollToTop from "./components/ScrollToTop";
 
 const courses = ["初體驗", "技能班", "雪橇車", "建冰屋"];
+
 
 function App() {
   //傳入course狀態(使用者要看哪個course)

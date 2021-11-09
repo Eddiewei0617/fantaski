@@ -36,7 +36,7 @@ function OrderContent() {
               </div>
               <div className="col-3 order_total d-flex">
                 <label className="m-0">總金額 NT$ </label>
-                <input type="text" value="0" className="p-0" />
+                <input type="text" value="0" className="mr-4" />
               </div>
             </div>
           </div>

@@ -47,7 +47,7 @@ function NavSide() {
           </Accordion.Collapse>
         </Card>
 
-        {/* 男女裝 */}
+        {/* 服飾類 */}
 
         <Card>
           <Card.Header className="product_area">
@@ -58,7 +58,7 @@ function NavSide() {
               className="product_word"
             >
               <GrCoatCheck className="mr-2" />
-              男女裝
+              服飾類
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="1">
@@ -98,32 +98,26 @@ function NavSide() {
               className="product_word"
             >
               <GiProtectionGlasses className="mr-2" />
-              配件類
+              裝備類
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="2">
             <Card.Body className="detail_word">
               <GiProtectionGlasses className="mr-1" />
-              護目鏡
+              滑雪配件
             </Card.Body>
           </Accordion.Collapse>
           <Accordion.Collapse eventKey="2">
             <Card.Body className="detail_word">
               <GiProtectionGlasses className="mr-1" />
-              雪杖
-            </Card.Body>
-          </Accordion.Collapse>
-          <Accordion.Collapse eventKey="2">
-            <Card.Body className="detail_word">
-              <GiProtectionGlasses className="mr-1" />
-              護膝
+              器材出租
             </Card.Body>
           </Accordion.Collapse>
         </Card>
 
         {/* 器材類 */}
 
-        <Card>
+        {/* <Card>
           <Card.Header className="product_area">
             <Accordion.Toggle
               as={Button}
@@ -153,11 +147,8 @@ function NavSide() {
               鹿與雪橇車
             </Card.Body>
           </Accordion.Collapse>
-        </Card>
+        </Card> */}
       </Accordion>
-      {/* </div> */}
-      {/* </div>
-      </div> */}
 
       {/* 為了隔開與商品圖們的距離 */}
       <div className="col-1"></div>
