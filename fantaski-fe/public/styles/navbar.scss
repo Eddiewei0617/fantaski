@@ -13,6 +13,7 @@ body {
   background-color: $main-blue;
   border-bottom: 3px solid $assist-white;
   transition: 0.2s;
+  z-index: 2000;
 }
 .navbar-header {
   margin-left: 10%;
@@ -25,7 +26,7 @@ body {
   font-family: "Hobo Std";
   color: $main-text-darkblue;
   font-size: 1.3em;
-  transform: translate(-15%, 5%);
+  transform: translate(-35%, 5%);
 }
 
 // 往下滑時產生白色背景
