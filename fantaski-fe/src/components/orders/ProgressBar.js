@@ -1,12 +1,25 @@
-import { IMAGE_URL } from "../../config/url";
+import { useState, useEffect } from "react";
+import { ORDERIMAGE_URL } from "../../config/url";
 
-function ProgressBar({ setStep2, step2, progressMoving }) {
-  // console.log("111", progressMoving);
+function ProgressBar({ step, setStep, progressMoving, progressMoving3 }) {
+  // 載入中Start----------------------
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
+  const spinner = (
+    <div className="spinner-border text-primary" role="status">
+      <span className="sr-only">Loading...</span>
+    </div>
+  );
+  // 載入中End------------------------
   return (
     <>
       <section>
-        <div className="penguin">
-          <img src={`${IMAGE_URL}/penguin.png`} alt="" />
+        <div className="penguin penguin3">
+          <img src={`${ORDERIMAGE_URL}/penguin.png`} alt="" />
         </div>
 
         <section className="d-flex">
@@ -16,15 +29,19 @@ function ProgressBar({ setStep2, step2, progressMoving }) {
             </div>
             <p className="order_progress_word md-blue">確認訂單</p>
           </div>
-          <div className="progress_line">
-            <div className="first_during"></div>
+          {/* ---------------------------------------------------------- */}
+
+          <div className="progress_line  w3-round-xlarge  ">
+            <div className="first_during w3-round-xlarge"></div>
           </div>
+
+          {/* ---------------------------------------------------------- */}
           <div>
             <button
               className="progress_button2"
               onClick={() => {
-                // progressMoving
-                setStep2(true);
+                setStep(2);
+                progressMoving();
               }}
             >
               <div className="material-icons md-50 md-grey number_icon">
@@ -33,12 +50,26 @@ function ProgressBar({ setStep2, step2, progressMoving }) {
               <p className="order_progress_word md-grey">付款方式</p>
             </button>
           </div>
-          <div className="progress_line"> </div>
+          {/* ---------------------------------------------------------- */}
+          <div className="progress_line3  w3-round-xlarge  ">
+            <div className="first_during3 w3-round-xlarge"></div>
+          </div>
+          {/* ---------------------------------------------------------- */}
+
           <div>
-            <div className="material-icons md-50 md-grey number_icon">
-              looks_3
-            </div>
-            <p className="order_progress_word md-grey">完成訂單</p>
+            <button
+              className="progress_button3"
+              onClick={() => {
+                progressMoving3();
+
+                setStep(3);
+              }}
+            >
+              <div className="material-icons md-50 md-grey number_icon">
+                looks_3
+              </div>
+              <p className="order_progress_word md-grey">完成訂單</p>
+            </button>
           </div>
         </section>
       </section>

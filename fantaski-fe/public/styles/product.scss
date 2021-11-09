@@ -1,13 +1,19 @@
 .navbar {
-  width: auto;
+  width: 100%;
   height: 100px;
   background-color: $main-blue;
-  margin-bottom: 40px;
+  // margin-bottom: 40px;
+  position: fixed;
+  top: 0;
+  z-index: 3;
 }
 
 //---------------商品頁面-------------------------------------------
 
 // 圖片輪播設定
+.carousel {
+  margin-top: 100px;
+}
 .image_range {
   width: 1500px;
   height: 700px;
@@ -119,6 +125,40 @@
 .product_image_s {
   width: 15rem;
   height: 24rem;
+  position: relative;
+}
+@keyframes pulsate-fwd {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+.product_image_s:hover {
+  animation: pulsate-fwd 0.9s 1 alternate;
+}
+.collect_tag {
+  font-size: 27px;
+  position: absolute;
+  right: 0;
+  color: $main-red;
+  opacity: 0.5;
+  background-color: transparent;
+  border: 0ch;
+  margin: 0;
+  padding: 0;
+}
+.collect_tag:hover {
+  font-size: 33px;
+  color: $main-red;
+  opacity: 1;
 }
 
 // 條列式圖片設定
@@ -133,6 +173,10 @@
 .product_image_l {
   width: 15rem;
   height: 24rem;
+  position: relative;
+}
+.product_image_l:hover {
+  animation: pulsate-fwd 0.9s 1 alternate;
 }
 .product_description {
   max-width: 900px;
@@ -167,12 +211,16 @@
 
 // 切換頁面按鈕
 .page_button {
-  position: absolute;
-  left: 50%;
-  margin-bottom: 0;
-  // display: flex;
-  // justify-content: center;
-  // align-items: flex-end;
+  // position: absolute;
+  // left: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-left: 19%;
+  margin-bottom: 10rem;
+}
+.main_area {
+  height: 1600px;
 }
 
 // .page_button {
