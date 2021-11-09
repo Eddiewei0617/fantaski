@@ -102,7 +102,7 @@ function Navbar() {
                     className={`nav-link ${
                       colorButton === "山的一切" && "active"
                     }`}
-                    to="/mountain"
+                    to="/mountainroute"
                     onClick={handleClick}
                   >
                     山的一切
@@ -113,7 +113,7 @@ function Navbar() {
                     className={`nav-link ${
                       colorButton === "租點裝備" && "active"
                     }`}
-                    to="/product"
+                    to="/products"
                     onClick={handleClick}
                   >
                     租點裝備
