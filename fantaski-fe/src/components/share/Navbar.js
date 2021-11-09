@@ -161,8 +161,12 @@ function Navbar() {
                 </li>
                 <li className="left-line"></li>
                 <li className="nav-item user-login">
-                  <Link className="nav-link" to="/login">
+                  <Link className="nav-link" to="/member">
                     <FaUserAlt className="all-icon-nav" size={25} />
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/login">
                     {/* 會員登入後，要將(登入/註冊)改為會員的ID(帳號名稱) */}
                     <span className="login">登入/註冊</span>
                   </Link>
