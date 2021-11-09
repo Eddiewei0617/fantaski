@@ -1,0 +1,46 @@
+.go-top {
+  width: 40px;
+  height: 40px;
+  background: $main-red;
+  border-radius: 50%;
+  border: none;
+
+  position: fixed;
+  z-index: 3000;
+  right: 3%;
+  bottom: 3%;
+
+  //   display: none;
+  //   visibility: hidden;
+  //   overflow: hidden;
+
+  //   padding: 10px 13px;
+
+  transition: 0.2s ease-in-out;
+  text-align: center;
+
+  //   opacity: 0;
+  box-shadow: $shadow;
+
+  &:hover {
+    background: $main-blue;
+  }
+}
+
+.go-top.is-block {
+  display: block;
+}
+
+.go-top.is-opacity {
+  opacity: 1;
+  visibility: visible;
+}
+
+.top-arrow {
+  color: $assist-white;
+  font-size: $font-l;
+  //   padding: 0 4%;
+  margin: 8% auto;
+  //   text-align: center;
+  //   line-height: 40px;
+}
