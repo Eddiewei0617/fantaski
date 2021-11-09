@@ -64,10 +64,7 @@ function Navbar() {
               {/* logo */}
               <Link className="navbar-brand" to="/">
                 <img
-                  src={`${IMAGE_SHARE_URL.slice(
-                    1,
-                    -2
-                  )}/fantaski_logo_white.svg`}
+                  src={`${IMAGE_SHARE_URL}/fantaski_logo_white.svg`}
                   width="70"
                   height="70"
                   alt="FantaskiLogo"
