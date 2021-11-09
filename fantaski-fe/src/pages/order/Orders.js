@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 
-import ProgressBar from "../components/orders/ProgressBar";
-import FirstStep from "../components/orders/FirstStep";
-import SecondStep from "../components/orders/SecondStep";
-import ThirdStep from "../components/orders/ThirdStep";
+import ProgressBar from "../../components/orders/ProgressBar";
+import FirstStep from "../../components/orders/FirstStep";
+import SecondStep from "../../components/orders/SecondStep";
+import ThirdStep from "../../components/orders/ThirdStep";
 
-import { PRODUCTIMAGE_URL, ORDERIMAGE_URL } from "../config/url";
+import { PRODUCTIMAGE_URL, ORDERIMAGE_URL } from "../../config/url";
 
 const productFromServer = [
   {
@@ -69,12 +69,6 @@ function Orders(props) {
     }
   }, []);
 
-  const display = (
-    <>
-      <p>{orderProduct.name}</p>
-    </>
-  );
-
   // 為了判斷在哪個頁面切換
   const [step, setStep] = useState(0);
 
@@ -90,7 +84,6 @@ function Orders(props) {
       break;
     case 2:
       console.log("第二頁");
-
       return (
         <>
           <div className="navbar"></div>
@@ -116,6 +109,22 @@ function Orders(props) {
       break;
     case 3:
       console.log("第三頁");
+      return (
+        <>
+          <div className="navbar"></div>
+          <div className="progress_bar_bg">
+            <div className="progress_bar">
+              <ProgressBar
+                step={step}
+                setStep={setStep}
+                progressMoving={progressMoving}
+                progressMoving3={progressMoving3}
+              />
+            </div>
+          </div>
+          <ThirdStep />
+        </>
+      );
       break;
     default:
       console.log("請再次確認頁面");
@@ -124,7 +133,7 @@ function Orders(props) {
 
   // 企鵝和進度條移動
   let penguin = document.querySelector(".penguin");
-  let penguin3 = document.querySelector(".penguin");
+  let penguin3 = document.querySelector(".penguin3");
   let progressLine = document.querySelector(".first_during");
   let progressLine3 = document.querySelector(".first_during3");
   let number2 = document.querySelector(".progress_button2 div");
@@ -139,7 +148,6 @@ function Orders(props) {
     word2.style.color = "#134865";
     // console.log("888");
   }
-
   // 輸入卡號後到確認訂單的過程
   function progressMoving3() {
     penguin3.classList.add("penguinMove3");
@@ -148,6 +156,7 @@ function Orders(props) {
     word3.style.color = "#134865";
   }
   // classList.add 是在原本的樣式加上新的樣式；style.className是覆蓋原本樣式
+
   return (
     <>
       <div className="navbar"></div>
@@ -157,7 +166,7 @@ function Orders(props) {
             step={step}
             setStep={setStep}
             progressMoving={progressMoving}
-            // progressMoving3={progressMoving3}
+            progressMoving3={progressMoving3}
           />
         </div>
       </div>
@@ -170,7 +179,6 @@ function Orders(props) {
 
       {/* <SecondStep orderProduct={orderProduct} progressMoving={progressMoving} /> */}
       <ThirdStep />
-      {display}
     </>
   );
 }

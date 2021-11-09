@@ -1,12 +1,24 @@
+import { useState, useEffect } from "react";
 import { ORDERIMAGE_URL } from "../../config/url";
 
 function ProgressBar({ step, setStep, progressMoving, progressMoving3 }) {
-  // console.log("666", setStep2);
-  // console.log("111", progressMoving);
+  // 載入中Start----------------------
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
+  const spinner = (
+    <div className="spinner-border text-primary" role="status">
+      <span className="sr-only">Loading...</span>
+    </div>
+  );
+  // 載入中End------------------------
   return (
     <>
       <section>
-        <div className="penguin">
+        <div className="penguin penguin3">
           <img src={`${ORDERIMAGE_URL}/penguin.png`} alt="" />
         </div>
 
@@ -48,8 +60,9 @@ function ProgressBar({ step, setStep, progressMoving, progressMoving3 }) {
             <button
               className="progress_button3"
               onClick={() => {
-                // setStep(2);
                 progressMoving3();
+
+                setStep(3);
               }}
             >
               <div className="material-icons md-50 md-grey number_icon">
