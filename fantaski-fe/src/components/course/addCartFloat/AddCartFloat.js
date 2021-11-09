@@ -16,6 +16,9 @@ function AddCartFloat({ customerChoose, setCustomerChoose, showCourse }) {
 
   useEffect(() => {
     getCourseInfo(showCourse, setCourseInfo);
+    window.addEventListener("click", () => {
+      setShowCalendarFloat(false);
+    });
   }, []);
 
   if (courseInfo === null) {
@@ -66,7 +69,8 @@ function AddCartFloat({ customerChoose, setCustomerChoose, showCourse }) {
               <FontAwesomeIcon
                 className="icons"
                 icon={faCalendarAlt}
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
                   setShowCalendarFloat(!showCalendarFloat);
                 }}
               />

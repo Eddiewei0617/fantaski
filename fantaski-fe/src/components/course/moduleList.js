@@ -1,11 +1,23 @@
 import axios from "axios";
 import { API_URL } from "../../config/url";
 
-const courseIdName = {
-  初體驗: 1,
-  技能班: 2,
-  雪橇車: 3,
-  建冰屋: 4,
+export const courseIdName = {
+  初體驗: {
+    id: 1,
+    eng: "beginner",
+  },
+  技能班: { id: 2, eng: "skill" },
+  雪橇車: { id: 3, eng: "sled" },
+  建冰屋: { id: 4, eng: "igloo" },
+};
+
+export const starMapping = {
+  0: ["empty-star", "empty-star", "empty-star", "empty-star", "empty-star"],
+  1: ["full-star", "empty-star", "empty-star", "empty-star", "empty-star"],
+  2: ["full-star", "full-star", "empty-star", "empty-star", "empty-star"],
+  3: ["full-star", "full-star", "full-star", "empty-star", "empty-star"],
+  4: ["full-star", "full-star", "full-star", "full-star", "empty-star"],
+  5: ["full-star", "full-star", "full-star", "full-star", "full-star"],
 };
 
 export async function getCourseInfo(showCourse, setCourseInfo) {

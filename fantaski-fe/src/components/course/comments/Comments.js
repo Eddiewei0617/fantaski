@@ -1,5 +1,5 @@
 import React from "react";
-import Comment from "./comment";
+import Comment from "./Comment";
 const comments = [
   {
     member: "Sam",

@@ -3,14 +3,8 @@ import "use-state-promise";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { COURSE_IMG_URL } from "../../../config/url";
+import { starMapping } from "../moduleList";
 
-const starMapping = {
-  1: ["full-star", "empty-star", "empty-star", "empty-star", "empty-star"],
-  2: ["full-star", "full-star", "empty-star", "empty-star", "empty-star"],
-  3: ["full-star", "full-star", "full-star", "empty-star", "empty-star"],
-  4: ["full-star", "full-star", "full-star", "full-star", "empty-star"],
-  5: ["full-star", "full-star", "full-star", "full-star", "full-star"],
-};
 function Comment(props) {
   const { comment } = props;
   const [hasEllipsis, setHasEllipsisPromise, setHasEllipsis] = useState(false);

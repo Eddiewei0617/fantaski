@@ -10,6 +10,7 @@ import Igloo from "./pages/course/Igloo";
 import Member from "./pages/Member";
 // 組合用元件
 import ScrollToTop from "./components/ScrollToTop";
+import CommentsInMember from "./components/course/commentsinMember/CommentsInMember";
 
 const courses = ["初體驗", "技能班", "雪橇車", "建冰屋"];
 
@@ -28,6 +29,7 @@ function App() {
         暫時代替navbar <br />
         <Link to="/Products">到產品</Link>&nbsp;
         <Link to="/Orders">到訂單</Link>&nbsp;
+        <Link to="/course/commentsinmemer">我的點評</Link>&nbsp;
         <Link
           to="/course/beginner"
           onClick={() => {
@@ -40,6 +42,16 @@ function App() {
         <Link to="/Member">到會員</Link>
         <ScrollToTop>
           <Switch>
+            <Route path="/course/beginner">
+              <Beginner
+                courses={courses}
+                showCourse={showCourse}
+                setShowCourse={setShowCourse}
+              />
+            </Route>
+            <Route path="/course/commentsinmemer">
+              <CommentsInMember setShowCourse={setShowCourse} />
+            </Route>
             <Route path="/course/beginner">
               <Beginner
                 courses={courses}

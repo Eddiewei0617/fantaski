@@ -63,7 +63,9 @@ function Coach({ showCourse }) {
                       setSelectedCoach(v.id);
                     }}
                   >
-                    <div className={`avatar ${styleList[i]["avatarClass"]}`}>
+                    <div
+                      className={`coach-avatar ${styleList[i]["avatarClass"]}`}
+                    >
                       <img
                         className="object-fit"
                         src={`${COURSE_IMG_URL}/${v.imgSrc}`}
