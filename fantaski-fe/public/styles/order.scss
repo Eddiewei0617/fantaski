@@ -18,40 +18,49 @@
 }
 
 // 企鵝--------
-@keyframes skiing {
-  0% {
-    margin-left: 15px;
-  }
-  100% {
-    margin-left: 450px;
-  }
-}
-@keyframes skiing2 {
-  0% {
-    margin-left: 450px;
-  }
-  100% {
-    margin-left: 875px;
-  }
-}
+// @keyframes skiing {
+//   0% {
+//     // margin-left: 15px;
+//     transform: translateX(0px);
+//   }
+//   100% {
+//     // margin-left: 450px;
+//     transform: translateX(403px);
+//   }
+// }
+// @keyframes skiing2 {
+//   0% {
+//     margin-left: 450px;
+//     transform: translateX(0px);
+//   }
+//   100% {
+//     // margin-left: 875px;
+//     transform: translateX(403px);
+//   }
+// }
+
 .penguin {
   width: 65px;
   height: 60px;
   display: block;
   margin-left: 15px;
+  transition: transform 2s ease-in-out, opacity 2s ease-in-out;
 }
 .penguin3 {
   width: 65px;
   height: 60px;
   display: block;
-  // margin-left: 450px;
+  transition: transform 2s ease-in-out, opacity 2s ease-in-out;
 }
 // forwards 的意思是讓動畫停在最後的位置
 .penguinMove {
-  animation: skiing 3s forwards;
+  // animation: skiing 3s forwards;
+  transform: translateX(408px);
 }
 .penguinMove3 {
-  animation: skiing2 3s forwards;
+  // margin-left: 450px;
+  // animation: skiing2 3s forwards;
+  transform: translateX(835px);
 }
 .penguin img {
   width: 100%;
@@ -116,7 +125,7 @@
   height: 5px;
 }
 .first_during_move {
-  animation: progressLine 3s forwards;
+  animation: progressLine 2s forwards;
 }
 
 // 購物車底色

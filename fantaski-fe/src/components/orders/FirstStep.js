@@ -15,7 +15,11 @@ function FirstStep({ orderProduct, progressMoving, step, setStep }) {
 
       <OrderContent />
       <div className="box3 d-flex justify-content-end m-5">
-        <NextStepIcon />
+        <NextStepIcon
+          progressMoving={progressMoving}
+          step={step}
+          setStep={setStep}
+        />
       </div>
     </>
   );

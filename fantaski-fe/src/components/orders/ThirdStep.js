@@ -2,7 +2,7 @@ import OrderFinal from "./OrderFinal";
 import PrevStepIcon from "./PrevStepIcon";
 import OrderSubmitIcon from "./OrderSubmitIcon";
 
-function ThirdStep() {
+function ThirdStep({ step, setStep, progressMoving, progressMoving3 }) {
   return (
     <>
       <OrderFinal />

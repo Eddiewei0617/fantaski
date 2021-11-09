@@ -93,14 +93,12 @@ function Orders(props) {
                 step={step}
                 setStep={setStep}
                 progressMoving={progressMoving}
-                progressMoving3={progressMoving3}
               />
             </div>
           </div>
           <SecondStep
             orderProduct={orderProduct}
             progressMoving={progressMoving}
-            progressMoving3={progressMoving3}
             step={step}
             setStep={setStep}
           />
@@ -118,11 +116,14 @@ function Orders(props) {
                 step={step}
                 setStep={setStep}
                 progressMoving={progressMoving}
-                progressMoving3={progressMoving3}
               />
             </div>
           </div>
-          <ThirdStep />
+          <ThirdStep
+            step={step}
+            setStep={setStep}
+            progressMoving={progressMoving}
+          />
         </>
       );
       break;
@@ -133,27 +134,15 @@ function Orders(props) {
 
   // 企鵝和進度條移動
   let penguin = document.querySelector(".penguin");
-  let penguin3 = document.querySelector(".penguin3");
   let progressLine = document.querySelector(".first_during");
-  let progressLine3 = document.querySelector(".first_during3");
   let number2 = document.querySelector(".progress_button2 div");
   let word2 = document.querySelector(".progress_button2 p");
-  let number3 = document.querySelector(".progress_button3 div");
-  let word3 = document.querySelector(".progress_button3 p");
   // 購物車到信用卡輸入的過程
   function progressMoving() {
     penguin.classList.add("penguinMove");
     progressLine.classList.add("first_during_move");
     number2.style.color = "#134865";
     word2.style.color = "#134865";
-    // console.log("888");
-  }
-  // 輸入卡號後到確認訂單的過程
-  function progressMoving3() {
-    penguin3.classList.add("penguinMove3");
-    progressLine3.classList.add("first_during_move");
-    number3.style.color = "#134865";
-    word3.style.color = "#134865";
   }
   // classList.add 是在原本的樣式加上新的樣式；style.className是覆蓋原本樣式
 
@@ -166,7 +155,6 @@ function Orders(props) {
             step={step}
             setStep={setStep}
             progressMoving={progressMoving}
-            progressMoving3={progressMoving3}
           />
         </div>
       </div>
@@ -176,9 +164,6 @@ function Orders(props) {
         step={step}
         setStep={setStep}
       />
-
-      {/* <SecondStep orderProduct={orderProduct} progressMoving={progressMoving} /> */}
-      <ThirdStep />
     </>
   );
 }

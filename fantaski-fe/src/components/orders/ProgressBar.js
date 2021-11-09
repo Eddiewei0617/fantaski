@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { ORDERIMAGE_URL } from "../../config/url";
 
-function ProgressBar({ step, setStep, progressMoving, progressMoving3 }) {
+function ProgressBar({ step, setStep, progressMoving }) {
   // 載入中Start----------------------
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -15,6 +15,19 @@ function ProgressBar({ step, setStep, progressMoving, progressMoving3 }) {
     </div>
   );
   // 載入中End------------------------
+
+  // 企鵝和進度條2階段到3階段
+  function progressMoving3() {
+    let penguin3 = document.querySelector(".penguin3");
+    let progressLine3 = document.querySelector(".first_during3");
+    let number3 = document.querySelector(".progress_button3 div");
+    let word3 = document.querySelector(".progress_button3 p");
+    penguin3.classList.add("penguinMove3");
+    progressLine3.classList.add("first_during_move");
+    number3.style.color = "#134865";
+    word3.style.color = "#134865";
+  }
+
   return (
     <>
       <section>
@@ -60,9 +73,8 @@ function ProgressBar({ step, setStep, progressMoving, progressMoving3 }) {
             <button
               className="progress_button3"
               onClick={() => {
-                progressMoving3();
-
                 setStep(3);
+                progressMoving3();
               }}
             >
               <div className="material-icons md-50 md-grey number_icon">
