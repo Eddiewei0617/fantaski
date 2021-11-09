@@ -9,11 +9,11 @@
   margin: 0 auto;
 }
 //-----------------------------課程通用按鈕-----------------------------//
-.buttons {
+.course-buttons {
   margin-top: 30px;
   height: 30px;
 }
-.buttons a {
+.course-buttons a {
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -21,7 +21,7 @@
   margin: 30px;
   /* transform: translateX(-25px); */
 }
-.buttons img {
+.course-buttons img {
   width: 50px;
   height: 50px;
   object-fit: cover;
@@ -29,32 +29,32 @@
     brightness(70%) contrast(89%);
 }
 /* 初體驗hover& 點選後效果 */
-.buttons .course0:hover img,
-.buttons .course0 .showCourseBtn {
+.course-buttons .course0:hover img,
+.course-buttons .course0 .showCourseBtn {
   filter: invert(45%) sepia(33%) saturate(839%) hue-rotate(81deg)
     brightness(65%) contrast(88%);
 }
 /* 技能班hover& 點選後效果 */
-.buttons .course1:hover img,
-.buttons .course1 .showCourseBtn {
+.course-buttons .course1:hover img,
+.course-buttons .course1 .showCourseBtn {
   filter: invert(62%) sepia(56%) saturate(4147%) hue-rotate(324deg)
     brightness(85%) contrast(108%);
 }
 /* 雪橇車hover & 點選後效果 */
 
-.buttons .course2:hover img,
-.buttons .course2 .showCourseBtn {
+.course-buttons .course2:hover img,
+.course-buttons .course2 .showCourseBtn {
   filter: brightness(0);
 }
 /* 建冰屋hover& 點選後效果 */
 
-.buttons .course3:hover img,
-.buttons .course3 .showCourseBtn {
+.course-buttons .course3:hover img,
+.course-buttons .course3 .showCourseBtn {
   filter: invert(45%) sepia(33%) saturate(839%) hue-rotate(81deg)
     brightness(65%) contrast(88%);
 }
 
-.buttons span {
+.course-buttons span {
   font-size: 22px;
   color: #134865;
 }

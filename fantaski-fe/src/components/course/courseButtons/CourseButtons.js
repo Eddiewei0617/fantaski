@@ -12,7 +12,7 @@ function CourseButtons(props) {
   const { courses, showCourse, setShowCourse } = props;
   return (
     <>
-      <div className="buttons d-flex justify-content-center align-items-center">
+      <div className="course-buttons d-flex justify-content-center align-items-center">
         {courses.map((course, i) => {
           return (
             <>

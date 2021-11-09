@@ -1,22 +1,22 @@
 import React, { useState } from "react";
-import "../App.css";
+// import "../App.css";
 import { useSpring, animated } from "react-spring";
 
 function Member() {
   const [registrationFormStatus, setRegistartionFormStatus] = useState(false);
-  const loginProps = useSpring({ 
-    left: registrationFormStatus ? -500 : 0, 
+  const loginProps = useSpring({
+    left: registrationFormStatus ? -500 : 0,
     // Login form sliding positions
   });
   const registerProps = useSpring({
-    left: registrationFormStatus ? 0 : 500, 
-    // Register form sliding positions 
+    left: registrationFormStatus ? 0 : 500,
+    // Register form sliding positions
   });
 
   const loginBtnProps = useSpring({
-    borderBottom: registrationFormStatus 
+    borderBottom: registrationFormStatus
       ? "solid 0px transparent"
-      : "solid 2px #1059FF",  //Animate bottom border of login button
+      : "solid 2px #1059FF", //Animate bottom border of login button
   });
   const registerBtnProps = useSpring({
     borderBottom: registrationFormStatus
@@ -35,6 +35,7 @@ function Member() {
     <div className="login-register-wrapper">
       <div className="nav-buttons">
         <animated.button
+          className="login-button"
           onClick={loginClicked}
           id="loginBtn"
           style={loginBtnProps}
@@ -42,6 +43,7 @@ function Member() {
           登入
         </animated.button>
         <animated.button
+          className="login-button"
           onClick={registerClicked}
           id="registerBtn"
           style={registerBtnProps}
@@ -70,7 +72,7 @@ function LoginForm() {
       {/* <label for="username"></label> */}
       <input type="text" value="帳號:" id="username" />
       {/* <label for="password"></label> */}
-      <input type="text" value ="密碼" id="password" />
+      <input type="text" value="密碼" id="password" />
       <input type="submit" value="登入" className="submit" />
     </React.Fragment>
   );
