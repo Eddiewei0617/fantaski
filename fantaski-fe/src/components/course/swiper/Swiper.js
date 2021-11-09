@@ -5,6 +5,7 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { COURSE_IMG_URL } from "../../../config/url";
 
 // import pants from "../../img/1631584448.jpg";
 
@@ -111,7 +112,7 @@ function Swiper({ showCourse }) {
         <div className="decoration-skill">
           <img
             className="object-fit"
-            src="/assets/img_course/all-advice.png"
+            src={`${COURSE_IMG_URL}/all-advice.png`}
             alt=""
           />
         </div>

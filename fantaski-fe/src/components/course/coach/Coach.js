@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { filterCouches } from "../asCouchDB";
+import { COURSE_IMG_URL } from "../../../config/url";
+
 const styleList = [
   {
     svgPathD:
@@ -64,7 +66,7 @@ function Coach({ showCourse }) {
                     <div className={`avatar ${styleList[i]["avatarClass"]}`}>
                       <img
                         className="object-fit"
-                        src={v.imgSrc}
+                        src={`${COURSE_IMG_URL}/${v.imgSrc}`}
                         alt={v.imgAlt}
                       />
                     </div>
@@ -101,13 +103,13 @@ function Coach({ showCourse }) {
           {selectedCoach === couchtoShow[0]["id"] ? (
             <img
               className="object-fit"
-              src="/assets/img_course/snowManinCouch.png"
+              src={`${COURSE_IMG_URL}/snowManinCouch.png`}
               alt=""
             />
           ) : (
             <img
               className="object-fit"
-              src="/assets/img_course/snowManinCouch2.png"
+              src={`${COURSE_IMG_URL}/snowManinCouch2.png`}
               alt=""
             />
           )}

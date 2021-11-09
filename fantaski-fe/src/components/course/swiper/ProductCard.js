@@ -1,4 +1,5 @@
 import React from "react";
+import { COURSE_IMG_URL } from "../../../config/url";
 
 function ProductCard(props) {
   const { product, i, selectedAdvice } = props;
@@ -18,7 +19,7 @@ function ProductCard(props) {
         >
           <img
             className="object-fit"
-            src={`/assets/img_course/${product.img}`}
+            src={`${COURSE_IMG_URL}/${product.img}`}
             alt=""
           ></img>
         </div>

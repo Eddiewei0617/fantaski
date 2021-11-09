@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { COURSE_IMG_URL } from "../../../config/url";
 
 const coursesinEng = {
   初體驗: "beginner",
@@ -25,7 +26,7 @@ function CourseButtons(props) {
               >
                 <Link to={`/course/${coursesinEng[course]}`}>
                   <img
-                    src="/assets/img_course/snowflat.png"
+                    src={`${COURSE_IMG_URL}/snowflat.png`}
                     alt=""
                     className={`${showCourse === course && "showCourseBtn"}`}
                   />

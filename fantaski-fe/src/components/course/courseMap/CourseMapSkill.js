@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { COURSE_IMG_URL } from "../../../config/url";
 
 function CourseMapSkill() {
   //切換文字or圖片用，先全部設定為文字面
@@ -25,7 +26,7 @@ function CourseMapSkill() {
         <div className="decoration-skill">
           <img
             className="object-fit"
-            src="/assets/img_course/skillMan.png"
+            src={`${COURSE_IMG_URL}/skillMan.png`}
             alt=""
           />
         </div>
@@ -45,7 +46,7 @@ function CourseMapSkill() {
                 <div className="back">
                   <img
                     className="object-fit"
-                    src="/assets/img_course/warmup.png"
+                    src={`${COURSE_IMG_URL}/warmup.png`}
                     alt=""
                   />
                 </div>
@@ -61,7 +62,7 @@ function CourseMapSkill() {
                 <div className="back">
                   <img
                     className="object-fit"
-                    src="/assets/img_course/s-Turn.png"
+                    src={`${COURSE_IMG_URL}/s-Turn.png`}
                     alt=""
                   />
                 </div>
@@ -77,7 +78,7 @@ function CourseMapSkill() {
                 <div className="back">
                   <img
                     className="object-fit"
-                    src="/assets/img_course/j-turn.png"
+                    src={`${COURSE_IMG_URL}/j-turn.png`}
                     alt=""
                   />
                 </div>
@@ -93,7 +94,7 @@ function CourseMapSkill() {
                 <div className="back">
                   <img
                     className="object-fit"
-                    src="/assets/img_course/carving.png"
+                    src={`${COURSE_IMG_URL}/carving.png`}
                     alt=""
                   />
                 </div>
@@ -109,7 +110,7 @@ function CourseMapSkill() {
                 <div className="back">
                   <img
                     className="object-fit"
-                    src="/assets/img_course/ollie.png"
+                    src={`${COURSE_IMG_URL}/ollie.png`}
                     alt=""
                   />
                 </div>
@@ -125,7 +126,7 @@ function CourseMapSkill() {
                 <div className="back">
                   <img
                     className="object-fit"
-                    src="/assets/img_course/park.png"
+                    src={`${COURSE_IMG_URL}/park.png`}
                     alt=""
                   />
                 </div>

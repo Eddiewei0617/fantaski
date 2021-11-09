@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { COURSE_IMG_URL } from "../../../config/url";
 
 const coursesinEng = {
   初體驗: "beginner",
@@ -29,7 +30,7 @@ function SingleCourseLink(props) {
           </div>
           <img
             className="object-fit"
-            src={`/assets/img_course/${imgSrc}`}
+            src={`${COURSE_IMG_URL}/${imgSrc}`}
             alt=""
           ></img>
         </Link>
