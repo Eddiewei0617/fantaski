@@ -19,11 +19,11 @@ import $ from "jquery";
 
 function Navbar() {
   // 設定該項目被點選時的狀態
-  let [colorButton, setColorButton] = useState("");
+  let [colorButton, setColorButton] = useState("FANTASKI");
   const handleClick = (e) => {
     setColorButton(e.target.innerText);
   };
-
+  // console.log(IMAGE_SHARE_URL.slice(0, -1));
   // navbar動態效果
   useEffect(() => {
     $(".change-logo").css("display", "none");
@@ -64,13 +64,26 @@ function Navbar() {
               {/* logo */}
               <Link className="navbar-brand" to="/">
                 <img
-                  src={`${IMAGE_SHARE_URL}/fantaski_logo_white.svg`}
+                  src={`${IMAGE_SHARE_URL.slice(
+                    1,
+                    -2
+                  )}/fantaski_logo_white.svg`}
                   width="70"
                   height="70"
                   alt="FantaskiLogo"
-                  className="logo-img"
+                  className={`logo-img ${
+                    colorButton === "FANTASKI" && "active"
+                  }`}
+                  onClick={handleClick}
                 />
-                <span className="change-logo">FANTASKI</span>
+                <span
+                  className={`change-logo ${
+                    colorButton === "FANTASKI" && "active"
+                  }`}
+                  onClick={handleClick}
+                >
+                  FANTASKI
+                </span>
               </Link>
             </div>
             {/* 主頁面 */}
