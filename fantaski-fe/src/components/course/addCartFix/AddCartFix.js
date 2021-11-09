@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import Calendar from "../calendar/Calendar";
+import { COURSE_IMG_URL } from "../../../config/url";
 
 function AddCartFix({ customerChoose, setCustomerChoose }) {
   const [showCalendar, setShowCalendar] = useState(false);
@@ -19,7 +20,7 @@ function AddCartFix({ customerChoose, setCustomerChoose }) {
         <div className="decoration-skill">
           <img
             className="object-fit"
-            src="/assets/img_course/skillPeople.png"
+            src={`${COURSE_IMG_URL}/skillPeople.png`}
             alt=""
           />
         </div>

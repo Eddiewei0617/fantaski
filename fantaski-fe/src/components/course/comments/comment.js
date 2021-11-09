@@ -2,6 +2,8 @@ import React, { useRef, useState, useEffect } from "react";
 import "use-state-promise";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { COURSE_IMG_URL } from "../../../config/url";
+
 const starMapping = {
   1: ["full-star", "empty-star", "empty-star", "empty-star", "empty-star"],
   2: ["full-star", "full-star", "empty-star", "empty-star", "empty-star"],
@@ -39,7 +41,7 @@ function Comment(props) {
         <div className="comment-avatar-box col-1">
           <img
             className="object-fit-height"
-            src="/assets/img_course/avatar-default.png"
+            src={`${COURSE_IMG_URL}/avatar-default.png`}
             alt=""
           />
         </div>

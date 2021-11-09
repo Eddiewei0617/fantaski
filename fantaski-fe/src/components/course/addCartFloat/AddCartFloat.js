@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
@@ -6,38 +6,25 @@ import {
   faCalendarAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import Calendar from "../calendar/Calendar";
+import { COURSE_IMG_URL } from "../../../config/url";
+import { getCourseInfo } from "../moduleList";
 
 function AddCartFloat({ customerChoose, setCustomerChoose, showCourse }) {
   const [showCalendarFloat, setShowCalendarFloat] = useState(false);
   const [showAddCart, setShowAddCart] = useState(false);
-  const courseInfoList = [
-    {
-      name: "初體驗",
-      hours: 4,
-      price: 1500,
-      imgSrc: "couch3.jpeg",
-    },
+  const [courseInfo, setCourseInfo] = useState(null);
 
-    {
-      name: "技能班",
-      hours: 6,
-      price: 3000,
-      imgSrc: "skill7.jpeg",
-    },
+  useEffect(() => {
+    getCourseInfo(showCourse, setCourseInfo);
+  }, []);
 
-    {
-      name: "雪橇車",
-      hours: 3,
-      price: 3000,
-      imgSrc: "sled1.jpeg",
-    },
-    {
-      name: "建冰屋",
-      hours: 2,
-      price: 1000,
-      imgSrc: "igloo3.jpeg",
-    },
-  ];
+  if (courseInfo === null) {
+    return (
+      <>
+        <div></div>
+      </>
+    );
+  }
   function handleChange(e) {
     let name = e.target.name;
     let newValue = e.target.value;
@@ -48,11 +35,6 @@ function AddCartFloat({ customerChoose, setCustomerChoose, showCourse }) {
   function handleClickAddCart() {
     setShowAddCart(!showAddCart);
   }
-  //依據回傳的showCourse return相應資訊
-  let infoToSHow = courseInfoList.filter((item) => {
-    return item.name === showCourse;
-  });
-  console.log(infoToSHow);
   return (
     <>
       <div
@@ -72,13 +54,13 @@ function AddCartFloat({ customerChoose, setCustomerChoose, showCourse }) {
           <div className="add-cart-box-img">
             <img
               className="object-fit"
-              src={`/assets/img_course/${infoToSHow[0].imgSrc}`}
+              src={`${COURSE_IMG_URL}/${courseInfo[0].img}`}
               alt=""
             />
           </div>
           <div className="add-cart-box-info">
-            <div>課程名稱：{infoToSHow[0].name}</div>
-            <div>課程時數：{infoToSHow[0].hours}小時</div>
+            <div>課程名稱：{courseInfo[0].name}</div>
+            <div>課程時數：{courseInfo[0].hours}小時</div>
             <div className="add-cart-box-info-date">
               報名日期：
               <FontAwesomeIcon
@@ -119,7 +101,7 @@ function AddCartFloat({ customerChoose, setCustomerChoose, showCourse }) {
                 onChange={handleChange}
               ></input>
             </div>
-            <div>課程價錢：$ {infoToSHow[0].price}</div>
+            <div>課程價錢：$ {courseInfo[0].price}</div>
           </div>
           <button>立即報名</button>
         </div>
