@@ -3,7 +3,7 @@ import { PRODUCTIMAGE_URL } from "../../config/url";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { BsTagsFill } from "react-icons/bs";
-
+import PageButton from "../products/PageButton";
 const productFromServer = [
   {
     id: 1,
@@ -28,7 +28,7 @@ const productFromServer = [
   },
 ];
 
-function ProductSquare() {
+function ProductSquare({ clickToChangeToggle, setToggleState, toggleState }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -41,7 +41,13 @@ function ProductSquare() {
         return (
           <li key={v.id} className="list-unstyled ">
             <div className="product_image_s  ">
-              <button className="collect_tag">
+              <button
+                id={i + 1}
+                className={`${
+                  toggleState[i + 1] === true && "collect_tagged"
+                }  collect_tag`}
+                onClick={clickToChangeToggle}
+              >
                 <BsTagsFill />
               </button>
               <img src={v.image} alt="" className="size" />
@@ -59,8 +65,11 @@ function ProductSquare() {
 
   return (
     <>
-      <h3 className="product_title pl-1">雪板類</h3>
-      {display}
+      <div>
+        <h3 className="product_title pl-1">雪板類</h3>
+        {display}
+        <PageButton />
+      </div>
     </>
   );
 }

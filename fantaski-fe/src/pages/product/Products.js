@@ -10,10 +10,22 @@ import SwitchIcon from "../../components/products/SwitchIcon";
 import NavSide from "../../components/products/NavSide";
 import ProductSquare from "../../components/products/ProductSquare";
 import ProductList from "../../components/products/ProductList";
-import PageButton from "../../components/products/PageButton";
+// import PageButton from "../../components/products/PageButton";
 
 function Products() {
   const [square, setSquare] = useState(true);
+  const [toggleState, setToggleState] = useState({});
+  //點擊後切換目標id的狀態false <-> true
+  const clickToChangeToggle = (e) => {
+    console.log("e", e);
+    let targetId = e.currentTarget.id;
+    let oppositeState = !toggleState[targetId];
+    let newState = { ...toggleState, [targetId]: oppositeState };
+    setToggleState(newState);
+    console.log(newState);
+    // setToggleState(!toggleState);
+  };
+  // clickToChangeToggle();
 
   // 用一個ref抓到要跳轉到的位置區塊，再寫一個function scrollTo
   const productSection = useRef(null);
@@ -38,8 +50,15 @@ function Products() {
 
       <div className="d-flex main_area" ref={productSection}>
         <NavSide />
-        {square ? <ProductSquare /> : <ProductList />}
-        <PageButton />
+        {square ? (
+          <ProductSquare
+            clickToChangeToggle={clickToChangeToggle}
+            setToggleState={setToggleState}
+            toggleState={toggleState}
+          />
+        ) : (
+          <ProductList />
+        )}
       </div>
 
       {/* <Footer /> */}

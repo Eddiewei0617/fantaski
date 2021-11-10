@@ -94,7 +94,7 @@
 // 分隔線
 .separate {
   width: 1px;
-  height: 100%;
+  height: 80%;
   border-right: 3px solid rgb(121, 121, 121);
   left: 23%;
   position: absolute;
@@ -114,8 +114,9 @@
 
 // 方格式圖片設定
 .all_image_s {
-  position: absolute;
-  left: 25%;
+  // position: absolute;
+  // left: 25%;
+  padding: 0;
 }
 .all_image_s li {
   display: inline-block;
@@ -157,6 +158,10 @@
 }
 .collect_tag:hover {
   font-size: 33px;
+  color: $main-red;
+  opacity: 1;
+}
+.collect_tagged {
   color: $main-red;
   opacity: 1;
 }
@@ -211,18 +216,38 @@
 
 // 切換頁面按鈕
 .page_button {
-  // position: absolute;
-  // left: 50%;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
-  margin-left: 19%;
-  margin-bottom: 10rem;
+  align-items: center;
 }
-.page_button Button {
-  margin: 5px;
-  font-weight: 700;
+.page_button ul {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  margin-bottom: 0;
 }
+.page_button li {
+  font-size: $font-l;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 0 15px;
+}
+
+.page_button li:active {
+  color: white;
+  background-color: $main-red;
+}
+.arrow_go:active {
+  color: white;
+  background-color: $main-red;
+}
+.arrow_go {
+  font-size: $font-xl;
+  color: $main-blue;
+  margin: 0 10px;
+}
+
 .main_area {
-  height: 1600px;
+  height: 100%;
 }
