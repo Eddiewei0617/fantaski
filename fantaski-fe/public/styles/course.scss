@@ -1,7 +1,7 @@
 //--------------------------------影片--------------------------------//
 .video-wrap {
-  width: 100vw;
-  height: 70vh;
+  width: 100%;
+  height: 85vh;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -18,7 +18,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 30px;
+  margin: 50px;
   /* transform: translateX(-25px); */
 }
 .course-buttons img {
@@ -78,11 +78,11 @@
   position: relative;
 }
 .course-map-wrapper .decoration-skill {
-  width: 100px;
-  height: 150px;
+  width: 130px;
+  height: 180px;
   position: absolute;
-  top: -100px;
-  left: -50px;
+  top: -110px;
+  left: -70px;
 }
 .course-map-wrapper .decoration-skill-deer {
   width: 300px;
@@ -91,6 +91,14 @@
   top: -130px;
   left: -100px;
   opacity: 0.3;
+}
+.course-map-wrapper .decoration-skill-igloo {
+  width: 300px;
+  height: 180px;
+  position: absolute;
+  top: -130px;
+  left: -100px;
+  filter: drop-shadow(4px 4px 8px #0987bd);
 }
 .course-map-wrapper .col {
   cursor: pointer;
@@ -159,12 +167,14 @@
 //------------------------------教練專區------------------------------//
 .coach-wrapper {
   height: 400px;
+}
+.coach-wrapper {
   position: relative;
 }
-.coach-wrapper .decoration-skill {
+.coach-wrapper .coach .decoration-skill {
   position: absolute;
   top: -30px;
-  right: 400px;
+  right: 40px;
   width: 100px;
   height: 150px;
   transform: rotate(8deg);
@@ -456,10 +466,10 @@
   line-height: 80px;
 }
 .empty-star {
-  color: rgba(173, 173, 173, 0.5);
+  color: rgb(207, 207, 207);
 }
 .full-star {
-  color: rgb(237, 240, 97);
+  color: rgb(243, 208, 54);
 }
 .commit-more {
   line-height: 16px;
@@ -476,9 +486,9 @@
 }
 .swiper-wrapper .decoration-skill {
   position: absolute;
-  width: 180px;
-  height: 180px;
-  left: -70px;
+  width: 250px;
+  height: 250px;
+  left: -120px;
   top: -78px;
   opacity: 0.7;
   transform: rotate(7deg);
@@ -600,7 +610,7 @@
 }
 .single-course-wrap {
   border-radius: 10px;
-  height: 200px;
+  height: 15rem;
   width: 40%;
   overflow: hidden;
   position: relative;

@@ -39,6 +39,21 @@ function Coach({ showCourse }) {
                 } coach-shadow `}
               >
                 <div className="coach">
+                  <div className="decoration-skill">
+                    {selectedCoach === couchtoShow[0]["id"] ? (
+                      <img
+                        className="object-fit"
+                        src={`${COURSE_IMG_URL}/snowManinCouch.png`}
+                        alt=""
+                      />
+                    ) : (
+                      <img
+                        className="object-fit"
+                        src={`${COURSE_IMG_URL}/snowManinCouch2.png`}
+                        alt=""
+                      />
+                    )}
+                  </div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 531.65 301.13"
@@ -101,21 +116,6 @@ function Coach({ showCourse }) {
             </>
           );
         })}
-        <div className="decoration-skill">
-          {selectedCoach === couchtoShow[0]["id"] ? (
-            <img
-              className="object-fit"
-              src={`${COURSE_IMG_URL}/snowManinCouch.png`}
-              alt=""
-            />
-          ) : (
-            <img
-              className="object-fit"
-              src={`${COURSE_IMG_URL}/snowManinCouch2.png`}
-              alt=""
-            />
-          )}
-        </div>
       </div>
     </>
   );

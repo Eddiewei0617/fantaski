@@ -5,7 +5,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { COURSE_IMG_URL } from "../../../config/url";
 import { starMapping } from "../moduleList";
 
-function Comment(props) {
+function SingleComment(props) {
   const { comment } = props;
   const [hasEllipsis, setHasEllipsisPromise, setHasEllipsis] = useState(false);
   const [hasMore, setHasMore] = useState(false);
@@ -73,4 +73,4 @@ function Comment(props) {
   );
 }
 
-export default Comment;
+export default SingleComment;

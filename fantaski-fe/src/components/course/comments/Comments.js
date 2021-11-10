@@ -1,5 +1,5 @@
 import React from "react";
-import Comment from "./Comment";
+import SingleComment from "./SingleComment";
 const comments = [
   {
     member: "Sam",
@@ -59,7 +59,7 @@ function Comments({ showCourse }) {
         {comments.map((commit, i) => {
           return (
             <>
-              <Comment key={i} comment={commit} />
+              <SingleComment key={i} comment={commit} />
             </>
           );
         })}
