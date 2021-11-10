@@ -1,16 +1,18 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
+//引入全站都可以用的樣式
+@import "../public/styles/global.scss";
+@import "../public/styles/navbar.scss";
+@import "../public/styles/footer.scss";
+@import "../public/styles/gotop.scss";
+@import "../public/styles/product.scss";
+@import "../public/styles/order.scss";
+@import "../public/styles/course.scss";
 @import "../public/styles/member.scss";
 @import "../public/styles/mountainRoute.scss";
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: $font-family-base;
+  background-color: $background-color;
+  font-weight: 600;
+}

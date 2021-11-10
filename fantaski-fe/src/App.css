@@ -4,7 +4,6 @@
   --main-text-darkblue: #134865;
   --background-color: #fefcee;
   --assist-white: #ffffff;
-  --route-green: rgb(19, 158, 19);
 
   --font-m: 16px;
   --font-l: 24px;
@@ -12,13 +11,21 @@
 
   --font-family-base: "Noto Sans Traditional Chinese, Hobo Std";
 
-  --border-radius-main: 30px;
+  --border-radius: 30px;
 
   --shadow: 0 0 30 rgba(19, 72, 101, 0.4);
 }
-* {
+/* Reset styles */
+html,
+body,
+body * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  background-color: inherit;
 }
+
 body {
-  background-color: var(--background-color);
+  background-color: #fefcee;
 }
