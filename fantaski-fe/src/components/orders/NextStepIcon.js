@@ -1,5 +1,5 @@
 import { Button } from "react-bootstrap";
-import { scryRenderedComponentsWithType } from "react-dom/test-utils";
+// import { scryRenderedComponentsWithType } from "react-dom/test-utils";
 
 function NextStepIcon({ step, setStep, scrollToTop }) {
   console.log("test", step);

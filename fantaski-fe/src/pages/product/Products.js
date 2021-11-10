@@ -1,8 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import "animate.css";
-import Navbar from "../../components/share/Navbar";
-import Footer from "../../components/share/Footer";
-import Gotop from "../../components/share/Gotop";
 
 import CarouselP from "../../components/products/CarouselP";
 import ScrolldownIcon from "../../components/products/ScrolldownIcon";
@@ -39,7 +36,6 @@ function Products() {
 
   return (
     <>
-      {/* <Navbar /> */}
       <CarouselP />
       <ScrolldownIcon
         onClick={() => {
@@ -60,8 +56,6 @@ function Products() {
           <ProductList />
         )}
       </div>
-
-      {/* <Footer /> */}
     </>
   );
 }

@@ -63,12 +63,14 @@ function ProductSquare({ clickToChangeToggle, setToggleState, toggleState }) {
     </ul>
   );
 
+  const [pageButton, setPageButton] = useState(false);
+
   return (
     <>
       <div>
         <h3 className="product_title pl-1">雪板類</h3>
         {display}
-        <PageButton />
+        <PageButton setPageButton={setPageButton} pageButton={pageButton} />
       </div>
     </>
   );

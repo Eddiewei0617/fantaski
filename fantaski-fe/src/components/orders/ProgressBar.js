@@ -15,12 +15,13 @@ function ProgressBar({ step, setStep, scrollToTop }) {
       <span className="sr-only">Loading...</span>
     </div>
   );
+  // 載入中End------------------------
+
   useEffect(() => {
     // step === 1 && progressMovingBack();
     step === 2 && progressMoving();
     step === 3 && progressMoving3();
   }, [step]);
-  // 載入中End------------------------
 
   // classList.add 是在原本的樣式加上新的樣式；style.className是覆蓋原本樣式
   // 企鵝和進度條1階段到2階段移動
@@ -31,7 +32,7 @@ function ProgressBar({ step, setStep, scrollToTop }) {
   // 購物車到信用卡輸入的過程(去)
   function progressMoving() {
     penguin.classList.add("penguinMove");
-    penguin.style.removeProperty("transform");
+    // penguin.style.removeProperty("transform");
     progressLine.classList.add("first_during_move");
     progressLine.classList.remove("first_during_move_back");
     number2.style.color = "#134865";
@@ -47,7 +48,7 @@ function ProgressBar({ step, setStep, scrollToTop }) {
     word2.style.removeProperty("color");
   }
 
-  // 企鵝和進度條2階段到3階段
+  // 企鵝和進度條2階段到3階段(去)
   let penguin3 = document.querySelector(".penguin3");
   let progressLine3 = document.querySelector(".first_during3");
   let number3 = document.querySelector(".progress_button3 div");
@@ -59,11 +60,11 @@ function ProgressBar({ step, setStep, scrollToTop }) {
     number3.style.color = "#134865";
     word3.style.color = "#134865";
   }
-  // 從第3階段回第2階段
+  // 從第3階段回第2階段(回)
   function progressMovingBack3() {
     penguin3.classList.remove("penguinMove3");
     progressLine3.classList.remove("first_during_move");
-    progressLine3.classList.add("first_during3_move_back");
+    // progressLine3.classList.add("first_during3_move_back");
     number3.style.removeProperty("color");
     word3.style.removeProperty("color");
   }
@@ -104,7 +105,6 @@ function ProgressBar({ step, setStep, scrollToTop }) {
               onClick={() => {
                 setStep(2);
                 progressMoving();
-
                 progressMovingBack3();
                 scrollToTop();
               }}
