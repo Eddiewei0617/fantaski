@@ -1,7 +1,7 @@
 //--------------------------------影片--------------------------------//
 .video-wrap {
-  width: 100vw;
-  height: 70vh;
+  width: 100%;
+  height: 85vh;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -18,7 +18,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 30px;
+  margin: 50px;
   /* transform: translateX(-25px); */
 }
 .course-buttons img {
@@ -59,7 +59,7 @@
   color: #134865;
 }
 //------------------------------內文標題------------------------------//
-.title {
+.course-title {
   font-weight: bolder;
   text-align: center;
   margin: 30px 0 10px 0;
@@ -78,11 +78,27 @@
   position: relative;
 }
 .course-map-wrapper .decoration-skill {
-  width: 100px;
-  height: 150px;
+  width: 130px;
+  height: 180px;
   position: absolute;
-  top: -100px;
-  left: -50px;
+  top: -110px;
+  left: -70px;
+}
+.course-map-wrapper .decoration-skill-deer {
+  width: 300px;
+  height: 180px;
+  position: absolute;
+  top: -130px;
+  left: -100px;
+  opacity: 0.3;
+}
+.course-map-wrapper .decoration-skill-igloo {
+  width: 300px;
+  height: 180px;
+  position: absolute;
+  top: -130px;
+  left: -100px;
+  filter: drop-shadow(4px 4px 8px #0987bd);
 }
 .course-map-wrapper .col {
   cursor: pointer;
@@ -123,11 +139,6 @@
   transition: 0.3s;
   transform: rotateY(0deg);
 }
-.object-fit {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 /* hover課程時字跟格子都變大一點 */
 .course-map-wrapper .col:hover {
   transform: scale(1.01);
@@ -149,15 +160,21 @@
   margin: 3px;
   box-shadow: 2px 2px 3px gray;
 }
+.course-map-wrapper .three-hour-box {
+  height: 154px;
+  letter-spacing: 3px;
+}
 //------------------------------教練專區------------------------------//
 .coach-wrapper {
   height: 400px;
+}
+.coach-wrapper {
   position: relative;
 }
-.coach-wrapper .decoration-skill {
+.coach-wrapper .coach .decoration-skill {
   position: absolute;
   top: -30px;
-  right: 400px;
+  right: 40px;
   width: 100px;
   height: 150px;
   transform: rotate(8deg);
@@ -200,7 +217,7 @@
 .click-area2 {
   bottom: 0;
 }
-.avatar {
+.coach-avatar {
   height: 120px;
   width: 120px;
   border-radius: 50%;
@@ -317,15 +334,14 @@
 //---------------------------(浮動)加入購物車--------------------------//
 .add-cart-float-wrapper {
   position: fixed;
-  right: 0;
+  right: -250px;
   top: 10vh;
   transition: 0.4s;
-  transform: translate(250px);
   z-index: 99;
 }
 .add-cart-float-wrapper-show {
   transition: 0.4s;
-  transform: translate(0);
+  transform: translate(-250px);
 }
 .hover-to-show {
   cursor: pointer;
@@ -450,10 +466,10 @@
   line-height: 80px;
 }
 .empty-star {
-  color: rgba(173, 173, 173, 0.5);
+  color: rgb(207, 207, 207);
 }
 .full-star {
-  color: rgb(237, 240, 97);
+  color: rgb(243, 208, 54);
 }
 .commit-more {
   line-height: 16px;
@@ -470,12 +486,13 @@
 }
 .swiper-wrapper .decoration-skill {
   position: absolute;
-  width: 180px;
-  height: 180px;
-  left: -70px;
+  width: 250px;
+  height: 250px;
+  left: -120px;
   top: -78px;
   opacity: 0.7;
   transform: rotate(7deg);
+  z-index: -1;
 }
 .visibleBox {
   width: 680px;
@@ -593,7 +610,7 @@
 }
 .single-course-wrap {
   border-radius: 10px;
-  height: 200px;
+  height: 15rem;
   width: 40%;
   overflow: hidden;
   position: relative;
@@ -602,6 +619,8 @@
 .single-course-mask {
   height: 30%;
   width: 100%;
+  text-align: center;
+  padding: 10px;
   color: #134865;
   position: absolute;
   top: 50%;
@@ -626,4 +645,39 @@
 }
 .single-course-wrap:hover .single-course-description {
   display: block;
+}
+//------------------------------課程訂單評價------------------------------//
+.order-comments-wrapper {
+  width: 70%;
+  padding: 5px;
+  margin: 0 auto;
+}
+.order-comment-box {
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid $main-text-darkblue;
+  border-radius: 5px;
+  background: white;
+  box-shadow: 1px 1px 3px gray;
+  font-size: 14px;
+}
+.course-comment-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.course-comment-content textarea {
+  background: rgba(250, 250, 250, 0.8);
+  resize: none;
+}
+.course-comment-buttons button {
+  margin: 10px 5px 5px 5px;
+}
+.course-comment-buttons a:hover {
+  text-decoration: none;
+}
+.star-hover {
+  transform: scale(1.2);
+  cursor: pointer;
 }
