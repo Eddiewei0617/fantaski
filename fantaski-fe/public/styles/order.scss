@@ -4,17 +4,17 @@
 .progress_bar_bg {
   background-color: $background-color;
   width: 100vw;
-  height: 200px;
+  height: 210px;
   position: fixed;
   z-index: 1;
-  top: 8%;
+  top: 80px;
 }
 
 .progress_bar {
   position: fixed;
   left: 27%;
   z-index: 2;
-  top: 10%;
+  top: 120px;
 }
 
 // 企鵝--------
@@ -46,6 +46,7 @@
   margin-left: 15px;
   transition: transform 2s ease-in-out, opacity 2s ease-in-out;
 }
+
 .penguin3 {
   width: 65px;
   height: 60px;
@@ -54,13 +55,13 @@
 }
 // forwards 的意思是讓動畫停在最後的位置
 .penguinMove {
-  // animation: skiing 3s forwards;
-  transform: translateX(408px);
+  transform: translateX(425px);
 }
+
 .penguinMove3 {
   // margin-left: 450px;
   // animation: skiing2 3s forwards;
-  transform: translateX(835px);
+  transform: translateX(845px);
 }
 .penguin img {
   width: 100%;
@@ -89,6 +90,7 @@
   font-size: $font-l;
   font-weight: 700;
 }
+.progress_button1,
 .progress_button2,
 .progress_button3 {
   border: 0ch;
@@ -111,6 +113,26 @@
     background-color: $main-text-darkblue;
   }
 }
+@keyframes progressLine3 {
+  0% {
+    width: 0%;
+    background-color: rgb(163, 163, 163);
+  }
+  100% {
+    width: 100%;
+    background-color: $main-text-darkblue;
+  }
+}
+@keyframes progressLineBack {
+  0% {
+    width: 100%;
+    background-color: $main-text-darkblue;
+  }
+  100% {
+    width: 0%;
+    background-color: rgb(163, 163, 163);
+  }
+}
 .progress_line,
 .progress_line3 {
   width: 15rem;
@@ -126,6 +148,12 @@
 }
 .first_during_move {
   animation: progressLine 2s forwards;
+}
+.first_during_move_back {
+  animation: progressLineBack 2s forwards;
+}
+.first_during3_move_back {
+  animation: progressLineBack 2s forwards;
 }
 
 // 購物車底色
@@ -287,11 +315,8 @@
   margin: auto 160px !important;
 }
 .rccs__card--unknown > div {
-  background: linear-gradient(
-    25deg,
-    $main-text-darkblue,
-    rgb(159, 211, 253)
-  ) !important;
+  background: #ffffff !important;
+  box-shadow: 0 0 15px #a6b8bf !important;
 }
 .rccs__card--front,
 .rccs__card--back {

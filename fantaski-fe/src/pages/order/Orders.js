@@ -7,7 +7,9 @@ import SecondStep from "../../components/orders/SecondStep";
 import ThirdStep from "../../components/orders/ThirdStep";
 
 import { PRODUCTIMAGE_URL, ORDERIMAGE_URL } from "../../config/url";
-
+import PrevStepIcon from "../../components/orders/PrevStepIcon";
+import NextStepIcon from "../../components/orders/NextStepIcon";
+import OrderSubmitIcon from "../../components/orders/OrderSubmitIcon";
 const productFromServer = [
   {
     id: 1,
@@ -70,100 +72,80 @@ function Orders(props) {
   }, []);
 
   // 為了判斷在哪個頁面切換
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(1);
 
-  switch (step) {
-    case 1:
-      console.log("第一頁");
-      <FirstStep
-        orderProduct={orderProduct}
-        progressMoving={progressMoving}
-        step={step}
-        setStep={setStep}
-      />;
-      break;
-    case 2:
-      console.log("第二頁");
-      return (
-        <>
-          <div className="navbar"></div>
-          <div className="progress_bar_bg">
-            <div className="progress_bar">
-              <ProgressBar
-                step={step}
-                setStep={setStep}
-                progressMoving={progressMoving}
-              />
-            </div>
-          </div>
-          <SecondStep
-            orderProduct={orderProduct}
-            progressMoving={progressMoving}
-            step={step}
-            setStep={setStep}
-          />
-        </>
-      );
-      break;
-    case 3:
-      console.log("第三頁");
-      return (
-        <>
-          <div className="navbar"></div>
-          <div className="progress_bar_bg">
-            <div className="progress_bar">
-              <ProgressBar
-                step={step}
-                setStep={setStep}
-                progressMoving={progressMoving}
-              />
-            </div>
-          </div>
-          <ThirdStep
-            step={step}
-            setStep={setStep}
-            progressMoving={progressMoving}
-          />
-        </>
-      );
-      break;
-    default:
-      console.log("請再次確認頁面");
-      break;
-  }
-
-  // 企鵝和進度條移動
-  let penguin = document.querySelector(".penguin");
-  let progressLine = document.querySelector(".first_during");
-  let number2 = document.querySelector(".progress_button2 div");
-  let word2 = document.querySelector(".progress_button2 p");
-  // 購物車到信用卡輸入的過程
-  function progressMoving() {
-    penguin.classList.add("penguinMove");
-    progressLine.classList.add("first_during_move");
-    number2.style.color = "#134865";
-    word2.style.color = "#134865";
-  }
-  // classList.add 是在原本的樣式加上新的樣式；style.className是覆蓋原本樣式
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <>
-      <div className="navbar"></div>
       <div className="progress_bar_bg">
         <div className="progress_bar">
           <ProgressBar
             step={step}
             setStep={setStep}
-            progressMoving={progressMoving}
+            scrollToTop={scrollToTop}
           />
         </div>
       </div>
-      <FirstStep
-        orderProduct={orderProduct}
-        progressMoving={progressMoving}
-        step={step}
-        setStep={setStep}
-      />
+      {step === 1 && (
+        <>
+          <FirstStep
+            orderProduct={orderProduct}
+            step={step}
+            setStep={setStep}
+          />
+          <div className="box3 d-flex justify-content-end m-5">
+            <NextStepIcon
+              step={step}
+              setStep={setStep}
+              scrollToTop={scrollToTop}
+            />
+          </div>
+        </>
+      )}
+      {step === 2 && (
+        <>
+          <SecondStep
+            orderProduct={orderProduct}
+            step={step}
+            setStep={setStep}
+          />
+          <div className="box3 d-flex justify-content-end m-5">
+            <PrevStepIcon
+              step={step}
+              setStep={setStep}
+              scrollToTop={scrollToTop}
+            />
+            <NextStepIcon
+              step={step}
+              setStep={setStep}
+              scrollToTop={scrollToTop}
+            />
+          </div>
+        </>
+      )}
+      {step === 3 && (
+        <>
+          <ThirdStep
+            orderProduct={orderProduct}
+            step={step}
+            setStep={setStep}
+          />
+          <div className="box3 d-flex justify-content-end m-5">
+            <PrevStepIcon
+              step={step}
+              setStep={setStep}
+              scrollToTop={scrollToTop}
+            />
+            <OrderSubmitIcon />
+          </div>
+        </>
+      )}
     </>
   );
 }

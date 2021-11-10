@@ -11,17 +11,17 @@ import Igloo from "./pages/course/Igloo";
 import Products from "./pages/product/Products";
 import Orders from "./pages/order/Orders";
 import Home from "./pages/Home";
-import MountainRoute from "./pages/MountainRoute";
+// import MountainRoute from "./pages/MountainRoute";
 import Forum from "./pages/Forum";
 import Member from "./pages/Member";
 import Login from "./pages/Login";
 
 // footer 相關連結
-import Aboutus from "./pages/footer/Aboutus";
-import Joinus from "./pages/footer/Joinus";
-import Terms from "./pages/footer/Terms";
-import Servicepolicy from "./pages/footer/Servicepolicy";
-import Privacy from "./pages/footer/Privacy";
+// import Aboutus from "./pages/footer/Aboutus";
+// import Joinus from "./pages/footer/Joinus";
+// import Terms from "./pages/footer/Terms";
+// import Servicepolicy from "./pages/footer/Servicepolicy";
+// import Privacy from "./pages/footer/Privacy";
 
 // ===========================================
 
@@ -104,14 +104,14 @@ function App() {
             <Route path="/forum">
               <Forum />
             </Route>
-            <Route path="/mountainroute">
+            {/* <Route path="/mountainroute">
               <MountainRoute />
-            </Route>
+            </Route> */}
             <Route path="/">
               <Home />
             </Route>
 
-            {/* footer有時間在處理 勿刪!!*/}
+            {/* footer有時間再處理 勿刪!!*/}
             {/* <Route path="/privacy" exact>
               <Privacy />
             </Route>

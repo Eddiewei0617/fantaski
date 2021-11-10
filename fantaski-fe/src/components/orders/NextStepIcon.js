@@ -1,17 +1,16 @@
 import { Button } from "react-bootstrap";
 import { scryRenderedComponentsWithType } from "react-dom/test-utils";
 
-function NextStepIcon({ progressMoving, step, setStep }) {
+function NextStepIcon({ step, setStep, scrollToTop }) {
   console.log("test", step);
+
   return (
     <>
       <Button
         className="nextstep"
         onClick={() => {
-          // progressMoving();
-          {
-            step === 0 ? setStep(2) : setStep(3);
-          }
+          step === 1 ? setStep(2) : setStep(3);
+          scrollToTop();
         }}
       >
         下一步

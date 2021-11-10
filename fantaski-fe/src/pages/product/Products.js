@@ -1,5 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import "animate.css";
+import Navbar from "../../components/share/Navbar";
+import Footer from "../../components/share/Footer";
+import Gotop from "../../components/share/Gotop";
 
 import CarouselP from "../../components/products/CarouselP";
 import ScrolldownIcon from "../../components/products/ScrolldownIcon";
@@ -17,13 +20,14 @@ function Products() {
   console.log(productSection);
   const scrollToProduct = () =>
     window.scrollTo({
-      top: productSection.current.offsetTop,
+      top: Number(`${productSection.current.offsetTop}`) - 150,
       behavior: "smooth",
     });
+  // console.log(productSection.current.offsetTop);
 
   return (
     <>
-      <div className="navbar"></div>
+      {/* <Navbar /> */}
       <CarouselP />
       <ScrolldownIcon
         onClick={() => {
@@ -37,6 +41,8 @@ function Products() {
         {square ? <ProductSquare /> : <ProductList />}
         <PageButton />
       </div>
+
+      {/* <Footer /> */}
     </>
   );
 }
