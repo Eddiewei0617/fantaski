@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-import "./App.css";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import MountainRoute from "./pages/MountainRoute";
-import Member from "./pages/Member";
-function App() {
-  return (
-    <Router>
-      <>
-        <Link to="/MountainRoute"></Link>
-        <Link to="/Member"></Link>
-        <Switch>
-          <Route path="/MountainRoute">
-            <MountainRoute />
-          </Route>
-          <Route path="/Member">
-            <Member />
-          </Route>
-        </Switch>
-      </>
-    </Router>
-=======
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { useState } from "react";
 
@@ -169,7 +147,6 @@ function App() {
         {/* 頁尾+版權訊息 */}
       </Router>
     </>
->>>>>>> 502df75d6741450fbd30ffb49e3a93cb9fd3eb16
   );
 }
 

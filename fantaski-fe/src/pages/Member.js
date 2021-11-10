@@ -1,23 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-import NAvbar from "../components/route/Navbar";
-import MemberList from "../components/member/MemberList";
-import MemberContent from "../components/member/MemberContent";
-
-function Member() {
-  return (
-    <div>
-      <NAvbar />
-      <div className="container">
-        <MemberList />
-        <MemberContent />
-      </div>
-    </div>
-  );
-}
-
-export default Member;
-=======
 import React, { useState } from "react";
 // import "../App.css";
 import { useSpring, animated } from "react-spring";
@@ -115,4 +95,3 @@ function RegisterForm() {
 }
 
 export default Member;
->>>>>>> 502df75d6741450fbd30ffb49e3a93cb9fd3eb16
