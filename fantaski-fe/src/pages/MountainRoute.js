@@ -6,7 +6,7 @@ import Map from "../components/route/Map";
 // import SnowOpen from "./components/SnowOpen";
 import Place from "../components/route/Place";
 import Cablecar from "../components/route/Cablecar";
-import ProdoctRent from "../components/route/ProdoctRent";
+import ProductRent from "../components/route/ProductRent";
 function MountainRoute() {
   return (
     <div>
@@ -18,7 +18,7 @@ function MountainRoute() {
       {/* <SnowInformation /> */}
       {/* <SnowOpen /> */}
       <Cablecar />
-      <ProdoctRent />
+      <ProductRent />
     </div>
   );
 }

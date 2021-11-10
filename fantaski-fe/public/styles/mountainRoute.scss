@@ -1,0 +1,455 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.bg {
+  background: blue;
+}
+.navbar {
+  height: 100px;
+}
+/* 地圖背景 */
+.skiMap {
+  margin: 0 auto;
+  background-image: url(../../src/components/route/ski-map-new.jpg);
+  background-size: cover;
+  width: 1820px;
+  height: 880px;
+  position: relative;
+}
+.route {
+  position: absolute;
+  top: 0.4%;
+  left: 14.3%;
+  float: left;
+}
+
+.routeAnimation {
+  position: absolute;
+  top: 0.3%;
+  left: 11.5%;
+  float: left;
+  /* animation: fill 0.5s ease forwards 4s; */
+}
+.routeAnimation path:hover {
+  cursor: pointer;
+  filter: blur(2px);
+  /* box-shadow: 10px 10px 10px black; */
+}
+/* 紅線動畫 */
+.routeAnimation path:nth-child(1) {
+  stroke-dasharray: 2548.03px;
+  stroke-dashoffset: 2548.03px;
+  animation: line-anim 3s linear forwards;
+}
+/* 綠線動畫 */
+.routeAnimation path:nth-child(2) {
+  stroke-dasharray: 703px;
+  stroke-dashoffset: 703px;
+  animation: line-anim 3s linear forwards;
+}
+/* 黑線動畫 */
+.routeAnimation path:nth-child(3) {
+  stroke-dasharray: 1116.354px;
+  stroke-dashoffset: 1116.354px;
+  animation: line-anim 3s linear forwards;
+}
+// 雪屋
+.mapIglooBorder {
+  //   transition: 4s;
+  cursor: pointer;
+}
+.mapIgloo {
+  position: absolute;
+  top: 25%;
+  left: 5%;
+  z-index: 99;
+}
+.mapIglooBorder:hover .mapIglooBg {
+  transform: scale(1.03);
+  //   box-shadow: 0px 0px 10px black;
+}
+@keyframes line-anim {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.mapIglooBg {
+  filter: blur(2px) invert(62%) sepia(88%) saturate(4449%) hue-rotate(87deg)
+    brightness(119%) contrast(118%);
+
+  z-index: 98;
+}
+
+/* 遮罩背景 */
+.maskBackground {
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 880px;
+  z-index: 99;
+  /* visibility: hidden; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+/* 彈跳視窗的字 */
+.modal-body h6 {
+  margin-top: 25px;
+  font-weight: 600;
+  color: var(--main-text-darkblue);
+}
+/* 視窗的border */
+.modal-content {
+  border: 30px solid white;
+  box-shadow: 30px black;
+  border-radius: 40px;
+}
+/* 視窗的標題下的border(綠線) */
+.greenLine {
+  border-bottom: 4px solid var(--route-green);
+  font-weight: bold;
+  color: green;
+  //   margin: 0 auto;
+}
+/* 視窗的標題下的border(紅線) */
+
+.redLine {
+  border-bottom: 4px solid red;
+  font-weight: bold;
+  color: red;
+  //   margin: 0 auto;
+}
+/* 視窗的標題下的border(黑線) */
+
+.blackLine {
+  border-bottom: 4px solid black;
+  font-weight: bold;
+  color: black;
+  //   margin: 0 auto;
+}
+
+/* 彈跳視窗的標題 */
+
+/* 彈跳視窗的大照片 */
+.imageBoxTop {
+  width: 370px;
+  height: 175px;
+}
+.imageBoxTop img:nth-child(1) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 25px;
+}
+/* 彈跳視窗的照片 */
+.imageBoxImg {
+  width: 85px;
+  height: 85px;
+}
+.imageBoxLeft img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+/* 彈跳視窗的右下角照片 */
+
+.imageBoxRight img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+/* 彈跳視窗的立即報名按鈕 */
+.popBtn {
+  width: 200px;
+  height: 60px;
+  border: 5px solid #ec6855;
+  color: #ec6855;
+  background: white;
+  font-size: var(--font-l);
+  font-weight: 900;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+.popBtn:hover {
+  width: 200px;
+  height: 60px;
+  border: 5px solid #ec6855;
+  color: white;
+  background: #ec6855;
+  font-size: var(--font-l);
+  font-weight: 900;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+/* 雪場資訊 */
+/* 雪場資訊字的樣式 */
+.informationText {
+  color: var(--main-text-darkblue);
+  font-weight: 900;
+  padding: 30px 100px;
+  text-align: center;
+  font-size: var(--font-xl);
+}
+/* .informationRealtive {
+    position: relative;
+  } */
+.pimg1,
+.pimg2 {
+  position: relative;
+  opacity: 0.7;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /*
+    fixed=parallax
+    scroll=normal
+    */
+  background-attachment: fixed;
+}
+/* 雪場資訊第一張圖 */
+.pimg1 {
+  background-image: url(../../src/components/route/snow3.jpg);
+  min-height: 500px;
+  /* position: relative; */
+  width: 100%;
+}
+/* 雪場資訊第二張圖 */
+.pimg2 {
+  background-image: url(../../src/components/route/pexels-photo-2138922.jpeg);
+  min-height: 500px;
+  width: 100%;
+}
+/* 雪場資訊區塊的字的設定 */
+.informationSection {
+  text-align: center;
+  padding: 50px 80px;
+  width: 100%;
+  line-height: 30px;
+  letter-spacing: 8px;
+}
+/* 雪場資訊空白區塊 */
+.informationSection2 {
+  width: 100%;
+  height: 75px;
+}
+/* 區塊內的標題設定 */
+.informationSection p:nth-child(1) {
+  font-size: var(--font-xl);
+}
+/* 區塊內黑框 */
+.section-dark {
+  background-color: #0f3a52be;
+  color: white;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+@media (max-width: 568px) {
+  .pimg1,
+  .pimg2 {
+    background-attachment: scroll;
+  }
+}
+/* 纜車標題 */
+.cableCarTitle {
+  font-size: var(--font-xl);
+  text-align: center;
+  font-weight: 900;
+  color: var(--main-text-darkblue);
+  /* padding: 50px 80px 0px 80px; */
+  width: 100%;
+  line-height: 30px;
+  letter-spacing: 8px;
+  background-color: var(--background-color);
+  height: 150px;
+}
+/* 纜車背景 */
+.cableCar {
+  background-color: #124864;
+  width: 100%;
+}
+/* 纜車區塊的高寬度 */
+.cableCarSection {
+  min-height: 500px;
+  width: 100%;
+}
+
+/* 看區塊邊框用 */
+
+.cableCarBox {
+  width: 350px;
+  height: 350px;
+  border: 5px solid white;
+  position: relative;
+
+  /* background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat; */
+}
+/* 纜車裡的照片 */
+.cableCarBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+/* 纜車區塊裡的字 */
+.cableCarText {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: var(--font-m);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  /* padding-top: 50px; */
+  line-height: 35px;
+  opacity: 0;
+}
+/* hover讓區塊的字顯現 */
+.cableCarText:hover {
+  opacity: 1;
+}
+
+/* 裝備出租站 */
+/* 裝備出租站的最外層區塊 */
+.productSection {
+  width: 100%;
+  height: 450px;
+  background-color: var(--main-text-darkblue);
+}
+/* 裝備出租站標題 */
+.productSectionTitle {
+  height: 150px;
+  width: 100%;
+  background-color: var(--background-color);
+  color: var(--main-text-darkblue);
+  font-weight: 900;
+  padding: 30px 100px;
+  text-align: center;
+  font-size: var(--font-xl);
+}
+/* .productSectionTitle p {
+   
+  } */
+/* 幻燈片動畫 */
+/* 圖片容器 */
+.accordian {
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+
+  /*Time for some styling*/
+  /* margin: 200px auto; */
+  /* box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.35);
+    -webkit-box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.35); */
+}
+
+/* 口風琴的寬度 */
+
+.accordian ul {
+  width: 100%;
+}
+/* 設定口風琴的位置 */
+.accordian li {
+  position: relative;
+  display: block;
+  width: 160px;
+  float: left;
+
+  border-left: 1px solid #888;
+
+  box-shadow: 0 0 25px 10px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 25px 10px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 25px 10px rgba(0, 0, 0, 0.5);
+
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+}
+/* 照片hover後其他照片的大小 */
+.accordian ul:hover li {
+  width: 140px;
+}
+/* 照片hover後展開的大小 */
+.accordian ul li:hover {
+  width: 600px;
+}
+/* 照片的區塊大小 */
+.accordian li img {
+  display: block;
+  width: 600px;
+  height: 400px;
+}
+/* 照片裡的標題定位置 */
+.image_title {
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 600px;
+}
+/* 照片裡的標題設定 */
+.image_title a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  padding: 20px;
+  font-size: 16px;
+}
+/* 裝備出租站的右邊區塊 */
+.productLeft {
+  height: 100%;
+}
+/* 裝備出租站的右邊標題 */
+.productLeftTitle {
+  color: var(--assist-white);
+  font-size: 28px;
+  text-align: center;
+}
+/* 裝備出租站的右邊區塊內容 */
+.productLeftContent {
+  color: var(--assist-white);
+  font-size: var(--font-l);
+}

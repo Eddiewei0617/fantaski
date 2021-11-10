@@ -1,5 +1,6 @@
 import React from "react";
 import { IMAGE_ROUTER_URL } from "../../config/url";
+// import "./Cablecar.css";
 function Cablecar() {
   return (
     <div>

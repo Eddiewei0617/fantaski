@@ -9,8 +9,9 @@ function MapMask() {
       <div className="maskBackground" tabindex="-1">
         <div className="modal-dialog modal-lg modal-dialog-centered">
           <div className="modal-content">
-            <div className="modal-header">
-              <h3 className="modal-title">綠線</h3>
+            <div className="modal-header ">
+              <div className="modal-title greenLine">毛線</div>
+
               <button
                 type="button"
                 class="close"
@@ -46,8 +47,8 @@ function MapMask() {
                   ></img>
                 </div>
               </div>
-              <div className="col-6">
-                <div className="row">
+              <div className="col-6 ">
+                <div className="row imageBoxText">
                   <div className="col-6 text-right">
                     <h6>狀況 :</h6>
                     <h6>推薦課程 :</h6>

@@ -3,6 +3,8 @@ import { FiUser } from "react-icons/fi";
 import { CgNotes } from "react-icons/cg";
 import { BsFillPencilFill } from "react-icons/bs";
 import { BsFillBookmarkFill } from "react-icons/bs";
+import { AiFillStar } from "react-icons/ai";
+
 function MemberList() {
   return (
     <div>
@@ -28,6 +30,12 @@ function MemberList() {
               <a href="#0" class="menu__link r-link text-underlined">
                 <BsFillBookmarkFill />
                 我的收藏
+              </a>
+            </li>
+            <li class="menu__group">
+              <a href="#0" class="menu__link r-link text-underlined">
+                <AiFillStar />
+                我的點評
               </a>
             </li>
           </ul>

@@ -6,13 +6,13 @@ function App() {
   return (
     <Router>
       <>
-        <Link to="/MountainRoute"></Link>
-        <Link to="/Member"></Link>
+        <Link to="/mountainRoute"></Link>
+        <Link to="/member"></Link>
         <Switch>
-          <Route path="/MountainRoute">
+          <Route path="/mountainRoute">
             <MountainRoute />
           </Route>
-          <Route path="/Member">
+          <Route path="/member">
             <Member />
           </Route>
         </Switch>

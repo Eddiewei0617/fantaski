@@ -1,7 +1,6 @@
 import React from "react";
 import { IMAGE_ROUTER_URL } from "../../config/url";
-
-function ProdoctRent() {
+function ProductRent() {
   return (
     <div>
       <div className="productSectionTitle">
@@ -80,4 +79,4 @@ function ProdoctRent() {
   );
 }
 
-export default ProdoctRent;
+export default ProductRent;
