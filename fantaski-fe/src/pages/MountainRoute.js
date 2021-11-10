@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/route/Navbar";
+// import Navbar from "../components/route/Navbar";
 import Map from "../components/route/Map";
 // import MapMask from "../components/route/MapMask";
 // import SnowInformation from "./components/SnowInformation";
@@ -10,7 +10,7 @@ import ProductRent from "../components/route/ProductRent";
 function MountainRoute() {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <Map />
       {/* <MapMask /> */}
 

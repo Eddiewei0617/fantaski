@@ -387,13 +387,13 @@ function Map() {
             onClick={() => {
               mapWhite();
             }}
-            className="mapIgloo"
-            src={`${IMAGE_ROUTER_URL}/igloo.png`}
-          />
-          <img
             className="mapIgloo mapIglooBg"
             src={`${IMAGE_ROUTER_URL}/igloo.png`}
           />
+          {/* <img
+            className="mapIgloo mapIglooBg"
+            src={`${IMAGE_ROUTER_URL}/igloo.png`}
+          /> */}
         </div>
         {/* <MapMask /> */}
         <svg

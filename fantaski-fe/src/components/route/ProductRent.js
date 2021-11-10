@@ -1,5 +1,6 @@
 import React from "react";
 import { IMAGE_ROUTER_URL } from "../../config/url";
+import { PRODUCTIMAGE_URL } from "../../config/url";
 function ProductRent() {
   return (
     <div>
@@ -15,7 +16,7 @@ function ProductRent() {
                   <a>mountain1</a>
                 </div>
                 <a>
-                  <img src={`${IMAGE_ROUTER_URL}/snow3.jpg`} />{" "}
+                  <img src={`${PRODUCTIMAGE_URL}/smooth.jpg`} />{" "}
                 </a>
               </li>
               <li>
@@ -23,7 +24,7 @@ function ProductRent() {
                   <a>mountain2</a>
                 </div>
                 <a>
-                  <img src={`${IMAGE_ROUTER_URL}/snow4.jpg`} />{" "}
+                  <img src={`${PRODUCTIMAGE_URL}/smooth.jpg`} />{" "}
                 </a>
               </li>
               <li>
@@ -31,7 +32,7 @@ function ProductRent() {
                   <a>mountain3</a>
                 </div>
                 <a>
-                  <img src={`${IMAGE_ROUTER_URL}/snow3.jpg`} />{" "}
+                  <img src={`${PRODUCTIMAGE_URL}/snowmobile2.jpg`} />{" "}
                 </a>
               </li>
               <li>
@@ -39,7 +40,7 @@ function ProductRent() {
                   <a>mountain4</a>
                 </div>
                 <a>
-                  <img src={`${IMAGE_ROUTER_URL}/snow4.jpg`} />{" "}
+                  <img src={`${PRODUCTIMAGE_URL}/allblack.jfif`} />{" "}
                 </a>
               </li>
               <li>
@@ -47,7 +48,7 @@ function ProductRent() {
                   <a>Cars 2</a>
                 </div>
                 <a>
-                  <img src={`${IMAGE_ROUTER_URL}/snow3.jpg`} />
+                  <img src={`${PRODUCTIMAGE_URL}/smooth.jpg`} />
                 </a>
               </li>
             </ul>

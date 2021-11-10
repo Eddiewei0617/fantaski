@@ -1,48 +1,3 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.bg {
-  background: blue;
-}
-.navbar {
-  height: 100px;
-}
 /* 地圖背景 */
 .skiMap {
   margin: 0 auto;
@@ -51,6 +6,7 @@
   width: 1820px;
   height: 880px;
   position: relative;
+  margin-top: 3%;
 }
 .route {
   position: absolute;
@@ -94,11 +50,23 @@
   //   transition: 4s;
   cursor: pointer;
 }
+// .mapIglooBg {
+//   filter: blur(2px) invert(62%) sepia(88%) saturate(4449%) hue-rotate(87deg)
+//     brightness(119%) contrast(118%);
+
+//   z-index: 2;
+// }
 .mapIgloo {
   position: absolute;
   top: 25%;
   left: 5%;
-  z-index: 99;
+  z-index: 1;
+  &:hover {
+    filter: blur(2px) invert(62%) sepia(88%) saturate(4449%) hue-rotate(87deg)
+      brightness(119%) contrast(118%);
+    opacity: 0.1;
+    background-image: url(../../src/components/route/igloo.png);
+  }
 }
 .mapIglooBorder:hover .mapIglooBg {
   transform: scale(1.03);
@@ -108,12 +76,6 @@
   to {
     stroke-dashoffset: 0;
   }
-}
-.mapIglooBg {
-  filter: blur(2px) invert(62%) sepia(88%) saturate(4449%) hue-rotate(87deg)
-    brightness(119%) contrast(118%);
-
-  z-index: 98;
 }
 
 /* 遮罩背景 */
@@ -203,7 +165,7 @@
   border: 5px solid #ec6855;
   color: #ec6855;
   background: white;
-  font-size: var(--font-l);
+  font-size: $font-l;
   font-weight: 900;
   border-radius: 10px;
   margin: 0 auto;
@@ -214,7 +176,7 @@
   border: 5px solid #ec6855;
   color: white;
   background: #ec6855;
-  font-size: var(--font-l);
+  font-size: $font-l;
   font-weight: 900;
   border-radius: 10px;
   margin: 0 auto;
@@ -222,11 +184,11 @@
 /* 雪場資訊 */
 /* 雪場資訊字的樣式 */
 .informationText {
-  color: var(--main-text-darkblue);
+  color: $main-text-darkblue;
   font-weight: 900;
   padding: 30px 100px;
   text-align: center;
-  font-size: var(--font-xl);
+  font-size: $font-xl;
 }
 /* .informationRealtive {
     position: relative;
@@ -272,7 +234,7 @@
 }
 /* 區塊內的標題設定 */
 .informationSection p:nth-child(1) {
-  font-size: var(--font-xl);
+  font-size: $font-xl;
 }
 /* 區塊內黑框 */
 .section-dark {
@@ -290,15 +252,15 @@
 }
 /* 纜車標題 */
 .cableCarTitle {
-  font-size: var(--font-xl);
+  font-size: $font-xl;
   text-align: center;
   font-weight: 900;
-  color: var(--main-text-darkblue);
+  color: $main-text-darkblue;
   /* padding: 50px 80px 0px 80px; */
   width: 100%;
   line-height: 30px;
   letter-spacing: 8px;
-  background-color: var(--background-color);
+  background-color: $background-color;
   height: 150px;
 }
 /* 纜車背景 */
@@ -356,18 +318,18 @@
 .productSection {
   width: 100%;
   height: 450px;
-  background-color: var(--main-text-darkblue);
+  background-color: $main-text-darkblue;
 }
 /* 裝備出租站標題 */
 .productSectionTitle {
   height: 150px;
   width: 100%;
-  background-color: var(--background-color);
-  color: var(--main-text-darkblue);
+  background-color: $background-color;
+  color: $main-text-darkblue;
   font-weight: 900;
   padding: 30px 100px;
   text-align: center;
-  font-size: var(--font-xl);
+  font-size: $font-xl;
 }
 /* .productSectionTitle p {
    
@@ -444,12 +406,12 @@
 }
 /* 裝備出租站的右邊標題 */
 .productLeftTitle {
-  color: var(--assist-white);
+  color: $assist-white;
   font-size: 28px;
   text-align: center;
 }
 /* 裝備出租站的右邊區塊內容 */
 .productLeftContent {
-  color: var(--assist-white);
-  font-size: var(--font-l);
+  color: $assist-white;
+  font-size: $font-l;
 }

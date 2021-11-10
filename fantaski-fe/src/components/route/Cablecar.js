@@ -10,7 +10,7 @@ function Cablecar() {
           <div className="row">
             <div className="col-4">
               <div className="cableCarBox">
-                <img src={`${IMAGE_ROUTER_URL}/snow3.jpg`}></img>
+                <img src={`${IMAGE_ROUTER_URL}/skiChair.jpg`}></img>
                 <div className="cableCarText">
                   <h2 className="p-3">纜 椅 Chairlift</h2>
                   <p>
@@ -29,7 +29,7 @@ function Cablecar() {
             </div>
             <div className="col-4">
               <div className="cableCarBox">
-                <img src={`${IMAGE_ROUTER_URL}/snow3.jpg`} />
+                <img src={`${IMAGE_ROUTER_URL}/tBar.jpg`} />
                 <div className="cableCarText">
                   <h2 className="p-3">T-bar 地面型牽引</h2>
                   <p>
@@ -50,7 +50,7 @@ function Cablecar() {
             </div>
             <div className="col-4">
               <div className="cableCarBox">
-                <img src={`${IMAGE_ROUTER_URL}/snow3.jpg`}></img>
+                <img src={`${IMAGE_ROUTER_URL}/cableCar.jpg`}></img>
                 <div className="cableCarText">
                   <h2 className="p-3"> 空 中 纜 車</h2>
                   <p>

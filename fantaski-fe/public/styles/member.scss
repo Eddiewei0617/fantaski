@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* .r-link {
   display: var(--rLinkDisplay, inline-flex) !important;
 } */
@@ -18,8 +17,8 @@
 }
 
 .menu {
-  color: var(--main-text-darkblue);
-  font-size: var(--font-l);
+  color: $main-text-darkblue;
+  font-size: $font-l;
   font-weight: 500;
 }
 
@@ -92,7 +91,7 @@
   transition-duration: 0.2s;
 }
 .menuLine {
-  border: 3px solid var(--main-text-darkblue);
+  border: 3px solid $main-text-darkblue;
   margin: 10px 0;
 }
 
@@ -102,7 +101,7 @@
 
 .memberContent {
   margin: 20px 0;
-  color: var(--main-text-darkblue);
+  color: $main-text-darkblue;
 }
 .memberContentHigh {
   height: 600px;
@@ -177,18 +176,18 @@
   left: 15%;
 }
 .memberName {
-  border-top: 1px solid var(--main-text-darkblue);
-  border-bottom: 1px solid var(--main-text-darkblue);
+  border-top: 1px solid $main-text-darkblue;
+  border-bottom: 1px solid $main-text-darkblue;
   width: 80%;
   margin: 0 auto;
   font-weight: 700;
-  font-size: var(--font-l);
+  font-size: $font-l;
 }
 .memberbtn {
   width: 80%;
-  background-color: var(--main-text-darkblue);
+  background-color: $main-text-darkblue;
   color: white;
-  font-size: var(--font-l);
+  font-size: $font-l;
   padding: 5px;
 }
 .memberbtn:hover {
@@ -196,8 +195,8 @@
 }
 .memberContentRightText {
   font-size: 500;
-  color: var(--main-text-darkblue);
-  font-size: var(--font-l);
+  color: $main-text-darkblue;
+  font-size: $font-l;
 }
 .memberContentOutside {
   height: 385px;
@@ -230,7 +229,7 @@
   height: 40px;
   padding: 10px;
   color: white;
-  font-size: var(--font-m);
+  font-size: $font-m;
   /* background-color: var(--main-red); */
   border-radius: 0;
 }
@@ -240,7 +239,7 @@
   border-radius: 0;
 }
 .memberEmailText {
-  font-size: var(--font-l);
+  font-size: $font-l;
 }
 .radioWidth {
   width: 20px;
@@ -249,13 +248,12 @@
 .memberEmailSubmit {
   color: white;
   width: 200px;
-  font-size: var(--font-l);
+  font-size: $font-l;
   /* height: 30px; */
   border-radius: 5px;
   padding: 0px 20px;
   margin: 40px;
 }
-=======
 // .container {
 //   width: 100%;
 //   padding-top: 140px;
@@ -368,4 +366,3 @@ form,
 #registerBtn {
   transition: all 0.2s ease;
 }
->>>>>>> main
