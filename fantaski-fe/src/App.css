@@ -4,6 +4,7 @@
   --main-text-darkblue: #134865;
   --background-color: #fefcee;
   --assist-white: #ffffff;
+<<<<<<< HEAD
   --route-green: rgb(19, 158, 19);
 
   --font-m: 16px;
@@ -26,40 +27,32 @@ body {
 .App {
   text-align: center;
 }
+=======
+>>>>>>> 502df75d6741450fbd30ffb49e3a93cb9fd3eb16
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+  --font-m: 16px;
+  --font-l: 24px;
+  --font-xl: 36px;
+
+  --font-family-base: "Noto Sans Traditional Chinese, Hobo Std";
+
+  --border-radius: 30px;
+
+  --shadow: 0 0 30 rgba(19, 72, 101, 0.4);
+}
+/* Reset styles */
+html,
+body,
+body * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  background-color: inherit;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body {
+  background-color: #fefcee;
 }
 
 .bg {
