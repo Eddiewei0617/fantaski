@@ -84,6 +84,14 @@
   top: -100px;
   left: -50px;
 }
+.course-map-wrapper .decoration-skill-deer {
+  width: 300px;
+  height: 180px;
+  position: absolute;
+  top: -130px;
+  left: -100px;
+  opacity: 0.3;
+}
 .course-map-wrapper .col {
   cursor: pointer;
   line-height: 150px;
@@ -123,11 +131,6 @@
   transition: 0.3s;
   transform: rotateY(0deg);
 }
-.object-fit {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 /* hover課程時字跟格子都變大一點 */
 .course-map-wrapper .col:hover {
   transform: scale(1.01);
@@ -148,6 +151,10 @@
   color: white;
   margin: 3px;
   box-shadow: 2px 2px 3px gray;
+}
+.course-map-wrapper .three-hour-box {
+  height: 154px;
+  letter-spacing: 3px;
 }
 //------------------------------教練專區------------------------------//
 .coach-wrapper {

@@ -15,11 +15,16 @@ function CommentInMember({ orderCourse, setShowCourse }) {
     let starId = e.currentTarget.id;
     let starIndex = starId.split("-").pop();
     setIsStarsClick(starIndex);
+    orderCourse.star = starIndex;
   }
-  function handleStarMouseEnter() {
+  function handleStarMouseEnter(e) {
+    let starId = e.currentTarget.id;
+    let starIndex = starId.split("-").pop();
+    setIsStarsClick(starIndex);
     setIsStarsHover(true);
   }
   function handleStarMouseLeave() {
+    setIsStarsClick(orderCourse.star);
     setIsStarsHover(false);
   }
   function handleTextChange(e) {
