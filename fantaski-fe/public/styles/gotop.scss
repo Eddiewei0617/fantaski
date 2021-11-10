@@ -1,0 +1,31 @@
+.go-top {
+  width: 40px;
+  height: 40px;
+  background: $main-red;
+  border-radius: 50%;
+  border: none;
+
+  position: fixed;
+  z-index: 3000;
+  right: 3%;
+  bottom: 3%;
+
+  transition: 0.2s ease-in-out;
+  text-align: center;
+
+  //   opacity: 0;
+  box-shadow: 0px 0px 4px rgba(116, 16, 1, 0.8);
+
+  &:hover {
+    background: #d5402a;
+  }
+}
+
+.top-arrow {
+  color: $assist-white;
+  font-size: $font-l;
+  //   padding: 0 4%;
+  margin: 8% auto;
+  //   text-align: center;
+  //   line-height: 40px;
+}
