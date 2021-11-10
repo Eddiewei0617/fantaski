@@ -3,7 +3,7 @@ import Video from "../../components/course/video/Video";
 import CourseButtons from "../../components/course/courseButtons/CourseButtons";
 import Title from "../../components/course/titles/Title";
 import CourseIntroSkill from "../../components/course/courseIntro/CourseIntroSkill";
-import CourseMapSkill from "../../components/course/courseMap/CourseMapSkill";
+import CourseMapIgloo from "../../components/course/courseMap/CourseMapIgloo";
 import Coach from "../../components/course/coach/Coach";
 import Comments from "../../components/course/comments/Comments";
 import AddCartFix from "../../components/course/addCartFix/AddCartFix";
@@ -36,7 +36,7 @@ function Skill(props) {
       <Title titleName="課程介紹" />
       <CourseIntroSkill />
       <Title titleName="課程導覽" />
-      <CourseMapSkill />
+      <CourseMapIgloo />
       <Title titleName="專業教練" />
       <Coach showCourse={showCourse} />
       <Title titleName="雪友點評" />

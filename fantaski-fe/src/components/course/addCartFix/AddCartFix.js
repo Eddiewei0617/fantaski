@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import Calendar from "../calendar/Calendar";
@@ -14,6 +14,13 @@ function AddCartFix({ customerChoose, setCustomerChoose }) {
       return { ...cur, [name]: newValue };
     });
   }
+
+  useEffect(() => {
+    window.addEventListener("click", () => {
+      setShowCalendar(false);
+    });
+  }, []);
+
   return (
     <>
       <div className="add-cart-fix-wrapper">
@@ -39,7 +46,8 @@ function AddCartFix({ customerChoose, setCustomerChoose }) {
             <FontAwesomeIcon
               className="icons"
               icon={faCalendarAlt}
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 setShowCalendar(!showCalendar);
               }}
             />
