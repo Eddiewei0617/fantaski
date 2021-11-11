@@ -12,40 +12,40 @@ function ProductRent() {
           <div className="accordian">
             <ul>
               <li>
-                <div className="image_title">
-                  <a>mountain1</a>
+                <div className="image_title text-white">
+                  <a>超流行滑雪外套</a>
                 </div>
                 <a>
-                  <img src={`${PRODUCTIMAGE_URL}/smooth.jpg`} />{" "}
+                  <img src={`${PRODUCTIMAGE_URL}/snowJacket.jpg`} />{" "}
                 </a>
               </li>
               <li>
-                <div className="image_title">
-                  <a>mountain2</a>
+                <div className="image_title text-white">
+                  <a>時尚酷雪板</a>
                 </div>
                 <a>
-                  <img src={`${PRODUCTIMAGE_URL}/smooth.jpg`} />{" "}
+                  <img src={`${PRODUCTIMAGE_URL}/pexels-pixabay-257961.jpg`} />{" "}
                 </a>
               </li>
               <li>
-                <div className="image_title">
-                  <a>mountain3</a>
+                <div className="image_title text-white">
+                  <a>托米諾黃蜂極地摩托車</a>
                 </div>
                 <a>
                   <img src={`${PRODUCTIMAGE_URL}/snowmobile2.jpg`} />{" "}
                 </a>
               </li>
               <li>
-                <div className="image_title">
-                  <a>mountain4</a>
+                <div className="image_title text-white">
+                  <a>超防滑舒適雪鞋</a>
                 </div>
                 <a>
-                  <img src={`${PRODUCTIMAGE_URL}/allblack.jfif`} />{" "}
+                  <img src={`${PRODUCTIMAGE_URL}/snowShoes1.jpg`} />{" "}
                 </a>
               </li>
               <li>
-                <div className="image_title">
-                  <a>Cars 2</a>
+                <div className="image_title text-white">
+                  <a>炫彩護目鏡</a>
                 </div>
                 <a>
                   <img src={`${PRODUCTIMAGE_URL}/smooth.jpg`} />
