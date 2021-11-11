@@ -3,6 +3,7 @@ import { PRODUCTIMAGE_URL } from "../../config/url";
 import { Button } from "react-bootstrap";
 import { Link, withRouter } from "react-router-dom";
 import { BsTagsFill } from "react-icons/bs";
+import PageButton from "./PageButton";
 
 const productFromServer = [
   {
@@ -73,8 +74,11 @@ function ProductList() {
 
   return (
     <>
-      <h3 className="product_title pl-1">雪板類</h3>
-      {display}
+      <div>
+        <h3 className="product_title pl-1">雪板類</h3>
+        {display}
+        <PageButton />
+      </div>
     </>
   );
 }

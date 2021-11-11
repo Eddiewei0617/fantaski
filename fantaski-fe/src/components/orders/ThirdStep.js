@@ -1,14 +1,14 @@
 import OrderFinal from "./OrderFinal";
-import PrevStepIcon from "./PrevStepIcon";
-import OrderSubmitIcon from "./OrderSubmitIcon";
+// import PrevStepIcon from "./PrevStepIcon";
+// import OrderSubmitIcon from "./OrderSubmitIcon";
 
-function ThirdStep() {
+function ThirdStep({ step, setStep, progressMoving, progressMoving3 }) {
   return (
     <>
       <OrderFinal />
       <div className="box3 d-flex justify-content-end">
-        <PrevStepIcon />
-        <OrderSubmitIcon />
+        {/* <PrevStepIcon />
+        <OrderSubmitIcon /> */}
       </div>
     </>
   );

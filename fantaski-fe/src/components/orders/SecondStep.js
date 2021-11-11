@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import CreditCard from "./CreditCard";
 import OrderContent from "./OrderContent";
-import PrevStepIcon from "./PrevStepIcon";
-import NextStepIcon from "./NextStepIcon";
 
-function SecondStep({ progressMoving3, step, setStep }) {
+function SecondStep({ step, setStep }) {
   // 載入中Start----------------------
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -25,10 +23,7 @@ function SecondStep({ progressMoving3, step, setStep }) {
 
       <CreditCard />
       <OrderContent />
-      <div className="box3 d-flex justify-content-end">
-        <PrevStepIcon />
-        <NextStepIcon />
-      </div>
+      <div className="box3 d-flex justify-content-end"></div>
     </>
   );
 }
