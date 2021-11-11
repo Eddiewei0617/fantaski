@@ -1,6 +1,7 @@
 import React from "react";
 import MapMask from "./MapMask";
 import { IMAGE_ROUTER_URL } from "../../config/url";
+import { PRODUCTIMAGE_URL } from "../../config/url";
 import { useState } from "react";
 const logo = document.querySelectorAll(".routeAnimation path");
 
@@ -75,19 +76,19 @@ function Map() {
                   ></img> */}
                     <img
                       className="shadow-sm bg-white  border border-dark"
-                      src={`${IMAGE_ROUTER_URL}/snow3.jpg`}
+                      src={`${IMAGE_ROUTER_URL}/pexels-photo-3969999.jpeg`}
                     />
                   </div>
                   <div className="col-6 imageBoxLeft imageBoxImg">
                     <img
                       className="shadow-sm bg-white border border-dark"
-                      src={`${IMAGE_ROUTER_URL}/snow3.jpg`}
+                      src={`${IMAGE_ROUTER_URL}/skiing.jpg`}
                     ></img>
                   </div>
                   <div className="col-6 imageBoxRight imageBoxImg">
                     <img
                       className="shadow-sm bg-white border border-dark"
-                      src={`${IMAGE_ROUTER_URL}/snow3.jpg`}
+                      src={`${IMAGE_ROUTER_URL}/5781362573_3a6e7f5066_o.jpg`}
                     ></img>
                   </div>
                 </div>
@@ -104,7 +105,7 @@ function Map() {
                       <h6>開放</h6>
                       <h6>滑雪初體驗</h6>
                       <h6>雙版/護目鏡/護臂</h6>
-                      <h6>Jessica</h6>
+                      <h6>Chuan Jun</h6>
                       <h6>10位</h6>
                     </div>
                   </div>
@@ -162,19 +163,19 @@ function Map() {
                   ></img> */}
                     <img
                       className="shadow-sm bg-white  border border-dark"
-                      src={`${IMAGE_ROUTER_URL}/snow3.jpg`}
+                      src={`${IMAGE_ROUTER_URL}/red5.jpg`}
                     />
                   </div>
                   <div className="col-6 imageBoxLeft imageBoxImg">
                     <img
                       className="shadow-sm bg-white border border-dark"
-                      src={`${IMAGE_ROUTER_URL}/snow3.jpg`}
+                      src={`${IMAGE_ROUTER_URL}/red4.jpg`}
                     ></img>
                   </div>
                   <div className="col-6 imageBoxRight imageBoxImg">
                     <img
                       className="shadow-sm bg-white border border-dark"
-                      src={`${IMAGE_ROUTER_URL}/snow3.jpg`}
+                      src={`${IMAGE_ROUTER_URL}/red3.jpg`}
                     ></img>
                   </div>
                 </div>
@@ -191,7 +192,7 @@ function Map() {
                       <h6>開放</h6>
                       <h6>滑雪初體驗</h6>
                       <h6>雙版/護目鏡/護臂</h6>
-                      <h6>Jessica</h6>
+                      <h6>Eddie Wei</h6>
                       <h6>10位</h6>
                     </div>
                   </div>
@@ -246,19 +247,19 @@ function Map() {
                   ></img> */}
                     <img
                       className="shadow-sm bg-white  border border-dark"
-                      src={`${IMAGE_ROUTER_URL}/snow3.jpg`}
+                      src={`${PRODUCTIMAGE_URL}/snowmobile2.jpg`}
                     />
                   </div>
                   <div className="col-6 imageBoxLeft imageBoxImg">
                     <img
                       className="shadow-sm bg-white border border-dark"
-                      src={`${IMAGE_ROUTER_URL}/snow3.jpg`}
+                      src={`${PRODUCTIMAGE_URL}/santaDeer5.jpg`}
                     ></img>
                   </div>
                   <div className="col-6 imageBoxRight imageBoxImg">
                     <img
                       className="shadow-sm bg-white border border-dark"
-                      src={`${IMAGE_ROUTER_URL}/snow3.jpg`}
+                      src={`${PRODUCTIMAGE_URL}/snowmobile8.jpg`}
                     ></img>
                   </div>
                 </div>
