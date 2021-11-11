@@ -123,7 +123,7 @@ function App() {
               <Home />
             </Route>
 
-            {/* footer有時間在處理 勿刪!!*/}
+            {/* footer有時間再處理 勿刪!!*/}
             {/* <Route path="/privacy" exact>
               <Privacy />
             </Route>

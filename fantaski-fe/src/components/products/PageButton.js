@@ -1,13 +1,34 @@
-import { Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
+import { addClass } from "dom-helpers";
 
-function PageButton() {
+function PageButton({ setPageButton, pageButton }) {
+  function handlePageButton() {
+    setPageButton(!pageButton);
+  }
   return (
     <>
       <div className="page_button ">
-        <Button>{`<`}</Button>
-        <Button>{`1`}</Button>
-        {/* <Button>{`2`}</Button> */}
-        <Button>{`>`}</Button>
+        <div>
+          <FontAwesomeIcon className="arrow_go" icon={faCaretLeft} />
+        </div>
+        <ul>
+          <li
+            className={`${pageButton ? "page_active" : ""}`}
+            onClick={handlePageButton}
+          >
+            1
+          </li>
+          <li
+            className={`${pageButton ? "page_active" : ""}`}
+            onClick={handlePageButton}
+          >
+            2
+          </li>
+        </ul>
+        <div>
+          <FontAwesomeIcon className="arrow_go" icon={faCaretRight} />
+        </div>
       </div>
     </>
   );
