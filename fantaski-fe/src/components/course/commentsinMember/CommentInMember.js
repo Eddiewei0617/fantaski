@@ -79,7 +79,7 @@ function CommentInMember({ orderCourse, setShowCourse }) {
               rows="4"
               col="40"
               className="col-8"
-              placeholder={contentInTextarea == "" && "尚未留下評論..."}
+              placeholder={contentInTextarea === "" && "尚未留下評論..."}
               value={contentInTextarea}
               onChange={handleTextChange}
             ></textarea>

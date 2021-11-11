@@ -39,8 +39,8 @@ function SingleComment(props) {
             alt=""
           />
         </div>
-        <div className="col-1">{comment.member}</div>
-        <div className="col-8">{comment.date}</div>
+        <div className="col-2">{comment.name}</div>
+        <div className="col-7">{comment.booking_date}</div>
         <div className="col-2 text-right">
           {starMapping[comment.star].map((item, i) => {
             return (
@@ -54,7 +54,7 @@ function SingleComment(props) {
           className={`col-12 comment-box ${hasEllipsis && "ellipsis"}`}
           ref={commentHeight}
         >
-          {comment.content}
+          {comment.comment}
         </div>
         {hasMore && (
           <span

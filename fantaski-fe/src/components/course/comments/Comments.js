@@ -1,68 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import SingleComment from "./SingleComment";
-const comments = [
-  {
-    member: "Sam",
-    member_img: "",
-    date: "2020-01-23 17:18",
-    star: 4,
-    content:
-      "在教練清楚的解說與愉快的帶領下學會很很猛的滑雪技術，非常推薦來FANTASKI!",
-  },
-  {
-    member: "Sam1",
-    member_img: "",
-    date: "2020-01-23 17:18",
-    star: 1,
-    content:
-      "在教練清楚的解說與愉快的帶領下學會很很猛的滑雪技術，非常推薦來FANTASKI!",
-  },
-  {
-    member: "Sam2",
-    member_img: "",
-    date: "2020-01-23 17:18",
-    star: 5,
-    content:
-      "在教練清楚的解說與愉快的帶領下學會很很猛的滑雪技術，非常推薦來FANTASKI!",
-  },
-  {
-    member: "Sam3",
-    member_img: "",
-    date: "2020-01-23 17:18",
-    star: 3,
-    content:
-      "在教練清楚的解說與愉快的帶領下學會很很猛的滑雪技術，非常推薦來FANTASKI!",
-  },
-  {
-    member: "Sam4",
-    member_img: "",
-    date: "2020-01-23 17:18",
-    star: 3,
-    content:
-      "在教練清楚的解說與愉快的帶領下學會很很猛的滑雪技術，非常推薦來FANTASKI!在教練清楚的解說與愉快的帶領下學會很很猛的滑雪技術，非常推薦來FANTASKI!在教練清楚的解說與愉快的帶領下學會很很猛的滑雪技術，非常推薦來FANTASKI!在教練清楚的解說與愉快的帶領下學會很很猛的滑雪技術，非常推薦來FANTASKI!在教練清楚的解說與愉快的帶領下學會很很猛的滑雪技術，非常推薦來FANTASKI!",
-  },
-  {
-    member: "Sam5",
-    member_img: "",
-    date: "2020-01-23 17:18",
-    star: 3,
-    content:
-      "在教練清楚的解說與愉快的帶領下學會很很猛的滑雪技術，非常推薦來FANTASKI!",
-  },
-];
+import { getCommentsInfo } from "../moduleList";
 
 function Comments({ showCourse }) {
+  const [commentsInfo, setCommentsInfo] = useState(null);
   //後端依據showCourse抓評論回填
+  useEffect(() => {
+    getCommentsInfo(showCourse, setCommentsInfo);
+  }, []);
+
+  if (commentsInfo === null) {
+    return <div></div>;
+  }
+
   return (
     <>
       <div className="comments-wrapper">
-        {comments.map((commit, i) => {
-          return (
-            <>
-              <SingleComment key={i} comment={commit} />
-            </>
-          );
-        })}
+        {commentsInfo.length === 0 ? (
+          <>
+            <div className="no-comments"></div>
+            <div className="no-comments-text">
+              尚未有評論，立即報名課程當第一個評論的人！
+            </div>
+          </>
+        ) : (
+          commentsInfo.map((commit, i) => {
+            return (
+              <>
+                <SingleComment key={i} comment={commit} />
+              </>
+            );
+          })
+        )}
       </div>
     </>
   );
