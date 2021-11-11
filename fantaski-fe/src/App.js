@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // 引入各分頁(後續寫程式可更動) 頁面用元件
 // 課程
@@ -38,10 +38,18 @@ function App() {
   //傳入course狀態(使用者要看哪個course)
   const [showCourse, setShowCourse] = useState();
 
+  // nabar上購物車的數字
+  const [itemNumber, setItemNumber] = useState(0);
+
   return (
     <>
       <Router>
-        <Navbar courses={courses} setShowCourse={setShowCourse} />
+        <Navbar
+          courses={courses}
+          setShowCourse={setShowCourse}
+          setItemNumber={setItemNumber}
+          itemNumber={itemNumber}
+        />
         {/* LOGO+標題+導覽列+上方選單 */}
         {/* 主內容區 */}
         {/* 匹配路由表(路徑單一匹配) */}
@@ -102,7 +110,7 @@ function App() {
               />
             </Route>
             <Route path="/products">
-              <Products />
+              <Products setItemNumber={setItemNumber} itemNumber={itemNumber} />
             </Route>
             <Route path="/Orders">
               <Orders />

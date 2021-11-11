@@ -9,8 +9,10 @@ import ProductSquare from "../../components/products/ProductSquare";
 import ProductList from "../../components/products/ProductList";
 // import PageButton from "../../components/products/PageButton";
 
-function Products() {
+function Products({ setItemNumber, itemNumber }) {
   const [square, setSquare] = useState(true);
+
+  // 做收藏標籤的點擊變換 start------------------------------
   const [toggleState, setToggleState] = useState({});
   //點擊後切換目標id的狀態false <-> true
   const clickToChangeToggle = (e) => {
@@ -19,10 +21,9 @@ function Products() {
     let oppositeState = !toggleState[targetId];
     let newState = { ...toggleState, [targetId]: oppositeState };
     setToggleState(newState);
-    console.log(newState);
-    // setToggleState(!toggleState);
+    // console.log(newState);
   };
-  // clickToChangeToggle();
+  // 做收藏標籤的點擊變換 end------------------------------
 
   // 用一個ref抓到要跳轉到的位置區塊，再寫一個function scrollTo
   const productSection = useRef(null);
@@ -32,7 +33,6 @@ function Products() {
       top: Number(`${productSection.current.offsetTop}`) - 150,
       behavior: "smooth",
     });
-  // console.log(productSection.current.offsetTop);
 
   return (
     <>
@@ -51,9 +51,17 @@ function Products() {
             clickToChangeToggle={clickToChangeToggle}
             setToggleState={setToggleState}
             toggleState={toggleState}
+            setItemNumber={setItemNumber}
+            itemNumber={itemNumber}
           />
         ) : (
-          <ProductList />
+          <ProductList
+            clickToChangeToggle={clickToChangeToggle}
+            setToggleState={setToggleState}
+            toggleState={toggleState}
+            setItemNumber={setItemNumber}
+            itemNumber={itemNumber}
+          />
         )}
       </div>
     </>

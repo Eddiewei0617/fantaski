@@ -38,7 +38,7 @@ const productFromServer = [
   },
 ];
 
-function ProductList() {
+function ProductList({ clickToChangeToggle, setToggleState, toggleState }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -51,7 +51,13 @@ function ProductList() {
         return (
           <li key={v.id} className="list-unstyled ">
             <div className="product_image_l">
-              <button className="collect_tag">
+              <button
+                id={i + 1}
+                className={`${
+                  toggleState[i + 1] === true && "collect_tagged"
+                }  collect_tag`}
+                onClick={clickToChangeToggle}
+              >
                 <BsTagsFill />
               </button>
               <img src={v.image} alt="" className="size" />
@@ -71,13 +77,23 @@ function ProductList() {
       })}
     </ul>
   );
+  const [pageButton, setPageButton] = useState(0);
+  function handlePageButton(e) {
+    let pageId = Number(e.target.id);
+    setPageButton(pageId);
+    // console.log("e.target", pageId);
+  }
 
   return (
     <>
       <div>
         <h3 className="product_title pl-1">雪板類</h3>
         {display}
-        <PageButton />
+        <PageButton
+          setPageButton={setPageButton}
+          pageButton={pageButton}
+          handlePageButton={handlePageButton}
+        />
       </div>
     </>
   );

@@ -37,6 +37,7 @@ function SwitchIcon({ setSquare, square }) {
             squareId.current.style.backgroundColor = "";
             listId.current.style.backgroundColor = "#ec6855";
             setSquare(false);
+            // console.log("555", listId.current.style);
           }}
         >
           <FaListUl size="1.6rem" />
