@@ -78,10 +78,9 @@ function AddCartFix({ showCourse, customerChoose, setCustomerChoose }) {
           <div className="col-2">
             <h5>價格</h5>
             <h4>
-              ${" "}
               {courseInfo === null
-                ? 0
-                : courseInfo[0].price * customerChoose.number}
+                ? "價錢查詢中：）"
+                : `$${courseInfo[0].price * customerChoose.number}`}
             </h4>
           </div>
           <div className="col-2">

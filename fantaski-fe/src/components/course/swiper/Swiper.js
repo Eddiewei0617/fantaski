@@ -24,7 +24,7 @@ function Swiper({ showCourse }) {
   }, []);
 
   if (adviceInfo === null) {
-    return <div></div>;
+    return <div className="text-center">此課程無推薦裝備</div>;
   }
 
   //  往左按鈕的點擊事件
