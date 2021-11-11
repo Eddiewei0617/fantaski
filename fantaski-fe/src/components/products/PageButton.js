@@ -1,12 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { addClass } from "dom-helpers";
 
-function PageButton({ setPageButton, pageButton, handlePageButton }) {
-  // function handlePageButton() {
-  //   setPageButton(!pageButton);
-  // }
+function PageButton({ setPageButton, pageButton, handlePageButton, products }) {
+  // console.log("抓", products);
   const pageNumber = [
     {
       id: 1,
@@ -25,6 +23,9 @@ function PageButton({ setPageButton, pageButton, handlePageButton }) {
       name: "4",
     },
   ];
+  useEffect(() => {
+    setPageButton(1);
+  }, []);
 
   return (
     <>

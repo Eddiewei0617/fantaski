@@ -1,6 +1,10 @@
+import { PRODUCTIMAGE_URL } from "../../config/url";
+
 function CartContent({ orderProduct }) {
-  // console.log("123", orderProduct);
-  for (let i = 0; i < 4; i++) {}
+  let storage = localStorage;
+  let itemString = storage["addItemList"];
+  let items = itemString.substr(0, itemString.length - 2).split(", ");
+
   return (
     <>
       <div className="cart_content_bg">
@@ -12,27 +16,31 @@ function CartContent({ orderProduct }) {
           <div className="col-sm">單價</div>
           <div className="col-sm">數量</div>
           <div className="col-sm">小計</div>
+          <div className="col-sm">刪除</div>
         </div>
 
         <div className="cart_content">
           <div>
+            {/* 動態新增開始 */}
             <div className="row ">
-              <div className=" cart_image">
-                <img src={orderProduct.image} alt="" />
+              <div className="cart_image">
+                <img src={`${PRODUCTIMAGE_URL}/allblack.jfif`} alt="" />
               </div>
-              <div className="col">
-                <div>{orderProduct.category}</div>
-              </div>
-              <div className="col">{orderProduct.name}</div>
+              <div className="col">雪板類</div>
+              <div className="col">暗黑滿點雪板</div>
               <div className="col">
                 <input type="date" />
               </div>
-              <div className="col">$ {orderProduct.price}</div>
+              <div className="col">$ 1200</div>
               <div className="col">
-                <input type="number" value="" />
+                <input type="number" value="1" min="1" />
               </div>
-              <div className="col"></div>
+              <div className="col">$ 1200</div>
+              <div className="col" id="1">
+                <button className="btn btn-info">X</button>
+              </div>
             </div>
+            {/* 動態新增結束--------------------------- */}
             <div className="row">
               <div className="col">333</div>
             </div>

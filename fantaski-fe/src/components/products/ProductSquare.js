@@ -4,7 +4,6 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { BsTagsFill } from "react-icons/bs";
 import PageButton from "../products/PageButton";
-// import Navbar from "../share/Navbar";
 
 const productFromServer = [
   {
@@ -38,17 +37,27 @@ function ProductSquare({
   itemNumber,
 }) {
   let storage = localStorage;
+  // 為了不要讓addItemList在null的時候寫undefined
   if (storage["addItemList"] == null) {
     storage["addItemList"] = "";
   }
-  let itemString = storage["addItemList"];
-  let items = itemString.substr(0, itemString.length - 2).split(", ");
+  // 抓到storage裡面有幾樣商品的字串後，用split將字串轉成陣列就能顯示出有幾個了
+  function handleAddNumber() {
+    let itemString = storage["addItemList"];
+    let items = itemString.substr(0, itemString.length - 2).split(", ");
+    setItemNumber(Number(items.length));
+  }
+  // 一進到頁面(包括重新整理)，判判斷如果addItemList裡面是空字串，就設購物車數字為0，不然就正常呼叫函式
   useEffect(() => {
-    setItemNumber(items.length);
-  }, [items.length]);
+    if (storage["addItemList"] === "") {
+      setItemNumber(0);
+    } else {
+      handleAddNumber();
+    }
+  }, []);
 
+  // 讓商品顯示在頁面上
   const [products, setProducts] = useState([]);
-
   useEffect(() => {
     setProducts(productFromServer);
   }, []);
@@ -85,12 +94,10 @@ function ProductSquare({
                 if (storage[itemId]) {
                   alert("您已將此物品加入購物車");
                 } else {
-                  storage.setItem(itemId, productInfo);
+                  storage.setItem(itemId, products);
                   storage["addItemList"] += `${itemId}, `;
                 }
-
-                // 抓到storage裡面有幾樣商品的字串後，用split將字串轉成陣列就能顯示出有幾個了
-                // setItemNumber(items.length);
+                handleAddNumber();
               }}
             >
               加入購物車
@@ -116,7 +123,6 @@ function ProductSquare({
 
   return (
     <>
-      {/* <Navbar /> */}
       <div>
         <h3 className="product_title pl-1">雪板類</h3>
         {display}

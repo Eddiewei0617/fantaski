@@ -36,9 +36,30 @@ const productFromServer = [
     image: `${PRODUCTIMAGE_URL}/hulk.jfif`,
     price: 1600,
   },
+  {
+    id: 4,
+    name: "陽光滿點單板",
+    category: "雪板類",
+    suitable: "初體驗",
+    description:
+      "滿滿大海配色的雪板，就是要陽光的你在雪上也能像在海上衝浪般的自在舒適!",
+    image: `${PRODUCTIMAGE_URL}/roxy_ocean.jfif`,
+    price: 1400,
+  },
+  {
+    id: 5,
+    name: "藝術滿點單板",
+    category: "雪板類",
+    suitable: "技能班",
+    description:
+      "2022最新雪板上市啦!此次以最五彩繽紛的動物---鸚鵡作為主軸，讓你邊滑雪邊欣賞腳下的絢麗鸚鵡",
+    image: `${PRODUCTIMAGE_URL}/Women's Snowboards.jfif`,
+    price: 2000,
+  },
 ];
 
 function ProductList({ clickToChangeToggle, setToggleState, toggleState }) {
+  // 讓商品顯示在頁面上
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -93,6 +114,7 @@ function ProductList({ clickToChangeToggle, setToggleState, toggleState }) {
           setPageButton={setPageButton}
           pageButton={pageButton}
           handlePageButton={handlePageButton}
+          products={products}
         />
       </div>
     </>
