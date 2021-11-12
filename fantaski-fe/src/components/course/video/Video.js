@@ -9,12 +9,12 @@ const videosLink = [
 
   {
     name: "技能班",
-    src: "skillClass.mp4",
+    src: "skillvideo2.mp4",
   },
 
   {
     name: "雪橇車",
-    src: "sled.mp4",
+    src: "sledVideo.mp4",
   },
   {
     name: "建冰屋",

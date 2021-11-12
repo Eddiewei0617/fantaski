@@ -16,23 +16,21 @@ function CourseButtons(props) {
         {courses.map((course, i) => {
           return (
             <>
-              <a
-                href="#/"
+              <Link
                 key={i}
+                to={`/course/${coursesinEng[course]}`}
                 className={`course${i}`}
                 onClick={() => {
                   setShowCourse(course);
                 }}
               >
-                <Link to={`/course/${coursesinEng[course]}`}>
-                  <img
-                    src={`${COURSE_IMG_URL}/snowflat.png`}
-                    alt=""
-                    className={`${showCourse === course && "showCourseBtn"}`}
-                  />
-                  <span>{course}</span>
-                </Link>
-              </a>
+                <img
+                  src={`${COURSE_IMG_URL}/snowflat.png`}
+                  alt=""
+                  className={`${showCourse === course && "showCourseBtn"}`}
+                />
+                <span>{course}</span>
+              </Link>
             </>
           );
         })}
