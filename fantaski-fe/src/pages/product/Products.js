@@ -23,7 +23,7 @@ function Products() {
 
   return (
     <>
-      <div className="navbar"></div>
+      {/* <div className="navbar"></div> */}
       <CarouselP />
       <ScrolldownIcon
         onClick={() => {
