@@ -18,3 +18,8 @@ export const ORDERIMAGE_URL =
 export const COURSE_IMG_URL =
   process.env.REACT_APP_COURSE_IMG_URL ||
   "http://localhost:3000/assets/images_course";
+
+// 論壇圖片
+export const IMAGE_FORUM_URL =
+  process.env.REACT_APP_IMAGE_FORUM_URL ||
+  "http://localhost:3000/assets/images_forum";

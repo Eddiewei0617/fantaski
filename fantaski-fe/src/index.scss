@@ -7,11 +7,14 @@
 @import "../public/styles/order.scss";
 @import "../public/styles/course.scss";
 @import "../public/styles/member.scss";
+@import "../public/styles/forum.scss";
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: $font-family-base;
   background-color: $background-color;
-  font-weight: 600;
+  font-size: $font-m;
+  // font-weight: 600;
 }

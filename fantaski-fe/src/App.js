@@ -12,7 +12,13 @@ import Products from "./pages/product/Products";
 import Orders from "./pages/order/Orders";
 import Home from "./pages/Home";
 import MountainRoute from "./pages/MountainRoute";
-import Forum from "./pages/Forum";
+
+// 論壇
+import Forum from "./pages/forums/Forum";
+// import Skiexperience from "./pages/forums/Skiexperience";
+// import Courseshare from "./pages/forums/Courseshare";
+// import Equipment from "./pages/forums/Equipment";
+
 import Member from "./pages/Member";
 import Login from "./pages/Login";
 
