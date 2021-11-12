@@ -1,36 +1,13 @@
 // 內建通用型元件
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 // 組合型元件
 import PageButton from "../products/PageButton";
 import { PRODUCTIMAGE_URL } from "../../config/url";
 import { Button } from "react-bootstrap";
 import { BsTagsFill } from "react-icons/bs";
-
-const productFromServer = [
-  {
-    id: 1,
-    name: "暗黑滿點單板",
-    category: "雪板類",
-    image: `${PRODUCTIMAGE_URL}/allblack.jfif`,
-    price: 1200,
-  },
-  {
-    id: 2,
-    name: "可愛滿點單板",
-    category: "雪板類",
-    image: `${PRODUCTIMAGE_URL}/Elmo.jfif`,
-    price: 1000,
-  },
-  {
-    id: 3,
-    name: "力量滿點單板",
-    category: "雪板類",
-    image: `${PRODUCTIMAGE_URL}/hulk.jfif`,
-    price: 1600,
-  },
-];
 
 function ProductSquare({
   clickToChangeToggle,
@@ -62,9 +39,24 @@ function ProductSquare({
 
   // 讓商品顯示在頁面上
   const [products, setProducts] = useState([]);
-  useEffect(() => {
-    setProducts(productFromServer);
+  useEffect(async () => {
+    let res = await axios.get(
+      "http://localhost:3001/api/products/productsInfoList"
+    );
+    setProducts(res.data);
   }, []);
+
+  // 查表法: 因為product資料表的category是數字，為了顯示在畫面上是文字用這招
+  const CATEGORY = {
+    1: "單板",
+    2: "雙板",
+    3: "滑雪外套",
+    4: "雪鞋",
+    5: "毛帽",
+    6: "雪褲",
+    7: "配件",
+    8: "器材",
+  };
 
   const display = (
     <ul className="all_image_s ">
@@ -81,7 +73,11 @@ function ProductSquare({
               >
                 <BsTagsFill title="加入收藏" />
               </button>
-              <img src={v.image} alt="" className="size" />
+              <img
+                src={`${PRODUCTIMAGE_URL}/${v.image}`}
+                alt=""
+                className="size"
+              />
             </div>
             <p className="mt-3 h5">{v.name}</p>
             <p className="h5">NT$ {v.price}</p>
@@ -107,7 +103,9 @@ function ProductSquare({
               加入購物車
               <input
                 type="hidden"
-                value={`${v.image}|${v.category}|${v.name}|${v.price}`}
+                value={`${PRODUCTIMAGE_URL}/${v.image}|${
+                  CATEGORY[v.category_id]
+                }|${v.name}|${v.price}`}
               />
             </Button>
           </li>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PRODUCTIMAGE_URL } from "../../config/url";
 
 function OrderItems() {
@@ -16,17 +16,31 @@ function OrderItems() {
   //   var getValue = JSON.parse(value);
   //   console.log("getValue", getValue);
 
-  for (let i = 0; i < items.length; i++) {
-    var orderArray = [
-      {
-        id: localStorage.getItem(items[i]),
-        name: localStorage[items[i]].split("|")[2],
-        category: localStorage[items[i]].split("|")[1],
-        price: localStorage[items[i]].split("|")[3],
-        image: localStorage[items[i]].split("|")[0],
-      },
-    ];
+  const [orderList, setOrderList] = useState([]);
+  useEffect(() => {
+    for (let i = 0; i < items.length; i++) {
+      var orderArray = [
+        {
+          id: localStorage.getItem(items[i]),
+          name: localStorage[items[i]].split("|")[2],
+          category: localStorage[items[i]].split("|")[1],
+          price: localStorage[items[i]].split("|")[3],
+          image: localStorage[items[i]].split("|")[0],
+        },
+      ];
+    }
+    setOrderList(orderArray);
+  }, []);
+
+  // 寫一個function過濾出剩下沒被點到刪除的商品們
+  function removeFromCart(itemToRemove) {
+    setOrderList((orderList) =>
+      orderList.filter((v, i) => {
+        return v.id !== itemToRemove;
+      })
+    );
   }
+
   // console.log("check", orderArray[i].name);
 
   //   for (let i = 0; i < items.length; i++) {
@@ -39,7 +53,7 @@ function OrderItems() {
   // -------------------------------------------------------------------------------
   return (
     <>
-      {orderArray.map((v, i) => {
+      {orderList.map((v, i) => {
         console.log("v", v);
         return (
           <div className="row " key={v.id}>
@@ -63,9 +77,20 @@ function OrderItems() {
                 min="1"
               />
             </div>
-            <div className="col">$ 1200</div>
+            <div className="col">
+              $ {number !== "" ? number * v.price : 1 * v.price}
+            </div>
             <div className="col" id="1">
-              <button className="btn btn-info">X</button>
+              <button
+                className="btn btn-info"
+                onClick={() => {
+                  // 讓頁面上的商品消失:
+                  removeFromCart(`${v.id}`);
+                  // 讓localStorage的資料消失:
+                }}
+              >
+                X
+              </button>
             </div>
           </div>
         );
