@@ -14,9 +14,9 @@ function Gotop() {
   };
 
   useEffect(() => {
-    // Button is displayed after scrolling for 150 pixels
+    // Button is displayed after scrolling for 100 pixels
     const toggleVisibility = () => {
-      if (window.pageYOffset > 150) {
+      if (window.pageYOffset > 120) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
