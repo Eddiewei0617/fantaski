@@ -113,7 +113,7 @@ function App() {
               <Products setItemNumber={setItemNumber} itemNumber={itemNumber} />
             </Route>
             <Route path="/Orders">
-              <Orders />
+              <Orders setItemNumber={setItemNumber} itemNumber={itemNumber} />
             </Route>
             <Route path="/login">
               <Login />

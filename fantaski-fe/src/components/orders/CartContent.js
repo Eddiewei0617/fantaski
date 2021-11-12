@@ -1,10 +1,7 @@
 import { PRODUCTIMAGE_URL } from "../../config/url";
+import OrderItems from "./OrderItems";
 
 function CartContent({ orderProduct }) {
-  let storage = localStorage;
-  let itemString = storage["addItemList"];
-  let items = itemString.substr(0, itemString.length - 2).split(", ");
-
   return (
     <>
       <div className="cart_content_bg">
@@ -21,8 +18,9 @@ function CartContent({ orderProduct }) {
 
         <div className="cart_content">
           <div>
+            <OrderItems />
             {/* 動態新增開始 */}
-            <div className="row ">
+            {/* <div className="row ">
               <div className="cart_image">
                 <img src={`${PRODUCTIMAGE_URL}/allblack.jfif`} alt="" />
               </div>
@@ -39,11 +37,11 @@ function CartContent({ orderProduct }) {
               <div className="col" id="1">
                 <button className="btn btn-info">X</button>
               </div>
-            </div>
+            </div> */}
             {/* 動態新增結束--------------------------- */}
-            <div className="row">
+            {/* <div className="row">
               <div className="col">333</div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

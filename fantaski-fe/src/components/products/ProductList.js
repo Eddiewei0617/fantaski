@@ -1,9 +1,12 @@
+// 內建通用元件
 import { useState, useEffect } from "react";
+import { Link, withRouter } from "react-router-dom";
+
+// 組合用元件
+import PageButton from "./PageButton";
 import { PRODUCTIMAGE_URL } from "../../config/url";
 import { Button } from "react-bootstrap";
-import { Link, withRouter } from "react-router-dom";
 import { BsTagsFill } from "react-icons/bs";
-import PageButton from "./PageButton";
 
 const productFromServer = [
   {
@@ -58,7 +61,34 @@ const productFromServer = [
   },
 ];
 
-function ProductList({ clickToChangeToggle, setToggleState, toggleState }) {
+function ProductList({
+  clickToChangeToggle,
+  setToggleState,
+  toggleState,
+  setItemNumber,
+  itemNumber,
+}) {
+  // 點加入購物車後從到locaStorage
+  let storage = localStorage;
+  // 為了不要讓addItemList在null的時候寫undefined
+  if (storage["addItemList"] == null) {
+    storage["addItemList"] = "";
+  }
+  // 抓到storage裡面有幾樣商品的字串後，用split將字串轉成陣列就能顯示出有幾個了
+  function handleAddNumber() {
+    let itemString = storage["addItemList"];
+    let items = itemString.substr(0, itemString.length - 2).split(", ");
+    setItemNumber(Number(items.length));
+  }
+  // 一進到頁面(包括重新整理)，判判斷如果addItemList裡面是空字串，就設購物車數字為0，不然就正常呼叫函式
+  useEffect(() => {
+    if (storage["addItemList"] === "") {
+      setItemNumber(0);
+    } else {
+      handleAddNumber();
+    }
+  }, []);
+
   // 讓商品顯示在頁面上
   const [products, setProducts] = useState([]);
 
@@ -89,9 +119,30 @@ function ProductList({ clickToChangeToggle, setToggleState, toggleState }) {
               <p>適合對象 : {v.suitable}</p>
               <p>租購價 : NT$ {v.price}</p>
 
-              <Link to={"/orders?id=" + v.id}>
-                <Button className="cart">加入購物車</Button>
-              </Link>
+              <Button
+                id={v.id}
+                className="cart"
+                onClick={(e) => {
+                  let itemId = v.id;
+                  let productInfo = e.currentTarget.children[0].value;
+                  // console.log("value", productInfo); //http://localhost:3000/assets/images_product/allblack.jfif|雪板類|暗黑滿點單板|1200
+
+                  // 開始把點"加到購物車"的商品存入storage
+                  if (storage[itemId]) {
+                    alert("您已將此物品加入購物車");
+                  } else {
+                    storage.setItem(itemId, productInfo);
+                    storage["addItemList"] += `${itemId}, `;
+                  }
+                  handleAddNumber();
+                }}
+              >
+                加入購物車
+                <input
+                  type="hidden"
+                  value={`${v.image}|${v.category}|${v.name}|${v.price}`}
+                />
+              </Button>
             </div>
           </li>
         );
@@ -102,7 +153,6 @@ function ProductList({ clickToChangeToggle, setToggleState, toggleState }) {
   function handlePageButton(e) {
     let pageId = Number(e.target.id);
     setPageButton(pageId);
-    // console.log("e.target", pageId);
   }
 
   return (

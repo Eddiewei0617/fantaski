@@ -1,9 +1,12 @@
+// 內建通用型元件
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+
+// 組合型元件
+import PageButton from "../products/PageButton";
 import { PRODUCTIMAGE_URL } from "../../config/url";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { BsTagsFill } from "react-icons/bs";
-import PageButton from "../products/PageButton";
 
 const productFromServer = [
   {
@@ -36,6 +39,7 @@ function ProductSquare({
   setItemNumber,
   itemNumber,
 }) {
+  // 點加入購物車後從到locaStorage
   let storage = localStorage;
   // 為了不要讓addItemList在null的時候寫undefined
   if (storage["addItemList"] == null) {
@@ -75,26 +79,26 @@ function ProductSquare({
                 }  collect_tag`}
                 onClick={clickToChangeToggle}
               >
-                <BsTagsFill />
+                <BsTagsFill title="加入收藏" />
               </button>
               <img src={v.image} alt="" className="size" />
             </div>
             <p className="mt-3 h5">{v.name}</p>
             <p className="h5">NT$ {v.price}</p>
-            {/* <Link to={"/orders?id=" + v.id}> */}
+
             <Button
               id={v.id}
               className="cart"
               onClick={(e) => {
                 let itemId = v.id;
                 let productInfo = e.currentTarget.children[0].value;
-                console.log("value", productInfo); //http://localhost:3000/assets/images_product/allblack.jfif|雪板類|暗黑滿點單板|1200
+                // console.log("value", productInfo); //http://localhost:3000/assets/images_product/allblack.jfif|雪板類|暗黑滿點單板|1200
 
                 // 開始把點"加到購物車"的商品存入storage
                 if (storage[itemId]) {
                   alert("您已將此物品加入購物車");
                 } else {
-                  storage.setItem(itemId, products);
+                  storage.setItem(itemId, productInfo);
                   storage["addItemList"] += `${itemId}, `;
                 }
                 handleAddNumber();
@@ -106,7 +110,6 @@ function ProductSquare({
                 value={`${v.image}|${v.category}|${v.name}|${v.price}`}
               />
             </Button>
-            {/* </Link> */}
           </li>
         );
       })}
@@ -118,9 +121,9 @@ function ProductSquare({
   function handlePageButton(e) {
     let pageId = Number(e.target.id);
     setPageButton(pageId);
-    // console.log("e.target", pageId);
   }
 
+  // --------------------------------------------------------------------------
   return (
     <>
       <div>
