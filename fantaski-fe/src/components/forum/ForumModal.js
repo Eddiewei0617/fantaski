@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
-import ForumThreeDot from "./ForumThreeDot";
+import ForumThreeDots from "./ForumThreeDots";
 import { IMAGE_FORUM_URL } from "../../config/url";
 import ForumHeartCommit from "./ForumHeartCommit";
 import { BsHeartFill } from "react-icons/bs";
@@ -22,7 +22,7 @@ function ForumModal(props) {
           <span className="forum-username">Eddie</span>
         </Modal.Title>
         <div className="forum-pop-threedot">
-          <ForumThreeDot />
+          <ForumThreeDots />
         </div>
       </Modal.Header>
       <Modal.Body>

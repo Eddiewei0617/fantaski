@@ -1,9 +1,8 @@
 import React from "react";
-import ForumAddReply from "../../components/forum/ForumAddReply";
 import ForumButton from "../../components/forum/ForumButton";
 import ForumHeadBtn from "../../components/forum/ForumHeadBtn";
 import ForumPost from "../../components/forum/ForumPost";
-import ForumThreeDot from "../../components/forum/ForumThreeDot";
+import ForumThreeDots from "../../components/forum/ForumThreeDots";
 
 function Fourm() {
   return (
@@ -18,7 +17,7 @@ function Fourm() {
               <div className="content-head-buttonall">
                 <ForumHeadBtn />
                 {/* content-head-button end */}
-                <ForumThreeDot />
+                <ForumThreeDots />
                 {/* forum-more-button end */}
               </div>
               {/* content-head-buttonall end */}
