@@ -1,4 +1,5 @@
 import React from "react";
+import ForumAddReply from "../../components/forum/ForumAddReply";
 import ForumButton from "../../components/forum/ForumButton";
 import ForumHeadBtn from "../../components/forum/ForumHeadBtn";
 import ForumPost from "../../components/forum/ForumPost";

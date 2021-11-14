@@ -1,3 +1,6 @@
+// ====================
+$hr-color: #c6c6c6;
+// ====================
 .forum-main {
   margin-top: 7.5%;
   //   background: $assist-white;
@@ -225,10 +228,11 @@
 
 .heart-commit-num {
   color: $main-red;
-  display: flex;
+  display: inline-flex;
   justify-content: flex-start;
   align-items: center;
   margin: 2% auto;
+  width: 95%;
   .heart-num {
     padding-right: 1%;
     + span {
@@ -312,28 +316,22 @@
 .forum-pop-threedot {
   margin: -1rem -1rem -1rem auto;
   padding: 1rem 1rem;
-  transform: translate(330%, 80%);
+  transform: translate(335%, 80%);
   z-index: 1;
 }
 
-// modal body
-.modal-body,
-.modal-footer {
-  width: 95%;
-  margin: 0 auto;
-}
 .modal-body {
-  color: $main-text-darkblue;
   height: 60vh;
   overflow-x: hidden;
   overflow-y: scroll;
-  padding: 0 60px;
+  padding: 0;
   &::-webkit-scrollbar {
     width: 8px;
   }
   //scroll background
   &::-webkit-scrollbar-track {
-    background: $assist-white;
+    // background: $assist-white;
+    background: transparent;
   }
   //滑桿本身
   &::-webkit-scrollbar-thumb {
@@ -343,9 +341,15 @@
   &::-webkit-scrollbar-thumb:hover {
     background: $main-blue;
   }
-  hr {
-    background: #dee2e6;
-    height: 3px;
+  .forum-contents {
+    color: $main-text-darkblue;
+    padding: 0 60px;
+    width: 95%;
+    margin: 0 auto;
+    hr {
+      background: $hr-color;
+      height: 3px;
+    }
   }
 }
 
@@ -379,19 +383,131 @@
 }
 .heart-count {
   color: #9c9c9c;
-  display: block;
-  text-align: right;
-  position: relative;
-  top: -16%;
 }
 
 // 留言區
-.forum-commit-bg {
-  background: #b5e0f8;
-  width: 100%;
-  padding: 0 !important;
+.forum-reply-bg {
+  background: #d2ecfa;
+  hr {
+    background: $hr-color;
+    height: 2px;
+    margin: 8px 0;
+  }
 }
-.forum-commit-img {
+.forum-container {
+  width: 95%;
+  margin: 0 auto;
+  padding: 10px 60px;
+  color: $main-text-darkblue;
+  .forum-reply-head {
+    display: inline-block;
+    width: 100%;
+    margin-top: 3%;
+    span {
+      margin: 0 2%;
+    }
+  }
+}
+.forum-reply-content {
+  display: flex;
+  overflow: hidden;
+}
+.reply-left {
+  flex-shrink: 0;
+  padding-right: 10px;
+}
+.forum-reply-img {
   width: 40px;
   height: 40px;
+  img {
+    width: 100%;
+  }
+}
+
+.reply-user-name {
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-start;
+}
+
+// 做後端判定時再來調整
+.user-reply {
+  white-space: break-spaces;
+  word-break: break-word;
+  margin: 3% 0;
+}
+
+.reply-time {
+  color: #9c9c9c;
+  font-size: 14px;
+  p {
+    margin: 0 auto;
+  }
+  span {
+    margin-left: 2%;
+  }
+}
+
+// modal footer
+.modal-footer {
+  justify-content: center;
+}
+.reply-area {
+  width: 88%;
+  margin: 0 auto;
+}
+
+input[type="text"] {
+  width: 70%;
+  padding: 10px;
+  margin: 5px 15px 0 0;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 2px solid #9c9c9c;
+}
+
+.reply-submit {
+  border: none;
+  border-radius: 5px;
+  background: $main-red;
+  color: $assist-white;
+  padding: 5px 10px;
+  letter-spacing: 5px;
+}
+
+// forumedit
+.forum-edit {
+  margin: 0 auto;
+  input[type="text"] {
+    border: none;
+    border: 2px solid red;
+    margin: 3% 0;
+  }
+}
+
+.textarea {
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  resize: none;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  //scroll background
+  &::-webkit-scrollbar-track {
+    // background: $assist-white;
+    background: transparent;
+  }
+  //滑桿本身
+  &::-webkit-scrollbar-thumb {
+    background: $main-text-darkblue;
+    border-radius: 100px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: $main-blue;
+  }
 }
