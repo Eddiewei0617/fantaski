@@ -17,7 +17,7 @@ import { FaUserAlt, FaCloudSunRain } from "react-icons/fa";
 
 import $ from "jquery";
 
-function Navbar({ courses, setShowCourse }) {
+function Navbar({ courses, setShowCourse, setItemNumber, itemNumber }) {
   // 設定該項目被點選時的狀態
   let [colorButton, setColorButton] = useState("FANTASKI");
   const handleClick = (e) => {
@@ -164,7 +164,9 @@ function Navbar({ courses, setShowCourse }) {
                 <li className="nav-item">
                   <Link className="nav-link position-relative" to="/orders">
                     <BsFillCartFill className="all-icon-nav" size={25} />
-                    <p className="shopping-cart-circle">10</p>
+                    <p className="shopping-cart-circle" id="itemNumber">
+                      {itemNumber}
+                    </p>
                   </Link>
                 </li>
                 <li className="left-line"></li>

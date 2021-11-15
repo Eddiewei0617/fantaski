@@ -10,13 +10,9 @@ function ProgressBar({ step, setStep, scrollToTop }) {
       setIsLoading(false);
     }, 1000);
   }, []);
-  const spinner = (
-    <div className="spinner-border text-primary" role="status">
-      <span className="sr-only">Loading...</span>
-    </div>
-  );
   // 載入中End------------------------
 
+  // 當step有更動時，呼叫不同進度條動畫函式
   useEffect(() => {
     // step === 1 && progressMovingBack();
     step === 2 && progressMoving();
@@ -69,6 +65,7 @@ function ProgressBar({ step, setStep, scrollToTop }) {
     word3.style.removeProperty("color");
   }
 
+  // ----------------------------------------------------------------------------------------
   return (
     <>
       <section>
@@ -77,6 +74,7 @@ function ProgressBar({ step, setStep, scrollToTop }) {
         </div>
 
         <section className="d-flex">
+          {/* 階段一進度 */}
           <div>
             <button
               className="progress_button1"
@@ -99,6 +97,7 @@ function ProgressBar({ step, setStep, scrollToTop }) {
           </div>
 
           {/* ---------------------------------------------------------- */}
+          {/* 階段二進度 */}
           <div>
             <button
               className="progress_button2"
@@ -120,7 +119,7 @@ function ProgressBar({ step, setStep, scrollToTop }) {
             <div className="first_during3 w3-round-xlarge"></div>
           </div>
           {/* ---------------------------------------------------------- */}
-
+          {/* 階段三進度 */}
           <div>
             <button
               className="progress_button3"

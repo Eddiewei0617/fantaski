@@ -1,6 +1,7 @@
-function CartContent({ orderProduct }) {
-  // console.log("123", orderProduct);
-  for (let i = 0; i < 4; i++) {}
+import { PRODUCTIMAGE_URL } from "../../config/url";
+import OrderItems from "./OrderItems";
+
+function CartContent({ orderProduct, customerChoose, setCustomerChoose }) {
   return (
     <>
       <div className="cart_content_bg">
@@ -12,30 +13,15 @@ function CartContent({ orderProduct }) {
           <div className="col-sm">單價</div>
           <div className="col-sm">數量</div>
           <div className="col-sm">小計</div>
+          <div className="col-sm">刪除</div>
         </div>
 
         <div className="cart_content">
           <div>
-            <div className="row ">
-              <div className=" cart_image">
-                <img src={orderProduct.image} alt="" />
-              </div>
-              <div className="col">
-                <div>{orderProduct.category}</div>
-              </div>
-              <div className="col">{orderProduct.name}</div>
-              <div className="col">
-                <input type="date" />
-              </div>
-              <div className="col">$ {orderProduct.price}</div>
-              <div className="col">
-                <input type="number" value="" />
-              </div>
-              <div className="col"></div>
-            </div>
-            <div className="row">
-              <div className="col">333</div>
-            </div>
+            <OrderItems
+              customerChoose={customerChoose}
+              setCustomerChoose={setCustomerChoose}
+            />
           </div>
         </div>
       </div>

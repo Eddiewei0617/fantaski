@@ -39,9 +39,13 @@ app.get("/", (req, res) => {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//api路徑中間件
+//api路徑中間件(課程)
 let courseRouter = require("./routers/course");
 app.use("/api/course", courseRouter);
+
+//api路徑中間件(商品)
+let productRouter = require("./routers/products");
+app.use("/api/products", productRouter);
 
 //404中間件
 app.use((req, res, next) => {
