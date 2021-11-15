@@ -1,0 +1,561 @@
+// ====================
+$hr-color: #c6c6c6;
+$forum-box-shadow: 0 0 30px rgba(19, 72, 101, 0.4);
+// ====================
+.forum-main {
+  margin-top: 10.5%;
+  //   background: $assist-white;
+}
+.forum-container {
+  max-width: 1000px;
+}
+
+// =========================
+
+// area1 各區塊 button 區
+.forum-button {
+  ul {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5%;
+  }
+  .buttonto-forum {
+    margin: 0 5%;
+    background-color: $main-red;
+    border-radius: 15px;
+    transition: 0.3s;
+    .forum-button-link {
+      color: $assist-white;
+      font-size: 1.8em;
+      line-height: 1.8em;
+      text-decoration: none;
+      padding: 0 20px;
+    }
+    &:hover {
+      background-color: #d8936e;
+      transform: translateY(-5px);
+      cursor: pointer;
+    }
+  }
+}
+
+// =========================
+
+// area2 內文區
+.forum-content {
+  background: $assist-white;
+  border-radius: 30px;
+  //   height: 150vh;
+  box-shadow: $forum-box-shadow;
+  padding: 2%;
+}
+
+.forum-content-head {
+  position: sticky;
+  z-index: 2;
+  top: 80px;
+  background-color: $assist-white;
+  border-radius: 30px 30px 0 0;
+}
+
+// area2 內文區的head btn
+.content-head-buttonall {
+  margin: 0 auto;
+  padding: 40px 80px 0;
+  border-bottom: 3px solid #d7d4d4;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+.content-head-button {
+  ul {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 3%;
+  }
+  .content-headtobutton {
+    margin-right: 5%;
+    width: 100px;
+    .content-headtobutton-link {
+      font-size: $font-l;
+      letter-spacing: 10px;
+      color: $main-text-darkblue;
+      font-weight: 500;
+      text-decoration: none;
+      position: relative;
+    }
+    .content-headtobutton-link-active {
+      font-size: $font-l;
+      letter-spacing: 10px;
+      color: $main-text-darkblue;
+      font-weight: 500;
+      text-decoration: none;
+      position: relative;
+      &::after {
+        content: "";
+        border-bottom: 3px solid $main-text-darkblue;
+        width: 100%;
+        position: absolute;
+        top: 125%;
+        right: 5%;
+        transform: translate(0, -50%);
+      }
+    }
+  }
+}
+
+// ---------------------------------
+
+// dropdown
+.forum-more-button .forum-dots {
+  color: $main-text-darkblue;
+  font-size: 20px;
+  margin: 3% auto;
+  &:active {
+    animation: fadeInFromNone 0.5s ease-out;
+  }
+}
+
+// react-dropdown
+#dropdown-basic::after {
+  display: none;
+}
+.forum-more-button.forum-dots {
+  color: $main-text-darkblue;
+  font-size: 22px;
+}
+
+.btn-primary {
+  background-color: transparent;
+  color: transparent;
+  border: transparent;
+  transition: 0.5s ease-in;
+  &:hover {
+    background-color: transparent;
+    color: transparent;
+    border: transparent;
+  }
+  &:active {
+    background-color: transparent;
+    color: transparent;
+    border: transparent;
+  }
+  &:focus {
+    background-color: transparent;
+    color: transparent;
+    border: transparent;
+    box-shadow: 0 0 0 0 rgba(255 255 255 / 100%);
+  }
+}
+.btn-primary:not(:disabled):not(.disabled):active,
+.show > .btn-primary.dropdown-toggle {
+  background-color: transparent;
+  color: transparent;
+  border: transparent;
+  &:focus {
+    box-shadow: 0 0 0 0 rgb(255 255 255 / 100%);
+    transform: rotate(90deg);
+  }
+}
+
+.dropdown-menu {
+  z-index: 1;
+  box-shadow: 1px 1px 10px rgba(75 75 75 / 60%);
+}
+
+.dropdown-item {
+  color: $main-text-darkblue;
+  &:active {
+    background-color: $main-red;
+  }
+  .forum-dropdown-btn {
+    margin-right: 8%;
+  }
+}
+
+// ---------------------------------
+// post區
+.forum-post {
+  margin: 2% 0;
+}
+.post {
+  margin: 0 auto;
+  width: 70%;
+  border-bottom: 1px solid #d7d4d4;
+  position: relative;
+  cursor: pointer;
+}
+
+.post-head {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #b6b5b5;
+  font-size: $font-m;
+}
+.postuser-color {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: $main-red; //female
+  background-color: $main-blue; //male
+  background-color: #6b6b6b; //multiple
+  margin-right: 1%;
+}
+
+.post-time {
+  margin: 0 1%;
+  font-size: 12px;
+}
+
+.post-content {
+  width: 70%;
+  h2 {
+    color: $main-text-darkblue;
+    font-size: 28px;
+    margin: 1% auto;
+  }
+}
+.post-p-area {
+  overflow: hidden;
+  .post-p {
+    color: $main-blue;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    // margin: 1% 0;
+  }
+}
+
+.heart-commit-num {
+  color: $main-red;
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 2% auto;
+  width: 95%;
+  .heart-num {
+    padding-right: 1%;
+    + span {
+      color: #b6b5b5;
+      padding-left: 10px;
+    }
+  }
+
+  .commit-num {
+    margin: 0 3%;
+    span {
+      padding: 0 6px;
+    }
+  }
+}
+
+.post-img {
+  object-fit: cover;
+  overflow: hidden;
+  width: 110px;
+  height: 90px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  position: absolute;
+  left: 80%;
+  display: inline-flex;
+  top: 20%;
+  align-items: inherit;
+  justify-content: center;
+}
+
+// ---------------------------------
+// modal
+.modal-open {
+  padding-right: 0 !important;
+  font-family: Arial, Helvetica, sans-serif;
+  .modal-backdrop,
+  .modal {
+    z-index: 2100;
+  }
+}
+
+.modal-dialog .modal-content {
+  border-radius: 30px;
+  border: 0;
+}
+// madal head
+.modal-header {
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 3%;
+  padding: 1rem 2rem;
+  .close {
+    margin: 0 0 0 auto;
+  }
+}
+.modal-title {
+  display: inline-flex;
+}
+.forum-username {
+  color: $main-text-darkblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.forum-user-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1px solid rgba(19, 72, 101, 0.4);
+  overflow: hidden;
+  object-fit: cover;
+  margin-right: 8px;
+  //   user 上傳圖檔不為svg時須做這設定
+  //   display: inline-flex;
+  //   align-items: inherit;
+  //   justify-content: center;
+}
+
+.forum-pop-threedot {
+  margin: -1rem -1rem -1rem auto;
+  padding: 1rem 1rem;
+  transform: translate(335%, 80%);
+  z-index: 1;
+}
+
+.forum-modal-body {
+  height: 60vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 0;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  //scroll background
+  &::-webkit-scrollbar-track {
+    // background: $assist-white;
+    background: transparent;
+  }
+  //滑桿本身
+  &::-webkit-scrollbar-thumb {
+    background: $main-text-darkblue;
+    border-radius: 100px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: $main-blue;
+  }
+  .forum-contents {
+    color: $main-text-darkblue;
+    padding: 0 60px;
+    width: 95%;
+    margin: 0 auto;
+    hr {
+      background: $hr-color;
+      height: 3px;
+    }
+  }
+}
+
+.forum-kind-color {
+  color: $main-red;
+  letter-spacing: 2px;
+  span {
+    color: #9c9c9c;
+    padding-left: 10px;
+    font-size: 14px;
+  }
+}
+
+.forum-img {
+  max-width: min(100%, 750px);
+  //   max-height: min(100%, 500px);
+  overflow: hidden;
+  object-fit: cover;
+  display: inline-flex;
+  align-items: inherit;
+  justify-content: center;
+  margin: 5% 0;
+}
+
+.forum-p {
+  //   white-space: pre-wrap;
+  //   word-wrap: break-word;
+  word-break: keep-all;
+  //   text-align: justify;
+  line-height: 3;
+}
+.heart-count {
+  color: #9c9c9c;
+}
+
+// 留言區
+.forum-reply-bg {
+  background: #d2ecfa;
+  hr {
+    background: $hr-color;
+    height: 2px;
+    margin: 8px 0;
+  }
+}
+.forum-container {
+  width: 95%;
+  margin: 0 auto;
+  padding: 10px 60px;
+  color: $main-text-darkblue;
+  .forum-reply-head {
+    display: inline-block;
+    width: 100%;
+    margin-top: 3%;
+    span {
+      margin: 0 2%;
+    }
+  }
+}
+.forum-reply-content {
+  display: flex;
+  overflow: hidden;
+}
+.reply-left {
+  flex-shrink: 0;
+  padding-right: 10px;
+}
+.forum-reply-img {
+  width: 40px;
+  height: 40px;
+  img {
+    width: 100%;
+  }
+}
+
+.reply-user-name {
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-start;
+}
+
+// 做後端判定時再來調整
+.user-reply {
+  white-space: break-spaces;
+  word-break: break-word;
+  margin: 3% 0;
+}
+
+.reply-time {
+  color: #9c9c9c;
+  font-size: 14px;
+  p {
+    margin: 0 auto;
+  }
+  span {
+    margin-left: 2%;
+  }
+}
+
+// modal footer
+.modal-footer {
+  justify-content: center;
+}
+.reply-area {
+  width: 88%;
+  margin: 0 auto;
+  input[type="text"] {
+    width: 70%;
+    padding: 10px;
+    margin: 5px 15px 0 0;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 2px solid #9c9c9c;
+  }
+}
+
+.reply-submit {
+  border: none;
+  border-radius: 5px;
+  background: $main-red;
+  color: $assist-white;
+  padding: 5px 10px;
+  letter-spacing: 5px;
+}
+
+// forumedit
+.forum-edit-area {
+  background: $assist-white;
+  border-radius: 30px;
+  box-shadow: $forum-box-shadow;
+  hr {
+    background: $hr-color;
+    height: 2px;
+  }
+}
+.fourmedit-head-area {
+  display: flex;
+  padding: 2% 0;
+}
+.forum-edit {
+  margin: 0 auto;
+  input[type="text"] {
+    width: 100%;
+    border: none;
+    box-sizing: border-box;
+    border: 2px solid #9c9c9c;
+    margin: 2% 0;
+    padding: 2%;
+    border-radius: 10px;
+    font-size: $font-l;
+    letter-spacing: 3px;
+  }
+}
+
+.textarea {
+  width: 100%;
+  height: 250px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+
+  // background-color: #f8f8f8;
+  resize: none;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  //scroll background
+  &::-webkit-scrollbar-track {
+    // background: $assist-white;
+    background: transparent;
+  }
+  //滑桿本身
+  &::-webkit-scrollbar-thumb {
+    background: $main-text-darkblue;
+    border-radius: 100px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: $main-blue;
+  }
+}
+
+.add-icon {
+  margin: 2% 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 30px;
+}
+.cancle-btn {
+  border: none;
+  background: none;
+  letter-spacing: 5px;
+}
+.confrim-btn {
+  border: none;
+  background: $main-red;
+  color: $assist-white;
+  border-radius: 5px;
+  padding: 5px;
+}
+.post-btn-link {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+    color: $main-text-darkblue;
+  }
+}

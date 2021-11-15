@@ -48,7 +48,7 @@ function Map() {
           tabindex="-1"
           // key={item.id}
         >
-          <div className="modal-dialog modal-lg modal-dialog-centered ">
+          <div className="modal-dialog modal-lg modal-dialog-centered">
             <div className="modal-content shadow-lg">
               <div className="modal-header">
                 <h3 className="modal-title greenLine">
