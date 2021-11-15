@@ -1,6 +1,7 @@
 // 內建共用元件
 import { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
+import axios from "axios";
 
 // 不同階段渲染元件
 import FirstStep from "../../components/orders/FirstStep";
@@ -53,9 +54,14 @@ function Orders(props) {
     date: "",
     number: "",
   });
-  // const [pointUsed, setPointUsed] = useState(0);
-  // const [productPrice, setProductPrice] = useState(0);
-  // const [coursePrice, setCoursePrice] = useState(0);
+  const [memberPoints, setMemberPoints] = useState();
+  useEffect(async () => {
+    let res = await axios.get(
+      "http://localhost:3001/api/order/getMemberPoints"
+    );
+    setMemberPoints(res.data);
+    console.log(res.data);
+  }, []);
 
   // 先設一個空的商品物件，讓下面可以抓到後重新設定回來
   const [orderProduct, setOrderProduct] = useState({
@@ -131,7 +137,8 @@ function Orders(props) {
             setStep={setStep}
             customerChoose={customerChoose}
             setCustomerChoose={setCustomerChoose}
-            pointUsed
+            memberPoints={memberPoints}
+            setMemberPoints={setMemberPoints}
           />
           <div className="box3 d-flex justify-content-end m-5">
             <NextStepIcon
@@ -148,6 +155,8 @@ function Orders(props) {
             orderProduct={orderProduct}
             step={step}
             setStep={setStep}
+            memberPoints={memberPoints}
+            setMemberPoints={setMemberPoints}
           />
           <div className="box3 d-flex justify-content-end m-5">
             <PrevStepIcon

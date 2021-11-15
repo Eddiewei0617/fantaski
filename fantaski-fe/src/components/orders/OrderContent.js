@@ -1,9 +1,29 @@
 import { useState, useEffect, useRef } from "react";
 import { CART_CATEGORY } from "../../config/StatusShortcut";
-
-function OrderContent({ customerChoose, setCustomerChoose, step }) {
+import axios from "axios";
+function OrderContent({
+  customerChoose,
+  setCustomerChoose,
+  step,
+  // memberPoints,
+  // setMemberPoints,
+}) {
   const [pointUsed, setPointUsed] = useState(0);
+  const [points, setPoints] = useState(0);
+  const [memberPoints, setMemberPoints] = useState();
+  useEffect(async () => {
+    let res = await axios.get(
+      "http://localhost:3001/api/order/getMemberPoints"
+    );
+    setMemberPoints(res.data);
+    console.log(res.data);
+  }, []);
 
+  // useEffect(() => {
+  //   setPoints(`${memberPoints[0].point}`);
+  // }, []);
+
+  // console.log("point", memberPoints[0].point); // 300
   let storage = localStorage;
   let itemString = storage["addItemList"];
   let items = itemString.substr(0, itemString.length - 2).split(", ");
@@ -33,11 +53,11 @@ function OrderContent({ customerChoose, setCustomerChoose, step }) {
     }
   }, [customerChoose]);
 
-  // const point = useRef();
-  // console.log("point", point);
   // useEffect(() => {
-  //   setPointUsed(point.current.value);
+  //   setPointUsed(storage[`${memberPoints[0].name}`]);
   // }, [step]);
+
+  // console.log(memberPoints[0].point);
 
   return (
     <>
@@ -55,7 +75,7 @@ function OrderContent({ customerChoose, setCustomerChoose, step }) {
                   </div>
                   <div className="col d-flex">
                     <label className="m-0">會員點數 </label>
-                    <input type="text" value={`${0}  點`} className="p-0" />
+                    <input type="text" value={0} className="p-0" />
                   </div>
                 </div>
 
@@ -72,6 +92,7 @@ function OrderContent({ customerChoose, setCustomerChoose, step }) {
                       placeholder={`${0}  點`}
                       value={pointUsed}
                       onChange={(e) => {
+                        storage.setItem(memberPoints[0].name, e.target.value);
                         setPointUsed(e.target.value);
                       }}
                       className="p-0"

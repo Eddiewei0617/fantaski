@@ -84,7 +84,7 @@ function OrderItems({ customerChoose, setCustomerChoose }) {
                   let productNumber = e.target.value;
                   let newNumberArray = storage[`${v.id}`].split("|");
                   newNumberArray.splice(5, 1, productNumber);
-                  console.log("newNumber", newNumberArray);
+                  // console.log("newNumber", newNumberArray);
                   storage[`${v.id}`] = newNumberArray.join("|");
                 }}
                 min="1"

@@ -47,6 +47,10 @@ app.use("/api/course", courseRouter);
 let productRouter = require("./routers/products");
 app.use("/api/products", productRouter);
 
+//api路徑中間件(購物車)
+let orderRouter = require("./routers/order");
+app.use("/api/order", orderRouter);
+
 //404中間件
 app.use((req, res, next) => {
   console.log("找不到網頁");
