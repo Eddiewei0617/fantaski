@@ -1,8 +1,9 @@
 // ====================
 $hr-color: #c6c6c6;
+$forum-box-shadow: 0 0 30px rgba(19, 72, 101, 0.4);
 // ====================
 .forum-main {
-  margin-top: 7.5%;
+  margin-top: 10.5%;
   //   background: $assist-white;
 }
 .forum-container {
@@ -45,7 +46,7 @@ $hr-color: #c6c6c6;
   background: $assist-white;
   border-radius: 30px;
   //   height: 150vh;
-  box-shadow: 0 0 30px rgba(19, 72, 101, 0.4);
+  box-shadow: $forum-box-shadow;
   padding: 2%;
 }
 
@@ -475,23 +476,43 @@ $hr-color: #c6c6c6;
 }
 
 // forumedit
+.forum-edit-area {
+  background: $assist-white;
+  border-radius: 30px;
+  box-shadow: $forum-box-shadow;
+  hr {
+    background: $hr-color;
+    height: 2px;
+  }
+}
+.fourmedit-head-area {
+  display: flex;
+  padding: 2% 0;
+}
 .forum-edit {
   margin: 0 auto;
   input[type="text"] {
+    width: 100%;
     border: none;
-    border: 2px solid red;
-    margin: 3% 0;
+    box-sizing: border-box;
+    border: 2px solid #9c9c9c;
+    margin: 2% 0;
+    padding: 2%;
+    border-radius: 10px;
+    font-size: $font-l;
+    letter-spacing: 3px;
   }
 }
 
 .textarea {
   width: 100%;
-  height: 150px;
+  height: 250px;
   padding: 12px 20px;
   box-sizing: border-box;
   border: 2px solid #ccc;
-  border-radius: 4px;
-  background-color: #f8f8f8;
+  border-radius: 10px;
+
+  // background-color: #f8f8f8;
   resize: none;
   &::-webkit-scrollbar {
     width: 8px;
@@ -508,5 +529,33 @@ $hr-color: #c6c6c6;
   }
   &::-webkit-scrollbar-thumb:hover {
     background: $main-blue;
+  }
+}
+
+.add-icon {
+  margin: 2% 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 30px;
+}
+.cancle-btn {
+  border: none;
+  background: none;
+  letter-spacing: 5px;
+}
+.confrim-btn {
+  border: none;
+  background: $main-red;
+  color: $assist-white;
+  border-radius: 5px;
+  padding: 5px;
+}
+.post-btn-link {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+    color: $main-text-darkblue;
   }
 }

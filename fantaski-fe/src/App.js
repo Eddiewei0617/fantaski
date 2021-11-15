@@ -15,6 +15,7 @@ import Home from "./pages/Home";
 
 // 論壇
 import Forum from "./pages/forums/Forum";
+import NewPost from "./pages/forums/NewPost";
 // import Skiexperience from "./pages/forums/Skiexperience";
 // import Courseshare from "./pages/forums/Courseshare";
 // import Equipment from "./pages/forums/Equipment";
@@ -106,6 +107,9 @@ function App() {
             </Route>
             <Route path="/member">
               <Member />
+            </Route>
+            <Route path="/forum/new-post">
+              <NewPost />
             </Route>
             <Route path="/forum">
               <Forum />

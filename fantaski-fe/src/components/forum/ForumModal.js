@@ -6,20 +6,20 @@ import ForumHeartCommit from "./ForumHeartCommit";
 import { BsHeartFill } from "react-icons/bs";
 import ForumReply from "./ForumReply";
 import ForumAddReply from "./ForumAddReply";
+import FourmUserName from "./ForumUserName";
 
 // 需做登入狀態判斷，是該帳號登入時，會顯示 threeDot
 
 function ForumModal(props) {
+  // 狀態還未寫
+  if (props.xxx === 2) {
+  } else {
+  }
   return (
     <Modal {...props} size="lg" aria-labelledby="forumModalView" centered>
       <Modal.Header closeButton>
         <Modal.Title id="forumModalView">
-          <div className="forum-user-img">
-            {/* 需規範上傳圖片的限制檔名與K數 */}
-            <img src={`${IMAGE_FORUM_URL}/snowman.svg`} alt="snowman-defult" />
-          </div>
-          {/* user 帳號名 */}
-          <span className="forum-username">Eddie</span>
+          <FourmUserName />
         </Modal.Title>
         <div className="forum-pop-threedot">
           <ForumThreeDots />
