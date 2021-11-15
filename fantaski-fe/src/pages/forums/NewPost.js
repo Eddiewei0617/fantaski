@@ -12,7 +12,7 @@ function NewPost() {
         <div className="container forum-container forum-edit-area">
           <div className="fourmedit-head-area">
             <FourmUserName />
-            <Button>Close</Button>
+            {/* <Button>Close</Button> */}
           </div>
           <hr />
           <ForumEdit />

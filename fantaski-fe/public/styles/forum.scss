@@ -125,7 +125,7 @@ $forum-box-shadow: 0 0 30px rgba(19, 72, 101, 0.4);
   font-size: 22px;
 }
 
-.btn-primary {
+.forum-more-button.btn-primary {
   background-color: transparent;
   color: transparent;
   border: transparent;
@@ -147,8 +147,8 @@ $forum-box-shadow: 0 0 30px rgba(19, 72, 101, 0.4);
     box-shadow: 0 0 0 0 rgba(255 255 255 / 100%);
   }
 }
-.btn-primary:not(:disabled):not(.disabled):active,
-.show > .btn-primary.dropdown-toggle {
+.forum-more-button.btn-primary:not(:disabled):not(.disabled):active,
+.show > .forum-more-button.btn-primary.dropdown-toggle {
   background-color: transparent;
   color: transparent;
   border: transparent;
