@@ -105,7 +105,7 @@ function AddCartFloat({ customerChoose, setCustomerChoose, showCourse }) {
                 onChange={handleChange}
               ></input>
             </div>
-            <div>課程價錢：$ {courseInfo[0].price}</div>
+            <div>課程價錢：$ {courseInfo[0].price * customerChoose.number}</div>
           </div>
           <button>立即報名</button>
         </div>

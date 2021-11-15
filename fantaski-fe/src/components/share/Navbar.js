@@ -140,7 +140,12 @@ function Navbar({ courses, setShowCourse, setItemNumber, itemNumber }) {
               <ul className="navbar-nav ml-3 mr-auto d-flex justify-content-center align-items-center">
                 <li className="left-line"></li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="#/">
+                  {/* 天氣小圖有時間在製作 */}
+                  <Link
+                    className={`nav-link ${colorButton === "天氣" && "active"}`}
+                    to="/#"
+                    onClick={handleClick}
+                  >
                     {/* 天氣小圖&溫度要抓天氣API */}
                     <BsFillCloudSunFill className="all-icon-nav" size={25} />
                     {/* <BsSnow2 />
@@ -166,12 +171,24 @@ function Navbar({ courses, setShowCourse, setItemNumber, itemNumber }) {
                 </li>
                 <li className="left-line"></li>
                 <li className="nav-item user-login">
-                  <Link className="nav-link" to="/member">
+                  <Link
+                    className={`nav-link ${
+                      colorButton === "會員中心" && "active"
+                    }`}
+                    to="/member"
+                    onClick={handleClick}
+                  >
                     <FaUserAlt className="all-icon-nav" size={25} />
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/login">
+                  <Link
+                    className={`nav-link ${
+                      colorButton === "login" && "active"
+                    }`}
+                    to="/login"
+                    onClick={handleClick}
+                  >
                     {/* 會員登入後，要將(登入/註冊)改為會員的ID(帳號名稱) */}
                     <span className="login">登入/註冊</span>
                   </Link>

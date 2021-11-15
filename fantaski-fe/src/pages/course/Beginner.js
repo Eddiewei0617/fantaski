@@ -11,6 +11,7 @@ import Swiper from "../../components/course/swiper/Swiper";
 import CourseLink from "../../components/course/courseLink/CourseLink";
 import AddCartFloat from "../../components/course/addCartFloat/AddCartFloat";
 import "animate.css";
+import { toShowAddCartFloat } from "../../components/course/moduleList";
 
 function Beginner(props) {
   const { courses, showCourse, setShowCourse } = props;
@@ -18,28 +19,24 @@ function Beginner(props) {
   //showCourse courses[1]
   const [customerChoose, setCustomerChoose] = useState({
     date: "",
-    number: "",
+    number: 1,
   });
   const [scrollTop, setScrollTop] = useState(false);
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
-      let heightToTriggerFloat = 450;
-      let scrollTop = document.documentElement.scrollTop;
-      if (scrollTop > heightToTriggerFloat) {
-        setScrollTop(true);
-      } else {
-        setScrollTop(false);
-      }
-    });
+    toShowAddCartFloat(setScrollTop);
   }, []);
+
+  if (showCourse === undefined) {
+    setShowCourse(courses[1]);
+    return <div></div>;
+  }
 
   return (
     <>
       <Video showCourse={showCourse} />
       {scrollTop && (
         <AddCartFloat
-          className="animate__animated animate__backInRight "
           showCourse={showCourse}
           customerChoose={customerChoose}
           setCustomerChoose={setCustomerChoose}

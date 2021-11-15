@@ -12,8 +12,15 @@ import CommentsInMember from "./components/course/commentsinMember/CommentsInMem
 import Products from "./pages/product/Products";
 import Orders from "./pages/order/Orders";
 import Home from "./pages/Home";
-// import MountainRoute from "./pages/MountainRoute";
-import Forum from "./pages/Forum";
+import MountainRoute from "./pages/MountainRoute";
+
+// 論壇
+import Forum from "./pages/forums/Forum";
+import NewPost from "./pages/forums/NewPost";
+// import Skiexperience from "./pages/forums/Skiexperience";
+// import Courseshare from "./pages/forums/Courseshare";
+// import Equipment from "./pages/forums/Equipment";
+
 import Member from "./pages/Member";
 import Login from "./pages/Login";
 
@@ -121,12 +128,15 @@ function App() {
             <Route path="/member">
               <Member />
             </Route>
+            <Route path="/forum/new-post">
+              <NewPost />
+            </Route>
             <Route path="/forum">
               <Forum />
             </Route>
-            {/* <Route path="/mountainroute">
+            <Route path="/mountainroute">
               <MountainRoute />
-            </Route> */}
+            </Route>
             <Route path="/">
               <Home />
             </Route>
