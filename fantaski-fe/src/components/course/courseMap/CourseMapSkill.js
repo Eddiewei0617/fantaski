@@ -58,7 +58,7 @@ function CourseMapSkill() {
                 onClick={clickToChangeToggle}
                 id="sTurn"
               >
-                <div className="front">S轉彎 - 0.5hr</div>
+                <div className="front">S轉 - 0.5hr</div>
                 <div className="back">
                   <img
                     className="object-fit"
@@ -74,7 +74,7 @@ function CourseMapSkill() {
                 onClick={clickToChangeToggle}
                 id="jTurn"
               >
-                <div className="front">J轉彎 - 0.5hr</div>
+                <div className="front">J轉 - 0.5hr</div>
                 <div className="back">
                   <img
                     className="object-fit"

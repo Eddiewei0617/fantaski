@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Video from "../../components/course/video/Video";
 import CourseButtons from "../../components/course/courseButtons/CourseButtons";
 import Title from "../../components/course/titles/Title";
@@ -10,6 +10,8 @@ import AddCartFix from "../../components/course/addCartFix/AddCartFix";
 import Swiper from "../../components/course/swiper/Swiper";
 import CourseLink from "../../components/course/courseLink/CourseLink";
 import AddCartFloat from "../../components/course/addCartFloat/AddCartFloat";
+import "animate.css";
+import { toShowAddCartFloat } from "../../components/course/moduleList";
 
 function Beginner(props) {
   const { courses, showCourse, setShowCourse } = props;
@@ -17,17 +19,29 @@ function Beginner(props) {
   //showCourse courses[1]
   const [customerChoose, setCustomerChoose] = useState({
     date: "",
-    number: "",
+    number: 1,
   });
+  const [scrollTop, setScrollTop] = useState(false);
+
+  useEffect(() => {
+    toShowAddCartFloat(setScrollTop);
+  }, []);
+
+  if (showCourse === undefined) {
+    setShowCourse(courses[1]);
+    return <div></div>;
+  }
 
   return (
     <>
       <Video showCourse={showCourse} />
-      <AddCartFloat
-        showCourse={showCourse}
-        customerChoose={customerChoose}
-        setCustomerChoose={setCustomerChoose}
-      />
+      {scrollTop && (
+        <AddCartFloat
+          showCourse={showCourse}
+          customerChoose={customerChoose}
+          setCustomerChoose={setCustomerChoose}
+        />
+      )}
       <CourseButtons
         courses={courses}
         showCourse={showCourse}

@@ -1,9 +1,20 @@
 import { Button } from "react-bootstrap";
+// import { scryRenderedComponentsWithType } from "react-dom/test-utils";
 
-function NextStepIcon() {
+function NextStepIcon({ step, setStep, scrollToTop }) {
+  console.log("test", step);
+
   return (
     <>
-      <Button className="nextstep">下一步</Button>
+      <Button
+        className="nextstep"
+        onClick={() => {
+          step === 1 ? setStep(2) : setStep(3);
+          scrollToTop();
+        }}
+      >
+        下一步
+      </Button>
     </>
   );
 }

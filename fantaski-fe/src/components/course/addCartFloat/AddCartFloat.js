@@ -16,6 +16,9 @@ function AddCartFloat({ customerChoose, setCustomerChoose, showCourse }) {
 
   useEffect(() => {
     getCourseInfo(showCourse, setCourseInfo);
+    window.addEventListener("click", () => {
+      setShowCalendarFloat(false);
+    });
   }, []);
 
   if (courseInfo === null) {
@@ -66,7 +69,8 @@ function AddCartFloat({ customerChoose, setCustomerChoose, showCourse }) {
               <FontAwesomeIcon
                 className="icons"
                 icon={faCalendarAlt}
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
                   setShowCalendarFloat(!showCalendarFloat);
                 }}
               />
@@ -101,7 +105,7 @@ function AddCartFloat({ customerChoose, setCustomerChoose, showCourse }) {
                 onChange={handleChange}
               ></input>
             </div>
-            <div>課程價錢：$ {courseInfo[0].price}</div>
+            <div>課程價錢：$ {courseInfo[0].price * customerChoose.number}</div>
           </div>
           <button>立即報名</button>
         </div>

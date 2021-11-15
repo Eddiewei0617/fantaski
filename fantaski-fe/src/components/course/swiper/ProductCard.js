@@ -19,21 +19,21 @@ function ProductCard(props) {
         >
           <img
             className="object-fit"
-            src={`${COURSE_IMG_URL}/${product.img}`}
+            src={`${COURSE_IMG_URL}/${product.image}`}
             alt=""
           ></img>
         </div>
         <div className="advice-product-intro p-1 d-flex flex-column justify-content-between">
           <h6 className="text-center">{product.name}</h6>
           <p className={`${selectedAdvice === i ? "p-selected" : "p-normal"} `}>
-            {product.intro}
+            {product.content}
           </p>
           <h5
             className={`${
               selectedAdvice === i ? "p-selected" : "p-normal"
             } price`}
           >
-            {product.price}
+            $ {product.price}
           </h5>
           <div className="d-flex justify-content-between">
             <button
@@ -48,7 +48,7 @@ function ProductCard(props) {
                 selectedAdvice === i ? "button-selected" : "button-normal"
               } `}
             >
-              立即購買
+              更多款式
             </button>
           </div>
         </div>

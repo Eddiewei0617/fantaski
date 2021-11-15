@@ -1,3 +1,243 @@
+/* .r-link {
+  display: var(--rLinkDisplay, inline-flex) !important;
+} */
+/* 綁訂在href上樣式 */
+.r-link[href] {
+  color: var(--rLinkColor);
+  text-decoration: none;
+}
+.r-list {
+  padding-left: 0;
+  margin-top: 100px;
+  margin-bottom: 0;
+  list-style: none;
+}
+.menu__list a {
+  padding: 10px;
+}
+
+.menu {
+  color: $main-text-darkblue;
+  font-size: $font-l;
+  font-weight: 500;
+}
+
+.menu__link {
+  display: block;
+}
+
+.menu__link:focus {
+  outline: var(--menuLinkOutlineWidth, 2px) solid
+    var(--menuLinkOutlineColor, currentColor);
+  outline-offset: var(--menuLinkOutlineOffset);
+}
+
+.menu:hover .menu__link:not(:hover) {
+  --rLinkColor: var(--menuLinkColorUnactive, rgba(22, 22, 22, 0.35));
+}
+/* .menu {
+    background-color: var(--menuBackgroundColor, #f0f0f0);
+    box-shadow: var(
+      --menuBoxShadow,
+      0 1px 3px 0 rgba(0, 0, 0, 0.12),
+      0 1px 2px 0 rgba(0, 0, 0, 0.24)
+    );
+  } */
+
+.menu__list {
+  display: flex;
+  justify-content: space-around;
+}
+
+.menu__link {
+  padding: 1.5rem 2.5rem;
+  font-weight: 700;
+}
+.text-underlined {
+  position: relative;
+  overflow: hidden;
+
+  will-change: color;
+  transition: color 0.25s ease-out;
+}
+
+.text-underlined::before,
+.text-underlined::after {
+  content: "";
+  width: 0;
+  height: 3px;
+  background-color: currentColor;
+
+  will-change: width;
+  transition: width 0.1s ease-out;
+
+  position: absolute;
+  bottom: 0;
+}
+
+.text-underlined::before {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.text-underlined::after {
+  right: 50%;
+  transform: translateX(50%);
+}
+
+.text-underlined:hover::before,
+.text-underlined:hover::after {
+  width: 100%;
+  transition-duration: 0.2s;
+}
+.menuLine {
+  border: 3px solid $main-text-darkblue;
+  margin: 10px 0;
+}
+
+.memberTitle {
+  margin: 0 auto !important;
+}
+
+.memberContent {
+  margin: 20px 0;
+  color: $main-text-darkblue;
+}
+.memberContentHigh {
+  height: 730px;
+  display: flex;
+  justify-content: center;
+}
+.memberContentLeft {
+  height: 100%;
+  background-color: white;
+  border-radius: 15px;
+  width: 80%;
+  position: relative;
+}
+
+.memberContentRight {
+  height: 730px;
+  background-color: white;
+  border-radius: 15px;
+  width: 100%;
+}
+.memberPhotoRealtive {
+  position: relative;
+}
+.memberPhoto {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  /* display: block; */
+  margin: 0 auto;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+.memberPhoto img:nth-child(1) {
+  width: 100%;
+}
+.memberFile {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  /* display: block; */
+  margin: 0 auto;
+  position: absolute;
+  /* border: 1px solid rgba(0, 0, 0, 0.2);
+     */
+  color: black;
+  bottom: 0%;
+  right: 25%;
+  /* left: 0%; */
+  /* top: 0%; */
+  background-color: white;
+  z-index: 1;
+}
+
+.memberFile:hover {
+  background-color: black;
+  color: white;
+  /* cursor: pointer; */
+}
+.memberFile input {
+  width: 100%;
+  opacity: 0;
+  z-index: -2;
+  height: 100%;
+}
+.memberFile svg {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 15%;
+  left: 15%;
+}
+.memberName {
+  border-top: 1px solid $main-text-darkblue;
+  border-bottom: 1px solid $main-text-darkblue;
+  width: 80%;
+  margin: 0 auto;
+  font-weight: 700;
+  font-size: $font-l;
+}
+.memberbtn {
+  width: 80%;
+  background-color: $main-text-darkblue;
+  color: white;
+  font-size: $font-l;
+  padding: 5px;
+}
+.memberbtn:hover {
+  background-color: #0c3144;
+}
+.memberContentRightText {
+  font-size: 500;
+  color: $main-text-darkblue;
+  font-size: $font-l;
+}
+.memberContentOutside {
+  height: 385px;
+  justify-content: center;
+  align-items: center;
+}
+.memberContentIcon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  /* display: block; */
+  margin: 0 auto;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.memberContentIcon svg {
+  width: 100%;
+  height: 100%;
+  padding: 10%;
+  /* border: 1px solid; */
+}
+.memberContentBorderBotton {
+  border-bottom: 2px dashed #707070;
+  margin: 30px;
+  /* padding: 20px; */
+  width: 90%;
+}
+
+.radioWidth {
+  width: 20px;
+  height: 20px;
+}
+.memberEmailSubmit {
+  color: white;
+  width: 200px;
+  font-size: $font-l;
+  /* height: 30px; */
+  border-radius: 5px;
+  padding: 0px 20px;
+  margin: 40px;
+}
 // .container {
 //   width: 100%;
 //   padding-top: 140px;
