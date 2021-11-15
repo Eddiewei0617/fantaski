@@ -2,7 +2,15 @@ import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 
-function PageButton({ setPageButton, pageButton, handlePageButton, products }) {
+function PageButton({
+  setPageButton,
+  pageButton,
+  handlePageButton,
+  products,
+  pageNow,
+  setPageNow,
+  onClick,
+}) {
   const pageNumber = [
     {
       id: 1,
@@ -32,6 +40,8 @@ function PageButton({ setPageButton, pageButton, handlePageButton, products }) {
           onClick={() => {
             if (pageButton > 1) {
               setPageButton(pageButton - 1);
+              setPageNow(pageNow - 1);
+              onClick();
             }
           }}
         >
@@ -44,7 +54,11 @@ function PageButton({ setPageButton, pageButton, handlePageButton, products }) {
                 key={v.id}
                 id={v.id}
                 className={`${pageButton === v.id ? "page_active" : ""} `}
-                onClick={handlePageButton}
+                onClick={(e) => {
+                  handlePageButton(e);
+                  setPageNow(`${v.id}`);
+                  onClick();
+                }}
               >
                 {v.name}
               </li>
@@ -79,6 +93,8 @@ function PageButton({ setPageButton, pageButton, handlePageButton, products }) {
           onClick={() => {
             if (pageButton < pageNumber.length) {
               setPageButton(pageButton + 1);
+              setPageNow(pageNow + 1);
+              onClick();
             }
           }}
         >

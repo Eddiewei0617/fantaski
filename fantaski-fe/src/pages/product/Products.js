@@ -63,6 +63,9 @@ function Products({ setItemNumber, itemNumber }) {
             toggleState={toggleState}
             setItemNumber={setItemNumber}
             itemNumber={itemNumber}
+            onClick={() => {
+              scrollToProduct();
+            }}
           />
         )}
       </div>

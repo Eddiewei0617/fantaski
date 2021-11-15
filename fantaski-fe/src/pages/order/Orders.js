@@ -49,6 +49,14 @@ const productFromServer = [
 
 function Orders(props) {
   const { setItemNumber, itemNumber } = props;
+  const [customerChoose, setCustomerChoose] = useState({
+    date: "",
+    number: "",
+  });
+  // const [pointUsed, setPointUsed] = useState(0);
+  // const [productPrice, setProductPrice] = useState(0);
+  // const [coursePrice, setCoursePrice] = useState(0);
+
   // 先設一個空的商品物件，讓下面可以抓到後重新設定回來
   const [orderProduct, setOrderProduct] = useState({
     id: 0,
@@ -121,6 +129,9 @@ function Orders(props) {
             orderProduct={orderProduct}
             step={step}
             setStep={setStep}
+            customerChoose={customerChoose}
+            setCustomerChoose={setCustomerChoose}
+            pointUsed
           />
           <div className="box3 d-flex justify-content-end m-5">
             <NextStepIcon

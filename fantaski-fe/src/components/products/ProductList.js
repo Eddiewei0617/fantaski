@@ -68,6 +68,7 @@ function ProductList({
   toggleState,
   setItemNumber,
   itemNumber,
+  onClick,
 }) {
   // 點加入購物車後從到locaStorage
   let storage = localStorage;
@@ -92,12 +93,25 @@ function ProductList({
 
   // 讓商品顯示在頁面上
   const [products, setProducts] = useState([]);
+  const [pageNow, setPageNow] = useState(1); // 為了偵測在哪一頁，然後切換頁面會顯示不同商品
   useEffect(async () => {
     let res = await axios.get(
       "http://localhost:3001/api/products/productsInfoList"
     );
-    setProducts(res.data);
-  }, []);
+    // 先假設一個productList空[]放單頁商品的；totalProductList空[]是放全部商品的
+    // 判斷式 : 如果一頁商品數量除以5的餘數是0，那就把這些商品push進總陣列，然後把小陣列歸零，繼續跑迴圈
+    let productList = [];
+    let totalProductList = [];
+    for (let i = 0; i < res.data.length; i++) {
+      productList.push(res.data[i]);
+      if ((i + 1) % 5 === 0) {
+        totalProductList.push(productList);
+        productList = [];
+      }
+    }
+    totalProductList.push(productList);
+    setProducts(totalProductList[pageNow - 1]);
+  }, [pageNow]);
 
   const display = (
     <ul className="all_image_l ">
@@ -122,8 +136,8 @@ function ProductList({
             </div>
             <div className="product_description">
               <p>{v.name}</p>
-              <p>{v.description}</p>
-              <p>適合對象 : {v.suitable}</p>
+              <p>{v.content}</p>
+              {/* <p>適合對象 : {v.suitable}</p> */}
               <p>租購價 : NT$ {v.price}</p>
 
               <Button
@@ -147,7 +161,7 @@ function ProductList({
                 加入購物車
                 <input
                   type="hidden"
-                  value={`${v.image}|${v.category}|${v.name}|${v.price}`}
+                  value={`${PRODUCTIMAGE_URL}/${v.image}|裝備租賃|${v.name}|${v.price}|2021-11-15|1`}
                 />
               </Button>
             </div>
@@ -168,10 +182,13 @@ function ProductList({
         <h3 className="product_title pl-1">雪板類</h3>
         {display}
         <PageButton
+          pageNow={pageNow}
+          setPageNow={setPageNow}
           setPageButton={setPageButton}
           pageButton={pageButton}
           handlePageButton={handlePageButton}
           products={products}
+          onClick={onClick} // 點完之後往上跳到商品適當位置
         />
       </div>
     </>

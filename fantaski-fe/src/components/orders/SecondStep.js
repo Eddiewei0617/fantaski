@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import CreditCard from "./CreditCard";
 import OrderContent from "./OrderContent";
 
-function SecondStep() {
+function SecondStep({ step }) {
+  const [pointUsed, setPointUsed] = useState(0);
   // 載入中Start----------------------
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -15,7 +16,11 @@ function SecondStep() {
   return (
     <>
       <CreditCard />
-      <OrderContent />
+      <OrderContent
+        step={step}
+        pointUsed={pointUsed}
+        setPointUsed={setPointUsed}
+      />
     </>
   );
 }

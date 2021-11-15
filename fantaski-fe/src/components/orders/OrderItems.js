@@ -1,36 +1,33 @@
 import { useEffect, useState } from "react";
-import { PRODUCTIMAGE_URL } from "../../config/url";
+import { CART_CATEGORY } from "../../config/StatusShortcut";
 
-function OrderItems() {
+function OrderItems({ customerChoose, setCustomerChoose }) {
   // 設定數量輸入值的狀態
-  const [number, setNumber] = useState("");
+
   // 代入localStorage裡面存的資料
   var storage = localStorage;
   let itemString = storage["addItemList"];
   let items = itemString.substr(0, itemString.length - 2).split(", ");
   console.log("items", items);
-  //   let value = storage.getItem("2");
-  //   console.log("value", value);
-  //   let valueName = value.split("|")[2];
-  //   console.log("valueName", valueName);
-  //   var getValue = JSON.parse(value);
-  //   console.log("getValue", getValue);
 
+  // 將在購物車要呈現的資料push進一個空陣列，並且當customerChoose(date或number)有變動時，再重新渲染一次 ---------------------
   const [orderList, setOrderList] = useState([]);
   useEffect(() => {
+    let orderArray = [];
     for (let i = 0; i < items.length; i++) {
-      var orderArray = [
-        {
-          id: localStorage.getItem(items[i]),
-          name: localStorage[items[i]].split("|")[2],
-          category: localStorage[items[i]].split("|")[1],
-          price: localStorage[items[i]].split("|")[3],
-          image: localStorage[items[i]].split("|")[0],
-        },
-      ];
+      orderArray.push({
+        id: items[i],
+        name: localStorage[items[i]].split("|")[2],
+        category: localStorage[items[i]].split("|")[1],
+        price: localStorage[items[i]].split("|")[3],
+        image: localStorage[items[i]].split("|")[0],
+        date: localStorage[items[i]].split("|")[4],
+        number: localStorage[items[i]].split("|")[5],
+      });
     }
     setOrderList(orderArray);
-  }, []);
+  }, [customerChoose]);
+  //-------------------------------------------------------------------------------------------------------------
 
   // 寫一個function過濾出剩下沒被點到刪除的商品們
   function removeFromCart(itemToRemove) {
@@ -40,45 +37,61 @@ function OrderItems() {
       })
     );
   }
-
-  // console.log("check", orderArray[i].name);
-
-  //   for (let i = 0; i < items.length; i++) {
-  //     let itemInfo = storage.getItem(items[i]);
-  //     console.log("totalValue", itemInfo);
-  //     let itemTitle = itemInfo.split("|")[2];
-  //     // createCartList(items[i], itemInfo);
-  //   }
-
   // -------------------------------------------------------------------------------
   return (
     <>
       {orderList.map((v, i) => {
-        console.log("v", v);
         return (
           <div className="row " key={v.id}>
             <div className="cart_image">
               <img src={v.image} alt="" />
             </div>
-            <div className="col">{v.category}</div>
+            <div className="col">{CART_CATEGORY[v.category]}</div>
             <div className="col">{v.name}</div>
             <div className="col">
-              <input type="date" />
+              <input
+                type="date"
+                name="date"
+                value={v.date}
+                onChange={(e) => {
+                  // console.log("e", e);
+                  setCustomerChoose((cur) => {
+                    return { ...cur, [e.target.name]: productDate };
+                  });
+                  // 抓日期變換的值
+                  let productDate = e.target.value;
+                  // 將storage裡面的字串value轉成陣列
+                  let newDateArray = storage[`${v.id}`].split("|");
+                  // 將日期位置以最新日期取代。splice(欲取代的位置index, 取一個, 以甚麼東西取代它)
+                  newDateArray.splice(4, 1, productDate);
+                  // 最後再將改好的陣列轉回字串放回localStorage
+                  storage[`${v.id}`] = newDateArray.join("|");
+                }}
+              />
             </div>
             <div className="col">$ {v.price}</div>
             <div className="col">
               <input
                 className="cart_number"
                 type="number"
-                value={number === "" ? 1 : number}
+                name="number"
+                value={v.number === "" ? 1 : v.number}
                 onChange={(e) => {
-                  setNumber(e.target.value);
+                  // console.log("e", e);
+                  setCustomerChoose((cur) => {
+                    return { ...cur, [e.target.name]: e.target.value };
+                  });
+                  let productNumber = e.target.value;
+                  let newNumberArray = storage[`${v.id}`].split("|");
+                  newNumberArray.splice(5, 1, productNumber);
+                  console.log("newNumber", newNumberArray);
+                  storage[`${v.id}`] = newNumberArray.join("|");
                 }}
                 min="1"
               />
             </div>
             <div className="col">
-              $ {number !== "" ? number * v.price : 1 * v.price}
+              {v.number !== "" ? v.number * v.price : 1 * v.price}
             </div>
             <div className="col" id="1">
               <button
@@ -87,6 +100,12 @@ function OrderItems() {
                   // 讓頁面上的商品消失:
                   removeFromCart(`${v.id}`);
                   // 讓localStorage的資料消失:
+                  delete localStorage[`${v.id}`];
+                  // 讓localStorage的數量少了被刪除的那個id
+                  storage["addItemList"] = storage["addItemList"].replace(
+                    `${v.id}, `,
+                    ""
+                  );
                 }}
               >
                 X

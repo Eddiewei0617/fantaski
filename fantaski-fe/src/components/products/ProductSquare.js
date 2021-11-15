@@ -46,18 +46,6 @@ function ProductSquare({
     setProducts(res.data);
   }, []);
 
-  // 查表法: 因為product資料表的category是數字，為了顯示在畫面上是文字用這招
-  const CATEGORY = {
-    1: "單板",
-    2: "雙板",
-    3: "滑雪外套",
-    4: "雪鞋",
-    5: "毛帽",
-    6: "雪褲",
-    7: "配件",
-    8: "器材",
-  };
-
   const display = (
     <ul className="all_image_s ">
       {products.map((v, i) => {
@@ -103,9 +91,7 @@ function ProductSquare({
               加入購物車
               <input
                 type="hidden"
-                value={`${PRODUCTIMAGE_URL}/${v.image}|${
-                  CATEGORY[v.category_id]
-                }|${v.name}|${v.price}`}
+                value={`${PRODUCTIMAGE_URL}/${v.image}|B|${v.name}|${v.price}|2021-11-15|1`}
               />
             </Button>
           </li>
@@ -127,11 +113,11 @@ function ProductSquare({
       <div>
         <h3 className="product_title pl-1">雪板類</h3>
         {display}
-        <PageButton
+        {/* <PageButton
           setPageButton={setPageButton}
           pageButton={pageButton}
           handlePageButton={handlePageButton}
-        />
+        /> */}
       </div>
     </>
   );
