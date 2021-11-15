@@ -12,7 +12,7 @@ import CommentsInMember from "./components/course/commentsinMember/CommentsInMem
 import Products from "./pages/product/Products";
 import Orders from "./pages/order/Orders";
 import Home from "./pages/Home";
-// import MountainRoute from "./pages/MountainRoute";
+import MountainRoute from "./pages/MountainRoute";
 
 // 論壇
 import Forum from "./pages/forums/Forum";
@@ -126,9 +126,9 @@ function App() {
             <Route path="/forum">
               <Forum />
             </Route>
-            {/* <Route path="/mountainroute">
+            <Route path="/mountainroute">
               <MountainRoute />
-            </Route> */}
+            </Route>
             <Route path="/">
               <Home />
             </Route>

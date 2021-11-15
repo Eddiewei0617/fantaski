@@ -276,10 +276,10 @@ $forum-box-shadow: 0 0 30px rgba(19, 72, 101, 0.4);
   }
 }
 
-.modal-content {
+.modal-dialog .modal-content {
   border-radius: 30px;
+  border: 0;
 }
-
 // madal head
 .modal-header {
   width: 95%;
@@ -321,7 +321,7 @@ $forum-box-shadow: 0 0 30px rgba(19, 72, 101, 0.4);
   z-index: 1;
 }
 
-.modal-body {
+.forum-modal-body {
   height: 60vh;
   overflow-x: hidden;
   overflow-y: scroll;

@@ -19,16 +19,17 @@ export const COURSE_IMG_URL =
   process.env.REACT_APP_COURSE_IMG_URL ||
   "http://localhost:3000/assets/images_course";
 
-<<<<<<< HEAD
 // 論壇圖片
 export const IMAGE_FORUM_URL =
   process.env.REACT_APP_IMAGE_FORUM_URL ||
   "http://localhost:3000/assets/images_forum";
-=======
+
+// 山的一切圖片
 export const IMAGE_ROUTER_URL =
   process.env.REACT_APP_IMAGE_ROUTER_URL ||
   "http://localhost:3000/assets/images_route";
 
+// 會員中心的圖片
 export const IMAGE_MEMBER_URL =
   process.env.REACT_APP_IMAGE_MEMBER_URL ||
   "http://localhost:3000/assets/images_member";
@@ -36,4 +37,3 @@ export const IMAGE_MEMBER_URL =
 //皆後端api的網址
 export const API_URL =
   process.env.REACT_APP_API_URL || "http://localhost:3001/api";
->>>>>>> main

@@ -36,10 +36,6 @@ function Products() {
 
   return (
     <>
-<<<<<<< HEAD
-      {/* <div className="navbar"></div> */}
-=======
->>>>>>> main
       <CarouselP />
       <ScrolldownIcon
         onClick={() => {

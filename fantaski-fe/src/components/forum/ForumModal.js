@@ -25,7 +25,7 @@ function ForumModal(props) {
           <ForumThreeDots />
         </div>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="forum-modal-body">
         <div className="forum-contents">
           <h2>滑雪遇到⼤腳印</h2>
           <p className="forum-kind-color">
