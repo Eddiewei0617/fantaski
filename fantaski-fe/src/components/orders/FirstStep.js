@@ -2,13 +2,19 @@ import { useState, useEffect } from "react";
 import CartContent from "./CartContent";
 import OrderContent from "./OrderContent";
 
-function FirstStep({ orderProduct, progressMoving, step, setStep }) {
+function FirstStep({ orderProduct, customerChoose, setCustomerChoose }) {
   return (
     <>
-      <CartContent orderProduct={orderProduct} />
+      <CartContent
+        orderProduct={orderProduct}
+        customerChoose={customerChoose}
+        setCustomerChoose={setCustomerChoose}
+      />
 
-      <OrderContent />
-      <div className="box3 d-flex justify-content-end m-5"></div>
+      <OrderContent
+        customerChoose={customerChoose}
+        setCustomerChoose={setCustomerChoose}
+      />
     </>
   );
 }

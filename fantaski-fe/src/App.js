@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // 引入各分頁(後續寫程式可更動) 頁面用元件
 // 課程
@@ -12,7 +12,14 @@ import Products from "./pages/product/Products";
 import Orders from "./pages/order/Orders";
 import Home from "./pages/Home";
 import MountainRoute from "./pages/MountainRoute";
-import Forum from "./pages/Forum";
+
+// 論壇
+import Forum from "./pages/forums/Forum";
+import NewPost from "./pages/forums/NewPost";
+// import Skiexperience from "./pages/forums/Skiexperience";
+// import Courseshare from "./pages/forums/Courseshare";
+// import Equipment from "./pages/forums/Equipment";
+
 import Member from "./pages/Member";
 import Login from "./pages/Login";
 
@@ -37,10 +44,18 @@ function App() {
   //傳入course狀態(使用者要看哪個course)
   const [showCourse, setShowCourse] = useState();
 
+  // nabar上購物車的數字
+  const [itemNumber, setItemNumber] = useState(0);
+
   return (
     <>
       <Router>
-        <Navbar courses={courses} setShowCourse={setShowCourse} />
+        <Navbar
+          courses={courses}
+          setShowCourse={setShowCourse}
+          setItemNumber={setItemNumber}
+          itemNumber={itemNumber}
+        />
         {/* LOGO+標題+導覽列+上方選單 */}
         {/* 主內容區 */}
         {/* 匹配路由表(路徑單一匹配) */}
@@ -98,16 +113,19 @@ function App() {
               />
             </Route>
             <Route path="/products">
-              <Products />
+              <Products setItemNumber={setItemNumber} itemNumber={itemNumber} />
             </Route>
             <Route path="/Orders">
-              <Orders />
+              <Orders setItemNumber={setItemNumber} itemNumber={itemNumber} />
             </Route>
             <Route path="/login">
               <Login />
             </Route>
             <Route path="/member">
               <Member setShowCourse={setShowCourse} />
+            </Route>
+            <Route path="/forum/new-post">
+              <NewPost />
             </Route>
             <Route path="/forum">
               <Forum />
