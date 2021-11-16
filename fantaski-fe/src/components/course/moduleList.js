@@ -12,6 +12,18 @@ export const courseIdName = {
   建冰屋: { id: 4, eng: "igloo" },
 };
 
+//https://openweathermap.org/weather-conditions 對照表
+const weatherID = {
+  200: "BsFillCloudyFill", //Thunderstorm
+  300: "FaCloudSunRain", //Drizzle
+  500: "BsFillCloudRainHeavyFill", //Rain
+  600: "BsSnow2", //Snow
+  700: "BsWind", //Atmosphere
+  800: "BsFillBrightnessHighFill", //Clear
+  810: "BsFillCloudSunFill", //Clouds
+};
+
+//滾輪到特定高度才出現浮動式的立即報名
 export function toShowAddCartFloat(setScrollTop) {
   window.addEventListener("scroll", () => {
     let heightToTriggerFloat = 450;
@@ -115,4 +127,11 @@ export async function getDailyCourseLeft(
   if (setStuLimit !== null) {
     setStuLimit(stuLimit);
   }
+}
+
+//即時天氣api
+export async function getWeatherInfo(setWeatherInfo) {
+  let res = await axios.get(`${API_URL}/weather`);
+  let resWeather = res.data.data;
+  setWeatherInfo(resWeather);
 }

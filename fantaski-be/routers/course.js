@@ -1,6 +1,7 @@
 express = require("express");
 const router = express.Router();
 const connection = require("../utils/db");
+
 //起始頁(沒做啥，確認api有沒有成功連上而已)
 router.get("/", (req, res) => {
   console.log("有人訪問課程api");
