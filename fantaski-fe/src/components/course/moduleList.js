@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_URL } from "../../config/url";
+import moment from "moment";
 
 export const courseIdName = {
   初體驗: {
@@ -59,4 +60,59 @@ export async function getAdviceInfo(showCourse, setAdviceInfo) {
   });
   let adviceInfoList = res.data;
   setAdviceInfo(adviceInfoList);
+}
+
+//會員購買課程api
+export async function getMemberCourseComment(memberId, setMemberCourseComment) {
+  let res = await axios.post(`${API_URL}/course/getmembercoursecomment`, {
+    member_id: memberId,
+  });
+  let memberCourseComment = res.data;
+  setMemberCourseComment(memberCourseComment);
+}
+
+//會員更新課程評價api
+export async function postCourseCommentStar(OrderCourseId, revisedStar, now) {
+  let res = await axios.post(`${API_URL}/course/postcoursecommentstar`, {
+    order_course_id: OrderCourseId,
+    revised_star: revisedStar,
+    now: now,
+  });
+}
+//會員更新課程評論api
+export async function postCourseComment(OrderCourseId, newComment, now) {
+  let res = await axios.post(`${API_URL}/course/postcoursecomment`, {
+    order_course_id: OrderCourseId,
+    new_comment: newComment,
+    now: now,
+  });
+}
+
+//取得指定期間每日剩餘名額api
+export async function getDailyCourseLeft(
+  dateStart,
+  dateEnd,
+  courseId,
+  setDailyCourseLeft,
+  setStuLimit
+) {
+  let res = await axios.post(`${API_URL}/course/getdailycourseleft`, {
+    date_start: dateStart,
+    date_end: dateEnd,
+    course_id: courseId,
+  });
+  let dailyCourseLeft = res.data;
+  let stuLimit = dailyCourseLeft["limit"]["stu_limit"];
+  let dailyLeftObj = {};
+  let leftArray = dailyCourseLeft["dailyLeft"];
+  for (let i = 0; i < leftArray.length; i++) {
+    let date = moment.utc(leftArray[i]["booking_date"]).format("YYYY-MM-DD");
+    dailyLeftObj[date] = leftArray[i]["totalAmount"];
+  }
+  if (setDailyCourseLeft !== null) {
+    setDailyCourseLeft(dailyLeftObj);
+  }
+  if (setStuLimit !== null) {
+    setStuLimit(stuLimit);
+  }
 }

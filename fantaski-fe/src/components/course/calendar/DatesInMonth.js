@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
-
+import { getDailyCourseLeft, courseIdName } from "../moduleList";
 const today = moment().format("YYYY-MM-DD");
 
 //某年是否為閏年(400可整除-1600;100不可整除;4可整除)
@@ -72,6 +72,7 @@ const daysInNextMonth = (daysThisLastMonth, month, year) => {
 
 function DatesInMonth(props) {
   const {
+    showCourse,
     selectedYear,
     selectedMonth,
     day,
@@ -79,6 +80,24 @@ function DatesInMonth(props) {
     setShowCalendar,
     setShowCalendarFloat,
   } = props;
+  const [dailyCourseLeft, setDailyCourseLeft] = useState(null);
+  const [stuLimit, setStuLimit] = useState(0);
+
+  //後端依據showCourse抓剩餘人數後回傳並存到dailyCourseLeft[{2021:12-25:1}, {2021-12-20:3}]
+  useEffect(() => {
+    let firstDate = `${totalDays[0]["y"]}-${totalDays[0]["m"]}-${totalDays[0]["d"]}`;
+    let totalDaysLen = totalDays.length;
+    let lastDate = `${totalDays[totalDaysLen - 1].y}-${
+      totalDays[totalDaysLen - 1].m
+    }-${totalDays[totalDaysLen - 1].d}`;
+    getDailyCourseLeft(
+      firstDate,
+      lastDate,
+      courseIdName[showCourse].id,
+      setDailyCourseLeft, //課程剩餘人數物件
+      setStuLimit //課程人數上限
+    );
+  }, []);
 
   let totalDaysLT = weekDayInLastMonth(selectedYear, selectedMonth).concat(
     daysInThisMonth(selectedYear, selectedMonth, day)
@@ -97,34 +116,96 @@ function DatesInMonth(props) {
       tempdata = [];
     }
   }
-  const handleChange = (year, month, day) => {
-    console.log(setShowCalendarFloat, setShowCalendar);
-    if (setShowCalendarFloat === undefined) {
-      setShowCalendar(false);
-    } else if (setShowCalendar === undefined) {
-      setShowCalendarFloat(false);
+  //使用者切換年月時
+  const handleChange = (y, m, d) => {
+    if (d < 10) d = `0${d}`;
+    if (m < 10) m = `0${m}`;
+    let Columntoday = `${y}-${m}-${d}`;
+    if (Columntoday >= today) {
+      if (dailyCourseLeft[Columntoday] !== undefined) {
+        let left = Number(stuLimit) - Number(dailyCourseLeft[Columntoday]);
+        if (left <= 0) left = 0;
+        if (left <= 0) {
+          alert("該課程人數已滿，請選擇其他日期");
+          return;
+        } else if (left > 0) {
+          console.log(Columntoday, today);
+          setCustomerChoose((cur) => {
+            return {
+              ...cur,
+              date: Columntoday,
+              courseLeft: left,
+              courseLimit: stuLimit,
+            };
+          });
+        }
+      } else {
+        setCustomerChoose((cur) => {
+          return {
+            ...cur,
+            date: Columntoday,
+            courseLeft: stuLimit,
+            courseLimit: stuLimit,
+          };
+        });
+      }
+      if (setShowCalendarFloat === undefined) {
+        setShowCalendar(false);
+      } else if (setShowCalendar === undefined) {
+        setShowCalendarFloat(false);
+      }
     }
-    let newValue = `${year}-${month}-${day}`;
-    setCustomerChoose((cur) => {
-      return { ...cur, date: newValue };
-    });
   };
+  //依日期為本月或上下月給不同style
   function handleStyleChange(y, m, d) {
     if (d < 10) d = `0${d}`;
+    if (m < 10) m = `0${m}`;
     let lastNextStyle = "calendar-dates-box-last";
     let thisMonthStyle = "calendar-dates-box-this";
     let thisMonth = `${y}-${m}`;
     let selectMonth = `${selectedYear}-${selectedMonth}`;
     let Columntoday = `${y}-${m}-${d}`;
     if (thisMonth === selectMonth) {
-      if (Columntoday !== today) {
+      if (Columntoday > today) {
         return thisMonthStyle;
+      } else if (Columntoday < today) {
+        return lastNextStyle;
       } else {
         let todayStyle = "calendar-dates-box-this-today";
         return thisMonthStyle, todayStyle;
       }
     } else if (thisMonth !== selectMonth) {
       return lastNextStyle;
+    }
+  }
+  //依據日期回填剩餘人數
+  function dailyLeft(y, m, d) {
+    if (d < 10) d = `0${d}`;
+    if (m < 10) m = `0${m}`;
+    let theDate = `${y}-${m}-${d}`;
+    if (dailyCourseLeft === null) {
+      return;
+    } else if (theDate < today) {
+      return;
+    } else {
+      if (dailyCourseLeft.hasOwnProperty(theDate)) {
+        let left = stuLimit - dailyCourseLeft[theDate];
+        if (left < 0) left = 0;
+        return `剩${left}人`;
+      } else {
+        return `剩${stuLimit}人`;
+      }
+    }
+  }
+  //依據剩餘人數決定bg color
+  function bgColorByLeft(leftFunction) {
+    if (leftFunction) {
+      let leftAmount = leftFunction.replace(/[^0-9]/gi, "");
+      if (leftAmount < 3 && leftAmount > 0) {
+        return "bgLessThan3";
+      } else if (leftAmount <= 0) {
+        return "bgLessThan0";
+      }
     }
   }
   return (
@@ -141,10 +222,16 @@ function DatesInMonth(props) {
                         vc.y,
                         vc.m,
                         vc.d
-                      )}`}
-                      onClick={() => handleChange(vc.y, vc.m, vc.d)}
+                      )}  ${bgColorByLeft(dailyLeft(vc.y, vc.m, vc.d))}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleChange(vc.y, vc.m, vc.d);
+                      }}
                     >
                       {vc.d}
+                      <div className={`daily-left`}>
+                        {dailyLeft(vc.y, vc.m, vc.d)}
+                      </div>
                     </td>
                   </>
                 );

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { COURSE_IMG_URL } from "../../../config/url";
 import { starMapping } from "../moduleList";
+import moment from "moment";
 
 function SingleComment(props) {
   const { comment } = props;
@@ -39,8 +40,14 @@ function SingleComment(props) {
             alt=""
           />
         </div>
-        <div className="col-2">{comment.name}</div>
-        <div className="col-7">{comment.booking_date}</div>
+        <div className="col-3">{comment.name}</div>
+        <div className="col-6">
+          {comment.comment_last_update === null
+            ? ""
+            : moment
+                .utc(comment.comment_last_update)
+                .format("YYYY-MM-DD HH:mm:ss")}
+        </div>
         <div className="col-2 text-right">
           {starMapping[comment.star].map((item, i) => {
             return (

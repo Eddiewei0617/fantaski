@@ -7,7 +7,6 @@ import Skill from "./pages/course/Skill";
 import Beginner from "./pages/course/Beginner";
 import Sled from "./pages/course/Sled";
 import Igloo from "./pages/course/Igloo";
-import CommentsInMember from "./components/course/commentsinMember/CommentsInMember";
 // 商品
 import Products from "./pages/product/Products";
 import Orders from "./pages/order/Orders";
@@ -63,7 +62,7 @@ function App() {
         {/* 切換顯示的元件畫面放在這下面 */}
         {/* ScrollToTop是為了讓連到另一頁內容時，頁面回到最上方 */}
         {/* 暫時代替navbar <br /> */}
-        <Link to="/Products">到產品</Link>&nbsp;
+        {/* <Link to="/Products">到產品</Link>&nbsp;
         <Link to="/Orders">到訂單</Link>&nbsp;
         <Link to="/course/commentsinmemer">我的點評</Link>&nbsp;
         <Link
@@ -73,7 +72,7 @@ function App() {
           }}
         >
           到課程-初體驗
-        </Link>
+        </Link> */}
         &nbsp;
         <Link to="/Member">到會員</Link>
         <ScrollToTop>
@@ -84,9 +83,6 @@ function App() {
                 showCourse={showCourse}
                 setShowCourse={setShowCourse}
               />
-            </Route>
-            <Route path="/course/commentsinmemer">
-              <CommentsInMember setShowCourse={setShowCourse} />
             </Route>
             <Route path="/course/beginner">
               <Beginner
@@ -126,7 +122,7 @@ function App() {
               <Login />
             </Route>
             <Route path="/member">
-              <Member />
+              <Member setShowCourse={setShowCourse} />
             </Route>
             <Route path="/forum/new-post">
               <NewPost />
