@@ -21,6 +21,7 @@ function Skill(props) {
     number: 1,
   });
   const [scrollTop, setScrollTop] = useState(false);
+  const [ifAddCart, setIfAddCart] = useState(false);
 
   useEffect(() => {
     toShowAddCartFloat(setScrollTop);
@@ -36,6 +37,8 @@ function Skill(props) {
       <Video showCourse={showCourse} />
       {scrollTop && (
         <AddCartFloat
+          ifAddCart={ifAddCart}
+          setIfAddCart={setIfAddCart}
           className="animate__animated animate__backInRight "
           showCourse={showCourse}
           customerChoose={customerChoose}
@@ -57,6 +60,8 @@ function Skill(props) {
       <Title titleName="雪友點評" />
       <Comments showCourse={showCourse} />
       <AddCartFix
+        ifAddCart={ifAddCart}
+        setIfAddCart={setIfAddCart}
         showCourse={showCourse}
         customerChoose={customerChoose}
         setCustomerChoose={setCustomerChoose}

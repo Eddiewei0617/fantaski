@@ -22,6 +22,7 @@ function Beginner(props) {
     number: 1,
   });
   const [scrollTop, setScrollTop] = useState(false);
+  const [ifAddCart, setIfAddCart] = useState(false);
 
   useEffect(() => {
     toShowAddCartFloat(setScrollTop);
@@ -37,6 +38,8 @@ function Beginner(props) {
       <Video showCourse={showCourse} />
       {scrollTop && (
         <AddCartFloat
+          ifAddCart={ifAddCart}
+          setIfAddCart={setIfAddCart}
           showCourse={showCourse}
           customerChoose={customerChoose}
           setCustomerChoose={setCustomerChoose}
@@ -56,6 +59,8 @@ function Beginner(props) {
       <Title titleName="雪友點評" />
       <Comments showCourse={showCourse} />
       <AddCartFix
+        ifAddCart={ifAddCart}
+        setIfAddCart={setIfAddCart}
         showCourse={showCourse}
         customerChoose={customerChoose}
         setCustomerChoose={setCustomerChoose}
