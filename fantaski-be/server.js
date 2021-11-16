@@ -47,6 +47,10 @@ app.use("/api/course", courseRouter);
 let productRouter = require("./routers/products");
 app.use("/api/products", productRouter);
 
+//天氣api
+let weatherRouter = require("./routers/weather");
+app.use("/api/weather", weatherRouter);
+
 //404中間件
 app.use((req, res, next) => {
   console.log("找不到網頁");
