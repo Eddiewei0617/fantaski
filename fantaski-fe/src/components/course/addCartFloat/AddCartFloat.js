@@ -31,7 +31,7 @@ function AddCartFloat({
   }, []);
 
   useEffect(() => {
-    if (courseInfo !== null && storage[courseInfo[0].id]) {
+    if (courseInfo !== null && storage[`c-${courseInfo[0].id}`]) {
       setIfAddCart(true);
     }
   }, [courseInfo]);
@@ -52,6 +52,13 @@ function AddCartFloat({
   function handleChange(e) {
     let name = e.target.name;
     let newValue = e.target.value;
+    if (name === "number" && newValue > customerChoose.courseLeft) {
+      alert("超過人數上限");
+      return;
+    } else if (name === "number" && newValue <= 0) {
+      alert("人數不可少於1");
+      return;
+    }
     setCustomerChoose((cur) => {
       return { ...cur, [name]: newValue };
     });
@@ -100,8 +107,8 @@ function AddCartFloat({
                 name="date"
                 value={customerChoose.date}
                 placeholder={
-                  storage[courseInfo[0].id] && courseInfo !== null
-                    ? storage[courseInfo[0].id].split("|")[4]
+                  storage[`c-${courseInfo[0].id}`] && courseInfo !== null
+                    ? storage[`c-${courseInfo[0].id}`].split("|")[4]
                     : "選擇日期"
                 }
                 className="date-input pl-3"
@@ -126,8 +133,8 @@ function AddCartFloat({
                 name="number"
                 value={customerChoose.number}
                 placeholder={
-                  storage[courseInfo[0].id] && courseInfo !== null
-                    ? storage[courseInfo[0].id].split("|")[4]
+                  storage[`c-${courseInfo[0].id}`] && courseInfo !== null
+                    ? storage[`c-${courseInfo[0].id}`].split("|")[4]
                     : "選擇日期"
                 }
                 min="1"
@@ -153,7 +160,7 @@ function AddCartFloat({
                 return;
               } else {
                 setIfAddCart(true);
-                let itemId = courseInfo[0].id;
+                let itemId = `c-${courseInfo[0].id}`;
                 let productInfo = e.currentTarget.children[0].value;
                 // console.log("value", productInfo); //http://localhost:3000/assets/images_product/allblack.jfif|雪板類|暗黑滿點單板|1200
 
@@ -171,7 +178,7 @@ function AddCartFloat({
             {ifAddCart ? "成功報名" : "立即報名"}
             <input
               type="hidden"
-              value={`${COURSE_IMG_URL}/${courseInfo[0].img}|課程體驗|${courseInfo[0].name}課程|${courseInfo[0].price}|${customerChoose.date}|${customerChoose.number}`}
+              value={`${COURSE_IMG_URL}/${courseInfo[0].img}|A|${courseInfo[0].name}課程|${courseInfo[0].price}|${customerChoose.date}|${customerChoose.number}`}
             />
           </button>
         </div>

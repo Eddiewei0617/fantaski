@@ -67,7 +67,7 @@ function Sled(props) {
         setCustomerChoose={setCustomerChoose}
       />
       <Title titleName="推薦裝備" />
-      <Swiper showCourse={showCourse} />
+      <Swiper showCourse={showCourse} customerChoose={customerChoose} />
       <Title titleName="其他課程" />
       <CourseLink setShowCourse={setShowCourse} courses={courses} />
     </>
