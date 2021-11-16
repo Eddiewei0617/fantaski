@@ -36,6 +36,9 @@ function Products({ setItemNumber, itemNumber }) {
       behavior: "smooth",
     });
 
+  // 商品種類狀態，有1~8，預設為1(單板)
+  const [categoryId, setCategoryId] = useState(1);
+
   return (
     <>
       <CarouselP />
@@ -47,7 +50,7 @@ function Products({ setItemNumber, itemNumber }) {
       <SwitchIcon setSquare={setSquare} square={square} />
 
       <div className="d-flex main_area" ref={productSection}>
-        <NavSide />
+        <NavSide setCategoryId={setCategoryId} />
         {square ? (
           <ProductSquare
             clickToChangeToggle={clickToChangeToggle}
@@ -55,6 +58,7 @@ function Products({ setItemNumber, itemNumber }) {
             toggleState={toggleState}
             setItemNumber={setItemNumber}
             itemNumber={itemNumber}
+            categoryId={categoryId}
           />
         ) : (
           <ProductList
@@ -66,6 +70,7 @@ function Products({ setItemNumber, itemNumber }) {
             onClick={() => {
               scrollToProduct();
             }}
+            categoryId={categoryId}
           />
         )}
       </div>

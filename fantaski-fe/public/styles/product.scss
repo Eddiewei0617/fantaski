@@ -128,6 +128,11 @@
   height: 24rem;
   position: relative;
 }
+.product_image_jackets {
+  width: 270px;
+  height: 310px;
+  position: relative;
+}
 @keyframes pulsate-fwd {
   0% {
     -webkit-transform: scale(1);
@@ -142,7 +147,8 @@
     transform: scale(1);
   }
 }
-.product_image_s:hover {
+.product_image_s:hover,
+.product_image_jackets:hover {
   animation: pulsate-fwd 0.9s 1 alternate;
 }
 .collect_tag {

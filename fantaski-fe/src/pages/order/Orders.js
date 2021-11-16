@@ -54,7 +54,7 @@ function Orders(props) {
     date: "",
     number: "",
   });
-  const [memberPoints, setMemberPoints] = useState();
+  const [memberPoints, setMemberPoints] = useState(null);
   useEffect(async () => {
     let res = await axios.get(
       "http://localhost:3001/api/order/getMemberPoints"

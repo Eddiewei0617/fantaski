@@ -5,25 +5,22 @@ function OrderContent({
   customerChoose,
   setCustomerChoose,
   step,
-  // memberPoints,
-  // setMemberPoints,
+  memberPoints,
+  setMemberPoints,
 }) {
   const [pointUsed, setPointUsed] = useState(0);
-  const [points, setPoints] = useState(0);
-  const [memberPoints, setMemberPoints] = useState();
-  useEffect(async () => {
-    let res = await axios.get(
-      "http://localhost:3001/api/order/getMemberPoints"
-    );
-    setMemberPoints(res.data);
-    console.log(res.data);
-  }, []);
+  const [points, setPoints] = useState("---");
 
-  // useEffect(() => {
-  //   setPoints(`${memberPoints[0].point}`);
+  // const [memberPoints, setMemberPoints] = useState();
+  // useEffect(async () => {
+  //   let res = await axios.get(
+  //     "http://localhost:3001/api/order/getMemberPoints"
+  //   );
+  //   setMemberPoints(res.data);
+  //   console.log(res.data);
   // }, []);
-
   // console.log("point", memberPoints[0].point); // 300
+
   let storage = localStorage;
   let itemString = storage["addItemList"];
   let items = itemString.substr(0, itemString.length - 2).split(", ");
@@ -53,9 +50,11 @@ function OrderContent({
     }
   }, [customerChoose]);
 
-  // useEffect(() => {
-  //   setPointUsed(storage[`${memberPoints[0].name}`]);
-  // }, [step]);
+  useEffect(() => {
+    if (memberPoints !== null) {
+      setPointUsed(storage[`${memberPoints[0].name}`]);
+    }
+  }, [step]);
 
   // console.log(memberPoints[0].point);
 
@@ -75,7 +74,17 @@ function OrderContent({
                   </div>
                   <div className="col d-flex">
                     <label className="m-0">會員點數 </label>
-                    <input type="text" value={0} className="p-0" />
+                    <input type="text" value={`${points} 點`} className="p-0" />
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => {
+                        `${points}` === "---"
+                          ? setPoints(`${memberPoints[0].point}`)
+                          : setPoints(`---`);
+                      }}
+                    >
+                      顯示會員點數
+                    </button>
                   </div>
                 </div>
 
@@ -87,7 +96,6 @@ function OrderContent({
                   <div className="col d-flex">
                     <label className="m-0">使用點數 </label>
                     <input
-                      // ref={point}
                       type="number"
                       placeholder={`${0}  點`}
                       value={pointUsed}

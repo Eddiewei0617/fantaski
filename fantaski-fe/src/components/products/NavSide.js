@@ -5,7 +5,7 @@ import { GrCoatCheck } from "react-icons/gr";
 import { GiProtectionGlasses } from "react-icons/gi";
 import { GiDeer } from "react-icons/gi";
 
-function NavSide() {
+function NavSide({ setCategoryId }) {
   return (
     <>
       {/* 側邊欄區域 */}
@@ -28,13 +28,23 @@ function NavSide() {
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="0">
-            <Card.Body className="detail_word">
+            <Card.Body
+              className="detail_word"
+              onClick={() => {
+                setCategoryId(1);
+              }}
+            >
               <GiSnowboard className="mr-1" />
               單板
             </Card.Body>
           </Accordion.Collapse>
           <Accordion.Collapse eventKey="0">
-            <Card.Body className="detail_word">
+            <Card.Body
+              className="detail_word"
+              onClick={() => {
+                setCategoryId(2);
+              }}
+            >
               <GiSnowboard className="mr-1" />
               雙板
             </Card.Body>
@@ -56,25 +66,45 @@ function NavSide() {
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="1">
-            <Card.Body className="detail_word">
+            <Card.Body
+              className="detail_word"
+              onClick={() => {
+                setCategoryId(3);
+              }}
+            >
               <GrCoatCheck className="mr-1" />
               滑雪外套
             </Card.Body>
           </Accordion.Collapse>
           <Accordion.Collapse eventKey="1">
-            <Card.Body className="detail_word">
+            <Card.Body
+              className="detail_word"
+              onClick={() => {
+                setCategoryId(4);
+              }}
+            >
               <GrCoatCheck className="mr-1" />
               雪鞋
             </Card.Body>
           </Accordion.Collapse>
           <Accordion.Collapse eventKey="1">
-            <Card.Body className="detail_word">
+            <Card.Body
+              className="detail_word"
+              onClick={() => {
+                setCategoryId(5);
+              }}
+            >
               <GrCoatCheck className="mr-1" />
               毛帽
             </Card.Body>
           </Accordion.Collapse>
           <Accordion.Collapse eventKey="1">
-            <Card.Body className="detail_word">
+            <Card.Body
+              className="detail_word"
+              onClick={() => {
+                setCategoryId(6);
+              }}
+            >
               <GrCoatCheck className="mr-1" />
               雪褲
             </Card.Body>
@@ -96,13 +126,23 @@ function NavSide() {
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="2">
-            <Card.Body className="detail_word">
+            <Card.Body
+              className="detail_word"
+              onClick={() => {
+                setCategoryId(7);
+              }}
+            >
               <GiProtectionGlasses className="mr-1" />
               滑雪配件
             </Card.Body>
           </Accordion.Collapse>
           <Accordion.Collapse eventKey="2">
-            <Card.Body className="detail_word">
+            <Card.Body
+              className="detail_word"
+              onClick={() => {
+                setCategoryId(8);
+              }}
+            >
               <GiProtectionGlasses className="mr-1" />
               器材出租
             </Card.Body>
