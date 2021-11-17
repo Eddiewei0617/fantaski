@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 // 引入各分頁(後續寫程式可更動) 頁面用元件
+
 // 課程
 import Skill from "./pages/course/Skill";
 import Beginner from "./pages/course/Beginner";
@@ -20,9 +21,7 @@ import NewPost from "./pages/forums/NewPost";
 // import Courseshare from "./pages/forums/Courseshare";
 // import Equipment from "./pages/forums/Equipment";
 
-import Member from "./pages/Member";
 import Login from "./pages/Login";
-
 // footer 相關連結
 // import Aboutus from "./pages/footer/Aboutus";
 // import Joinus from "./pages/footer/Joinus";
@@ -30,6 +29,11 @@ import Login from "./pages/Login";
 // import Servicepolicy from "./pages/footer/Servicepolicy";
 // import Privacy from "./pages/footer/Privacy";
 
+//member會員
+import Member from "./pages/member/Member";
+import MemberForum from "./pages/member/MemberForum";
+import Record from "./pages/member/Record";
+import MemberCollect from "./pages/member/MemberCollect";
 // ===========================================
 
 // 組合用元件
@@ -127,6 +131,16 @@ function App() {
             <Route path="/forum/new-post">
               <NewPost />
             </Route>
+            <Route path="/record">
+              <Record />
+            </Route>
+            <Route path="/memberForum">
+              <MemberForum />
+            </Route>
+            <Route path="/memberCollect">
+              <MemberCollect />
+            </Route>
+
             <Route path="/forum">
               <Forum />
             </Route>
