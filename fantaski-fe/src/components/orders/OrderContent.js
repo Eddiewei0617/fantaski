@@ -7,19 +7,11 @@ function OrderContent({
   step,
   memberPoints,
   setMemberPoints,
+  pointUsed,
+  setPointUsed,
 }) {
-  const [pointUsed, setPointUsed] = useState(0);
+  // const [pointUsed, setPointUsed] = useState(0);
   const [points, setPoints] = useState("---");
-
-  // const [memberPoints, setMemberPoints] = useState();
-  // useEffect(async () => {
-  //   let res = await axios.get(
-  //     "http://localhost:3001/api/order/getMemberPoints"
-  //   );
-  //   setMemberPoints(res.data);
-  //   console.log(res.data);
-  // }, []);
-  // console.log("point", memberPoints[0].point); // 300
 
   let storage = localStorage;
   let itemString = storage["addItemList"];
@@ -55,8 +47,6 @@ function OrderContent({
       setPointUsed(storage[`${memberPoints[0].name}`]);
     }
   }, [step]);
-
-  // console.log(memberPoints[0].point);
 
   return (
     <>
@@ -100,10 +90,11 @@ function OrderContent({
                       placeholder={`${0}  點`}
                       value={pointUsed}
                       onChange={(e) => {
-                        storage.setItem(memberPoints[0].name, e.target.value);
+                        storage.setItem(memberPoints[0].name, pointUsed);
                         setPointUsed(e.target.value);
                       }}
                       className="p-0"
+                      min="0"
                     />
                   </div>
                 </div>
@@ -112,7 +103,11 @@ function OrderContent({
                 <label className="m-0">總金額 NT$ </label>
                 <input
                   type="text"
-                  value={coursePrice + productPrice - pointUsed}
+                  value={
+                    pointUsed === undefined
+                      ? coursePrice + productPrice
+                      : coursePrice + productPrice - pointUsed
+                  }
                   className="mr-4"
                 />
               </div>

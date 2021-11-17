@@ -5,19 +5,31 @@ import { BsTagsFill } from "react-icons/bs";
 import { PRODUCTIMAGE_URL } from "../../config/url";
 import { CATEGORY_WORD } from "../../config/StatusShortcut";
 
-function Skis({ toggleState, clickToChangeToggle, handleAddNumber }) {
+function ProductInfo({
+  toggleState,
+  clickToChangeToggle,
+  handleAddNumber,
+  categoryId,
+}) {
   let storage = localStorage;
-  const [skis, setSkis] = useState([]);
+
+  // 傳參數(categoryId)給後端(記得用Post!!!)，跟後端說要哪個id的商品資料，請後端去資料庫撈
+  const [snowboards, setSnowboards] = useState([]);
   useEffect(async () => {
-    let res = await axios.get("http://localhost:3001/api/products/skis");
-    setSkis(res.data);
-  }, []);
+    let res = await axios.post(
+      "http://localhost:3001/api/products/productsInfoList",
+      {
+        category: categoryId,
+      }
+    );
+    setSnowboards(res.data);
+  }, [categoryId]);
 
   return (
     <>
-      <h3 className="product_title pl-1">{CATEGORY_WORD[2]}</h3>
+      <h3 className="product_title pl-1">{CATEGORY_WORD[categoryId]}</h3>
       <ul className="all_image_s ">
-        {skis.map((v, i) => {
+        {snowboards.map((v, i) => {
           return (
             <li key={v.id} className="list-unstyled">
               <div className="product_image_s  ">
@@ -43,7 +55,7 @@ function Skis({ toggleState, clickToChangeToggle, handleAddNumber }) {
                 id={v.id}
                 className="cart"
                 onClick={(e) => {
-                  let itemId = v.id;
+                  let itemId = `p-${v.id}`;
                   let productInfo = e.currentTarget.children[0].value;
                   // console.log("value", productInfo); //http://localhost:3000/assets/images_product/allblack.jfif|雪板類|暗黑滿點單板|1200
 
@@ -71,4 +83,4 @@ function Skis({ toggleState, clickToChangeToggle, handleAddNumber }) {
   );
 }
 
-export default Skis;
+export default ProductInfo;

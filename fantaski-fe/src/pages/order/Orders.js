@@ -7,6 +7,7 @@ import axios from "axios";
 import FirstStep from "../../components/orders/FirstStep";
 import SecondStep from "../../components/orders/SecondStep";
 import ThirdStep from "../../components/orders/ThirdStep";
+import OrderContent from "../../components/orders/OrderContent";
 
 // 頁面通用元件
 import ProgressBar from "../../components/orders/ProgressBar";
@@ -50,10 +51,13 @@ const productFromServer = [
 
 function Orders(props) {
   const { setItemNumber, itemNumber } = props;
+  // 為了購物車第一步驟改變日期和數量而設的
   const [customerChoose, setCustomerChoose] = useState({
     date: "",
     number: "",
   });
+
+  // 從資料庫抓member的資料回來
   const [memberPoints, setMemberPoints] = useState(null);
   useEffect(async () => {
     let res = await axios.get(
@@ -61,33 +65,6 @@ function Orders(props) {
     );
     setMemberPoints(res.data);
     console.log(res.data);
-  }, []);
-
-  // 先設一個空的商品物件，讓下面可以抓到後重新設定回來
-  const [orderProduct, setOrderProduct] = useState({
-    id: 0,
-    name: "",
-    category: "",
-    suitable: "",
-    description: "",
-    image: ``,
-    price: 0,
-  });
-
-  // 設定一進頁面後便去抓點到的那個商品id，並且判斷如果網址id和點到的id一樣就顯示那樣商品
-  useEffect(() => {
-    const searchParams = new URLSearchParams(props.location.search);
-    // console.log("123", props.location.search);
-    const productId = searchParams.get("id");
-    // console.log("333", productId);
-
-    const newOrderProduct = productFromServer.find((v, i) => {
-      // console.log("555", v.id);
-      return v.id === Number(productId);
-    });
-    if (newOrderProduct) {
-      setOrderProduct(newOrderProduct);
-    }
   }, []);
 
   // 為了判斷切換為哪個階段
@@ -117,6 +94,8 @@ function Orders(props) {
     }
   }, []);
 
+  const [pointUsed, setPointUsed] = useState(0);
+
   // ------------------------------------------------------------------------------------
   return (
     <>
@@ -132,13 +111,16 @@ function Orders(props) {
       {step === 1 && (
         <>
           <FirstStep
-            orderProduct={orderProduct}
             step={step}
             setStep={setStep}
             customerChoose={customerChoose}
             setCustomerChoose={setCustomerChoose}
             memberPoints={memberPoints}
             setMemberPoints={setMemberPoints}
+            pointUsed={pointUsed}
+            setPointUsed={setPointUsed}
+            setItemNumber={setItemNumber}
+            itemNumber={itemNumber}
           />
           <div className="box3 d-flex justify-content-end m-5">
             <NextStepIcon
@@ -152,11 +134,12 @@ function Orders(props) {
       {step === 2 && (
         <>
           <SecondStep
-            orderProduct={orderProduct}
             step={step}
             setStep={setStep}
             memberPoints={memberPoints}
             setMemberPoints={setMemberPoints}
+            pointUsed={pointUsed}
+            setPointUsed={setPointUsed}
           />
           <div className="box3 d-flex justify-content-end m-5">
             <PrevStepIcon
@@ -175,9 +158,11 @@ function Orders(props) {
       {step === 3 && (
         <>
           <ThirdStep
-            orderProduct={orderProduct}
             step={step}
             setStep={setStep}
+            memberPoints={memberPoints}
+            pointUsed={pointUsed}
+            setPointUsed={setPointUsed}
           />
           <div className="box3 d-flex justify-content-end m-5">
             <PrevStepIcon

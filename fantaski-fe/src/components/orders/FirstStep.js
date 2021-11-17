@@ -8,13 +8,20 @@ function FirstStep({
   setCustomerChoose,
   memberPoints,
   setMemberPoints,
+  pointUsed,
+  setPointUsed,
+  setItemNumber,
+  itemNumber,
 }) {
+  console.log(pointUsed);
   return (
     <>
       <CartContent
         orderProduct={orderProduct}
         customerChoose={customerChoose}
         setCustomerChoose={setCustomerChoose}
+        setItemNumber={setItemNumber}
+        itemNumber={itemNumber}
       />
 
       <OrderContent
@@ -22,6 +29,8 @@ function FirstStep({
         setCustomerChoose={setCustomerChoose}
         memberPoints={memberPoints}
         setMemberPoints={setMemberPoints}
+        pointUsed={pointUsed}
+        setPointUsed={setPointUsed}
       />
     </>
   );

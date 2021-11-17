@@ -1,4 +1,66 @@
-function OrderFinal() {
+import { useState, useEffect } from "react";
+import { CART_CATEGORY } from "../../config/StatusShortcut";
+const moment = require("moment");
+
+function OrderFinal({ memberPoints, pointUsed, setPointUsed }) {
+  // 代入localStorage裡面存的資料
+  var storage = localStorage;
+  let itemString = storage["addItemList"];
+  let items = itemString.substr(0, itemString.length - 2).split(", ");
+  const [orderList, setOrderList] = useState([]);
+  useEffect(() => {
+    let orderArray = [];
+    for (let i = 0; i < items.length; i++) {
+      orderArray.push({
+        id: items[i],
+        name: localStorage[items[i]].split("|")[2],
+        category: localStorage[items[i]].split("|")[1],
+        price: localStorage[items[i]].split("|")[3],
+        image: localStorage[items[i]].split("|")[0],
+        date: localStorage[items[i]].split("|")[4],
+        number: localStorage[items[i]].split("|")[5],
+      });
+    }
+    setOrderList(orderArray);
+  }, []);
+
+  // 算總消費金額
+  let total = 0;
+  for (let i = 0; i < items.length; i++) {
+    total += storage[items[i]].split("|")[3] * storage[items[i]].split("|")[5];
+  }
+
+  // 把訂單編號存成useState比較好傳資料到後端
+  const [orderNo, setOrderNo] = useState(0);
+  useEffect(() => {
+    setOrderNo(() => {
+      let randomNo = random_No(2);
+      console.log("randomNo", randomNo);
+      return randomNo;
+    });
+  }, []);
+
+  // 隨機生成訂單編號
+  function random_No(j) {
+    var random_no = "";
+    for (
+      var i = 0;
+      i < j;
+      i++ //j位隨機數，用以加在時間戳後面。
+    ) {
+      random_no += Math.floor(Math.random() * 10);
+    }
+    random_no = new Date().getTime() + random_no;
+    return random_no;
+  }
+
+  // 訂購時間(用moment套件)
+  let orderTime = moment().format("YYYY-MM-DD hh:mm:ss a");
+  // let times = document.querySelector("#time");
+  // function clock() {
+  //   times.innerText = orderTime;
+  // }
+  // setInterval(clock, 1000);
   return (
     <>
       <div className="order_final_bg">
@@ -10,25 +72,29 @@ function OrderFinal() {
               <div className="col-3 final_title">
                 <div>訂單編號</div>
               </div>
-              <div className="col-9 final_word">12312315</div>
+              <div className="col-9 final_word">{orderNo}</div>
             </div>
             <div className="row border-bottoms">
               <div className="col-3 final_title">
                 <div>訂購時間</div>
               </div>
-              <div className="col-9 final_word">2021-11-5 22:04:23</div>
+              <div className="col-9 final_word" id="time">
+                {orderTime}
+              </div>
             </div>
             <div className="row border-bottoms">
               <div className="col-3 final_title">
                 <div>消費金額</div>
               </div>
-              <div className="col-9 final_word">NT$ 3799</div>
+              <div className="col-9 final_word">NT$ {total - pointUsed}</div>
             </div>
             <div className="row border-bottoms">
               <div className="col-3 final_title">
                 <div>剩餘點數</div>
               </div>
-              <div className="col-9 final_word">99 點</div>
+              <div className="col-9 final_word">
+                {memberPoints[0].point - pointUsed} 點
+              </div>
             </div>
           </div>
           {/* 中間分隔線 */}
@@ -48,31 +114,41 @@ function OrderFinal() {
                 </tr>
               </thead>
               <tbody className="final_tbody">
-                <tr>
-                  <td>
-                    <input type="text" name="category" value="課程體驗" />
-                  </td>
-                  <td>
-                    <input type="text" name="name" value="滑雪初體驗" />
-                  </td>
-                  <td className="">
-                    <input type="text" name="" value="2021-11-05 22:04:23 " />
-                  </td>
-                  <td className="type_number">
-                    NT$ <input type="text" name="price" value="2000" />
-                  </td>
-                  <td className="type_number">
-                    <input type="text" name="amount" value="1" />
-                  </td>
-                  <td className="type_number">
-                    NT$ <input type="text" name="subtotal" value="2000" />
-                  </td>
-                </tr>
+                {orderList.map((v, i) => {
+                  let subtotal = v.price * v.number;
+                  return (
+                    <tr>
+                      <td>
+                        <input
+                          type="text"
+                          name="category"
+                          value={CART_CATEGORY[v.category]}
+                        />
+                      </td>
+                      <td>
+                        <input type="text" name="name" value={v.name} />
+                      </td>
+                      <td className="">
+                        <input type="text" name="" value={v.date} />
+                      </td>
+                      <td className="type_number">
+                        NT$ <input type="text" name="price" value={v.price} />
+                      </td>
+                      <td className="type_number">
+                        <input type="text" name="amount" value={v.number} />
+                      </td>
+                      <td className="type_number">
+                        NT${" "}
+                        <input type="text" name="subtotal" value={subtotal} />
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
             <div className="final_total">
               <label>總計 : NT$ </label>
-              <input type="text" name="total" value="3799" />
+              <input type="text" name="total" value={total - pointUsed} />
             </div>
           </form>
         </div>

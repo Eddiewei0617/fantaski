@@ -1,7 +1,13 @@
 import { PRODUCTIMAGE_URL } from "../../config/url";
 import OrderItems from "./OrderItems";
 
-function CartContent({ orderProduct, customerChoose, setCustomerChoose }) {
+function CartContent({
+  orderProduct,
+  customerChoose,
+  setCustomerChoose,
+  setItemNumber,
+  itemNumber,
+}) {
   return (
     <>
       <div className="cart_content_bg">
@@ -21,6 +27,8 @@ function CartContent({ orderProduct, customerChoose, setCustomerChoose }) {
             <OrderItems
               customerChoose={customerChoose}
               setCustomerChoose={setCustomerChoose}
+              setItemNumber={setItemNumber}
+              itemNumber={itemNumber}
             />
           </div>
         </div>

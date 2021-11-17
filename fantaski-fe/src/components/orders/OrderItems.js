@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import { CART_CATEGORY } from "../../config/StatusShortcut";
 
-function OrderItems({ customerChoose, setCustomerChoose }) {
+function OrderItems({
+  customerChoose,
+  setCustomerChoose,
+  setItemNumber,
+  itemNumber,
+}) {
   // 設定數量輸入值的狀態
 
   // 代入localStorage裡面存的資料
@@ -106,6 +111,7 @@ function OrderItems({ customerChoose, setCustomerChoose }) {
                     `${v.id}, `,
                     ""
                   );
+                  setItemNumber(itemNumber - 1);
                 }}
               >
                 X

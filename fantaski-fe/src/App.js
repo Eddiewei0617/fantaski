@@ -45,7 +45,7 @@ function App() {
   //傳入course狀態(使用者要看哪個course)
   const [showCourse, setShowCourse] = useState();
 
-  // nabar上購物車的數字
+  // navbar上購物車的數字
   const [itemNumber, setItemNumber] = useState(0);
 
   return (

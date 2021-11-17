@@ -2,65 +2,13 @@
 import { useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
+import { CATEGORY_WORD } from "../../config/StatusShortcut";
 
 // 組合用元件
 import PageButton from "./PageButton";
 import { PRODUCTIMAGE_URL } from "../../config/url";
 import { Button } from "react-bootstrap";
 import { BsTagsFill } from "react-icons/bs";
-
-// const productFromServer = [
-//   {
-//     id: 1,
-//     name: "暗黑滿點單板",
-//     category: "雪板類",
-//     suitable: "技能班",
-//     description:
-//       "此塊雪板由黑曜石製成，黑曜石產量相當稀少，其具有增強技能的力量，站上此塊雪板就能讓它帶著你滑雪，不管多高難度的動作都能輕而易舉完成。",
-//     image: `${PRODUCTIMAGE_URL}/allblack.jfif`,
-//     price: 1200,
-//   },
-//   {
-//     id: 2,
-//     name: "可愛滿點單板",
-//     category: "雪板類",
-//     suitable: "技能班",
-//     description:
-//       "這款雪板相當適合青少年(女)或是童心未泯的諸位，卡通人物elmo在你滑雪時會輕輕播放著歡樂的音樂讓你享受其中!",
-//     image: `${PRODUCTIMAGE_URL}/Elmo.jfif`,
-//     price: 1000,
-//   },
-//   {
-//     id: 3,
-//     name: "力量滿點單板",
-//     category: "雪板類",
-//     suitable: "技能班",
-//     description:
-//       "浩克的力量不必多說，大家眾所皆知，給正在訓練下坡加速的你前所未有的重力體驗!",
-//     image: `${PRODUCTIMAGE_URL}/hulk.jfif`,
-//     price: 1600,
-//   },
-//   {
-//     id: 4,
-//     name: "陽光滿點單板",
-//     category: "雪板類",
-//     suitable: "初體驗",
-//     description:
-//       "滿滿大海配色的雪板，就是要陽光的你在雪上也能像在海上衝浪般的自在舒適!",
-//     image: `${PRODUCTIMAGE_URL}/roxy_ocean.jfif`,
-//     price: 1400,
-//   },
-//   {
-//     id: 5,
-//     name: "藝術滿點單板",
-//     category: "雪板類",
-//     suitable: "技能班",
-//     description:
-//       "2022最新雪板上市啦!此次以最五彩繽紛的動物---鸚鵡作為主軸，讓你邊滑雪邊欣賞腳下的絢麗鸚鵡",
-//     image: `${PRODUCTIMAGE_URL}/Women's Snowboards.jfif`,
-//     price: 2000,
-//   },
-// ];
 
 function ProductList({
   clickToChangeToggle,
@@ -69,6 +17,7 @@ function ProductList({
   setItemNumber,
   itemNumber,
   onClick,
+  categoryId,
 }) {
   // 點加入購物車後從到locaStorage
   let storage = localStorage;
@@ -95,8 +44,9 @@ function ProductList({
   const [products, setProducts] = useState([]);
   const [pageNow, setPageNow] = useState(1); // 為了偵測在哪一頁，然後切換頁面會顯示不同商品
   useEffect(async () => {
-    let res = await axios.get(
-      "http://localhost:3001/api/products/productsInfoList"
+    let res = await axios.post(
+      "http://localhost:3001/api/products/productsInfoList",
+      { category: categoryId }
     );
     // 先假設一個productList空[]放單頁商品的；totalProductList空[]是放全部商品的
     // 判斷式 : 如果一頁商品數量除以5的餘數是0，那就把這些商品push進總陣列，然後把小陣列歸零，繼續跑迴圈
@@ -111,7 +61,7 @@ function ProductList({
     }
     totalProductList.push(productList);
     setProducts(totalProductList[pageNow - 1]);
-  }, [pageNow]);
+  }, [pageNow, categoryId]);
 
   const display = (
     <ul className="all_image_l ">
@@ -179,7 +129,7 @@ function ProductList({
   return (
     <>
       <div>
-        <h3 className="product_title pl-1">雪板類</h3>
+        <h3 className="product_title pl-1">{CATEGORY_WORD[categoryId]}</h3>
         {display}
         <PageButton
           pageNow={pageNow}
