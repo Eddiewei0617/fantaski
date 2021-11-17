@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 // 引入各分頁(後續寫程式可更動) 頁面用元件
-import MountainRoute from "./pages/MountainRoute";
+
 // 課程
 import Skill from "./pages/course/Skill";
 import Beginner from "./pages/course/Beginner";
@@ -12,7 +12,6 @@ import Igloo from "./pages/course/Igloo";
 import Products from "./pages/product/Products";
 import Orders from "./pages/order/Orders";
 import Home from "./pages/Home";
-<<<<<<< HEAD
 import MountainRoute from "./pages/MountainRoute";
 
 // 論壇
@@ -22,10 +21,6 @@ import NewPost from "./pages/forums/NewPost";
 // import Courseshare from "./pages/forums/Courseshare";
 // import Equipment from "./pages/forums/Equipment";
 
-import Member from "./pages/Member";
-=======
-import Forum from "./pages/Forum";
->>>>>>> route
 import Login from "./pages/Login";
 // footer 相關連結
 // import Aboutus from "./pages/footer/Aboutus";
