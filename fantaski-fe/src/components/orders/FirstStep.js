@@ -3,7 +3,6 @@ import CartContent from "./CartContent";
 import OrderContent from "./OrderContent";
 
 function FirstStep({
-  orderProduct,
   customerChoose,
   setCustomerChoose,
   memberPoints,
@@ -17,7 +16,6 @@ function FirstStep({
   return (
     <>
       <CartContent
-        orderProduct={orderProduct}
         customerChoose={customerChoose}
         setCustomerChoose={setCustomerChoose}
         setItemNumber={setItemNumber}
@@ -31,6 +29,7 @@ function FirstStep({
         setMemberPoints={setMemberPoints}
         pointUsed={pointUsed}
         setPointUsed={setPointUsed}
+        itemNumber={itemNumber}
       />
     </>
   );

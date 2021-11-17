@@ -9,6 +9,6 @@ let connection = mysql.createConnection({
   connectionlimit: process.env.CONNECTION_LIMIT || 10,
 });
 
-connect = Promise.promisifyAll(connection);
+connection = Promise.promisifyAll(connection);
 
 module.exports = connection;

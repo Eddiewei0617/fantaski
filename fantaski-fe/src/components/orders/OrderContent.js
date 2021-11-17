@@ -9,6 +9,7 @@ function OrderContent({
   setMemberPoints,
   pointUsed,
   setPointUsed,
+  itemNumber,
 }) {
   // const [pointUsed, setPointUsed] = useState(0);
   const [points, setPoints] = useState("---");
@@ -26,21 +27,22 @@ function OrderContent({
     for (let i = 0; i < items.length; i++) {
       let singlePrice = storage[items[i]].split("|")[3];
       let singleNumber = storage[items[i]].split("|")[5];
-      courseTotal += singlePrice * singleNumber;
       if (storage[items[i]].split("|")[1] === "A") {
-        setCoursePrice(courseTotal);
+        courseTotal += singlePrice * singleNumber;
       }
     }
+    setCoursePrice(courseTotal);
+
     let productTotal = 0;
     for (let j = 0; j < items.length; j++) {
       let singlePrice = storage[items[j]].split("|")[3];
       let singleNumber = storage[items[j]].split("|")[5];
-      productTotal += singlePrice * singleNumber;
       if (storage[items[j]].split("|")[1] === "B") {
-        setProductPrice(productTotal);
+        productTotal += singlePrice * singleNumber;
       }
     }
-  }, [customerChoose]);
+    setProductPrice(productTotal);
+  }, [customerChoose, itemNumber]);
 
   useEffect(() => {
     if (memberPoints !== null) {
@@ -90,7 +92,7 @@ function OrderContent({
                       placeholder={`${0}  點`}
                       value={pointUsed}
                       onChange={(e) => {
-                        storage.setItem(memberPoints[0].name, pointUsed);
+                        storage.setItem(memberPoints[0].name, e.target.value);
                         setPointUsed(e.target.value);
                       }}
                       className="p-0"

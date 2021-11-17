@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import { BsTagsFill } from "react-icons/bs";
 import { PRODUCTIMAGE_URL } from "../../config/url";
 import { CATEGORY_WORD } from "../../config/StatusShortcut";
+import { API_URL } from "../../config/url";
 
 function ProductInfo({
   toggleState,
@@ -16,12 +17,9 @@ function ProductInfo({
   // 傳參數(categoryId)給後端(記得用Post!!!)，跟後端說要哪個id的商品資料，請後端去資料庫撈
   const [snowboards, setSnowboards] = useState([]);
   useEffect(async () => {
-    let res = await axios.post(
-      "http://localhost:3001/api/products/productsInfoList",
-      {
-        category: categoryId,
-      }
-    );
+    let res = await axios.post(`${API_URL}/products/productsInfoList`, {
+      category: categoryId,
+    });
     setSnowboards(res.data);
   }, [categoryId]);
 

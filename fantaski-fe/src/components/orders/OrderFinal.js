@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { CART_CATEGORY } from "../../config/StatusShortcut";
+import axios from "axios";
+import { API_URL } from "../../config/url";
 const moment = require("moment");
 
 function OrderFinal({ memberPoints, pointUsed, setPointUsed }) {
@@ -35,7 +37,7 @@ function OrderFinal({ memberPoints, pointUsed, setPointUsed }) {
   useEffect(() => {
     setOrderNo(() => {
       let randomNo = random_No(2);
-      console.log("randomNo", randomNo);
+      // console.log("randomNo", randomNo);
       return randomNo;
     });
   }, []);
@@ -53,6 +55,18 @@ function OrderFinal({ memberPoints, pointUsed, setPointUsed }) {
     random_no = new Date().getTime() + random_no;
     return random_no;
   }
+
+  // 準備傳資料給後端去insert進資料庫
+  // async function getOrderNoInfo(orderNo, setOrderNo) {
+  //   let res = await axios.post(
+  //     `${API_URL}/products/getorderno`,
+  //     {
+  //       orderNumber: orderNo,
+  //     }
+  //   );
+  //   console.log("res", res);
+  //   setOrderNo(res.data);
+  // }
 
   // 訂購時間(用moment套件)
   let orderTime = moment().format("YYYY-MM-DD hh:mm:ss a");
