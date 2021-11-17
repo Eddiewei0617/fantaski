@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { IMAGE_SHARE_URL } from "../../config/url";
 import { Link } from "react-router-dom";
 import { ParallaxProvider } from "react-scroll-parallax";
+import { axios } from "axios";
+import { getWeatherInfo, weatherID } from "../course/moduleList";
 
 // icon
 import {
@@ -20,6 +22,9 @@ import $ from "jquery";
 function Navbar({ courses, setShowCourse, setItemNumber, itemNumber }) {
   // 設定該項目被點選時的狀態
   let [colorButton, setColorButton] = useState("FANTASKI");
+  const [weatherInfo, setWeatherInfo] = useState(null);
+  const [weatherIcon, setWeatherIcon] = useState();
+
   const handleClick = (e) => {
     setColorButton(e.target.innerText);
   };
@@ -46,6 +51,59 @@ function Navbar({ courses, setShowCourse, setItemNumber, itemNumber }) {
       }
     });
   }, []);
+
+  // 天氣小圖api;
+  useEffect(() => {
+    //天氣資訊api--因為免費版有使用次數上限，先把他註解掉
+    // getWeatherInfo(setWeatherInfo);
+    //用哪個天氣小圖
+    decideWeatherIcon();
+  }, []);
+  // 決定要用哪個天氣小圖
+  function decideWeatherIcon() {
+    let weatherIconTag;
+    if (weatherInfo !== null) {
+      let weatherStatusId = weatherInfo.statusId.toString().split("")[0];
+      console.log(weatherStatusId);
+      switch (Number(weatherStatusId)) {
+        case 2:
+          weatherIconTag = (
+            <BsFillCloudyFill className="all-icon-nav" size={25} />
+          );
+          break;
+        case 3:
+          weatherIconTag = (
+            <FaCloudSunRain className="all-icon-nav" size={25} />
+          );
+          break;
+        case 5:
+          weatherIconTag = (
+            <BsFillCloudRainHeavyFill className="all-icon-nav" size={25} />
+          );
+          break;
+        case 6:
+          weatherIconTag = <BsSnow2 className="all-icon-nav" size={25} />;
+          break;
+        case 7:
+          weatherIconTag = <BsWind className="all-icon-nav" size={25} />;
+          break;
+        case 8:
+          weatherInfo.statusId === 800
+            ? (weatherIconTag = (
+                <BsFillBrightnessHighFill className="all-icon-nav" size={25} />
+              ))
+            : (weatherIconTag = (
+                <BsFillCloudSunFill className="all-icon-nav" size={25} />
+              ));
+          break;
+        default:
+          <BsFillCloudyFill className="all-icon-nav" size={25} />;
+      }
+    } else {
+      weatherIconTag = <BsFillCloudyFill className="all-icon-nav" size={25} />;
+    }
+    setWeatherIcon(weatherIconTag);
+  }
 
   return (
     <>
@@ -146,17 +204,21 @@ function Navbar({ courses, setShowCourse, setItemNumber, itemNumber }) {
                     to="/#"
                     onClick={handleClick}
                   >
+                    {weatherIcon}
                     {/* 天氣小圖&溫度要抓天氣API */}
-                    <BsFillCloudSunFill className="all-icon-nav" size={25} />
+                    {/* <BsFillCloudSunFill className="all-icon-nav" size={25} /> */}
                     {/* <BsSnow2 />
                 <FaCloudSunRain />
                 <BsWind />
-                <BsFillBrightnessHighFill />
-                <BsFillCloudyFill />
-                <BsFillCloudRainHeavyFill /> */}
-                    <span className="warm-number">3°C</span>
+                <BsFillBrightnessHighFill className="all-icon-nav"/>
+                {/* <BsFillCloudyFill /> */}
+                    {/* <BsFillCloudRainHeavyFill /> */}
+                    <span className="warm-number">
+                      {weatherInfo !== null ? weatherInfo.temp : "3"}°C
+                    </span>
                     <span className="area-time text-center">
-                      JP Hokkaido 11:00
+                      JP Hokkaido
+                      {weatherInfo !== null ? weatherInfo.time : "16:00"}
                     </span>
                   </Link>
                 </li>

@@ -278,6 +278,22 @@
   width: 320px;
   height: 350px;
 }
+.add-cart-fix-wrapper button {
+  background: $main-red;
+  height: 50px;
+  width: 90px;
+  border: none;
+  box-shadow: 1px 1px 3px black;
+  border-radius: 10px;
+  color: white;
+  letter-spacing: 3px;
+}
+.add-cart-fix-wrapper .button-clicked {
+  transition: 0.4s;
+  background: rgb(190, 190, 190);
+  color: white;
+}
+
 .day-choose-box,
 .number-choose-box {
   position: relative;
@@ -300,7 +316,7 @@
   bottom: 20px;
   transform: translateY(50%);
   font-size: 22px;
-  right: 20%;
+  right: 18%;
 }
 .add-cart-fix-wrapper .date {
   padding-left: 8px;
@@ -313,8 +329,10 @@
   background: white;
   position: absolute;
   top: 100%;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 999;
+  box-shadow: 1px 1px 3px gray;
 }
 .add-cart-fix-wrapper .number {
   text-align: center;
@@ -331,6 +349,7 @@
   justify-content: center;
   align-items: center;
 }
+
 //---------------------------(浮動)加入購物車--------------------------//
 .add-cart-float-wrapper {
   position: fixed;
@@ -343,6 +362,22 @@
   transition: 0.4s;
   transform: translate(-250px);
 }
+.add-cart-float-wrapper button {
+  background: $main-red;
+  height: 40px;
+  width: 90px;
+  border: none;
+  box-shadow: 1px 1px 3px black;
+  border-radius: 8px;
+  color: white;
+  letter-spacing: 2px;
+}
+.add-cart-float-wrapper .button-clicked {
+  transition: 0.4s;
+  background: rgb(190, 190, 190);
+  color: white;
+}
+
 .hover-to-show {
   cursor: pointer;
   text-align: center;
@@ -400,34 +435,64 @@
   color: rgb(122, 122, 122);
   position: absolute;
   top: 8px;
-  left: 85px;
+  left: 83px;
 }
 //-------------------------------日曆-------------------------------//
+.calendar-wrapper {
+  line-height: 13px;
+  font-size: 12px;
+  width: 250px;
+}
 .calendar-header {
-  height: 40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
-.calendar-dates-week {
-  height: 10px;
-}
-.date-select-box {
-  margin: 5px;
-}
-.calendar-dates-box {
+.calendar-header .change-icons {
   cursor: pointer;
+  color: rgba(31, 91, 148);
+  font-size: 16px;
 }
-.calendar-dates-box:hover {
-  background: rgba(122, 122, 122, 0.3);
+.calendar-wrapper table th {
+  padding: 3px;
+}
+.calendar-wrapper table td {
+  vertical-align: middle;
+  height: 35px;
+  padding: 1px;
 }
 .calendar-dates-box-last {
-  color: rgb(122, 122, 122);
+  color: rgba(95, 95, 95, 0.8);
+  cursor: default;
 }
 .calendar-dates-box-this {
   color: rgb(0, 0, 0);
+  cursor: pointer;
 }
 .calendar-dates-box-this-today {
   color: rgb(226, 109, 109);
+  cursor: pointer;
+}
+.calendar-dates-box-this-today:hover,
+.calendar-dates-box-this:hover {
+  background: rgba(122, 122, 122, 0.4);
 }
 
+.calendar-wrapper .daily-left {
+  font-size: 10px;
+}
+.bgLessThan3 {
+  background: rgb(226, 109, 109);
+}
+.bgLessThan0 {
+  color: rgba(95, 95, 95, 0.8);
+  cursor: default;
+  background: rgba(122, 122, 122, 0.4);
+}
+.bgLessThan0:hover {
+  cursor: default;
+  background: rgba(122, 122, 122, 0.4);
+}
 //------------------------------評論------------------------------//
 .comments-wrapper {
   max-width: 800px;
@@ -509,6 +574,7 @@
   transform: rotate(7deg);
   z-index: -1;
 }
+
 .visibleBox {
   width: 680px;
   overflow: hidden;
@@ -590,14 +656,35 @@
 .advice-product-intro .p-normal,
 .advice-product-intro .button-normal {
   /* transition: 0.4s; */
-  width: 170px;
   opacity: 0;
 }
 .advice-product-intro .p-selected,
 .advice-product-intro .button-selected {
-  transition: 0.6s;
+  // transition: 0.6s;
   opacity: 100;
-  width: 170px;
+}
+.swiper-wrapper .buttons button {
+  margin-right: 5px;
+  width: 85px;
+  font-size: 14px;
+  height: 30px;
+  border: none;
+  box-shadow: 1px 1px 3px black;
+  border-radius: 5px;
+  color: white;
+}
+
+.swiper-wrapper .addCartBtn {
+  background: $main-red;
+}
+.swiper-wrapper .moreBtn {
+  background: $primary;
+}
+.swiper-wrapper .button-clicked {
+  background: rgb(190, 190, 190);
+  font-size: 10px !important;
+  color: white;
+  cursor: default;
 }
 
 .img-box-selected {
@@ -611,11 +698,6 @@
   bottom: 5%;
   width: 90%;
   height: 70%;
-}
-.object-fit {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 //------------------------------課程連結------------------------------//
@@ -663,18 +745,25 @@
 }
 //------------------------------課程訂單評價------------------------------//
 .order-comments-wrapper {
-  width: 70%;
+  width: 80%;
   padding: 5px;
   margin: 0 auto;
 }
+.member-comments-title {
+  background: $main-blue;
+  border-radius: 10px;
+  height: 50px;
+  line-height: 50px;
+  color: white;
+  font-size: 18px;
+}
 .order-comment-box {
-  margin: 5px;
-  padding: 5px;
-  border: 1px solid $main-text-darkblue;
-  border-radius: 5px;
-  background: white;
-  box-shadow: 1px 1px 3px gray;
-  font-size: 14px;
+  margin: 10px 5px;
+  padding: 10px 5px;
+  border-bottom: 3px solid $main-text-darkblue;
+  // border-radius: 5px;
+  // box-shadow: 1px 1px 3px gray;
+  font-size: $font-m;
 }
 .course-comment-img {
   width: 120px;
@@ -682,8 +771,11 @@
   border-radius: 3px;
   overflow: hidden;
 }
+.order-course-info {
+  padding-left: 50px;
+}
 .course-comment-content textarea {
-  background: rgba(250, 250, 250, 0.8);
+  background: rgba(250, 250, 250, 0.6);
   resize: none;
 }
 .course-comment-buttons button {

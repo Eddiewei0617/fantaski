@@ -50,6 +50,9 @@ app.use("/api/products", productRouter);
 //api路徑中間件(購物車)
 let orderRouter = require("./routers/order");
 app.use("/api/order", orderRouter);
+//天氣api
+let weatherRouter = require("./routers/weather");
+app.use("/api/weather", weatherRouter);
 
 //404中間件
 app.use((req, res, next) => {

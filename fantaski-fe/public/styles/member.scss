@@ -2,6 +2,7 @@
   display: var(--rLinkDisplay, inline-flex) !important;
 } */
 /* 綁訂在href上樣式 */
+// 會員頁面
 .r-link[href] {
   color: var(--rLinkColor);
   text-decoration: none;
@@ -12,27 +13,25 @@
   margin-bottom: 0;
   list-style: none;
 }
-.menu__list a {
-  padding: 10px;
-}
-
 .menu {
   color: $main-text-darkblue;
   font-size: $font-l;
   font-weight: 500;
 }
 
-.menu__link {
+.menuLink {
   display: block;
+  padding: 1.5rem 2.5rem;
+  font-weight: 700;
 }
 
-.menu__link:focus {
+.menuLink:focus {
   outline: var(--menuLinkOutlineWidth, 2px) solid
     var(--menuLinkOutlineColor, currentColor);
   outline-offset: var(--menuLinkOutlineOffset);
 }
 
-.menu:hover .menu__link:not(:hover) {
+.menu:hover .menuLink:not(:hover) {
   --rLinkColor: var(--menuLinkColorUnactive, rgba(22, 22, 22, 0.35));
 }
 /* .menu {
@@ -44,14 +43,12 @@
     );
   } */
 
-.menu__list {
+.menuList {
   display: flex;
   justify-content: space-around;
 }
-
-.menu__link {
-  padding: 1.5rem 2.5rem;
-  font-weight: 700;
+.menuList a {
+  padding: 10px;
 }
 .text-underlined {
   position: relative;
@@ -238,6 +235,37 @@
   padding: 0px 20px;
   margin: 40px;
 }
+// 會員頁面結束
+
+// 購買紀錄頁面
+.recordTitle {
+  color: #ffffff;
+  font-size: 20px;
+  background-color: $main-blue;
+  text-align: center;
+  border-radius: 20px 20px 0px 0px;
+  width: 100%;
+  margin: 0 auto;
+}
+.accordionWidth {
+  width: 100%;
+}
+.imgBox {
+  width: 90px;
+  height: 90px;
+}
+.imgBox img {
+  width: 100%;
+  height: 100%;
+}
+.card-body div:nth-child(1) {
+  font-weight: 600;
+  font-size: 20px;
+}
+// .reacordAccordion {
+//   background-color: #ffffff;
+// }
+
 // .container {
 //   width: 100%;
 //   padding-top: 140px;

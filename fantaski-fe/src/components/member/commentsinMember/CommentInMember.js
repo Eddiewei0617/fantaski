@@ -3,7 +3,13 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { COURSE_IMG_URL } from "../../../config/url";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { starMapping, courseIdName } from "../moduleList";
+import {
+  starMapping,
+  courseIdName,
+  postCourseCommentStar,
+  postCourseComment,
+} from "../../course/moduleList";
+import moment from "moment";
 
 function CommentInMember({ orderCourse, setShowCourse }) {
   const [isStarsClick, setIsStarsClick] = useState(orderCourse.star);
@@ -11,11 +17,15 @@ function CommentInMember({ orderCourse, setShowCourse }) {
   const [contentInTextarea, setContentInTextarea] = useState(
     orderCourse.comment
   );
+  let now = moment().format("YYYY-MM-DDTHH:mm:ss.SSS");
+
   function handleStarClick(e) {
     let starId = e.currentTarget.id;
     let starIndex = starId.split("-").pop();
     setIsStarsClick(starIndex);
     orderCourse.star = starIndex;
+    let order_course_id = e.currentTarget.getAttribute("name");
+    postCourseCommentStar(order_course_id, starIndex, now);
   }
   function handleStarMouseEnter(e) {
     let starId = e.currentTarget.id;
@@ -28,27 +38,33 @@ function CommentInMember({ orderCourse, setShowCourse }) {
     setIsStarsHover(false);
   }
   function handleTextChange(e) {
-    setContentInTextarea(e.target.value);
+    let newComment = e.target.value;
+    setContentInTextarea(newComment);
+    let order_course_id = e.currentTarget.getAttribute("name");
+    postCourseComment(order_course_id, newComment, now);
   }
 
   return (
     <>
       <div className="order-comment-box row justify-content-center align-items-center">
-        <div className="col-2">
+        <div className="col-2 pl-0">
           <div className="course-comment-img ">
             <img
               className="object-fit"
-              src={`${COURSE_IMG_URL}/${orderCourse.imgSrc}`}
+              src={`${COURSE_IMG_URL}/${orderCourse.img}`}
               alt=""
             />
           </div>
         </div>
         <div className="order-course-info col-4">
-          <div>訂單編號：{orderCourse.order_id}</div>
-          <div>課程名稱：{orderCourse.course_name}</div>
+          <div>訂單編號：{orderCourse.sequence}</div>
+          <div>課程名稱：{orderCourse.name}</div>
           <div>報名人數：{orderCourse.amount}</div>
-          <div>報名日期：{orderCourse.booking_date}</div>
-          <div>課程金額：{orderCourse.price}</div>
+          <div>
+            報名日期：
+            {moment.utc(orderCourse.booking_date).format("YYYY-MM-DD")}
+          </div>
+          <div>課程金額：{orderCourse.price * orderCourse.amount}</div>
         </div>
         <div className="col-6">
           <div className="row">
@@ -60,6 +76,7 @@ function CommentInMember({ orderCourse, setShowCourse }) {
                     <FontAwesomeIcon
                       key={i}
                       id={`star-${i + 1}`}
+                      name={orderCourse.order_course_id}
                       icon={faStar}
                       className={`stars-hover ml-1 ${item} ${
                         isStarsHover && "star-hover"
@@ -75,7 +92,7 @@ function CommentInMember({ orderCourse, setShowCourse }) {
           </div>
           <div className="row mt-1 ml-1 course-comment-content">
             <textarea
-              name="content"
+              name={orderCourse.order_course_id}
               rows="4"
               col="40"
               className="col-8"
@@ -86,10 +103,9 @@ function CommentInMember({ orderCourse, setShowCourse }) {
             <div className="col-4 course-comment-buttons">
               <button>
                 <Link
-                  to={`/course/${courseIdName[orderCourse.course_name].eng}`}
+                  to={`/course/${courseIdName[orderCourse.name]["eng"]}`}
                   onClick={() => {
-                    console.log("click");
-                    setShowCourse(orderCourse.course_name);
+                    setShowCourse(orderCourse.name);
                   }}
                 >
                   課程詳情
