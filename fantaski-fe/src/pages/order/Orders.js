@@ -15,6 +15,7 @@ import PrevStepIcon from "../../components/orders/PrevStepIcon";
 import NextStepIcon from "../../components/orders/NextStepIcon";
 import OrderSubmitIcon from "../../components/orders/OrderSubmitIcon";
 import { PRODUCTIMAGE_URL, ORDERIMAGE_URL } from "../../config/url";
+import { API_URL } from "../../config/url";
 
 function Orders(props) {
   const { setItemNumber, itemNumber } = props;
@@ -27,11 +28,9 @@ function Orders(props) {
   // 從資料庫抓member的資料回來
   const [memberPoints, setMemberPoints] = useState(null);
   useEffect(async () => {
-    let res = await axios.get(
-      "http://localhost:3001/api/order/getMemberPoints"
-    );
+    let res = await axios.get(`${API_URL}/order/getMemberPoints`);
     setMemberPoints(res.data);
-    console.log(res.data);
+    console.log("res.data", res.data);
   }, []);
 
   // 為了判斷切換為哪個階段
@@ -127,18 +126,19 @@ function Orders(props) {
           <ThirdStep
             step={step}
             setStep={setStep}
+            scrollToTop={scrollToTop}
             memberPoints={memberPoints}
             pointUsed={pointUsed}
             setPointUsed={setPointUsed}
           />
-          <div className="box3 d-flex justify-content-end m-5">
+          {/* <div className="box3 d-flex justify-content-end m-5">
             <PrevStepIcon
               step={step}
               setStep={setStep}
               scrollToTop={scrollToTop}
             />
             <OrderSubmitIcon />
-          </div>
+          </div> */}
         </>
       )}
     </>

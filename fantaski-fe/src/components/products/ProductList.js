@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
 import { CATEGORY_WORD } from "../../config/StatusShortcut";
+import { API_URL } from "../../config/url";
 
 // 組合用元件
 import PageButton from "./PageButton";
@@ -44,10 +45,9 @@ function ProductList({
   const [products, setProducts] = useState([]);
   const [pageNow, setPageNow] = useState(1); // 為了偵測在哪一頁，然後切換頁面會顯示不同商品
   useEffect(async () => {
-    let res = await axios.post(
-      "http://localhost:3001/api/products/productsInfoList",
-      { category: categoryId }
-    );
+    let res = await axios.post(`${API_URL}/products/productsInfoList`, {
+      category: categoryId,
+    });
     // 先假設一個productList空[]放單頁商品的；totalProductList空[]是放全部商品的
     // 判斷式 : 如果一頁商品數量除以5的餘數是0，那就把這些商品push進總陣列，然後把小陣列歸零，繼續跑迴圈
     let productList = [];
@@ -68,7 +68,17 @@ function ProductList({
       {products.map((v, i) => {
         return (
           <li key={v.id} className="list-unstyled ">
-            <div className="product_image_l">
+            <div
+              className={`product_image_l  ${
+                (products[i].category_id === 3 ||
+                  products[i].category_id === 4 ||
+                  products[i].category_id === 5 ||
+                  products[i].category_id === 6 ||
+                  products[i].category_id === 7 ||
+                  products[i].category_id === 8) &&
+                "product_image_jackets"
+              }`}
+            >
               <button
                 id={i + 1}
                 className={`${
@@ -94,7 +104,7 @@ function ProductList({
                 id={v.id}
                 className="cart"
                 onClick={(e) => {
-                  let itemId = v.id;
+                  let itemId = `p-${v.id}`;
                   let productInfo = e.currentTarget.children[0].value;
                   // console.log("value", productInfo); //http://localhost:3000/assets/images_product/allblack.jfif|雪板類|暗黑滿點單板|1200
 
@@ -111,7 +121,7 @@ function ProductList({
                 加入購物車
                 <input
                   type="hidden"
-                  value={`${PRODUCTIMAGE_URL}/${v.image}|裝備租賃|${v.name}|${v.price}|2021-11-15|1`}
+                  value={`${PRODUCTIMAGE_URL}/${v.image}|B|${v.name}|${v.price}|2021-11-15|1`}
                 />
               </Button>
             </div>

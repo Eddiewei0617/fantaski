@@ -126,9 +126,13 @@ function ProgressBar({ step, setStep, scrollToTop }) {
               onClick={() => {
                 if (
                   storage["number"] == null ||
+                  storage["number"] === "" ||
                   storage["name"] == null ||
+                  storage["name"] === "" ||
                   storage["expiry"] == null ||
-                  storage["cvc"] == null
+                  storage["expiry"] === "" ||
+                  storage["cvc"] == null ||
+                  storage["cvc"] === ""
                 ) {
                   setStep(2);
                 } else {

@@ -1,13 +1,5 @@
 // 內建通用型元件
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
-
-// 組合型元件
-import { PRODUCTIMAGE_URL } from "../../config/url";
-import { Button } from "react-bootstrap";
-import { BsTagsFill } from "react-icons/bs";
-import { CATEGORY_WORD } from "../../config/StatusShortcut";
 
 // 手風琴不同種類商品的components切換
 import ProductInfo from "./ProductInfo";

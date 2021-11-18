@@ -22,7 +22,6 @@ function ProductInfo({
     });
     setSnowboards(res.data);
   }, [categoryId]);
-
   return (
     <>
       <h3 className="product_title pl-1">{CATEGORY_WORD[categoryId]}</h3>
@@ -30,7 +29,17 @@ function ProductInfo({
         {snowboards.map((v, i) => {
           return (
             <li key={v.id} className="list-unstyled">
-              <div className="product_image_s  ">
+              <div
+                className={`product_image_s  ${
+                  (snowboards[i].category_id === 3 ||
+                    snowboards[i].category_id === 4 ||
+                    snowboards[i].category_id === 5 ||
+                    snowboards[i].category_id === 6 ||
+                    snowboards[i].category_id === 7 ||
+                    snowboards[i].category_id === 8) &&
+                  "product_image_jackets"
+                }`}
+              >
                 <button
                   id={i + 1}
                   className={`${

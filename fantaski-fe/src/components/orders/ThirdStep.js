@@ -1,6 +1,13 @@
 import OrderFinal from "./OrderFinal";
 
-function ThirdStep({ memberPoints, pointUsed, setPointUsed, step }) {
+function ThirdStep({
+  memberPoints,
+  pointUsed,
+  setPointUsed,
+  step,
+  setStep,
+  scrollToTop,
+}) {
   return (
     <>
       <OrderFinal
@@ -8,6 +15,8 @@ function ThirdStep({ memberPoints, pointUsed, setPointUsed, step }) {
         pointUsed={pointUsed}
         setPointUsed={setPointUsed}
         step={step}
+        setStep={setStep}
+        scrollToTop={scrollToTop}
       />
     </>
   );

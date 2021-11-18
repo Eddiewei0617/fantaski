@@ -1,6 +1,6 @@
 express = require("express");
 const router = express.Router();
-const { application } = require("express");
+// const { application } = require("express");
 const connection = require("../utils/db");
 
 router.get("/", (res, req) => {

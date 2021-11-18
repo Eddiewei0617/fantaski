@@ -2,9 +2,19 @@ import { useState, useEffect } from "react";
 import { CART_CATEGORY } from "../../config/StatusShortcut";
 import axios from "axios";
 import { API_URL } from "../../config/url";
+
+import OrderSubmitIcon from "./OrderSubmitIcon";
+import PrevStepIcon from "./PrevStepIcon";
 const moment = require("moment");
 
-function OrderFinal({ memberPoints, pointUsed, setPointUsed }) {
+function OrderFinal({
+  memberPoints,
+  pointUsed,
+  setPointUsed,
+  step,
+  setStep,
+  scrollToTop,
+}) {
   // 代入localStorage裡面存的資料
   var storage = localStorage;
   let itemString = storage["addItemList"];
@@ -37,7 +47,6 @@ function OrderFinal({ memberPoints, pointUsed, setPointUsed }) {
   useEffect(() => {
     setOrderNo(() => {
       let randomNo = random_No(2);
-      // console.log("randomNo", randomNo);
       return randomNo;
     });
   }, []);
@@ -56,18 +65,6 @@ function OrderFinal({ memberPoints, pointUsed, setPointUsed }) {
     return random_no;
   }
 
-  // 準備傳資料給後端去insert進資料庫
-  // async function getOrderNoInfo(orderNo, setOrderNo) {
-  //   let res = await axios.post(
-  //     `${API_URL}/products/getorderno`,
-  //     {
-  //       orderNumber: orderNo,
-  //     }
-  //   );
-  //   console.log("res", res);
-  //   setOrderNo(res.data);
-  // }
-
   // 訂購時間(用moment套件)
   let orderTime = moment().format("YYYY-MM-DD hh:mm:ss a");
   // let times = document.querySelector("#time");
@@ -75,6 +72,26 @@ function OrderFinal({ memberPoints, pointUsed, setPointUsed }) {
   //   times.innerText = orderTime;
   // }
   // setInterval(clock, 1000);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      // 傳表單資料給後端
+      let res = await axios.post(`${API_URL}/order/orderconfirm`, {
+        orderList,
+        orderNumber: orderNo,
+        total: total - pointUsed,
+      });
+
+      // 傳剩餘點數給後端
+      let res2 = await axios.post(`${API_URL}/order/pointleft`, {
+        pointLeft: memberPoints[0].point - pointUsed,
+      });
+    } catch (e) {
+      console.log("handleSubmit", e);
+    }
+  }
+
   return (
     <>
       <div className="order_final_bg">
@@ -100,14 +117,19 @@ function OrderFinal({ memberPoints, pointUsed, setPointUsed }) {
               <div className="col-3 final_title">
                 <div>消費金額</div>
               </div>
-              <div className="col-9 final_word">NT$ {total - pointUsed}</div>
+              <div className="col-9 final_word">
+                NT$ {pointUsed === undefined ? total : total - pointUsed}
+              </div>
             </div>
             <div className="row border-bottoms">
               <div className="col-3 final_title">
                 <div>剩餘點數</div>
               </div>
               <div className="col-9 final_word">
-                {memberPoints[0].point - pointUsed} 點
+                {pointUsed === undefined
+                  ? memberPoints[0].point
+                  : memberPoints[0].point - pointUsed}{" "}
+                點
               </div>
             </div>
           </div>
@@ -115,7 +137,7 @@ function OrderFinal({ memberPoints, pointUsed, setPointUsed }) {
           <div className="middle_line"></div>
 
           {/* 下方總明細欄位 */}
-          <form action="" className="final_form">
+          <form action="" className="final_form" onSubmit={handleSubmit}>
             <table className="final_table">
               <thead className="final_thead">
                 <tr>
@@ -152,7 +174,7 @@ function OrderFinal({ memberPoints, pointUsed, setPointUsed }) {
                         <input type="text" name="amount" value={v.number} />
                       </td>
                       <td className="type_number">
-                        NT${" "}
+                        NT$
                         <input type="text" name="subtotal" value={subtotal} />
                       </td>
                     </tr>
@@ -162,7 +184,19 @@ function OrderFinal({ memberPoints, pointUsed, setPointUsed }) {
             </table>
             <div className="final_total">
               <label>總計 : NT$ </label>
-              <input type="text" name="total" value={total - pointUsed} />
+              <input
+                type="text"
+                name="total"
+                value={pointUsed === undefined ? total : total - pointUsed}
+              />
+            </div>
+            <div className="box3 d-flex justify-content-end m-5 final_prev">
+              <PrevStepIcon
+                step={step}
+                setStep={setStep}
+                scrollToTop={scrollToTop}
+              />
+              <OrderSubmitIcon />
             </div>
           </form>
         </div>
