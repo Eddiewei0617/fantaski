@@ -9,6 +9,9 @@ function ProductSquare({
   toggleState,
   setItemNumber,
   categoryId,
+  memberInfo,
+  collected,
+  setCollectUpdate,
 }) {
   // 點加入購物車後從到locaStorage
   let storage = localStorage;
@@ -41,6 +44,9 @@ function ProductSquare({
           clickToChangeToggle={clickToChangeToggle}
           handleAddNumber={handleAddNumber}
           categoryId={categoryId}
+          memberInfo={memberInfo}
+          collected={collected}
+          setCollectUpdate={setCollectUpdate}
         />
       </div>
     </>

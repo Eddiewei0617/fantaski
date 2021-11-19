@@ -16,6 +16,7 @@ import NextStepIcon from "../../components/orders/NextStepIcon";
 import OrderSubmitIcon from "../../components/orders/OrderSubmitIcon";
 import { PRODUCTIMAGE_URL, ORDERIMAGE_URL } from "../../config/url";
 import { API_URL } from "../../config/url";
+import { getMemberPoints } from "../../components/orders/ModuleDb";
 
 function Orders(props) {
   const { setItemNumber, itemNumber } = props;
@@ -27,10 +28,8 @@ function Orders(props) {
 
   // 從資料庫抓member的資料回來
   const [memberPoints, setMemberPoints] = useState(null);
-  useEffect(async () => {
-    let res = await axios.get(`${API_URL}/order/getMemberPoints`);
-    setMemberPoints(res.data);
-    console.log("res.data", res.data);
+  useEffect(() => {
+    getMemberPoints(setMemberPoints);
   }, []);
 
   // 為了判斷切換為哪個階段

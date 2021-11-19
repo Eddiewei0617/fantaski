@@ -1,6 +1,9 @@
 // 頁面通用元件
 import { useState, useEffect, useRef } from "react";
 import "animate.css";
+import { getMemberPoints } from "../../components/orders/ModuleDb";
+import axios from "axios";
+import { API_URL } from "../../config/url";
 
 // 渲染兩種不同版面元件
 import ProductSquare from "../../components/products/ProductSquare";
@@ -19,7 +22,7 @@ function Products({ setItemNumber, itemNumber }) {
   const [toggleState, setToggleState] = useState({});
   //點擊後切換目標id的狀態false <-> true
   const clickToChangeToggle = (e) => {
-    console.log("e", e);
+    console.log("e", e.currentTarget.id);
     let targetId = e.currentTarget.id;
     let oppositeState = !toggleState[targetId];
     let newState = { ...toggleState, [targetId]: oppositeState };
@@ -38,6 +41,27 @@ function Products({ setItemNumber, itemNumber }) {
 
   // 商品種類狀態，有1~8，預設為1(單板)
   const [categoryId, setCategoryId] = useState(1);
+
+  const [memberInfo, setMemberInfo] = useState(null);
+  useEffect(() => {
+    getMemberPoints(setMemberInfo);
+  }, []);
+  // console.log("memberInfo", memberInfo);
+
+  // 接收後端傳來的product_collection資料
+  const [collected, setCollected] = useState([]);
+  const [collectUpdate, setCollectUpdate] = useState(0); // 此狀態是為了讓之後商品點收藏後每次都會重抓一次
+  useEffect(async () => {
+    try {
+      let res = await axios.post(`${API_URL}/products/collectinfo`, {
+        memberID: 1,
+      });
+      setCollected(res.data);
+    } catch (e) {
+      console.error("collectinfo", e);
+    }
+  }, [collectUpdate]);
+  // console.log("collected", collected);
 
   return (
     <>
@@ -59,6 +83,9 @@ function Products({ setItemNumber, itemNumber }) {
             setItemNumber={setItemNumber}
             itemNumber={itemNumber}
             categoryId={categoryId}
+            memberInfo={memberInfo}
+            collected={collected}
+            setCollectUpdate={setCollectUpdate}
           />
         ) : (
           <ProductList

@@ -61,8 +61,9 @@ router.post("/orderconfirm", async (req, res) => {
     for (let i = 0; i < req.body.orderList.length; i++) {
       if (req.body.orderList[i].category === "B") {
         let orderList = await connection.queryAsync(
-          "INSERT INTO order_product (product_id, amount, booking_date, created_at, valid) VALUES(?,?,?,?,?) ",
+          "INSERT INTO order_product (order_id, product_id, amount, booking_date, created_at, valid) VALUES(?,?,?,?,?,?) ",
           [
+            orderConfirm.insertId,
             req.body.orderList[i].id.substr(2, 1),
             req.body.orderList[i].number,
             req.body.orderList[i].date,
@@ -78,8 +79,9 @@ router.post("/orderconfirm", async (req, res) => {
     for (let i = 0; i < req.body.orderList.length; i++) {
       if (req.body.orderList[i].category === "A") {
         let orderList = await connection.queryAsync(
-          "INSERT INTO order_course (course_id, amount, booking_date, created_at, valid) VALUES(?,?,?,?,?) ",
+          "INSERT INTO order_course (order_id, course_id, amount, booking_date, created_at, valid) VALUES(?,?,?,?,?,?) ",
           [
+            orderConfirm.insertId,
             req.body.orderList[i].id.substr(2, 1),
             req.body.orderList[i].number,
             req.body.orderList[i].date,

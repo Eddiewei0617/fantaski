@@ -11,6 +11,9 @@ function ProductInfo({
   clickToChangeToggle,
   handleAddNumber,
   categoryId,
+  memberInfo,
+  collected,
+  setCollectUpdate,
 }) {
   let storage = localStorage;
 
@@ -20,8 +23,31 @@ function ProductInfo({
     let res = await axios.post(`${API_URL}/products/productsInfoList`, {
       category: categoryId,
     });
+
     setSnowboards(res.data);
   }, [categoryId]);
+
+  // 傳點到想收藏的資料給後端  // 註: 給一個v變數是因為丟到下面map迴圈裡也需要用到v，所以先在這邊加
+  // 因為傳給後端後同時有刪除也有insert，所以要一個判斷是判斷我點的這個商品是不是已經在product_collection裡面出現過了
+  async function handleCollect(v) {
+    let isDelete = false;
+    collected.forEach((item, index) => {
+      if (v.id === item.product_id) {
+        isDelete = true;
+      }
+    });
+    setCollectUpdate(Math.random());
+    try {
+      let res = await axios.post(`${API_URL}/products/collection`, {
+        isDelete: isDelete,
+        memberId: memberInfo[0].id,
+        productId: v.id,
+      });
+    } catch (err) {
+      console.error("handleCollect", err);
+    }
+  }
+
   return (
     <>
       <h3 className="product_title pl-1">{CATEGORY_WORD[categoryId]}</h3>
@@ -43,9 +69,25 @@ function ProductInfo({
                 <button
                   id={i + 1}
                   className={`${
-                    toggleState[i + 1] === true && "collect_tagged"
-                  }  collect_tag`}
-                  onClick={clickToChangeToggle}
+                    toggleState[i + 1] === true
+                      ? "collect_tagged"
+                      : "collect_tag"
+                  } 
+                  
+                  ${collected.map((collections) => {
+                    if (
+                      collections.member_id === 1 &&
+                      collections.product_id === v.id
+                    ) {
+                      return " collect_tagged ";
+                    }
+                  })} 
+                  
+                  collect_tag`}
+                  onClick={(e) => {
+                    clickToChangeToggle(e);
+                    handleCollect(v);
+                  }}
                 >
                   <BsTagsFill title="加入收藏" />
                 </button>

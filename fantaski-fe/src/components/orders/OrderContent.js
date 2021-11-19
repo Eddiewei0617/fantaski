@@ -11,7 +11,6 @@ function OrderContent({
   setPointUsed,
   itemNumber,
 }) {
-  // const [pointUsed, setPointUsed] = useState(0);
   const [points, setPoints] = useState("---");
 
   let storage = localStorage;
