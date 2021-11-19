@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+
+  &::before, &::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+  }
+}
+
+html {
+  font-size: 62.5%;
+
+  /* 16px=1rem so 62.5% of 16px=10px 1rem=10px */
+}
+
+body {
+  box-sizing: border-box;
+  background-color: #fefcee;
+  background-attachment: fixed;
+  background-size: cover;
+
+  /* background-image:  */
+}

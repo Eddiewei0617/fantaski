@@ -122,7 +122,7 @@ function App() {
             <Route path="/Orders">
               <Orders setItemNumber={setItemNumber} itemNumber={itemNumber} />
             </Route>
-            <Route path="/login">
+            <Route path="/Login">
               <Login />
             </Route>
             <Route path="/member">
