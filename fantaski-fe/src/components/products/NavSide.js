@@ -5,7 +5,7 @@ import { GrCoatCheck } from "react-icons/gr";
 import { GiProtectionGlasses } from "react-icons/gi";
 import { GiDeer } from "react-icons/gi";
 
-function NavSide({ setCategoryId }) {
+function NavSide({ setCategoryId, setCollectUpdate }) {
   return (
     <>
       {/* 側邊欄區域 */}
@@ -43,6 +43,7 @@ function NavSide({ setCategoryId }) {
               className="detail_word"
               onClick={() => {
                 setCategoryId(2);
+                setCollectUpdate(Math.random());
               }}
             >
               <GiSnowboard className="mr-1" />

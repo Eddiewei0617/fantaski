@@ -1,8 +1,12 @@
+// 共用元件
 import { useState, useEffect } from "react";
 import { CART_CATEGORY } from "../../config/StatusShortcut";
 import axios from "axios";
 import { API_URL } from "../../config/url";
+import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 
+// 組合用元件
 import OrderSubmitIcon from "./OrderSubmitIcon";
 import PrevStepIcon from "./PrevStepIcon";
 const moment = require("moment");
@@ -74,7 +78,7 @@ function OrderFinal({
   // setInterval(clock, 1000);
 
   async function handleSubmit(e) {
-    e.preventDefault();
+    // e.preventDefault();
     try {
       // 傳表單資料給後端
       let res = await axios.post(`${API_URL}/order/orderconfirm`, {
@@ -90,6 +94,18 @@ function OrderFinal({
     } catch (e) {
       console.log("handleSubmit", e);
     }
+  }
+  // 表單出後自動跳轉頁面回商品頁
+  let history = useHistory();
+  async function handleJupmto() {
+    let trans = await history.push("/products");
+    Swal.fire({
+      position: "top:100px",
+      icon: "success",
+      title: "感謝您的選購 祝您滑雪愉快",
+      showConfirmButton: false,
+      timer: 3000,
+    });
   }
 
   return (
@@ -128,7 +144,7 @@ function OrderFinal({
               <div className="col-9 final_word">
                 {pointUsed === undefined
                   ? memberPoints[0].point
-                  : memberPoints[0].point - pointUsed}{" "}
+                  : memberPoints[0].point - pointUsed}
                 點
               </div>
             </div>
@@ -137,7 +153,14 @@ function OrderFinal({
           <div className="middle_line"></div>
 
           {/* 下方總明細欄位 */}
-          <form action="" className="final_form" onSubmit={handleSubmit}>
+          <form
+            action=""
+            className="final_form"
+            onSubmit={(e) => {
+              handleSubmit(e);
+              handleJupmto();
+            }}
+          >
             <table className="final_table">
               <thead className="final_thead">
                 <tr>

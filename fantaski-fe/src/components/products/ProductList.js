@@ -19,6 +19,9 @@ function ProductList({
   itemNumber,
   onClick,
   categoryId,
+  memberInfo,
+  collected,
+  setCollectUpdate,
 }) {
   // 點加入購物車後從到locaStorage
   let storage = localStorage;
@@ -63,6 +66,27 @@ function ProductList({
     setProducts(totalProductList[pageNow - 1]);
   }, [pageNow, categoryId]);
 
+  // 傳點到想收藏的資料給後端  // 註: 給一個v變數是因為丟到下面map迴圈裡也需要用到v，所以先在這邊加
+  // 因為傳給後端後同時有刪除也有insert，所以要一個判斷是判斷我點的這個商品是不是已經在product_collection裡面出現過了
+  async function handleCollect(v) {
+    let isDelete = false;
+    collected.forEach((item, index) => {
+      if (v.id === item.product_id) {
+        isDelete = true;
+      }
+    });
+    setCollectUpdate(Math.random());
+    try {
+      let res = await axios.post(`${API_URL}/products/collection`, {
+        isDelete: isDelete,
+        memberId: memberInfo[0].id,
+        productId: v.id,
+      });
+    } catch (err) {
+      console.error("handleCollect", err);
+    }
+  }
+
   const display = (
     <ul className="all_image_l ">
       {products.map((v, i) => {
@@ -81,10 +105,20 @@ function ProductList({
             >
               <button
                 id={i + 1}
-                className={`${
-                  toggleState[i + 1] === true && "collect_tagged"
-                }  collect_tag`}
-                onClick={clickToChangeToggle}
+                className={`
+                  ${collected.map((collections) => {
+                    if (
+                      collections.member_id === 1 &&
+                      collections.product_id === v.id
+                    ) {
+                      return " collect_tagged "; // " "裡前後的空格不可以少，不然和其他被選到收藏的商品className黏在一起就抓不到了
+                    }
+                  })} 
+                   collect_tag`}
+                onClick={(e) => {
+                  //clickToChangeToggle(e);
+                  handleCollect(v);
+                }}
               >
                 <BsTagsFill />
               </button>

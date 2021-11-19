@@ -21,13 +21,13 @@ function Products({ setItemNumber, itemNumber }) {
   // 做收藏標籤的點擊變換 start------------------------------
   const [toggleState, setToggleState] = useState({});
   //點擊後切換目標id的狀態false <-> true
-  const clickToChangeToggle = (e) => {
-    console.log("e", e.currentTarget.id);
-    let targetId = e.currentTarget.id;
-    let oppositeState = !toggleState[targetId];
-    let newState = { ...toggleState, [targetId]: oppositeState };
-    setToggleState(newState);
-  };
+  // const clickToChangeToggle = (e) => {
+  //   console.log("e", e.currentTarget.id);
+  //   let targetId = e.currentTarget.id;
+  //   let oppositeState = !toggleState[targetId];
+  //   let newState = { ...toggleState, [targetId]: oppositeState };
+  //   setToggleState(newState);
+  // };
   // 做收藏標籤的點擊變換 end------------------------------
 
   // 用一個ref抓到要跳轉到的位置區塊，再寫一個function scrollTo
@@ -42,13 +42,13 @@ function Products({ setItemNumber, itemNumber }) {
   // 商品種類狀態，有1~8，預設為1(單板)
   const [categoryId, setCategoryId] = useState(1);
 
+  // 引入moduleDb.js檔抓取後端member資料庫的資料來顯示會員剩餘點數
   const [memberInfo, setMemberInfo] = useState(null);
   useEffect(() => {
     getMemberPoints(setMemberInfo);
   }, []);
-  // console.log("memberInfo", memberInfo);
 
-  // 接收後端傳來的product_collection資料
+  // 接收後端傳來的 product_collection 資料
   const [collected, setCollected] = useState([]);
   const [collectUpdate, setCollectUpdate] = useState(0); // 此狀態是為了讓之後商品點收藏後每次都會重抓一次
   useEffect(async () => {
@@ -74,10 +74,13 @@ function Products({ setItemNumber, itemNumber }) {
       <SwitchIcon setSquare={setSquare} square={square} />
 
       <div className="d-flex main_area" ref={productSection}>
-        <NavSide setCategoryId={setCategoryId} />
+        <NavSide
+          setCategoryId={setCategoryId}
+          setCollectUpdate={setCollectUpdate}
+        />
         {square ? (
           <ProductSquare
-            clickToChangeToggle={clickToChangeToggle}
+            // clickToChangeToggle={clickToChangeToggle}
             setToggleState={setToggleState}
             toggleState={toggleState}
             setItemNumber={setItemNumber}
@@ -89,7 +92,7 @@ function Products({ setItemNumber, itemNumber }) {
           />
         ) : (
           <ProductList
-            clickToChangeToggle={clickToChangeToggle}
+            // clickToChangeToggle={clickToChangeToggle}
             setToggleState={setToggleState}
             toggleState={toggleState}
             setItemNumber={setItemNumber}
@@ -98,6 +101,9 @@ function Products({ setItemNumber, itemNumber }) {
               scrollToProduct();
             }}
             categoryId={categoryId}
+            memberInfo={memberInfo}
+            collected={collected}
+            setCollectUpdate={setCollectUpdate}
           />
         )}
       </div>

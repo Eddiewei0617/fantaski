@@ -68,24 +68,25 @@ function ProductInfo({
               >
                 <button
                   id={i + 1}
-                  className={`${
-                    toggleState[i + 1] === true
-                      ? "collect_tagged"
-                      : "collect_tag"
-                  } 
-                  
+                  className={
+                    `
                   ${collected.map((collections) => {
                     if (
                       collections.member_id === 1 &&
                       collections.product_id === v.id
                     ) {
-                      return " collect_tagged ";
+                      return " collect_tagged "; // " "裡前後的空格不可以少，不然和其他被選到收藏的商品className黏在一起就抓不到了
                     }
                   })} 
-                  
-                  collect_tag`}
+                   collect_tag`
+                    //  ${
+                    //   toggleState[i + 1] === true
+                    //     ? "collect_tagged"
+                    //     : "collect_tag"
+                    // }
+                  }
                   onClick={(e) => {
-                    clickToChangeToggle(e);
+                    //clickToChangeToggle(e);
                     handleCollect(v);
                   }}
                 >
