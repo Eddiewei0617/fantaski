@@ -1,16 +1,22 @@
-.navbar {
-  width: auto;
-  height: 100px;
-  background-color: $main-blue;
-  margin-bottom: 40px;
-}
+// .navbar {
+//   width: 100%;
+//   height: 100px;
+//   background-color: $main-blue;
+//   // margin-bottom: 40px;
+//   position: fixed;
+//   top: 0;
+//   z-index: 3;
+// }
 
 //---------------商品頁面-------------------------------------------
 
 // 圖片輪播設定
+.carousel {
+  margin-top: 150px;
+}
 .image_range {
-  width: 1500px;
-  height: 700px;
+  width: 70%;
+  height: 35%;
   margin: 0 auto;
   overflow: hidden;
 }
@@ -88,7 +94,7 @@
 // 分隔線
 .separate {
   width: 1px;
-  height: 100%;
+  height: 80%;
   border-right: 3px solid rgb(121, 121, 121);
   left: 23%;
   position: absolute;
@@ -108,8 +114,9 @@
 
 // 方格式圖片設定
 .all_image_s {
-  position: absolute;
-  left: 25%;
+  // position: absolute;
+  // left: 25%;
+  padding: 0;
 }
 .all_image_s li {
   display: inline-block;
@@ -119,12 +126,51 @@
 .product_image_s {
   width: 15rem;
   height: 24rem;
+  position: relative;
+}
+@keyframes pulsate-fwd {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+.product_image_s:hover {
+  animation: pulsate-fwd 0.9s 1 alternate;
+}
+.collect_tag {
+  font-size: 27px;
+  position: absolute;
+  right: 0;
+  color: $main-red;
+  opacity: 0.5;
+  background-color: transparent;
+  border: 0ch;
+  margin: 0;
+  padding: 0;
+}
+.collect_tag:hover {
+  font-size: 33px;
+  color: $main-red;
+  opacity: 1;
+}
+.collect_tagged {
+  color: $main-red;
+  opacity: 1;
 }
 
 // 條列式圖片設定
 .all_image_l {
-  position: absolute;
-  left: 22%;
+  // position: absolute;
+  // left: 22%;
+  padding: 0;
 }
 .all_image_l li {
   display: flex;
@@ -133,6 +179,10 @@
 .product_image_l {
   width: 15rem;
   height: 24rem;
+  position: relative;
+}
+.product_image_l:hover {
+  animation: pulsate-fwd 0.9s 1 alternate;
 }
 .product_description {
   max-width: 900px;
@@ -167,233 +217,43 @@
 
 // 切換頁面按鈕
 .page_button {
-  position: absolute;
-  left: 50%;
-  margin-bottom: 0;
-  // display: flex;
-  // justify-content: center;
-  // align-items: flex-end;
-}
-
-// .page_button {
-//   display: flex;
-//   // height: 50px;
-//   position: absolute;
-//   top: 220%;
-//   left: 50%;
-// }
-// .page_button Button {
-//   border: 1px solid white;
-// }
-
-//---------------購物車-------------------------------------------
-
-// 進度圖案文字條樣式設定
-@keyframes skiing {
-  0% {
-    margin-left: 15px;
-  }
-  100% {
-    margin-left: 450px;
-  }
-}
-.penguin {
-  width: 65px;
-  height: 60px;
-  display: block;
-  margin-left: 15px;
-}
-.penguin {
-  animation: skiing 3s;
-}
-
-.penguin img {
-  width: 100%;
-  height: 100%;
-}
-.md-50 {
-  font-size: 50px;
-  cursor: pointer;
-}
-.md-blue {
-  color: $main-text-darkblue;
-}
-.md-grey {
-  color: rgb(163, 163, 163);
-}
-// .md-blue:hover {
-//   opacity: 0.7;
-// }
-.number_icon {
   display: flex;
   justify-content: center;
-}
-.order_progress_word {
-  font-size: $font-l;
-  font-weight: 700;
-}
-.progress_line {
-  width: 15rem;
-  height: 5px;
-  background-color: rgb(163, 163, 163);
-  margin: 30px 3rem;
+  align-items: center;
 }
 
-// 購物車底色
-.cart_content_bg {
-  width: 1400px;
-  height: 600px;
-  background-color: $main-blue;
-  margin: 30px auto;
-  border-radius: 20px;
-  box-shadow: 0px 15px 15px -15px #000;
-  position: relative;
-}
-.cart_content {
-  width: 1400px;
-  height: 500px;
-  background-color: #fff;
-  position: absolute;
-  top: 100px;
-  border-radius: 0, 0, 20px, 20px;
-}
-.header {
-  text-align: center;
-  padding: 30px 0;
-  color: #fff;
-  font-weight: 600;
-  font-size: $font-l;
-}
-
-// 購物車內容
-.cart_content .row {
-  width: 1400px;
-  border-bottom: 3px solid rgb(155, 155, 155);
-  margin: 0 auto;
+.page_button ul {
+  padding: 0;
+  list-style: none;
   display: flex;
+  margin-bottom: 0;
 }
-.cart_content .row .col {
-  text-align: center;
-  justify-content: space-around;
-}
-.cart_content .col {
-  width: 200px;
-  // text-align: center;
+.page_button li {
   font-size: $font-l;
-  color: $main-text-darkblue;
-  padding: 80px 5px;
-}
-.cart_image {
-  margin: 10px;
-  width: 180px;
-  height: 200px;
-  object-fit: cover;
-}
-.cart_image img {
-  width: 90%;
-  height: 100%;
-}
-.cart_content input {
-  width: 200px;
-  border-radius: 20px;
-  border: 4px solid $main-text-darkblue;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 0 15px;
 }
 
-// 總訂單底色
-.order_content_bg {
-  width: 1400px;
-  height: 300px;
-  background-color: $main-blue;
-  margin: 30px auto;
-  border-radius: 20px;
-  box-shadow: 0px 15px 15px -15px #000;
-  position: relative;
-}
-.order_content {
-  width: 1400px;
-  height: 200px;
-  background-color: #fff;
-  position: absolute;
-  top: 100px;
-  border-radius: 0, 0, 20px, 20px;
-}
-.order_content_bg h2 {
-  text-align: center;
-  padding: 30px 0;
-  color: #fff;
-  font-weight: 600;
-}
-
-// 總訂單內容
-.order_detail {
-  padding: 10px 0;
-}
-.order_detail .col {
-  height: 80px;
-  // padding: 30px 0;
-  align-items: center;
-}
-.row1 {
-  // border: 1px solid black;
-  color: $main-text-darkblue;
-  font-size: $font-l;
-  font-weight: 600;
-}
-.row1 input {
-  outline: none;
-  border: 0ch;
-  width: 100px;
-}
-.row1 label {
-  width: 180px;
-}
-.order_total {
-  // border: 1px solid black;
-  color: $main-blue;
-  font-size: $font-l;
-  font-weight: 600;
-  padding: 60px 0;
-  align-items: center;
-}
-.order_total label {
-  width: 180px;
-}
-.order_total input {
-  width: 100px;
-  outline: none;
-  border: 0ch;
-  color: $main-red;
-}
-
-// 上一步下一步按鈕
-.prevstep {
-  margin-right: 1rem;
-  width: 8%;
-  border-radius: 20px;
-  font-size: 20px;
-  font-weight: 600;
-  background-color: $background-color;
-  color: $main-text-darkblue;
-  border: 4px solid $main-blue;
-}
-.prevstep:hover {
-  background-color: $main-blue;
-  color: #fff;
-  border: 4px solid $main-blue;
-}
-
-.nextstep {
-  margin-right: 20rem;
-  width: 8%;
-  border-radius: 20px;
-  font-size: 20px;
-  font-weight: 600;
-  background-color: $background-color;
-  color: $main-text-darkblue;
-  border: 4px solid $main-red;
-}
-.nextstep:hover {
+.page_button li:active,
+.page_button div:active {
+  color: white;
   background-color: $main-red;
-  color: #fff;
-  border: 4px solid $main-red;
+}
+.page_button div {
+  font-size: $font-xl;
+  color: $main-blue;
+  margin: 0 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 0 10px;
+}
+.page_active {
+  color: white;
+  background-color: $main-red;
+}
+
+.main_area {
+  height: 100%;
 }

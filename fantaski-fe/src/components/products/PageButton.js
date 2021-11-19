@@ -1,13 +1,105 @@
-import { Button } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 
-function PageButton() {
+function PageButton({
+  setPageButton,
+  pageButton,
+  handlePageButton,
+  products,
+  pageNow,
+  setPageNow,
+  onClick,
+}) {
+  const pageNumber = [
+    {
+      id: 1,
+      name: "1",
+    },
+    {
+      id: 2,
+      name: "2",
+    },
+    {
+      id: 3,
+      name: "3",
+    },
+    {
+      id: 4,
+      name: "4",
+    },
+  ];
+  useEffect(() => {
+    setPageButton(1);
+  }, []);
+
   return (
     <>
       <div className="page_button ">
-        <Button>{`<`}</Button>
-        <Button>{`1`}</Button>
-        {/* <Button>{`2`}</Button> */}
-        <Button>{`>`}</Button>
+        <div
+          onClick={() => {
+            if (pageButton > 1) {
+              setPageButton(pageButton - 1);
+              setPageNow(pageNow - 1);
+              onClick();
+            }
+          }}
+        >
+          <FontAwesomeIcon className="arrow_go" icon={faCaretLeft} />
+        </div>
+        <ul>
+          {pageNumber.map((v, i) => {
+            return (
+              <li
+                key={v.id}
+                id={v.id}
+                className={`${pageButton === v.id ? "page_active" : ""} `}
+                onClick={(e) => {
+                  handlePageButton(e);
+                  setPageNow(`${v.id}`);
+                  onClick();
+                }}
+              >
+                {v.name}
+              </li>
+            );
+          })}
+        </ul>
+
+        {/* <ul>
+          <li
+            id="1"
+            className={`${pageButton === 1 ? "page_active" : ""} `}
+            onClick={handlePageButton}
+          >
+            1
+          </li>
+          <li
+            id="2"
+            className={`${pageButton === 2 ? "page_active" : ""} `}
+            onClick={handlePageButton}
+          >
+            2
+          </li>
+          <li
+            id="3"
+            className={`${pageButton === 3 ? "page_active" : ""} `}
+            onClick={handlePageButton}
+          >
+            3
+          </li>
+        </ul> */}
+        <div
+          onClick={() => {
+            if (pageButton < pageNumber.length) {
+              setPageButton(pageButton + 1);
+              setPageNow(pageNow + 1);
+              onClick();
+            }
+          }}
+        >
+          <FontAwesomeIcon className="arrow_go" icon={faCaretRight} />
+        </div>
       </div>
     </>
   );

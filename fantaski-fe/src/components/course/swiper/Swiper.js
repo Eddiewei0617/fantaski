@@ -1,45 +1,14 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ProductCard from "./ProductCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { COURSE_IMG_URL } from "../../../config/url";
+import { getAdviceInfo } from "../moduleList";
 
-// import pants from "../../img/1631584448.jpg";
-
-const adviceProducts = [
-  {
-    id: 1,
-    name: "高機能雪褲",
-    intro: "防雪防滑防寒還能放糖果！安心滑雪首選！",
-    price: 3000,
-    img: "1631584448.jpg",
-  },
-  {
-    id: 2,
-    name: "酷炫雪板",
-    intro: "防雪防滑防寒還能放糖果！安心滑雪首選！",
-    price: 1000,
-    img: "1630913734.jpg",
-  },
-  {
-    id: 3,
-    name: "高級雪鞋",
-    intro: "防雪防滑防寒還能放糖果！安心滑雪首選！",
-    price: 2000,
-    img: "1631004818.jpg",
-  },
-  {
-    id: 4,
-    name: "最強護目鏡",
-    intro: "防雪防滑防寒還能放糖果！安心滑雪首選！",
-    price: 2000,
-    img: "1630914036.jpg",
-  },
-];
-
-function Swiper({ showCourse }) {
+function Swiper({ showCourse, customerChoose }) {
   //後端依據 showCourse抓資料回來
   const [selectedAdvice, setSelectedAdvice] = useState(0);
   const [ifArrowUnavailable, setIfArrowUnavailable] = useState({
@@ -48,13 +17,23 @@ function Swiper({ showCourse }) {
   });
   const allProducts = useRef();
 
+  const [adviceInfo, setAdviceInfo] = useState(null);
+  //後端依據showCourse抓評論回填
+  useEffect(() => {
+    getAdviceInfo(showCourse, setAdviceInfo);
+  }, []);
+
+  if (adviceInfo === null) {
+    return <div className="text-center">此課程無推薦裝備</div>;
+  }
+
   //  往左按鈕的點擊事件
   const changePicToL = () => {
     let newIndex = selectedAdvice - 1;
     if (newIndex < 0) {
       return;
     } else {
-      if (newIndex === adviceProducts.length - 2) {
+      if (newIndex === adviceInfo.length - 2) {
         //左鍵把右箭頭顏色改回來
         setIfArrowUnavailable((cur) => {
           return { ...cur, right: !cur["right"] };
@@ -78,7 +57,7 @@ function Swiper({ showCourse }) {
   //  往右按鈕的點擊事件
   const changePicToR = () => {
     let newIndex = selectedAdvice + 1;
-    if (newIndex >= adviceProducts.length) {
+    if (newIndex >= adviceInfo.length) {
       console.log("stopped");
       return;
     } else {
@@ -97,7 +76,7 @@ function Swiper({ showCourse }) {
         trimVersion - 160
       }px)`;
       //到最後一個的時候右箭頭改樣式--unavailable
-      if (newIndex === adviceProducts.length - 1) {
+      if (newIndex === adviceInfo.length - 1) {
         setIfArrowUnavailable((cur) => {
           return { ...cur, right: !cur["right"] };
         });
@@ -111,7 +90,7 @@ function Swiper({ showCourse }) {
         <div className="decoration-skill">
           <img
             className="object-fit"
-            src="/assets/img_course/all-advice.png"
+            src={`${COURSE_IMG_URL}/all-advice.png`}
             alt=""
           />
         </div>
@@ -122,13 +101,14 @@ function Swiper({ showCourse }) {
             style={{ transform: "translateX(160px)" }}
             ref={allProducts}
           >
-            {adviceProducts.map((product, i) => {
+            {adviceInfo.map((product, i) => {
               return (
                 <ProductCard
                   key={i}
                   product={product}
                   i={i}
                   selectedAdvice={selectedAdvice}
+                  customerChoose={customerChoose}
                 />
               );
             })}

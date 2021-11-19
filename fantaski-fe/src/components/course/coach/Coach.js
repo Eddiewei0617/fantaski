@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { filterCouches } from "../asCouchDB";
+import { COURSE_IMG_URL } from "../../../config/url";
+
 const styleList = [
   {
     svgPathD:
@@ -37,6 +39,21 @@ function Coach({ showCourse }) {
                 } coach-shadow `}
               >
                 <div className="coach">
+                  <div className="decoration-skill">
+                    {selectedCoach === couchtoShow[0]["id"] ? (
+                      <img
+                        className="object-fit"
+                        src={`${COURSE_IMG_URL}/snowManinCouch.png`}
+                        alt=""
+                      />
+                    ) : (
+                      <img
+                        className="object-fit"
+                        src={`${COURSE_IMG_URL}/snowManinCouch2.png`}
+                        alt=""
+                      />
+                    )}
+                  </div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 531.65 301.13"
@@ -61,10 +78,12 @@ function Coach({ showCourse }) {
                       setSelectedCoach(v.id);
                     }}
                   >
-                    <div className={`avatar ${styleList[i]["avatarClass"]}`}>
+                    <div
+                      className={`coach-avatar ${styleList[i]["avatarClass"]}`}
+                    >
                       <img
                         className="object-fit"
-                        src={v.imgSrc}
+                        src={`${COURSE_IMG_URL}/${v.imgSrc}`}
                         alt={v.imgAlt}
                       />
                     </div>
@@ -78,7 +97,7 @@ function Coach({ showCourse }) {
                     </div>
                   </div>
                   <div className="coach-file px-5">
-                    <h6 className="text-center">教練小檔案</h6>
+                    <div className="text-center">教練小檔案</div>
                     <ul className="list-unstyled">
                       <li>教練：{v.liName}</li>
                       <li>資歷：{v.liExperience}年</li>
@@ -97,21 +116,6 @@ function Coach({ showCourse }) {
             </>
           );
         })}
-        <div className="decoration-skill">
-          {selectedCoach === couchtoShow[0]["id"] ? (
-            <img
-              className="object-fit"
-              src="/assets/img_course/snowManinCouch.png"
-              alt=""
-            />
-          ) : (
-            <img
-              className="object-fit"
-              src="/assets/img_course/snowManinCouch2.png"
-              alt=""
-            />
-          )}
-        </div>
       </div>
     </>
   );

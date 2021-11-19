@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Video from "../../components/course/video/Video";
 import CourseButtons from "../../components/course/courseButtons/CourseButtons";
 import Title from "../../components/course/titles/Title";
 import CourseIntroSkill from "../../components/course/courseIntro/CourseIntroSkill";
-import CourseMapSkill from "../../components/course/courseMap/CourseMapSkill";
+import CourseMapSled from "../../components/course/courseMap/CourseMapSled";
 import Coach from "../../components/course/coach/Coach";
 import Comments from "../../components/course/comments/Comments";
 import AddCartFix from "../../components/course/addCartFix/AddCartFix";
 import Swiper from "../../components/course/swiper/Swiper";
 import CourseLink from "../../components/course/courseLink/CourseLink";
 import AddCartFloat from "../../components/course/addCartFloat/AddCartFloat";
+import { toShowAddCartFloat } from "../../components/course/moduleList";
 
 function Sled(props) {
   const { courses, showCourse, setShowCourse } = props;
@@ -17,17 +18,34 @@ function Sled(props) {
   //showCourse courses[1]
   const [customerChoose, setCustomerChoose] = useState({
     date: "",
-    number: "",
+    number: 1,
   });
+  const [scrollTop, setScrollTop] = useState(false);
+  const [ifAddCart, setIfAddCart] = useState(false);
+
+  useEffect(() => {
+    toShowAddCartFloat(setScrollTop);
+  }, []);
+
+  if (showCourse === undefined) {
+    setShowCourse(courses[3]);
+    return <div></div>;
+  }
 
   return (
     <>
       <Video showCourse={showCourse} />
-      <AddCartFloat
-        showCourse={showCourse}
-        customerChoose={customerChoose}
-        setCustomerChoose={setCustomerChoose}
-      />
+      {scrollTop && (
+        <AddCartFloat
+          ifAddCart={ifAddCart}
+          setIfAddCart={setIfAddCart}
+          className="animate__animated animate__backInRight "
+          showCourse={showCourse}
+          customerChoose={customerChoose}
+          setCustomerChoose={setCustomerChoose}
+        />
+      )}
+
       <CourseButtons
         courses={courses}
         showCourse={showCourse}
@@ -36,18 +54,20 @@ function Sled(props) {
       <Title titleName="課程介紹" />
       <CourseIntroSkill />
       <Title titleName="課程導覽" />
-      <CourseMapSkill />
+      <CourseMapSled />
       <Title titleName="專業教練" />
       <Coach showCourse={showCourse} />
       <Title titleName="雪友點評" />
       <Comments showCourse={showCourse} />
       <AddCartFix
+        ifAddCart={ifAddCart}
+        setIfAddCart={setIfAddCart}
         showCourse={showCourse}
         customerChoose={customerChoose}
         setCustomerChoose={setCustomerChoose}
       />
       <Title titleName="推薦裝備" />
-      <Swiper showCourse={showCourse} />
+      <Swiper showCourse={showCourse} customerChoose={customerChoose} />
       <Title titleName="其他課程" />
       <CourseLink setShowCourse={setShowCourse} courses={courses} />
     </>

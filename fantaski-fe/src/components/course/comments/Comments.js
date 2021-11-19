@@ -1,65 +1,35 @@
-import React from "react";
-import Comment from "./comment";
-const comments = [
-  {
-    member: "Sam",
-    member_img: "",
-    date: "2020-01-23 17:18",
-    star: 4,
-    content:
-      "在教練清楚的解說與愉快的帶領下學會很很猛的滑雪技術，非常推薦來FANTASKI!",
-  },
-  {
-    member: "Sam1",
-    member_img: "",
-    date: "2020-01-23 17:18",
-    star: 1,
-    content:
-      "在教練清楚的解說與愉快的帶領下學會很很猛的滑雪技術，非常推薦來FANTASKI!",
-  },
-  {
-    member: "Sam2",
-    member_img: "",
-    date: "2020-01-23 17:18",
-    star: 5,
-    content:
-      "在教練清楚的解說與愉快的帶領下學會很很猛的滑雪技術，非常推薦來FANTASKI!",
-  },
-  {
-    member: "Sam3",
-    member_img: "",
-    date: "2020-01-23 17:18",
-    star: 3,
-    content:
-      "在教練清楚的解說與愉快的帶領下學會很很猛的滑雪技術，非常推薦來FANTASKI!",
-  },
-  {
-    member: "Sam4",
-    member_img: "",
-    date: "2020-01-23 17:18",
-    star: 3,
-    content:
-      "在教練清楚的解說與愉快的帶領下學會很很猛的滑雪技術，非常推薦來FANTASKI!在教練清楚的解說與愉快的帶領下學會很很猛的滑雪技術，非常推薦來FANTASKI!在教練清楚的解說與愉快的帶領下學會很很猛的滑雪技術，非常推薦來FANTASKI!在教練清楚的解說與愉快的帶領下學會很很猛的滑雪技術，非常推薦來FANTASKI!在教練清楚的解說與愉快的帶領下學會很很猛的滑雪技術，非常推薦來FANTASKI!",
-  },
-  {
-    member: "Sam5",
-    member_img: "",
-    date: "2020-01-23 17:18",
-    star: 3,
-    content:
-      "在教練清楚的解說與愉快的帶領下學會很很猛的滑雪技術，非常推薦來FANTASKI!",
-  },
-];
+import React, { useState, useEffect } from "react";
+import SingleComment from "./SingleComment";
+import { getCommentsInfo } from "../moduleList";
 
 function Comments({ showCourse }) {
+  const [commentsInfo, setCommentsInfo] = useState(null);
   //後端依據showCourse抓評論回填
+  useEffect(() => {
+    getCommentsInfo(showCourse, setCommentsInfo);
+  }, []);
+
+  if (commentsInfo === null || commentsInfo.length === 0) {
+    return (
+      <>
+        <div className="comments-wrapper">
+          <div className="no-comments"></div>
+          <div className="no-comments-text">
+            尚未有評論，立即報名課程當第一個評論的人！
+          </div>
+          )
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <div className="comments-wrapper">
-        {comments.map((commit, i) => {
+        {commentsInfo.map((commit, i) => {
           return (
             <>
-              <Comment key={i} comment={commit} />
+              <SingleComment key={i} comment={commit} />
             </>
           );
         })}

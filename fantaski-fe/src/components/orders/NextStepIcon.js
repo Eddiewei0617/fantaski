@@ -1,9 +1,17 @@
 import { Button } from "react-bootstrap";
 
-function NextStepIcon() {
+function NextStepIcon({ step, setStep, scrollToTop }) {
   return (
     <>
-      <Button className="nextstep">下一步</Button>
+      <Button
+        className="nextstep"
+        onClick={() => {
+          step === 1 ? setStep(2) : setStep(3);
+          scrollToTop();
+        }}
+      >
+        下一步
+      </Button>
     </>
   );
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { COURSE_IMG_URL } from "../../../config/url";
 
 const coursesinEng = {
   初體驗: "beginner",
@@ -11,27 +12,25 @@ function CourseButtons(props) {
   const { courses, showCourse, setShowCourse } = props;
   return (
     <>
-      <div className="buttons d-flex justify-content-center align-items-center">
+      <div className="course-buttons d-flex justify-content-center align-items-center">
         {courses.map((course, i) => {
           return (
             <>
-              <a
-                href="#/"
+              <Link
                 key={i}
+                to={`/course/${coursesinEng[course]}`}
                 className={`course${i}`}
                 onClick={() => {
                   setShowCourse(course);
                 }}
               >
-                <Link to={`/course/${coursesinEng[course]}`}>
-                  <img
-                    src="/assets/img_course/snowflat.png"
-                    alt=""
-                    className={`${showCourse === course && "showCourseBtn"}`}
-                  />
-                  <span>{course}</span>
-                </Link>
-              </a>
+                <img
+                  src={`${COURSE_IMG_URL}/snowflat.png`}
+                  alt=""
+                  className={`${showCourse === course && "showCourseBtn"}`}
+                />
+                <span>{course}</span>
+              </Link>
             </>
           );
         })}

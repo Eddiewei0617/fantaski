@@ -1,0 +1,56 @@
+.footer-bg {
+  background: $main-blue;
+  padding: 1% 0;
+  margin-top: 5%;
+}
+
+// 主文
+.footer-main-article {
+  color: $assist-white;
+  line-height: 2em;
+  h2 {
+    color: $main-text-darkblue;
+    margin-top: 1%;
+    font-weight: 700;
+  }
+}
+
+// 相關資訊(關於我們...)
+.footer-about-us ul li {
+  display: inline-flex;
+  .footer-link {
+    text-decoration: none;
+    color: $assist-white;
+    &:hover {
+      color: $main-text-darkblue;
+    }
+  }
+}
+
+// 相關資訊(關於我們...) 右側線條
+.footer-right-line {
+  background: $assist-white;
+  margin: 0 1%;
+  height: 12px;
+  width: 1px;
+}
+
+// 分隔線
+.divider {
+  height: 3px;
+  background: $assist-white;
+}
+
+// copyright
+.footer-under-text {
+  color: $assist-white;
+  p {
+    margin: 0 auto;
+    font-size: 1.2em;
+  }
+  small {
+    font-size: ($font-m / 3);
+    font-weight: normal;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+}
