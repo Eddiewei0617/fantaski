@@ -58,6 +58,10 @@ app.use("/api/forum", forumRouter);
 let weatherRouter = require("./routers/weather");
 app.use("/api/weather", weatherRouter);
 
+// 會員api
+let memberRouter = require("./routers/member");
+app.use("/api/member", memberRouter);
+
 //404中間件
 app.use((req, res, next) => {
   console.log("找不到網頁");

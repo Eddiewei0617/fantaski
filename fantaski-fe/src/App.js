@@ -12,6 +12,7 @@ import Igloo from "./pages/course/Igloo";
 import Products from "./pages/product/Products";
 import Orders from "./pages/order/Orders";
 import Home from "./pages/Home";
+
 import MountainRoute from "./pages/MountainRoute";
 
 // 論壇
@@ -34,6 +35,7 @@ import Member from "./pages/member/Member";
 import MemberForum from "./pages/member/MemberForum";
 import Record from "./pages/member/Record";
 import MemberCollect from "./pages/member/MemberCollect";
+import MemberComment from "./pages/member/MemberComment";
 // ===========================================
 
 // 組合用元件
@@ -131,7 +133,7 @@ function App() {
             <Route path="/forum/new-post">
               <NewPost />
             </Route>
-            <Route path="/record">
+            <Route path="/memberRecord">
               <Record />
             </Route>
             <Route path="/memberForum">
@@ -139,6 +141,9 @@ function App() {
             </Route>
             <Route path="/memberCollect">
               <MemberCollect />
+            </Route>
+            <Route path="/memberComment">
+              <MemberComment />
             </Route>
 
             <Route path="/forum">
