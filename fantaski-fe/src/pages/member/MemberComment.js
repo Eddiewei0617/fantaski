@@ -1,13 +1,12 @@
 import React from "react";
 import MemberList from "../../components/member/MemberList";
-
-function MemberForum() {
+function MemberComment() {
   return (
     <div>
       <MemberList />
-      <div className="text-center">我的文章</div>
+      <div className="text-center">我的點評</div>
     </div>
   );
 }
 
-export default MemberForum;
+export default MemberComment;
