@@ -12,8 +12,6 @@ import Igloo from "./pages/course/Igloo";
 import Products from "./pages/product/Products";
 import Orders from "./pages/order/Orders";
 import Home from "./pages/Home";
-<<<<<<< HEAD
-import MountainRoute from "./pages/MountainRoute";
 
 // 論壇
 import Forum from "./pages/forums/Forum";
@@ -22,10 +20,6 @@ import NewPost from "./pages/forums/NewPost";
 // import Courseshare from "./pages/forums/Courseshare";
 // import Equipment from "./pages/forums/Equipment";
 
-import Member from "./pages/Member";
-=======
-import Forum from "./pages/Forum";
->>>>>>> route
 import Login from "./pages/Login";
 // footer 相關連結
 // import Aboutus from "./pages/footer/Aboutus";
