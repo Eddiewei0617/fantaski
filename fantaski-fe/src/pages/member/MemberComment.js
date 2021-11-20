@@ -4,7 +4,9 @@ function MemberComment() {
   return (
     <div>
       <MemberList />
-      <div className="text-center">我的點評</div>
+      <div className="text-center">
+        <h1>我的點評</h1>
+      </div>
     </div>
   );
 }
