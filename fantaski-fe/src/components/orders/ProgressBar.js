@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { ORDERIMAGE_URL } from "../../config/url";
 
 function ProgressBar({ step, setStep, scrollToTop }) {
-  // console.log("第一滑", progressMoving);
+  let storage = localStorage;
   // 載入中Start----------------------
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -124,9 +124,22 @@ function ProgressBar({ step, setStep, scrollToTop }) {
             <button
               className="progress_button3"
               onClick={() => {
-                setStep(3);
-                progressMoving3();
-                scrollToTop();
+                if (
+                  storage["number"] == null ||
+                  storage["number"] === "" ||
+                  storage["name"] == null ||
+                  storage["name"] === "" ||
+                  storage["expiry"] == null ||
+                  storage["expiry"] === "" ||
+                  storage["cvc"] == null ||
+                  storage["cvc"] === ""
+                ) {
+                  setStep(2);
+                } else {
+                  setStep(3);
+                  progressMoving3();
+                  scrollToTop();
+                }
               }}
             >
               <div className="material-icons md-50 md-grey number_icon">

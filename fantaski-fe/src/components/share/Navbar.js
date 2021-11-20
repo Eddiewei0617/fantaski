@@ -229,12 +229,22 @@ function Navbar({ courses, setShowCourse, setItemNumber, itemNumber }) {
                 </li>
                 <li className="left-line"></li>
                 <li className="nav-item">
-                  <Link className="nav-link position-relative" to="/orders">
-                    <BsFillCartFill className="all-icon-nav" size={25} />
-                    <p className="shopping-cart-circle" id="itemNumber">
-                      {itemNumber}
-                    </p>
-                  </Link>
+                  {localStorage["addItemList"] === "" ? (
+                    <Link className="nav-link position-relative" to="/products">
+                      <BsFillCartFill className="all-icon-nav" size={25} />
+                      <p className="shopping-cart-circle" id="itemNumber">
+                        {itemNumber}
+                      </p>
+                    </Link>
+                  ) : (
+                    <Link className="nav-link position-relative" to="/orders">
+                      {" "}
+                      <BsFillCartFill className="all-icon-nav" size={25} />
+                      <p className="shopping-cart-circle" id="itemNumber">
+                        {itemNumber}
+                      </p>
+                    </Link>
+                  )}
                 </li>
                 <li className="left-line"></li>
                 <li className="nav-item user-login">
