@@ -47,6 +47,10 @@ app.use("/api/course", courseRouter);
 let productRouter = require("./routers/products");
 app.use("/api/products", productRouter);
 
+//api路徑中間件(論壇)
+let forumRouter = require("./routers/forum");
+app.use("/api/forum", forumRouter);
+
 //天氣api
 let weatherRouter = require("./routers/weather");
 app.use("/api/weather", weatherRouter);
