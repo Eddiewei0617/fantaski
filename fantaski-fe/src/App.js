@@ -51,6 +51,12 @@ function App() {
   // nabar上購物車的數字
   const [itemNumber, setItemNumber] = useState(0);
 
+  //forum 種類
+  const [forumCategory, setForumCategory] = useState({
+    forumCategory: 0,
+    isHot: true,
+  });
+
   return (
     <>
       <Router>
@@ -58,6 +64,7 @@ function App() {
           courses={courses}
           setShowCourse={setShowCourse}
           setItemNumber={setItemNumber}
+          setForumCategory={setForumCategory}
           itemNumber={itemNumber}
         />
         {/* LOGO+標題+導覽列+上方選單 */}
@@ -129,7 +136,10 @@ function App() {
               <Member setShowCourse={setShowCourse} />
             </Route>
             <Route path="/forum/new-post">
-              <NewPost />
+              <NewPost
+                forumCategory={forumCategory}
+                setForumCategory={setForumCategory}
+              />
             </Route>
             <Route path="/record">
               <Record />
@@ -142,7 +152,10 @@ function App() {
             </Route>
 
             <Route path="/forum">
-              <Forum />
+              <Forum
+                forumCategory={forumCategory}
+                setForumCategory={setForumCategory}
+              />
             </Route>
             <Route path="/mountainroute">
               <MountainRoute />

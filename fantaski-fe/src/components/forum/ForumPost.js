@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { IMAGE_FORUM_URL } from "../../config/url";
+import { IMAGE_FORUM_URL, PUBLIC_URL } from "../../config/url";
 import ForumModal from "./ForumModal";
 import ForumHeartCommit from "./ForumHeartCommit";
 import { getForumInfo, forumList } from "./moduleList";
 import moment from "moment";
 
-function ForumPost({ forumCategory }) {
+function ForumPost({ forumCategory, setForumCategory }) {
   const [forumModalShow, setForumModalShow] = useState(false);
   const [forumInfo, setForumInfo] = useState(null);
   const [whichPostToShow, setWhichPostToShow] = useState(null);
@@ -14,16 +14,30 @@ function ForumPost({ forumCategory }) {
   const handleShow = (e) => {
     setForumModalShow(true);
     let postId = Number(e.currentTarget.id.split("-").pop());
+    //抓彈跳視窗的文章
     let singlepost = forumInfo["postList"].filter((post) => {
       return post.id === postId;
     });
-    let singleReply = forumInfo["reply"][postId];
     setWhichPostToShow(singlepost);
-    setReplyCount(singleReply);
+    //把彈跳視窗的文章傳到編輯文章頁面
+    setForumCategory((cur) => {
+      return { ...cur, nowaForumInfo: singlepost };
+    });
+
+    //抓彈跳視窗文章的回覆數
+    let singleReplyCount = forumInfo["reply"][postId];
+    if (singleReplyCount) {
+      setReplyCount(singleReplyCount);
+    } else {
+      setReplyCount(0);
+    }
   };
 
   useEffect(() => {
-    getForumInfo(forumCategory, setForumInfo);
+    //有新增或編輯圖片時，導致資料庫insert處理太慢，在這邊getinfo時還沒加到資料庫，所以用setTimeOut把getinfo排到後面去
+    setTimeout(() => {
+      getForumInfo(forumCategory, setForumInfo);
+    }, 0);
   }, [forumCategory]);
 
   if (forumInfo === null) {
@@ -64,14 +78,15 @@ function ForumPost({ forumCategory }) {
                     </div>
                     <ForumHeartCommit
                       heart={post.heart}
-                      reply={forumInfo["reply"][post.id]}
+                      replyCount={
+                        forumInfo["reply"][post.id]
+                          ? forumInfo["reply"][post.id]
+                          : 0
+                      }
                     />
                     {post.image !== "" && (
                       <div className="post-img">
-                        <img
-                          src={`${IMAGE_FORUM_URL}/${post.image}`}
-                          alt="postimg"
-                        />
+                        <img src={`${PUBLIC_URL}${post.image}`} alt="postimg" />
                       </div>
                     )}
                   </div>
@@ -85,8 +100,11 @@ function ForumPost({ forumCategory }) {
         <ForumModal
           forumModalShow={forumModalShow}
           setForumModalShow={setForumModalShow}
+          setForumCategory={setForumCategory}
           whichPostToShow={whichPostToShow}
-          reply={replyCount}
+          replyList={forumInfo["reply"]}
+          replyCount={replyCount}
+          setReplyCount={setReplyCount}
         />
       )}
     </>

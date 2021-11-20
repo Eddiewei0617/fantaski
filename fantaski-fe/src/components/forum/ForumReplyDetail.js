@@ -2,7 +2,7 @@ import React from "react";
 import { IMAGE_FORUM_URL } from "../../config/url";
 import moment from "moment";
 
-function ForumReplyDetail({ singleReply }) {
+function ForumReplyDetail({ singleReply, sequence }) {
   return (
     <>
       <div className="forum-reply-content">
@@ -28,7 +28,7 @@ function ForumReplyDetail({ singleReply }) {
           </div>
           <div className="reply-time">
             <p>
-              B{singleReply.id}
+              B{sequence}
               <span>
                 {moment(singleReply.created_at).format("YYYY-MM-DD HH:mm:ss")}
               </span>

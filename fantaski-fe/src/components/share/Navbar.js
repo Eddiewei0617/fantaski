@@ -19,12 +19,14 @@ import { FaUserAlt, FaCloudSunRain } from "react-icons/fa";
 
 import $ from "jquery";
 
-function Navbar({ courses, setShowCourse, setItemNumber, itemNumber }) {
+function Navbar({
+  courses,
+  setShowCourse,
+  setItemNumber,
+  itemNumber,
+  setForumCategory,
+}) {
   // 設定該項目被點選時的狀態
-  const [forumCategory, setForumCategory] = useState({
-    forumCategory: 0,
-    isHot: true,
-  });
 
   let [colorButton, setColorButton] = useState("FANTASKI");
   const [weatherInfo, setWeatherInfo] = useState(null);
@@ -191,7 +193,13 @@ function Navbar({ courses, setShowCourse, setItemNumber, itemNumber }) {
                       colorButton === "滑雪論壇" && "active"
                     }`}
                     to="/forum"
-                    onClick={handleClick}
+                    onClick={(e) => {
+                      handleClick(e);
+                      setForumCategory({
+                        forumCategory: 0,
+                        isHot: true,
+                      });
+                    }}
                   >
                     滑雪論壇
                   </Link>

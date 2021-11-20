@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 import ForumThreeDots from "./ForumThreeDots";
-import { IMAGE_FORUM_URL } from "../../config/url";
+import { IMAGE_FORUM_URL, PUBLIC_URL } from "../../config/url";
 import ForumHeartCommit from "./ForumHeartCommit";
 import { BsHeartFill } from "react-icons/bs";
 import ForumReply from "./ForumReply";
 import ForumAddReply from "./ForumAddReply";
 import FourmUserName from "./ForumUserName";
-import { forumList } from "./moduleList";
+import { forumList, getLikeList, updateForumLike } from "./moduleList";
 import moment from "moment";
 
 // 需做登入狀態判斷，是該帳號登入時，會顯示 threeDot
@@ -15,17 +15,43 @@ import moment from "moment";
 function ForumModal({
   forumModalShow,
   setForumModalShow,
+  setForumCategory,
   whichPostToShow,
-  reply,
+  replyCount,
+  setReplyCount,
+  replyList,
 }) {
-  if (whichPostToShow === null || reply === null) {
+  const [ifLike, setIfLike] = useState(false);
+  useEffect(() => {
+    //member id先用1
+    if (whichPostToShow !== null) {
+      getLikeList(whichPostToShow[0].id, 1, setIfLike);
+    }
+  }, [whichPostToShow]);
+  function handleHeartToggle() {
+    //member id先用1
+    //讓post的愛心數re-render
+    whichPostToShow[0].heart = ifLike
+      ? whichPostToShow[0].heart - 1
+      : whichPostToShow[0].heart + 1;
+    //  傳到後端做forum_like資料表的增減＆forum-heart增減
+    updateForumLike(whichPostToShow[0].id, 1, ifLike);
+    //改變該用戶是否按愛心的狀態
+    setIfLike(!ifLike);
+  }
+
+  if (whichPostToShow === null || replyCount === null) {
     return <div></div>;
   }
+
   return (
     <Modal
       show={forumModalShow}
       onHide={() => {
         setForumModalShow(false);
+        setForumCategory((cur) => {
+          return { ...cur, nowaForumInfo: "" };
+        });
       }}
       size="lg"
       aria-labelledby="forumModalView"
@@ -36,7 +62,11 @@ function ForumModal({
           <FourmUserName forum_id={whichPostToShow[0].id} />
         </Modal.Title>
         <div className="forum-pop-threedot">
-          <ForumThreeDots />
+          <ForumThreeDots
+            setForumModalShow={setForumModalShow}
+            forum_id={whichPostToShow[0].id}
+            setForumCategory={setForumCategory}
+          />
         </div>
       </Modal.Header>
       <Modal.Body className="forum-modal-body">
@@ -57,7 +87,7 @@ function ForumModal({
               <div className="forum-img">
                 {/* 只能上傳jpg、png */}
                 <img
-                  src={`${IMAGE_FORUM_URL}/${whichPostToShow[0].image}`}
+                  src={`${PUBLIC_URL}/${whichPostToShow[0].image}`}
                   alt="snowman-defult"
                 />
               </div>
@@ -65,16 +95,24 @@ function ForumModal({
             </>
           )}
           {/* 點讚愛心+留言數 */}
-          <ForumHeartCommit heart={whichPostToShow[0].heart} reply={reply} />
-          <span className="heart-count">
-            <BsHeartFill />
+          <ForumHeartCommit
+            heart={whichPostToShow[0].heart}
+            replyCount={replyCount}
+          />
+          <span className={`${ifLike ? "heart-like" : "heart-count"}`}>
+            <BsHeartFill onClick={handleHeartToggle} />
           </span>
         </div>
-        <ForumReply forumId={whichPostToShow[0].id} reply={reply} />
+        <ForumReply forumId={whichPostToShow[0].id} replyCount={replyCount} />
       </Modal.Body>
 
       <Modal.Footer>
-        <ForumAddReply />
+        <ForumAddReply
+          forum_id={whichPostToShow[0].id}
+          replyCount={replyCount}
+          setReplyCount={setReplyCount}
+          replyList={replyList}
+        />
         {/* <Button onClick={props.onHide}>Close</Button> */}
       </Modal.Footer>
     </Modal>

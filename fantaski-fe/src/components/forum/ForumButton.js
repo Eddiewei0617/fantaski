@@ -13,7 +13,7 @@ function ForumButton({ setForumCategory }) {
               className="forum-button-link"
               onClick={() => {
                 setForumCategory((cur) => {
-                  return { ...cur, forumCategory: 1 };
+                  return { ...cur, forumCategory: 1, isHot: true };
                 });
               }}
             >
@@ -26,7 +26,7 @@ function ForumButton({ setForumCategory }) {
               className="forum-button-link"
               onClick={() => {
                 setForumCategory((cur) => {
-                  return { ...cur, forumCategory: 2 };
+                  return { ...cur, forumCategory: 2, isHot: true };
                 });
               }}
             >
@@ -39,7 +39,7 @@ function ForumButton({ setForumCategory }) {
               className="forum-button-link"
               onClick={() => {
                 setForumCategory((cur) => {
-                  return { ...cur, forumCategory: 3 };
+                  return { ...cur, forumCategory: 3, isHot: true };
                 });
               }}
             >

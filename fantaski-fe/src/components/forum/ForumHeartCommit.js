@@ -2,7 +2,7 @@ import React from "react";
 
 import { BsHeartFill } from "react-icons/bs";
 
-function ForumHeartCommit({ heart, reply }) {
+function ForumHeartCommit({ heart, replyCount }) {
   return (
     <>
       <div className="heart-commit-num">
@@ -11,7 +11,7 @@ function ForumHeartCommit({ heart, reply }) {
           <span>{heart}</span>
         </div>
         <div className="commit-num">
-          留言數:<span>{reply}</span>則
+          留言數:<span>{replyCount ? replyCount : 0}</span>則
         </div>
       </div>
     </>

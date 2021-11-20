@@ -2,7 +2,7 @@ import React from "react";
 // import NAvbar from "../components/route/Navbar";
 import MemberList from "../../components//member/MemberList";
 import MemberContent from "../../components/member/MemberContent";
-// import CommentsInMember from "../../components/member/commentsinMember/CommentsInMember";
+import CommentsInMember from "../../components/member/commentsinMember/CommentsInMember";
 
 function Member({ setShowCourse }) {
   return (
