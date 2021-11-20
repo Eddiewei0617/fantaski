@@ -378,3 +378,39 @@ form,
 #registerBtn {
   transition: all 0.2s ease;
 }
+
+// 傳駿-會員收藏商品
+.member_collect_bg {
+  width: 1200px;
+  height: 100vh;
+  background-color: $main-blue;
+  margin: 55px auto;
+  border-radius: 20px;
+  box-shadow: 0px 15px 15px -15px #000;
+  position: relative;
+}
+.member_collect {
+  width: 1200px;
+  height: 92vh;
+  background-color: #fff;
+  position: absolute;
+  top: 100px;
+  border-radius: 0, 0, 20px, 20px;
+}
+.member_collect .row {
+  width: 1200px;
+  border-bottom: 3px solid rgb(155, 155, 155);
+  margin: 0 auto;
+  display: flex;
+}
+.member_collect .row .col {
+  text-align: center;
+  justify-content: space-around;
+}
+.member_collect .col {
+  width: 200px;
+  font-size: 20px;
+  color: $main-text-darkblue;
+  padding: 80px 5px;
+  margin-left: 10px;
+}
