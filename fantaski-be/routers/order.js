@@ -72,9 +72,7 @@ router.post("/orderconfirm", async (req, res) => {
           ]
         );
       }
-      // console.log("orderList", orderList);
     }
-
     // 寫進order_course資料表
     for (let i = 0; i < req.body.orderList.length; i++) {
       if (req.body.orderList[i].category === "A") {
