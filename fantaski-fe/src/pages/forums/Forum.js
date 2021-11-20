@@ -1,22 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import ForumButton from "../../components/forum/ForumButton";
 import ForumHeadBtn from "../../components/forum/ForumHeadBtn";
 import ForumPost from "../../components/forum/ForumPost";
 import ForumThreeDots from "../../components/forum/ForumThreeDots";
 
 function Fourm() {
-  // 還未寫狀態
+  const [forumCategory, setForumCategory] = useState({
+    forumCategory: 0,
+    isHot: true,
+  });
+
   return (
     <>
       <main className="forum-main">
         <div className="container forum-container">
           {/* area1 各區塊 button 區  */}
-          <ForumButton />
+          <ForumButton setForumCategory={setForumCategory} />
           {/* area2 內文區 */}
           <div className="forum-content">
             <section className="forum-content-head">
               <div className="content-head-buttonall">
-                <ForumHeadBtn />
+                <ForumHeadBtn setForumCategory={setForumCategory} />
                 {/* content-head-button end */}
                 <ForumThreeDots />
                 {/* forum-more-button end */}
@@ -26,7 +30,7 @@ function Fourm() {
             {/*forum-content-head end*/}
 
             {/* ====post 區==== */}
-            <ForumPost />
+            <ForumPost forumCategory={forumCategory} />
           </div>
         </div>
       </main>

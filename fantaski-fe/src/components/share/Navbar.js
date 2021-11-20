@@ -3,7 +3,7 @@ import { IMAGE_SHARE_URL } from "../../config/url";
 import { Link } from "react-router-dom";
 import { ParallaxProvider } from "react-scroll-parallax";
 import { axios } from "axios";
-import { getWeatherInfo, weatherID } from "../course/moduleList";
+import { getWeatherInfo } from "../course/moduleList";
 
 // icon
 import {
@@ -21,6 +21,11 @@ import $ from "jquery";
 
 function Navbar({ courses, setShowCourse, setItemNumber, itemNumber }) {
   // 設定該項目被點選時的狀態
+  const [forumCategory, setForumCategory] = useState({
+    forumCategory: 0,
+    isHot: true,
+  });
+
   let [colorButton, setColorButton] = useState("FANTASKI");
   const [weatherInfo, setWeatherInfo] = useState(null);
   const [weatherIcon, setWeatherIcon] = useState();

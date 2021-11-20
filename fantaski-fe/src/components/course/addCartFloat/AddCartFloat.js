@@ -152,7 +152,10 @@ function AddCartFloat({
           </div>
           <button
             onClick={(e) => {
-              if (customerChoose.date === "") {
+              let itemId = `c-${courseInfo[0].id}`;
+              if (storage[itemId]) {
+                alert("您已將此物品加入購物車");
+              } else if (customerChoose.date === "") {
                 alert("請填寫日期！");
               } else if (customerChoose.number > customerChoose.courseLeft) {
                 alert("人數超過上限");
@@ -161,17 +164,13 @@ function AddCartFloat({
                 return;
               } else {
                 setIfAddCart(true);
-                let itemId = `c-${courseInfo[0].id}`;
                 let productInfo = e.currentTarget.children[0].value;
                 // console.log("value", productInfo); //http://localhost:3000/assets/images_product/allblack.jfif|雪板類|暗黑滿點單板|1200
 
                 // 開始把點"加到購物車"的商品存入storage
-                if (storage[itemId]) {
-                  alert("您已將此物品加入購物車");
-                } else {
-                  storage.setItem(itemId, productInfo);
-                  storage["addItemList"] += `${itemId}, `;
-                }
+
+                storage.setItem(itemId, productInfo);
+                storage["addItemList"] += `${itemId}, `;
               }
             }}
             className={ifAddCart ? "button-clicked" : ""}

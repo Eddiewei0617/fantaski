@@ -50,6 +50,9 @@ app.use("/api/products", productRouter);
 //api路徑中間件(購物車)
 let orderRouter = require("./routers/order");
 app.use("/api/order", orderRouter);
+//api路徑中間件(論壇)
+let forumRouter = require("./routers/forum");
+app.use("/api/forum", forumRouter);
 
 //天氣api
 let weatherRouter = require("./routers/weather");
