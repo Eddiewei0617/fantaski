@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { IMAGE_SHARE_URL } from "../../config/url";
 import { Link } from "react-router-dom";
 import { ParallaxProvider } from "react-scroll-parallax";
@@ -19,7 +19,13 @@ import { FaUserAlt, FaCloudSunRain } from "react-icons/fa";
 
 import $ from "jquery";
 
-function Navbar({ courses, setShowCourse, setItemNumber, itemNumber }) {
+function Navbar({
+  courses,
+  setShowCourse,
+  setItemNumber,
+  itemNumber,
+  setCartPositionState,
+}) {
   // 設定該項目被點選時的狀態
   const [forumCategory, setForumCategory] = useState({
     forumCategory: 0,
@@ -110,6 +116,9 @@ function Navbar({ courses, setShowCourse, setItemNumber, itemNumber }) {
     setWeatherIcon(weatherIconTag);
   }
 
+  const cartPosition = useRef(null);
+  setCartPositionState(cartPosition);
+  // console.log("cartPosition", cartPosition);
   return (
     <>
       {/* scroll 初始化 */}
@@ -228,7 +237,7 @@ function Navbar({ courses, setShowCourse, setItemNumber, itemNumber }) {
                   </Link>
                 </li>
                 <li className="left-line"></li>
-                <li className="nav-item">
+                <li className="nav-item" ref={cartPosition}>
                   {localStorage["addItemList"] === "" ? (
                     <Link className="nav-link position-relative" to="/products">
                       <BsFillCartFill className="all-icon-nav" size={25} />
@@ -238,7 +247,6 @@ function Navbar({ courses, setShowCourse, setItemNumber, itemNumber }) {
                     </Link>
                   ) : (
                     <Link className="nav-link position-relative" to="/orders">
-                      {" "}
                       <BsFillCartFill className="all-icon-nav" size={25} />
                       <p className="shopping-cart-circle" id="itemNumber">
                         {itemNumber}

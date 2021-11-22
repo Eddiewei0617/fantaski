@@ -85,6 +85,7 @@ function OrderFinal({
         orderList,
         orderNumber: orderNo,
         total: total - pointUsed,
+        pointUsed: pointUsed,
       });
 
       // 傳剩餘點數給後端

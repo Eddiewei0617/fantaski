@@ -10,6 +10,19 @@ router.get("/", (res, req) => {
   res.send("歡迎來到商品後台");
 });
 // 全部商品資料
+router.get("/allproducts", async (req, res) => {
+  try {
+    let allProducts = await connection.queryAsync(
+      "SELECT * FROM product "
+    );
+    res.json(allProducts);
+  } catch (err) {
+    res.json({ code: 9999, message: "資料庫讀取錯誤" });
+    console.error(err);
+  }
+});
+
+
 // 用post請求從前端來的參數(category_id)，然後前端的categoeyId如果有改變就丟回不同的資料庫資料回去
 router.post("/productsInfoList", async (req, res) => {
   try {
@@ -60,5 +73,17 @@ router.post("/collection", async (req, res) => {
     res.json({ code: "0001", message: "接收前端資料錯誤" });
   }
 });
+
+// 在會員收藏頁點擊取消收藏後刪掉資料庫欄位
+router.post("/cancelcollection", async(req,res)=>{
+  let { memberId,  productId } = req.body;
+  try{
+    let cancelCollection = await connection.queryAsync("DELETE FROM product_collection WHERE member_id=? AND product_id=?", [memberId , productId])
+    res.json({result: "成功刪除收藏資料"})
+  }catch(e){
+    console.error("Delete from product_collection error", e);
+    res.json({ code: "0001", message: "接收前端資料錯誤" });
+  }
+})
 
 module.exports = router;
