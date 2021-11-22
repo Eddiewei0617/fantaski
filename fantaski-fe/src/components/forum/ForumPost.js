@@ -10,6 +10,8 @@ function ForumPost({ forumCategory, setForumCategory }) {
   const [forumInfo, setForumInfo] = useState(null);
   const [whichPostToShow, setWhichPostToShow] = useState(null);
   const [replyCount, setReplyCount] = useState(0);
+  let sevenDaysAgo = moment().subtract(7, "days").format("YYYY-MM-DD HH:mm");
+  let today = moment().format("YYYY-MM-DD HH:mm");
   // const handleClose = () => setForumModalShow(false);
   const handleShow = (e) => {
     setForumModalShow(true);
@@ -34,10 +36,7 @@ function ForumPost({ forumCategory, setForumCategory }) {
   };
 
   useEffect(() => {
-    //有新增或編輯圖片時，導致資料庫insert處理太慢，在這邊getinfo時還沒加到資料庫，所以用setTimeOut把getinfo排到後面去
-    setTimeout(() => {
-      getForumInfo(forumCategory, setForumInfo);
-    }, 0);
+    getForumInfo(forumCategory, setForumInfo);
   }, [forumCategory]);
 
   if (forumInfo === null) {
@@ -47,6 +46,22 @@ function ForumPost({ forumCategory, setForumCategory }) {
   return (
     <>
       {forumInfo["postList"].map((post, i) => {
+        let postTime = moment(post.created_at).format("YYYY-MM-DD HH:mm");
+        if (!moment(postTime).isBefore(sevenDaysAgo)) {
+          //天數差單位毫秒-->分鐘
+          let diffInTotalMinutes = moment(today).diff(postTime) / (1000 * 60);
+          let days = Math.floor(diffInTotalMinutes / 60 / 24);
+          let hours = Math.floor(diffInTotalMinutes / 60);
+          let minutes = Math.floor(diffInTotalMinutes % 60);
+          postTime =
+            days > 0
+              ? days + "天前"
+              : hours > 0
+              ? hours + "小時前"
+              : minutes > 0
+              ? minutes + "分鐘前"
+              : "剛發布";
+        }
         return (
           <>
             <section
@@ -63,9 +78,7 @@ function ForumPost({ forumCategory, setForumCategory }) {
                     <div className="post-kind">
                       {forumList[post.category_id]}
                     </div>
-                    <div className="post-time">
-                      {moment(post.created_at).format("YYYY-MM-DD HH:mm:ss")}
-                    </div>
+                    <div className="post-time">{postTime}</div>
                     {/* <div className="post-time">3天前</div> */}
                   </div>
                   {/*post-head end*/}

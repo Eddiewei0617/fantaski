@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 import { IMAGE_FORUM_URL } from "../../config/url";
 import { insertReplyInfo } from "./moduleList";
 
-function ForumAddReply({ forum_id, replyCount, setReplyCount, replyList }) {
+function ForumAddReply({
+  forum_id,
+  replyCount,
+  setReplyCount,
+  replyList,
+  setIfScrollDown,
+}) {
   //會員id好之前先打在這，之後要判斷是否登入狀態才可以發文
   const [memberInfo, setMemberInfo] = useState({
     id: 1,
@@ -15,12 +21,13 @@ function ForumAddReply({ forum_id, replyCount, setReplyCount, replyList }) {
   function handleChange(e) {
     setReplyContent(e.target.value);
   }
-  function handleSubmit() {
+  async function handleSubmit() {
     if (replyContent === "") {
       alert("回覆內容不可空白哦！");
       return;
     } else {
-      insertReplyInfo(forum_id, memberInfo.id, replyContent);
+      setIfScrollDown(true);
+      await insertReplyInfo(forum_id, memberInfo.id, replyContent);
       setReplyContent("");
       setReplyCount(replyCount + 1);
       replyList[forum_id] = replyCount + 1;

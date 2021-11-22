@@ -65,7 +65,7 @@ function Navbar({
     // getWeatherInfo(setWeatherInfo);
     //用哪個天氣小圖
     decideWeatherIcon();
-  }, []);
+  }, [weatherInfo]);
   // 決定要用哪個天氣小圖
   function decideWeatherIcon() {
     let weatherIconTag;
@@ -215,7 +215,6 @@ function Navbar({
                   <Link
                     className={`nav-link ${colorButton === "天氣" && "active"}`}
                     to="/#"
-                    onClick={handleClick}
                   >
                     {weatherIcon}
                     {/* 天氣小圖&溫度要抓天氣API */}

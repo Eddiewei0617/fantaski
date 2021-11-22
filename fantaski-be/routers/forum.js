@@ -152,16 +152,22 @@ router.post("/updatepostinfo", uploader.single("image"), async (req, res) => {
   let now = new Date();
   try {
     let resUpdatePostInfo = await connection.queryAsync(
-      "UPDATE forum SET category_id = ? , subject = ?, content = ?, image=?, created_at=? WHERE id = ?;",
+      "UPDATE forum SET category_id = ? , subject = ?, content = ?, created_at=? WHERE id = ?;",
       [
         req.body.category,
         req.body.subject,
         req.body.content,
-        filename,
         now,
         req.body.forum_id,
       ]
     );
+    //判斷req.file有沒有值，有值才update image
+    if (filename) {
+      let resImgPostInfo = await connection.queryAsync(
+        "UPDATE forum SET image = ? WHERE id = ?;",
+        [filename, req.body.forum_id]
+      );
+    }
     res.json({
       code: "0",
       message: "已更新文章",

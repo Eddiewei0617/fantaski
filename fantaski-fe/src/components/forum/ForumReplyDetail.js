@@ -3,6 +3,25 @@ import { IMAGE_FORUM_URL } from "../../config/url";
 import moment from "moment";
 
 function ForumReplyDetail({ singleReply, sequence }) {
+  let sevenDaysAgo = moment().subtract(7, "days").format("YYYY-MM-DD HH:mm");
+  let today = moment().format("YYYY-MM-DD HH:mm");
+  let postTime = moment(singleReply.created_at).format("YYYY-MM-DD HH:mm");
+  if (!moment(postTime).isBefore(sevenDaysAgo)) {
+    //天數差單位毫秒-->分鐘
+    let diffInTotalMinutes = moment(today).diff(postTime) / (1000 * 60);
+    let days = Math.floor(diffInTotalMinutes / 60 / 24);
+    let hours = Math.floor(diffInTotalMinutes / 60);
+    let minutes = Math.floor(diffInTotalMinutes % 60);
+    postTime =
+      days > 0
+        ? days + "天前"
+        : hours > 0
+        ? hours + "小時前"
+        : minutes > 0
+        ? minutes + "分鐘前"
+        : "剛回覆";
+  }
+
   return (
     <>
       <div className="forum-reply-content">
@@ -29,9 +48,7 @@ function ForumReplyDetail({ singleReply, sequence }) {
           <div className="reply-time">
             <p>
               B{sequence}
-              <span>
-                {moment(singleReply.created_at).format("YYYY-MM-DD HH:mm:ss")}
-              </span>
+              <span>{postTime}</span>
               {/* <span>13小時前</span> */}
             </p>
           </div>

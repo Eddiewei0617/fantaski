@@ -34,6 +34,7 @@ import Member from "./pages/member/Member";
 import MemberForum from "./pages/member/MemberForum";
 import Record from "./pages/member/Record";
 import MemberCollect from "./pages/member/MemberCollect";
+import MemberComment from "./pages/member/MemberComment";
 // ===========================================
 
 // 組合用元件
@@ -100,6 +101,7 @@ function App() {
                 courses={courses}
                 showCourse={showCourse}
                 setShowCourse={setShowCourse}
+                setItemNumber={setItemNumber}
               />
             </Route>
             <Route path="/course/skill">
@@ -107,6 +109,7 @@ function App() {
                 courses={courses}
                 showCourse={showCourse}
                 setShowCourse={setShowCourse}
+                setItemNumber={setItemNumber}
               />
             </Route>
             <Route path="/course/sled">
@@ -114,6 +117,7 @@ function App() {
                 courses={courses}
                 showCourse={showCourse}
                 setShowCourse={setShowCourse}
+                setItemNumber={setItemNumber}
               />
             </Route>
             <Route path="/course/igloo">
@@ -121,6 +125,7 @@ function App() {
                 courses={courses}
                 showCourse={showCourse}
                 setShowCourse={setShowCourse}
+                setItemNumber={setItemNumber}
               />
             </Route>
             <Route path="/products">
@@ -133,7 +138,7 @@ function App() {
               <Login />
             </Route>
             <Route path="/member">
-              <Member setShowCourse={setShowCourse} />
+              <Member />
             </Route>
             <Route path="/forum/new-post">
               <NewPost
@@ -149,6 +154,9 @@ function App() {
             </Route>
             <Route path="/memberCollect">
               <MemberCollect />
+            </Route>
+            <Route path="/membercomments">
+              <MemberComment setShowCourse={setShowCourse} />
             </Route>
 
             <Route path="/forum">

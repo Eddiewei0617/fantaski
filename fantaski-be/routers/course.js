@@ -25,7 +25,7 @@ router.post("/getcommentsinfo", async (req, res) => {
   console.log("request for getCommentsInfo");
   try {
     let commentsInfoList = await connection.queryAsync(
-      "SELECT oc.course_id, oc.order_id, oc.amount, oc.comment_last_update, oc.comment, oc.star, o.member_id, m.name, m.image FROM order_course oc, ordered o, member m WHERE oc.course_id = ? AND oc.star is NOT NULL AND oc.order_id = o.id AND o.member_id = m.id ORDER BY oc.comment_last_update DESC;",
+      "SELECT oc.course_id, oc.order_id, oc.amount, oc.comment_last_update, oc.comment, oc.star, o.member_id, m.name, m.image FROM order_course oc, ordered o, member m WHERE oc.course_id = ? AND oc.star is NOT NULL AND oc.order_id = o.id AND o.member_id = m.id ORDER BY (CASE WHEN oc.comment is NOT NULL then 0 ELSE 1 END), oc.comment_last_update DESC;",
       req.body.course_id
     );
     res.json(commentsInfoList);
@@ -82,6 +82,7 @@ router.post("/postcoursecommentstar", async (req, res) => {
 //更新order_course  評論 -->會員更新課程評價api
 router.post("/postcoursecomment", async (req, res) => {
   console.log("update for order_course comment");
+  if (req.body.new_comment === "") req.body.new_comment = null;
   try {
     let updateComment = await connection.queryAsync(
       "UPDATE order_course SET comment = ?, comment_last_update = ? WHERE id = ? ;",

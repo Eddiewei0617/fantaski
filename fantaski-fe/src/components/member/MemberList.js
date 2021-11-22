@@ -4,6 +4,7 @@ import { CgNotes } from "react-icons/cg";
 import { BsFillPencilFill } from "react-icons/bs";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { AiFillStar } from "react-icons/ai";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 function MemberList() {
   return (
@@ -33,10 +34,13 @@ function MemberList() {
               </a>
             </li>
             <li class="">
-              <a href="#0" class="menuLink r-link text-underlined">
+              <Link
+                to="/membercomments"
+                class="menuLink r-link text-underlined"
+              >
                 <AiFillStar />
                 我的點評
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

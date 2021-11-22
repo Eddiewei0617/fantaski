@@ -2,10 +2,20 @@ import React, { useState, useEffect } from "react";
 import ForumReplyDetail from "./ForumReplyDetail";
 import { getReplyInfo } from "./moduleList";
 
-function ForumReply({ forumId, replyCount }) {
+function ForumReply({
+  forumId,
+  replyCount,
+  modalBody,
+  ifScrollDown,
+  setIfScrollDown,
+}) {
   const [replyList, setReplyList] = useState(null);
-  useEffect(() => {
-    getReplyInfo(forumId, setReplyList);
+  useEffect(async () => {
+    await getReplyInfo(forumId, setReplyList);
+    if (ifScrollDown) {
+      modalBody.current.scrollTop = modalBody.current.scrollHeight;
+      setIfScrollDown(false);
+    }
   }, [replyCount]);
 
   if (replyList === null) {

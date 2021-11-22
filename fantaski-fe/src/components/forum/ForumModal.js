@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Modal, Button } from "react-bootstrap";
 import ForumThreeDots from "./ForumThreeDots";
 import { IMAGE_FORUM_URL, PUBLIC_URL } from "../../config/url";
@@ -21,7 +21,9 @@ function ForumModal({
   setReplyCount,
   replyList,
 }) {
+  let modalBody = useRef();
   const [ifLike, setIfLike] = useState(false);
+  const [ifScrollDown, setIfScrollDown] = useState(false);
   useEffect(() => {
     //member id先用1
     if (whichPostToShow !== null) {
@@ -69,15 +71,13 @@ function ForumModal({
           />
         </div>
       </Modal.Header>
-      <Modal.Body className="forum-modal-body">
+      <Modal.Body className="forum-modal-body" ref={modalBody}>
         <div className="forum-contents">
           <h2>{whichPostToShow[0].subject}</h2>
           <p className="forum-kind-color">
             {forumList[whichPostToShow[0].category_id]}
             <span>
-              {moment(whichPostToShow[0].created_at).format(
-                "YYYY-MM-DD HH:mm:ss"
-              )}
+              {moment(whichPostToShow[0].created_at).format("YYYY-MM-DD HH:mm")}
             </span>
             {/* <span>10⽉04⽇ 10:08</span> */}
           </p>
@@ -103,7 +103,13 @@ function ForumModal({
             <BsHeartFill onClick={handleHeartToggle} />
           </span>
         </div>
-        <ForumReply forumId={whichPostToShow[0].id} replyCount={replyCount} />
+        <ForumReply
+          forumId={whichPostToShow[0].id}
+          replyCount={replyCount}
+          modalBody={modalBody}
+          ifScrollDown={ifScrollDown}
+          setIfScrollDown={setIfScrollDown}
+        />
       </Modal.Body>
 
       <Modal.Footer>
@@ -112,6 +118,7 @@ function ForumModal({
           replyCount={replyCount}
           setReplyCount={setReplyCount}
           replyList={replyList}
+          setIfScrollDown={setIfScrollDown}
         />
         {/* <Button onClick={props.onHide}>Close</Button> */}
       </Modal.Footer>

@@ -8,6 +8,7 @@ import {
   insertPostInfo,
   updatePostInfo,
 } from "../../components/forum/moduleList";
+import { PUBLIC_URL } from "../../config/url";
 
 function NewPost({ forumCategory, setForumCategory }) {
   const [editContent, setEditContent] = useState({
@@ -16,7 +17,8 @@ function NewPost({ forumCategory, setForumCategory }) {
     content: "",
     image: "",
   });
-
+  const [previewFile, setPreviewFile] = useState(null);
+  //先判斷如果是編輯文章，把原文章內容存進editContent並顯示在網頁上
   useEffect(() => {
     if (forumCategory.nowaForumInfo && forumCategory.nowaForumInfo !== "") {
       let originalPost = forumCategory.nowaForumInfo[0];
@@ -28,13 +30,16 @@ function NewPost({ forumCategory, setForumCategory }) {
           image: originalPost.image,
         };
       });
+      if (forumCategory.nowaForumInfo[0].image !== "") {
+        setPreviewFile(`${PUBLIC_URL}${forumCategory.nowaForumInfo[0].image}`);
+      }
     }
     setForumCategory((cur) => {
       return { ...cur, lastUpdate: false };
     });
   }, []);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     if (editContent.category === "") {
       e.preventDefault();
       alert("請選擇文章類別");
@@ -55,10 +60,10 @@ function NewPost({ forumCategory, setForumCategory }) {
         //更新文章
         if (forumCategory.nowaForumInfo && forumCategory.nowaForumInfo !== "") {
           formData.append("forum_id", forumCategory.nowaForumInfo[0].id);
-          updatePostInfo(formData);
+          await updatePostInfo(formData);
         } else {
           //新增文章
-          insertPostInfo(formData);
+          await insertPostInfo(formData);
         }
       } catch (e) {
         console.log("傳送失敗：", e);
@@ -67,9 +72,16 @@ function NewPost({ forumCategory, setForumCategory }) {
   }
   //圖片上傳
   function handleUpload(e) {
-    if (e.target.files[0]) {
+    let file = e.target.files[0];
+    //FileReader處理圖片預覽
+    let fileReader = new FileReader();
+    fileReader.addEventListener("load", (e) => {
+      setPreviewFile(e.target.result);
+    });
+    fileReader.readAsDataURL(file);
+    if (file) {
       setEditContent((cur) => {
-        return { ...cur, image: e.target.files[0] };
+        return { ...cur, image: file };
       });
     }
   }
@@ -95,7 +107,11 @@ function NewPost({ forumCategory, setForumCategory }) {
                 onChange={handleUpload}
               />
               <BsCardImage className="add-img-icon" size={30} />
-              <span className="p-3">已上傳：{editContent.image.name}</span>
+              {previewFile && (
+                <div className="p-3 preview-img">
+                  <img className="object-fit" src={previewFile} alt="" />
+                </div>
+              )}
             </label>
             <div className="add-btn">
               <button className="cancle-btn">
@@ -118,8 +134,8 @@ function NewPost({ forumCategory, setForumCategory }) {
                 <Link
                   to="/forum"
                   className="post-btn-link"
-                  onClick={(e) => {
-                    handleSubmit(e);
+                  onClick={async (e) => {
+                    await handleSubmit(e);
                     setForumCategory((cur) => {
                       return {
                         ...cur,
