@@ -12,19 +12,19 @@ function MemberList() {
         <nav class="page__menu menu mt-5">
           <ul class="menuList r-list">
             <li class="">
-              <a href="#0" class="menuLink r-link text-underlined">
+              <Link to="/member" class="menuLink r-link text-underlined">
                 <FiUser /> 會員資料
-              </a>
+              </Link>
             </li>
             <li class="">
-              <a href="#0" class="menuLink r-link text-underlined">
+              <Link to="/memberRecord" class="menuLink r-link text-underlined">
                 <CgNotes /> 購買紀錄
-              </a>
+              </Link>
             </li>
             <li class="">
-              <a href="#0" class="menuLink r-link text-underlined">
-                <BsFillPencilFill /> 論壇管理
-              </a>
+              <Link to="/memberForum" class="menuLink r-link text-underlined">
+                <BsFillPencilFill /> 我的文章
+              </Link>
             </li>
             <li class="">
               <Link to="/MemberCollect" class="menuLink r-link text-underlined">
@@ -32,11 +32,12 @@ function MemberList() {
                 我的收藏
               </Link>
             </li>
+
             <li class="">
-              <a href="#0" class="menuLink r-link text-underlined">
+              <Link to="/memberComment" class="menuLink r-link text-underlined">
                 <AiFillStar />
                 我的點評
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>
