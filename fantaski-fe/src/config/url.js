@@ -37,3 +37,7 @@ export const IMAGE_MEMBER_URL =
 //接後端api的網址
 export const API_URL =
   process.env.REACT_APP_API_URL || "http://localhost:3001/api";
+
+//接後端圖片的URL
+export const PUBLIC_URL =
+  process.env.REACT_APP_PUBLIC_URL || "http://localhost:3001/public";

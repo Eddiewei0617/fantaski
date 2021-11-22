@@ -135,3 +135,10 @@ export async function getWeatherInfo(setWeatherInfo) {
   let resWeather = res.data.data;
   setWeatherInfo(resWeather);
 }
+
+// 抓到storage裡面有幾樣商品的字串後，用split將字串轉成陣列就能顯示出有幾個了
+export function handleAddNumber(storage, setItemNumber) {
+  let itemString = storage["addItemList"];
+  let items = itemString.substr(0, itemString.length - 2).split(", ");
+  setItemNumber(Number(items.length));
+}

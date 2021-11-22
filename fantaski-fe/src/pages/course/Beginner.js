@@ -14,7 +14,7 @@ import "animate.css";
 import { toShowAddCartFloat } from "../../components/course/moduleList";
 
 function Beginner(props) {
-  const { courses, showCourse, setShowCourse } = props;
+  const { courses, showCourse, setShowCourse, setItemNumber } = props;
   //courses ["初體驗", "技能班", "雪橇車", "建冰屋"]
   //showCourse courses[1]
   const [customerChoose, setCustomerChoose] = useState({
@@ -43,6 +43,7 @@ function Beginner(props) {
           showCourse={showCourse}
           customerChoose={customerChoose}
           setCustomerChoose={setCustomerChoose}
+          setItemNumber={setItemNumber}
         />
       )}
       <CourseButtons
@@ -64,9 +65,14 @@ function Beginner(props) {
         showCourse={showCourse}
         customerChoose={customerChoose}
         setCustomerChoose={setCustomerChoose}
+        setItemNumber={setItemNumber}
       />
       <Title titleName="推薦裝備" />
-      <Swiper showCourse={showCourse} customerChoose={customerChoose} />
+      <Swiper
+        showCourse={showCourse}
+        customerChoose={customerChoose}
+        setItemNumber={setItemNumber}
+      />
       <Title titleName="其他課程" />
       <CourseLink setShowCourse={setShowCourse} courses={courses} />
     </>

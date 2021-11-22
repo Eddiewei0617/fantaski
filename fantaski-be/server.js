@@ -25,6 +25,9 @@ app.use(
   })
 );
 
+//開放public資料夾
+app.use("/public", express.static("public"));
+
 //追朔訪問紀錄
 app.use((req, res, next) => {
   let current = new Date();
