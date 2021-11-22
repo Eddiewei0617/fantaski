@@ -6,9 +6,7 @@ function MemberComment({ setShowCourse }) {
   return (
     <div>
       <MemberList />
-      <div className="text-center">
-        <CommentsInMember setShowCourse={setShowCourse} />
-      </div>
+      <CommentsInMember setShowCourse={setShowCourse} />
     </div>
   );
 }

@@ -17,12 +17,12 @@ router.post("/getforuminfo", async (req, res) => {
       if (req.body.category_id === 0) {
         //熱門+不分類
         forumInfoList = await connection.queryAsync(
-          "SELECT id, category_id, created_at, subject, content, image, heart FROM forum WHERE valid = 1 ORDER BY heart DESC;"
+          "SELECT id, category_id, created_at, subject, content, image, heart FROM forum WHERE valid = 1 ORDER BY heart DESC, created_at DESC;"
         );
       } else {
         //熱門+分類
         forumInfoList = await connection.queryAsync(
-          "SELECT id, category_id, created_at, subject, content, image, heart  FROM forum WHERE category_id = ?  AND valid = 1 ORDER BY heart DESC;",
+          "SELECT id, category_id, created_at, subject, content, image, heart  FROM forum WHERE category_id = ?  AND valid = 1 ORDER BY heart DESC, created_at DESC;",
           req.body.category_id
         );
       }

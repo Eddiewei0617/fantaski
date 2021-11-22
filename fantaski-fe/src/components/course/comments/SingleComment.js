@@ -46,7 +46,7 @@ function SingleComment(props) {
             ? ""
             : moment
                 .utc(comment.comment_last_update)
-                .format("YYYY-MM-DD HH:mm:ss")}
+                .format("YYYY-MM-DD HH:mm")}
         </div>
         <div className="col-2 text-right">
           {starMapping[comment.star].map((item, i) => {
