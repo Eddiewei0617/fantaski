@@ -12,6 +12,7 @@ import Igloo from "./pages/course/Igloo";
 import Products from "./pages/product/Products";
 import Orders from "./pages/order/Orders";
 import Home from "./pages/Home";
+
 import MountainRoute from "./pages/MountainRoute";
 
 // 論壇
@@ -49,7 +50,7 @@ function App() {
   //傳入course狀態(使用者要看哪個course)
   const [showCourse, setShowCourse] = useState();
 
-  // nabar上購物車的數字
+  // navbar上購物車的數字
   const [itemNumber, setItemNumber] = useState(0);
 
   //forum 種類
@@ -146,7 +147,7 @@ function App() {
                 setForumCategory={setForumCategory}
               />
             </Route>
-            <Route path="/record">
+            <Route path="/memberRecord">
               <Record />
             </Route>
             <Route path="/memberForum">
@@ -155,7 +156,7 @@ function App() {
             <Route path="/memberCollect">
               <MemberCollect />
             </Route>
-            <Route path="/membercomments">
+            <Route path="/memberComment">
               <MemberComment setShowCourse={setShowCourse} />
             </Route>
 

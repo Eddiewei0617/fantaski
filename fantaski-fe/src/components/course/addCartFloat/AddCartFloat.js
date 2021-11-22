@@ -67,6 +67,7 @@ function AddCartFloat({
   function handleClickAddCart() {
     setShowAddCart(!showAddCart);
   }
+
   return (
     <>
       <div

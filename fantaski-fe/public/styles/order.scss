@@ -55,13 +55,13 @@
 }
 // forwards 的意思是讓動畫停在最後的位置
 .penguinMove {
-  transform: translateX(425px);
+  transform: translateX(450px);
 }
 
 .penguinMove3 {
   // margin-left: 450px;
   // animation: skiing2 3s forwards;
-  transform: translateX(845px);
+  transform: translateX(890px);
 }
 .penguin img {
   width: 100%;
@@ -367,7 +367,7 @@
 }
 .order_final_bg2 {
   width: 1200px;
-  height: 900px;
+  height: 95%;
   background-color: #fff;
   position: absolute;
   top: 100px;
@@ -420,7 +420,7 @@
 // 下方最終購買明細
 .final_form {
   border: 3px solid $main-text-darkblue;
-  margin: 10px 30px;
+  margin: -15px 30px;
 }
 .final_table {
   width: 1135px;
@@ -485,20 +485,39 @@
   color: $main-text-darkblue;
   border: 4px solid $main-blue;
 }
-.prevstep:hover {
+.prevstep:hover,
+.final_prev .prevstep:hover {
   background-color: $main-blue;
   color: #fff;
   border: 4px solid $main-blue;
 }
+.final_prev .prevstep {
+  width: 15%;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: white;
+  color: $main-text-darkblue;
+  border: 4px solid $main-blue;
+}
 
-.nextstep,
-.order_submit_icon {
+.nextstep {
   margin-right: 20rem;
   width: 8%;
   border-radius: 20px;
   font-size: 20px;
   font-weight: 600;
   background-color: $background-color;
+  color: $main-text-darkblue;
+  border: 4px solid $main-red;
+}
+.order_submit_icon {
+  width: 15%;
+  height: 100%;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: white;
   color: $main-text-darkblue;
   border: 4px solid $main-red;
 }

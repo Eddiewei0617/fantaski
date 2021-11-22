@@ -20,14 +20,6 @@ function PageButton({
       id: 2,
       name: "2",
     },
-    {
-      id: 3,
-      name: "3",
-    },
-    {
-      id: 4,
-      name: "4",
-    },
   ];
   useEffect(() => {
     setPageButton(1);
@@ -66,29 +58,6 @@ function PageButton({
           })}
         </ul>
 
-        {/* <ul>
-          <li
-            id="1"
-            className={`${pageButton === 1 ? "page_active" : ""} `}
-            onClick={handlePageButton}
-          >
-            1
-          </li>
-          <li
-            id="2"
-            className={`${pageButton === 2 ? "page_active" : ""} `}
-            onClick={handlePageButton}
-          >
-            2
-          </li>
-          <li
-            id="3"
-            className={`${pageButton === 3 ? "page_active" : ""} `}
-            onClick={handlePageButton}
-          >
-            3
-          </li>
-        </ul> */}
         <div
           onClick={() => {
             if (pageButton < pageNumber.length) {

@@ -38,7 +38,7 @@ app.get("/", (req, res) => {
   res.send("這裡是server你好");
 });
 
-//取得json資料
+//取得前端傳回json body的資料 (必寫，且須寫在前面，由上到下的順序很重要)
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -50,6 +50,9 @@ app.use("/api/course", courseRouter);
 let productRouter = require("./routers/products");
 app.use("/api/products", productRouter);
 
+//api路徑中間件(購物車)
+let orderRouter = require("./routers/order");
+app.use("/api/order", orderRouter);
 //api路徑中間件(論壇)
 let forumRouter = require("./routers/forum");
 app.use("/api/forum", forumRouter);
@@ -57,6 +60,10 @@ app.use("/api/forum", forumRouter);
 //天氣api
 let weatherRouter = require("./routers/weather");
 app.use("/api/weather", weatherRouter);
+
+// 會員api
+let memberRouter = require("./routers/member");
+app.use("/api/member", memberRouter);
 
 //404中間件
 app.use((req, res, next) => {
