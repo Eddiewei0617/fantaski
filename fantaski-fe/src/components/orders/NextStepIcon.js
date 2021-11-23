@@ -1,8 +1,16 @@
 import { Button } from "react-bootstrap";
-
-function NextStepIcon({ step, setStep, scrollToTop }) {
+import Swal from "sweetalert2";
+function NextStepIcon({ step, setStep, scrollToTop, setProgressAnimation }) {
   let storage = localStorage;
 
+  function creditAlert() {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "請輸入完整信用卡資訊",
+      // footer: '<a href="">Why do I have this issue?</a>'
+    });
+  }
   return (
     <>
       <Button
@@ -10,8 +18,13 @@ function NextStepIcon({ step, setStep, scrollToTop }) {
         onClick={() => {
           // step === 1 ? setStep(2) : setStep(3);
           // scrollToTop();
-          step === 1 && setStep(2);
-          (step === 2) &
+          if (step === 1) {
+            setStep(2);
+            setProgressAnimation(2);
+          }
+
+          if (
+            step === 2 &&
             (storage["number"] == null ||
               storage["number"] === "" ||
               storage["name"] == null ||
@@ -19,16 +32,26 @@ function NextStepIcon({ step, setStep, scrollToTop }) {
               storage["expiry"] == null ||
               storage["expiry"] === "" ||
               storage["cvc"] == null ||
-              storage["cvc"] === "") && setStep(2);
-          (step === 2) &
-            ((storage["number"] !== null) &
+              storage["cvc"] === "")
+          ) {
+            creditAlert();
+            setStep(2);
+          }
+          if (
+            step === 2 &&
+            (storage["number"] !== null) &
               (storage["number"] !== "") &
               (storage["name"] !== null) &
               (storage["name"] !== "") &
               (storage["expiry"] !== null) &
               (storage["expiry"] !== "") &
               (storage["cvc"] !== null) &
-              (storage["cvc"] !== "")) && setStep(3);
+              (storage["cvc"] !== "")
+          ) {
+            setStep(3);
+            setProgressAnimation(3);
+          }
+
           // progressMoving3();
           scrollToTop();
         }}

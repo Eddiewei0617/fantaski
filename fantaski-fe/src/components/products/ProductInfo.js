@@ -32,11 +32,12 @@ function ProductInfo({
 
   // console.log("cartPositionState", cartPositionState);
 
-  const flyCart = useRef();
+  // const flyCart = useRef();
   function flytoCart() {
     console.log("get", flyCart);
     // flyCart.current.classList.add("new_flyCart");
   }
+  const [flyCart, setFlyCart] = useState(0);
 
   return (
     <>
@@ -54,7 +55,7 @@ function ProductInfo({
                     snowboards[i].category_id === 7 ||
                     snowboards[i].category_id === 8) &&
                   "product_image_jackets"
-                }`}
+                } `}
               >
                 <button
                   id={i + 1}
@@ -87,10 +88,9 @@ function ProductInfo({
                 </button>
                 <img
                   id={v.id}
-                  ref={flyCart}
                   src={`${PRODUCTIMAGE_URL}/${v.image}`}
                   alt=""
-                  className="size fly_cart"
+                  className={`${flyCart == v.id && "scale-out-tr"}   size `}
                 />
               </div>
               <p className="mt-3 h5">{v.name}</p>
@@ -112,7 +112,8 @@ function ProductInfo({
                     storage["addItemList"] += `${itemId}, `;
                   }
                   handleAddNumber();
-                  flytoCart();
+                  setFlyCart(Number(`${v.id}`));
+                  // console.log("id", v.id);
                 }}
               >
                 加入購物車

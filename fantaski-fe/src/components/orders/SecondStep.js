@@ -8,6 +8,7 @@ function SecondStep({
   setMemberPoints,
   pointUsed,
   setPointUsed,
+  progressAnimation,
 }) {
   // 載入中Start----------------------
   const [isLoading, setIsLoading] = useState(true);
@@ -20,7 +21,11 @@ function SecondStep({
   console.log(pointUsed);
   return (
     <>
-      <CreditCard memberPoints={memberPoints} step={step} />
+      <CreditCard
+        memberPoints={memberPoints}
+        step={step}
+        progressAnimation={progressAnimation}
+      />
       <OrderContent
         step={step}
         memberPoints={memberPoints}
