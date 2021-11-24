@@ -7,13 +7,20 @@ import axios from "axios";
 
 function Member() {
   const [showmodal, setshowmodal] = useState("false");
-  const [member, setMember] = useState([]);
+  const [member, setMember] = useState(null);
+  // console.log(details && details.member[0].name);
   useEffect(async () => {
     let res = await axios.get(`${API_URL}/member/memberInfo`);
-    setMember(res.data);
+    console.log(res.data);
+    if (res.data.length > 0) {
+      setMember(res.data);
+    }
   }, []);
   function toggleModal() {
     setshowmodal(!showmodal);
+  }
+  if (member === null) {
+    return <></>;
   }
   return (
     <div>
@@ -137,6 +144,9 @@ function Member() {
                 data-dismiss="modal"
                 onClick={toggleModal}
               >
+                取消
+              </button>
+              <button type="submit" class="popBtn">
                 儲存
               </button>
             </div>
@@ -145,7 +155,18 @@ function Member() {
       </div>
       <div className="container">
         <MemberList />
-        <MemberContent toggleModal={toggleModal} />
+
+        <MemberContent
+          toggleModal={toggleModal}
+          name={member[0].name}
+          point={member[0].point}
+          level={member[0].level_id}
+          sex={member[0].gender}
+          birthday={member[0].birthday}
+          img={member[0].image}
+        />
+        {/* <CommentsInMember setShowCourse={setShowCourse} /> */}
+
       </div>
     </div>
   );
