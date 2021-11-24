@@ -53,8 +53,8 @@ router.post("/orderconfirm", async (req, res) => {
 
     // 寫進ordered資料表 // 註!!! 訂單編號req.body.orderNumber 出來是字串，所以資料庫記得要用varchar ***
     let orderConfirm = await connection.queryAsync(
-      "INSERT INTO ordered (order_no,member_id, consumption, created_at) VALUES(?,?,?,?) ",
-      [req.body.orderNumber, 1, req.body.total, created_at]
+      "INSERT INTO ordered (order_no,member_id, consumption,point_used, created_at) VALUES(?,?,?,?,?) ",
+      [req.body.orderNumber, 1, req.body.total, req.body.pointUsed, created_at]
     );
 
     // 寫進order_product資料表

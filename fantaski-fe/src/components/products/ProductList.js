@@ -22,6 +22,9 @@ function ProductList({
   memberInfo,
   collected,
   setCollectUpdate,
+  handleCollect,
+  handleChecked,
+  handleAddNumber,
 }) {
   // 點加入購物車後從到locaStorage
   let storage = localStorage;
@@ -29,12 +32,7 @@ function ProductList({
   if (storage["addItemList"] == null) {
     storage["addItemList"] = "";
   }
-  // 抓到storage裡面有幾樣商品的字串後，用split將字串轉成陣列就能顯示出有幾個了
-  function handleAddNumber() {
-    let itemString = storage["addItemList"];
-    let items = itemString.substr(0, itemString.length - 2).split(", ");
-    setItemNumber(Number(items.length));
-  }
+
   // 一進到頁面(包括重新整理)，判判斷如果addItemList裡面是空字串，就設購物車數字為0，不然就正常呼叫函式
   useEffect(() => {
     if (storage["addItemList"] === "") {
@@ -65,27 +63,6 @@ function ProductList({
     totalProductList.push(productList);
     setProducts(totalProductList[pageNow - 1]);
   }, [pageNow, categoryId]);
-
-  // 傳點到想收藏的資料給後端  // 註: 給一個v變數是因為丟到下面map迴圈裡也需要用到v，所以先在這邊加
-  // 因為傳給後端後同時有刪除也有insert，所以要一個判斷是判斷我點的這個商品是不是已經在product_collection裡面出現過了
-  async function handleCollect(v) {
-    let isDelete = false;
-    collected.forEach((item, index) => {
-      if (v.id === item.product_id) {
-        isDelete = true;
-      }
-    });
-    setCollectUpdate(Math.random());
-    try {
-      let res = await axios.post(`${API_URL}/products/collection`, {
-        isDelete: isDelete,
-        memberId: memberInfo[0].id,
-        productId: v.id,
-      });
-    } catch (err) {
-      console.error("handleCollect", err);
-    }
-  }
 
   const display = (
     <ul className="all_image_l ">
@@ -118,9 +95,12 @@ function ProductList({
                 onClick={(e) => {
                   //clickToChangeToggle(e);
                   handleCollect(v);
+                  e.currentTarget.className.includes("collect_tagged")
+                    ? handleCollect(v)
+                    : handleChecked();
                 }}
               >
-                <BsTagsFill />
+                <BsTagsFill title="加入收藏" />
               </button>
               <img
                 src={`${PRODUCTIMAGE_URL}/${v.image}`}

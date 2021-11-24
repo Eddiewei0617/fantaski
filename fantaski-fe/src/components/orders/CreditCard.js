@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Cards from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
 
-function CreditCard({ memberPoints, step }) {
+function CreditCard({ memberPoints, step, progressAnimation }) {
   let storage = localStorage;
   const [number, setNumber] = useState("");
   const [name, setName] = useState("");
@@ -29,7 +29,11 @@ function CreditCard({ memberPoints, step }) {
   // }
   return (
     <>
-      <div className="credit_content_bg">
+      <div
+        className={`
+          ${progressAnimation === 2 && "slit-in-vertical"}
+          credit_content_bg`}
+      >
         <h2>信用卡資訊</h2>
         <div className="credit_content">
           <Cards

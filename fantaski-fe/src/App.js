@@ -43,7 +43,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import Navbar from "./components/share/Navbar";
 import Footer from "./components/share/Footer";
 import Gotop from "./components/share/Gotop";
-
+import { getMemberPoints } from "../src/components/orders/ModuleDb";
 const courses = ["初體驗", "技能班", "雪橇車", "建冰屋"];
 
 function App() {
@@ -53,6 +53,13 @@ function App() {
   // navbar上購物車的數字
   const [itemNumber, setItemNumber] = useState(0);
 
+  // 引入moduleDb.js檔抓取後端member資料庫的資料來顯示會員剩餘點數
+  const [memberInfo, setMemberInfo] = useState(null);
+  useEffect(() => {
+    getMemberPoints(setMemberInfo);
+  }, []);
+
+  const [cartPositionState, setCartPositionState] = useState(null);
   //forum 種類
   const [forumCategory, setForumCategory] = useState({
     forumCategory: 0,
@@ -68,6 +75,7 @@ function App() {
           setItemNumber={setItemNumber}
           setForumCategory={setForumCategory}
           itemNumber={itemNumber}
+          setCartPositionState={setCartPositionState}
         />
         {/* LOGO+標題+導覽列+上方選單 */}
         {/* 主內容區 */}
@@ -130,7 +138,12 @@ function App() {
               />
             </Route>
             <Route path="/products">
-              <Products setItemNumber={setItemNumber} itemNumber={itemNumber} />
+              <Products
+                setItemNumber={setItemNumber}
+                itemNumber={itemNumber}
+                memberInfo={memberInfo}
+                cartPositionState={cartPositionState}
+              />
             </Route>
             <Route path="/Orders">
               <Orders setItemNumber={setItemNumber} itemNumber={itemNumber} />
@@ -154,7 +167,10 @@ function App() {
               <MemberForum />
             </Route>
             <Route path="/memberCollect">
-              <MemberCollect />
+              <MemberCollect
+                setItemNumber={setItemNumber}
+                memberInfo={memberInfo}
+              />
             </Route>
             <Route path="/memberComment">
               <MemberComment setShowCourse={setShowCourse} />
