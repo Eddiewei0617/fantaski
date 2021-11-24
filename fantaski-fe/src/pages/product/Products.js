@@ -1,5 +1,6 @@
 // 頁面通用元件
 import { useState, useEffect, useRef } from "react";
+
 import "animate.css";
 
 // 渲染兩種不同版面元件
