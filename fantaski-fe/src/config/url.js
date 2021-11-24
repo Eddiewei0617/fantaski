@@ -38,6 +38,10 @@ export const IMAGE_MEMBER_URL =
 export const API_URL =
   process.env.REACT_APP_API_URL || "http://localhost:3001/api";
 
+// 首頁圖片
+export const IMAGE_HOME_URL =
+  process.env.REACT_APP_IMAGE_HOME_URL ||
+  "http://localhost:3000/assets/images_home";
 
 // 上傳檔案api
 export const UPLOAD_URL =

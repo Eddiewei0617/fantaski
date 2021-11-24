@@ -1,5 +1,6 @@
 // 頁面通用元件
 import { useState, useEffect, useRef } from "react";
+
 import "animate.css";
 import { getMemberPoints } from "../../components/orders/ModuleDb";
 import axios from "axios";
