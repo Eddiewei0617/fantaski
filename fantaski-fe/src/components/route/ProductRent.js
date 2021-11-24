@@ -73,7 +73,7 @@ function ProductRent() {
             <div className="col-6 text-right p-0">器材 :</div>
             <div className="col-6 text-left p-0">雪橇車/摩托車</div>
           </div>
-          <button className="btn btn-primary mt-3 w-50 mx-auto">MORE</button>
+          <button className="btn btn-primary mt-3 w-50 mx-auto">更多</button>
         </div>
       </div>
     </div>

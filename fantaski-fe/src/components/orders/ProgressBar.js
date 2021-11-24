@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { ORDERIMAGE_URL } from "../../config/url";
-
-function ProgressBar({ step, setStep, scrollToTop }) {
-  // console.log("第一滑", progressMoving);
+import Swal from "sweetalert2";
+function ProgressBar({ step, setStep, scrollToTop, setProgressAnimation }) {
+  let storage = localStorage;
   // 載入中Start----------------------
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -65,6 +65,15 @@ function ProgressBar({ step, setStep, scrollToTop }) {
     word3.style.removeProperty("color");
   }
 
+  function creditAlert() {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "請輸入完整信用卡資訊",
+      // footer: '<a href="">Why do I have this issue?</a>'
+    });
+  }
+
   // ----------------------------------------------------------------------------------------
   return (
     <>
@@ -82,6 +91,7 @@ function ProgressBar({ step, setStep, scrollToTop }) {
                 setStep(1);
                 progressMovingBack();
                 scrollToTop();
+                setProgressAnimation(1);
               }}
             >
               <div className="material-icons md-50 md-blue number_icon">
@@ -106,6 +116,7 @@ function ProgressBar({ step, setStep, scrollToTop }) {
                 progressMoving();
                 progressMovingBack3();
                 scrollToTop();
+                setProgressAnimation(2);
               }}
             >
               <div className="material-icons md-50 md-grey number_icon">
@@ -124,9 +135,24 @@ function ProgressBar({ step, setStep, scrollToTop }) {
             <button
               className="progress_button3"
               onClick={() => {
-                setStep(3);
-                progressMoving3();
-                scrollToTop();
+                if (
+                  storage["number"] == null ||
+                  storage["number"] === "" ||
+                  storage["name"] == null ||
+                  storage["name"] === "" ||
+                  storage["expiry"] == null ||
+                  storage["expiry"] === "" ||
+                  storage["cvc"] == null ||
+                  storage["cvc"] === ""
+                ) {
+                  setStep(2);
+                  creditAlert();
+                } else {
+                  setStep(3);
+                  progressMoving3();
+                  scrollToTop();
+                  setProgressAnimation(3);
+                }
               }}
             >
               <div className="material-icons md-50 md-grey number_icon">

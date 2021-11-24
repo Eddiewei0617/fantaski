@@ -1,10 +1,20 @@
 import { PRODUCTIMAGE_URL } from "../../config/url";
 import OrderItems from "./OrderItems";
 
-function CartContent({ orderProduct, customerChoose, setCustomerChoose }) {
+function CartContent({
+  customerChoose,
+  setCustomerChoose,
+  setItemNumber,
+  itemNumber,
+  progressAnimation,
+}) {
   return (
     <>
-      <div className="cart_content_bg">
+      <div
+        className={`
+          ${progressAnimation === 1 && "slit-in-vertical"}
+          cart_content_bg`}
+      >
         <div className="row header">
           <div className="col-sm">圖片</div>
           <div className="col-sm">種類</div>
@@ -21,6 +31,8 @@ function CartContent({ orderProduct, customerChoose, setCustomerChoose }) {
             <OrderItems
               customerChoose={customerChoose}
               setCustomerChoose={setCustomerChoose}
+              setItemNumber={setItemNumber}
+              itemNumber={itemNumber}
             />
           </div>
         </div>

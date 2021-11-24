@@ -97,7 +97,7 @@ function Coach({ showCourse }) {
                     </div>
                   </div>
                   <div className="coach-file px-5">
-                    <h6 className="text-center">教練小檔案</h6>
+                    <div className="text-center">教練小檔案</div>
                     <ul className="list-unstyled">
                       <li>教練：{v.liName}</li>
                       <li>資歷：{v.liExperience}年</li>

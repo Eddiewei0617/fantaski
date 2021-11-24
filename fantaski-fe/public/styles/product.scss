@@ -28,7 +28,7 @@
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  filter: brightness(0.7);
+  filter: invert(0.7) brightness(0.5);
   padding: $font-l;
 }
 
@@ -128,6 +128,7 @@
   height: 24rem;
   position: relative;
 }
+
 @keyframes pulsate-fwd {
   0% {
     -webkit-transform: scale(1);
@@ -142,7 +143,8 @@
     transform: scale(1);
   }
 }
-.product_image_s:hover {
+.product_image_s:hover,
+.product_image_jackets:hover {
   animation: pulsate-fwd 0.9s 1 alternate;
 }
 .collect_tag {
@@ -181,6 +183,12 @@
   height: 24rem;
   position: relative;
 }
+.product_image_jackets {
+  width: 270px;
+  height: 310px;
+  position: relative;
+}
+
 .product_image_l:hover {
   animation: pulsate-fwd 0.9s 1 alternate;
 }
@@ -213,6 +221,38 @@
   color: white;
   background-color: $main-red;
   border: 1px solid $main-red;
+}
+// 加入購物車動畫
+@keyframes scale-out-tr {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+    opacity: 1;
+  }
+}
+
+@keyframes magic {
+  0% {
+    transform: translate3d(0, 0, 0);
+    transform: scale(1);
+  }
+  100% {
+    transform: translate3d(300px, -500px, 0), scale(0);
+    // transform: matrix(1.2, 0, 0, 1.2, 10, 20);
+  }
+}
+
+.scale-out-tr {
+  animation: scale-out-tr 0.8s;
 }
 
 // 切換頁面按鈕
@@ -256,4 +296,9 @@
 
 .main_area {
   height: 100%;
+}
+
+.new_flyCart {
+  width: 500px;
+  border: 5px solid red;
 }

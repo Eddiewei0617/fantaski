@@ -1,175 +1,257 @@
 import React from "react";
-import { IMAGE_MEMBER_URL } from "../../config/url";
+import { ORDERIMAGE_URL } from "../../config/url";
 import { AiFillPicture } from "react-icons/ai";
 import { BsFillPencilFill } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
-// import "./MemberContent.css";
-import MemberPop from "./MemberPop";
-function MemberContent() {
-  return (
-    <div>
-      <div className="row memberContent text-center ">
-        <div className="col-4 memberContentHigh  container ">
-          <div className="memberContentLeft shadow  d-flex flex-column justify-content-around">
-            <div className="memberPhotoRealtive">
-              <div className="memberPhoto mt-4 ">
-                <img src={`${IMAGE_MEMBER_URL}/penguin.png`} />
-              </div>
-              <div className="memberFile shadow-sm ">
-                <AiFillPicture /> <input type="file"></input>
-              </div>
-            </div>
-            <div className="m-2 ">
-              <h5>會員等級:雪人</h5>
-            </div>
+import { FaUserCircle } from "react-icons/fa";
+import { API_URL, UPLOAD_URL } from "../../config/url";
 
-            <div className="p-3 memberName">
-              Eddie{" "}
-              <a>
+// import "./MemberContent.css";
+import { useState } from "react";
+import { STATUS_LEVEL } from "../../config/StatusShortcut";
+import Member from "../../pages/member/Member";
+import axios from "axios";
+function MemberContent({
+  toggleModal,
+  name,
+  point,
+  sex,
+  level,
+  birthday,
+  img,
+}) {
+  // const STATUS_ = {};
+  // const [gender, setgender] = useState(`${sex}`);
+  // const [memberbirthday, setmemberbirthday] = useState("");
+  const [memberContent, setmemberContent] = useState({
+    gender: `${sex}`,
+    memberbirthday: `${birthday}`,
+    image: `${img}`,
+  });
+  const [uploadfile, setUploadfile] = useState(`${img}`);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      let res = await axios.post(`${API_URL}/member/membersave`, memberContent);
+      console.log(res);
+    } catch (e) {
+      console.log("handleSubmit", e);
+    }
+  }
+  const handleChange = (e) => {
+    let newMemberContent = {
+      ...memberContent,
+      [e.target.name]: e.target.value,
+    };
+    console.log(newMemberContent);
+    setmemberContent(newMemberContent);
+  };
+  async function handleUpload(e) {
+    // let newMemberUpload = { ...memberContent };
+    // newMemberUpload.image = e.target.files[0];
+    // setUploadfile(newMemberUpload);
+    // console.log(newMemberUpload);
+    e.preventDefault();
+    try {
+      let formData = new FormData();
+      formData.append("image", e.target.files[0]);
+      formData.append("id", 3);
+      let res = await axios.post(`${API_URL}/memberUpload/`, formData);
+      console.log(e.target.files[0]);
+    } catch (e) {
+      console.log("handleUpload錯啦", e);
+    }
+  }
+  // if (memberContent === null) {
+  //   return <></>;
+  // }
+  console.log(memberContent.memberbirthday);
+  return (
+    <>
+      <div>
+        <div className="row memberContent text-center">
+          <div className="col-4 memberContentHigh  container">
+            <div className="memberContentLeft shadow  d-flex flex-column justify-content-around">
+              <div className="memberPhotoRealtive">
+                <div className="memberPhoto mt-4 ">
+                  <img src={`${UPLOAD_URL}/${uploadfile}`} />
+                </div>
+                <div className="memberFile shadow-sm ">
+                  <AiFillPicture />{" "}
+                  <input
+                    type="file"
+                    name="image"
+                    onChange={handleUpload}
+                  ></input>
+                </div>
+              </div>
+              <div className="m-2 font-weight-bold">
+                <h5>會員等級:{STATUS_LEVEL[level]}</h5>
+              </div>
+
+              <div className="p-3 memberName">
+                {name}{" "}
+                {/* <a>
                 <BsFillPencilFill
                   style={{ width: "25", height: "25", margin: "0 0 10 10" }}
                 />
-              </a>
+              </a> */}
+              </div>
+              <div className="memberContenBorderBotton"></div>
+              <div>
+                <h5 className="pb-3">點數 :{point}點</h5>
+              </div>
+              <button
+                className="memberbtn mx-auto mb-5"
+                data-toggle="modal"
+                data-target="#exampleModal"
+                onClick={toggleModal}
+              >
+                修改個人資料
+              </button>
             </div>
-            <div className="memberContenBorderBotton"></div>
-            <div>
-              <h6 className="m-3">點數 :100點</h6>
-            </div>
-            <button
-              className="memberbtn mx-auto mb-5"
-              data-toggle="modal"
-              data-target="#exampleModal"
-            >
-              修改個人資料
-            </button>
           </div>
-        </div>
-        <div className="col-8 MemberContentHigh ">
-          <div className="memberContentRight shadow p-3">
-            <div className=" text-left memberContentRightText mb-3">
-              登入方式
-            </div>
-            <div className="row memberContentOutside ">
-              <div className="col-12 row text-left ">
-                <div className="col-3 d-flex align-items-center">
-                  <div className="memberContentIcon">
+
+          <div className="col-8 MemberContentHigh ">
+            <div className="memberContentRight shadow p-3">
+              <div className=" text-left memberContentRightText mb-3">
+                登入方式
+              </div>
+              <div className="row memberContentOutside ">
+                <div className="col-12 row text-left ">
+                  <div className="col-3 d-flex align-items-center">
+                    <div className="memberContentIcon">
+                      {" "}
+                      <FaUserCircle />
+                    </div>
+                  </div>
+                  <div className="col-6  d-flex align-items-center ">
+                    已建立帳號Eddie
+                  </div>
+                  <div className="col-3  d-flex align-items-center">
+                    <a className="text-right" href="">
+                      修改密碼
+                    </a>
+                  </div>
+                  <div className="memberContentBorderBotton"></div>
+                </div>
+                <div className="col-12 row text-left">
+                  <div className="col-3 ">
+                    <div className="memberContentIcon border border-dark">
+                      {" "}
+                      <FcGoogle />
+                    </div>
+                  </div>
+                  <div className="col-6 d-flex align-items-center">
+                    尚未連結Google帳號
+                  </div>
+                  <div className="col-3 d-flex align-items-center">
                     {" "}
-                    <FcGoogle />
+                    <a href="">前往連結帳號</a>
+                  </div>
+                  <div className="memberContentBorderBotton"></div>
+                </div>
+                <div className="col-12 row text-left ">
+                  <div className="col-3 ">
+                    <div className="memberContentIcon">
+                      {" "}
+                      <BsFacebook />
+                    </div>
+                  </div>
+                  <div className="col-6 d-flex align-items-center">
+                    尚未連結Facebook帳號
+                  </div>
+                  <div className="col-3 d-flex align-items-center">
+                    {" "}
+                    <a href="">前往連結帳號</a>
+                  </div>
+                  <div className="memberContentBorderBotton"></div>
+                </div>
+              </div>
+              <form onSubmit={handleSubmit}>
+                <div className="text-left">
+                  <div className=" pb-2 m-3">性別</div>
+                  <div class="form-check form-check-inline ml-5">
+                    <input
+                      class="form-check-input radioWidth"
+                      type="radio"
+                      name="gender"
+                      id="male"
+                      value="male"
+                      checked={memberContent.gender === "male"}
+                      onChange={handleChange}
+                    />
+                    <label class="form-check-label" for="male">
+                      男
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline ml-5">
+                    <input
+                      class="form-check-input radioWidth"
+                      type="radio"
+                      name="gender"
+                      id="female"
+                      value="female"
+                      checked={memberContent.gender === "female"}
+                      // checked={sex === "female" ? true : false}
+                      // onChange={(e) => {
+                      //   setgender(e.target.value);
+                      // }}
+                      onChange={handleChange}
+                    />
+                    <label class="form-check-label" for="female">
+                      女
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline ml-5">
+                    <input
+                      class="form-check-input radioWidth"
+                      type="radio"
+                      name="gender"
+                      id="sexual"
+                      value="sexual"
+                      // checked={sex === "sexual" ? true : false}
+                      checked={memberContent.gender === "sexual"}
+                      onChange={handleChange}
+                    />
+                    <label class="form-check-label" for="sexual">
+                      多元性別
+                    </label>
                   </div>
                 </div>
-                <div className="col-6  d-flex align-items-center ">
-                  已建立帳號Eddie
-                </div>
-                <div className="col-3  d-flex align-items-center">
-                  <a className="text-right" href="">
-                    修改密碼
-                  </a>
-                </div>
-                <div className="memberContentBorderBotton"></div>
-              </div>
-              <div className="col-12 row text-left">
-                <div className="col-3 ">
-                  <div className="memberContentIcon">
-                    {" "}
-                    <FcGoogle />
+                {/* --生日-- */}
+                <div className="text-left">
+                  <div className="memberEmailText pb-2 m-3">生日</div>
+                  <div>
+                    <input
+                      className="ml-5"
+                      type="date"
+                      name="memberbirthday"
+                      // value={memberbirthday ? memberbirthday : birthday}
+                      defaultValue={birthday}
+                      // onChange={(e) => {
+                      //   setmemberbirthday(e.target.value);
+                      // }}
+                      onChange={handleChange}
+                    ></input>
+                  </div>
+                  <div>
+                    <button
+                      type="submit"
+                      className="btn btn-danger memberEmailSubmit"
+                    >
+                      儲存
+                    </button>
                   </div>
                 </div>
-                <div className="col-6 d-flex align-items-center">
-                  尚未連結Google帳號
-                </div>
-                <div className="col-3 d-flex align-items-center">
-                  {" "}
-                  <a href="">前往連結帳號</a>
-                </div>
-                <div className="memberContentBorderBotton"></div>
-              </div>
-              <div className="col-12 row text-left ">
-                <div className="col-3 ">
-                  <div className="memberContentIcon">
-                    {" "}
-                    <BsFacebook />
-                  </div>
-                </div>
-                <div className="col-6 d-flex align-items-center">
-                  尚未連結Facebook帳號
-                </div>
-                <div className="col-3 d-flex align-items-center">
-                  {" "}
-                  <a href="">前往連結帳號</a>
-                </div>
-                <div className="memberContentBorderBotton"></div>
-              </div>
-            </div>
-            <div>
-              <div className="text-left">
-                <div className=" pb-2 m-3">性別</div>
-                <div class="form-check form-check-inline ml-5">
-                  <input
-                    class="form-check-input radioWidth"
-                    type="radio"
-                    name="gender"
-                    id="inlineRadio1"
-                    value="male"
-                  />
-                  <label class="form-check-label" for="inlineRadio1">
-                    男
-                  </label>
-                </div>
-                <div class="form-check form-check-inline ml-5">
-                  <input
-                    class="form-check-input radioWidth"
-                    type="radio"
-                    name="gender"
-                    id="inlineRadio2"
-                    value="female"
-                  />
-                  <label class="form-check-label" for="inlineRadio2">
-                    女
-                  </label>
-                </div>
-                <div class="form-check form-check-inline ml-5">
-                  <input
-                    class="form-check-input radioWidth"
-                    type="radio"
-                    name="gender"
-                    id="inlineRadio2"
-                    value="sexual"
-                  />
-                  <label class="form-check-label" for="inlineRadio2">
-                    多元性別
-                  </label>
-                </div>
-              </div>
-              {/* --生日-- */}
-              <div className="text-left">
-                <div className="memberEmailText pb-2 m-3">生日</div>
-                <div>
-                  <input
-                    className="ml-5"
-                    type="date"
-                    value="2020-04-20"
-                  ></input>
-                </div>
-                <div>
-                  <input
-                    type="submit"
-                    value="儲存"
-                    className="btn btn-danger memberEmailSubmit  "
-                  />
-                </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>
       </div>
-      {/* <div className="row">
-        <div className="col-4"></div>
-        <div className="col-8 MemberContentHigh ">
-          <div className="memberContentRight shadow p-3"></div>
-        </div>
-      </div> */}
-    </div>
+    </>
   );
 }
 

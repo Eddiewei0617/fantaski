@@ -19,7 +19,7 @@ function CarouselP() {
           <div className="image_range">
             <img
               className="d-block size"
-              src={`${PRODUCTIMAGE_URL}/santa1.png`}
+              src={`${PRODUCTIMAGE_URL}/skifamily.png`}
               alt="Second slide"
             />
           </div>
