@@ -57,7 +57,7 @@ function CommentInMember({ orderCourse, setShowCourse }) {
           </div>
         </div>
         <div className="order-course-info col-4">
-          <div>訂單編號：{orderCourse.sequence}</div>
+          <div>訂單編號：{orderCourse.order_no}</div>
           <div>課程名稱：{orderCourse.name}</div>
           <div>報名人數：{orderCourse.amount}</div>
           <div>
@@ -96,7 +96,7 @@ function CommentInMember({ orderCourse, setShowCourse }) {
               rows="4"
               col="40"
               className="col-8"
-              placeholder={contentInTextarea === "" && "尚未留下評論..."}
+              placeholder={contentInTextarea === null && "尚未留下評論..."}
               value={contentInTextarea}
               onChange={handleTextChange}
             ></textarea>

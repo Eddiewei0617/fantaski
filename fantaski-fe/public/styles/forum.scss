@@ -385,6 +385,9 @@ $forum-box-shadow: 0 0 30px rgba(19, 72, 101, 0.4);
 .heart-count {
   color: #9c9c9c;
 }
+.heart-like {
+  color: $main-red;
+}
 
 // 留言區
 .forum-reply-bg {
@@ -539,6 +542,10 @@ $forum-box-shadow: 0 0 30px rgba(19, 72, 101, 0.4);
   align-items: center;
   width: 100%;
   padding: 0 30px;
+}
+.preview-img {
+  display: inline-block;
+  height: 150px;
 }
 .cancle-btn {
   border: none;

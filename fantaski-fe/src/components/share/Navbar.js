@@ -25,12 +25,9 @@ function Navbar({
   setItemNumber,
   itemNumber,
   setCartPositionState,
+  setForumCategory,
 }) {
   // 設定該項目被點選時的狀態
-  const [forumCategory, setForumCategory] = useState({
-    forumCategory: 0,
-    isHot: true,
-  });
 
   let [colorButton, setColorButton] = useState("FANTASKI");
   const [weatherInfo, setWeatherInfo] = useState(null);
@@ -69,7 +66,7 @@ function Navbar({
     // getWeatherInfo(setWeatherInfo);
     //用哪個天氣小圖
     decideWeatherIcon();
-  }, []);
+  }, [weatherInfo]);
   // 決定要用哪個天氣小圖
   function decideWeatherIcon() {
     let weatherIconTag;
@@ -200,7 +197,13 @@ function Navbar({
                       colorButton === "滑雪論壇" && "active"
                     }`}
                     to="/forum"
-                    onClick={handleClick}
+                    onClick={(e) => {
+                      handleClick(e);
+                      setForumCategory({
+                        forumCategory: 0,
+                        isHot: true,
+                      });
+                    }}
                   >
                     滑雪論壇
                   </Link>
@@ -216,7 +219,6 @@ function Navbar({
                   <Link
                     className={`nav-link ${colorButton === "天氣" && "active"}`}
                     to="/#"
-                    onClick={handleClick}
                   >
                     {weatherIcon}
                     {/* 天氣小圖&溫度要抓天氣API */}
