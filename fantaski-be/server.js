@@ -24,7 +24,7 @@ app.use(
     saveUninitialized: false,
   })
 );
-
+app.use(express.static("public"));
 //追朔訪問紀錄
 app.use((req, res, next) => {
   let current = new Date();
@@ -61,6 +61,17 @@ app.use("/api/weather", weatherRouter);
 // 會員api
 let memberRouter = require("./routers/member");
 app.use("/api/member", memberRouter);
+
+// 圖片檔案上傳
+let memberUploadRouter = require("./routers/memberUpload");
+app.use("/api/memberUpload", memberUploadRouter);
+
+// 會員送入資料庫api
+// let memberSaveRouter = require("./routers/membersave");
+// app.use("/api/membersave", memberSaveRouter);
+//購買紀錄
+let recordRouter = require("./routers/record");
+app.use("/api/record", recordRouter);
 
 //404中間件
 app.use((req, res, next) => {
