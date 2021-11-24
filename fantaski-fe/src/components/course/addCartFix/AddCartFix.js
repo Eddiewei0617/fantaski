@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import Calendar from "../calendar/Calendar";
 import { COURSE_IMG_URL } from "../../../config/url";
-import { getCourseInfo } from "../moduleList";
+import { getCourseInfo, handleAddNumber } from "../moduleList";
 
 function AddCartFix({
   showCourse,
@@ -11,6 +11,7 @@ function AddCartFix({
   setCustomerChoose,
   ifAddCart,
   setIfAddCart,
+  setItemNumber,
 }) {
   const [showCalendar, setShowCalendar] = useState(false);
   const [courseInfo, setCourseInfo] = useState(null);
@@ -50,6 +51,7 @@ function AddCartFix({
   if (storage["addItemList"] == null) {
     storage["addItemList"] = "";
   }
+
   if (courseInfo === null) {
     return (
       <>
@@ -156,6 +158,7 @@ function AddCartFix({
 
                   storage.setItem(itemId, productInfo);
                   storage["addItemList"] += `${itemId}, `;
+                  handleAddNumber(storage, setItemNumber);
                 }
               }}
             >

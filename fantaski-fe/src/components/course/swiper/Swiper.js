@@ -8,7 +8,7 @@ import {
 import { COURSE_IMG_URL } from "../../../config/url";
 import { getAdviceInfo } from "../moduleList";
 
-function Swiper({ showCourse, customerChoose }) {
+function Swiper({ showCourse, customerChoose, setItemNumber }) {
   //後端依據 showCourse抓資料回來
   const [selectedAdvice, setSelectedAdvice] = useState(0);
   const [ifArrowUnavailable, setIfArrowUnavailable] = useState({
@@ -109,6 +109,7 @@ function Swiper({ showCourse, customerChoose }) {
                   i={i}
                   selectedAdvice={selectedAdvice}
                   customerChoose={customerChoose}
+                  setItemNumber={setItemNumber}
                 />
               );
             })}

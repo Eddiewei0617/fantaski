@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Calendar from "../calendar/Calendar";
 import { COURSE_IMG_URL } from "../../../config/url";
-import { getCourseInfo } from "../moduleList";
+import { getCourseInfo, handleAddNumber } from "../moduleList";
 
 function AddCartFloat({
   customerChoose,
@@ -15,6 +15,7 @@ function AddCartFloat({
   showCourse,
   ifAddCart,
   setIfAddCart,
+  setItemNumber,
 }) {
   const [showCalendarFloat, setShowCalendarFloat] = useState(false);
   const [showAddCart, setShowAddCart] = useState(false);
@@ -171,6 +172,7 @@ function AddCartFloat({
 
                 storage.setItem(itemId, productInfo);
                 storage["addItemList"] += `${itemId}, `;
+                handleAddNumber(storage, setItemNumber);
               }
             }}
             className={ifAddCart ? "button-clicked" : ""}

@@ -53,6 +53,12 @@ function App() {
   // navbar上購物車的數字
   const [itemNumber, setItemNumber] = useState(0);
 
+  //forum 種類
+  const [forumCategory, setForumCategory] = useState({
+    forumCategory: 0,
+    isHot: true,
+  });
+
   return (
     <>
       <Router>
@@ -60,6 +66,7 @@ function App() {
           courses={courses}
           setShowCourse={setShowCourse}
           setItemNumber={setItemNumber}
+          setForumCategory={setForumCategory}
           itemNumber={itemNumber}
         />
         {/* LOGO+標題+導覽列+上方選單 */}
@@ -95,6 +102,7 @@ function App() {
                 courses={courses}
                 showCourse={showCourse}
                 setShowCourse={setShowCourse}
+                setItemNumber={setItemNumber}
               />
             </Route>
             <Route path="/course/skill">
@@ -102,6 +110,7 @@ function App() {
                 courses={courses}
                 showCourse={showCourse}
                 setShowCourse={setShowCourse}
+                setItemNumber={setItemNumber}
               />
             </Route>
             <Route path="/course/sled">
@@ -109,6 +118,7 @@ function App() {
                 courses={courses}
                 showCourse={showCourse}
                 setShowCourse={setShowCourse}
+                setItemNumber={setItemNumber}
               />
             </Route>
             <Route path="/course/igloo">
@@ -116,6 +126,7 @@ function App() {
                 courses={courses}
                 showCourse={showCourse}
                 setShowCourse={setShowCourse}
+                setItemNumber={setItemNumber}
               />
             </Route>
             <Route path="/products">
@@ -128,10 +139,13 @@ function App() {
               <Login />
             </Route>
             <Route path="/member">
-              <Member setShowCourse={setShowCourse} />
+              <Member />
             </Route>
             <Route path="/forum/new-post">
-              <NewPost />
+              <NewPost
+                forumCategory={forumCategory}
+                setForumCategory={setForumCategory}
+              />
             </Route>
             <Route path="/memberRecord">
               <Record />
@@ -143,11 +157,14 @@ function App() {
               <MemberCollect />
             </Route>
             <Route path="/memberComment">
-              <MemberComment />
+              <MemberComment setShowCourse={setShowCourse} />
             </Route>
 
             <Route path="/forum">
-              <Forum />
+              <Forum
+                forumCategory={forumCategory}
+                setForumCategory={setForumCategory}
+              />
             </Route>
             <Route path="/mountainroute">
               <MountainRoute />

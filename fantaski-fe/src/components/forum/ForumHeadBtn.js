@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-function ForumHeadBtn({ setForumCategory }) {
+function ForumHeadBtn({ forumCategory, setForumCategory }) {
   // 設定該項目被點選時的狀態
-  let [forumHeadBtn, setForumHeadBtn] = useState("熱門");
+  // const [forumHeadBtn, setForumHeadBtn] = useState("熱門");
   const handleForumHeadBtn = (e) => {
     let innerText = e.target.innerText;
-    setForumHeadBtn(innerText);
+    // setForumHeadBtn(innerText);
     if (innerText === "最新") {
       setForumCategory((cur) => {
         return { ...cur, isHot: false };
@@ -24,7 +24,8 @@ function ForumHeadBtn({ setForumCategory }) {
           <li className="content-headtobutton">
             <a
               className={`content-headtobutton-link ${
-                forumHeadBtn === "熱門" && "content-headtobutton-link-active"
+                forumCategory.isHot === true &&
+                "content-headtobutton-link-active"
               }`}
               href="#/"
               onClick={handleForumHeadBtn}
@@ -35,7 +36,8 @@ function ForumHeadBtn({ setForumCategory }) {
           <li className="content-headtobutton">
             <a
               className={`content-headtobutton-link ${
-                forumHeadBtn === "最新" && "content-headtobutton-link-active"
+                forumCategory.isHot === false &&
+                "content-headtobutton-link-active"
               }`}
               href="#/"
               onClick={handleForumHeadBtn}

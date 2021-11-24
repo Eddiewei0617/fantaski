@@ -470,7 +470,7 @@
   cursor: pointer;
 }
 .calendar-dates-box-this-today {
-  color: rgb(226, 109, 109);
+  font-weight: bolder;
   cursor: pointer;
 }
 .calendar-dates-box-this-today:hover,
@@ -745,7 +745,7 @@
 }
 //------------------------------課程訂單評價------------------------------//
 .order-comments-wrapper {
-  width: 80%;
+  width: 70%;
   padding: 5px;
   margin: 0 auto;
 }

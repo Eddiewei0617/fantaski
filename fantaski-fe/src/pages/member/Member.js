@@ -1,12 +1,11 @@
 // import NAvbar from "../components/route/Navbar";
 import MemberList from "../../components//member/MemberList";
 import MemberContent from "../../components/member/MemberContent";
-// import CommentsInMember from "../../components/member/commentsinMember/CommentsInMember";
 import { useState, useEffect } from "react";
 import { API_URL } from "../../config/url";
 import axios from "axios";
 
-function Member({ setShowCourse }) {
+function Member() {
   const [showmodal, setshowmodal] = useState("false");
   const [member, setMember] = useState(null);
   // console.log(details && details.member[0].name);
@@ -156,6 +155,7 @@ function Member({ setShowCourse }) {
       </div>
       <div className="container">
         <MemberList />
+
         <MemberContent
           toggleModal={toggleModal}
           name={member[0].name}
@@ -166,6 +166,7 @@ function Member({ setShowCourse }) {
           img={member[0].image}
         />
         {/* <CommentsInMember setShowCourse={setShowCourse} /> */}
+
       </div>
     </div>
   );

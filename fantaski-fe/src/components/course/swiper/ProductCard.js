@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { COURSE_IMG_URL, PRODUCTIMAGE_URL } from "../../../config/url";
+import { handleAddNumber } from "../moduleList";
 
 function ProductCard(props) {
-  const { product, i, selectedAdvice, customerChoose } = props;
+  const { product, i, selectedAdvice, customerChoose, setItemNumber } = props;
   const [ifAddCart, setIfAddCart] = useState(false);
 
   let storage = localStorage;
@@ -65,6 +66,7 @@ function ProductCard(props) {
                 } else {
                   storage.setItem(itemId, productInfo);
                   storage["addItemList"] += `${itemId}, `;
+                  handleAddNumber(storage, setItemNumber);
                 }
               }}
             >

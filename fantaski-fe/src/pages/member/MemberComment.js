@@ -1,12 +1,12 @@
 import React from "react";
 import MemberList from "../../components/member/MemberList";
-function MemberComment() {
+import CommentsInMember from "../../components/member/commentsinMember/CommentsInMember";
+
+function MemberComment({ setShowCourse }) {
   return (
     <div>
       <MemberList />
-      <div className="text-center">
-        <h1>我的點評</h1>
-      </div>
+      <CommentsInMember setShowCourse={setShowCourse} />
     </div>
   );
 }

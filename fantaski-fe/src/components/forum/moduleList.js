@@ -2,7 +2,6 @@ import axios from "axios";
 import { API_URL } from "../../config/url";
 
 export const forumList = {
-  0: "全部",
   1: "滑雪經驗",
   2: "課程分享",
   3: "裝備體驗",
@@ -32,4 +31,43 @@ export async function getPosterInfo(forumId, setPoster) {
   });
   let resPosterInfo = res.data;
   setPoster(resPosterInfo[0]);
+}
+//論壇新增文章api
+export async function insertPostInfo(postInfo) {
+  let res = await axios.post(`${API_URL}/forum/insertpostinfo`, postInfo);
+}
+//論壇編輯文章api
+export async function updatePostInfo(postInfo) {
+  let res = await axios.post(`${API_URL}/forum/updatepostinfo`, postInfo);
+}
+//論壇刪除文章api
+export async function delPostInfo(forumId) {
+  let res = await axios.post(`${API_URL}/forum/delpostinfo`, {
+    forumId: forumId,
+  });
+}
+//論壇新增回覆api
+export async function insertReplyInfo(forum_id, member_id, replyInfo) {
+  let res = await axios.post(`${API_URL}/forum/insertreplyinfo`, {
+    forum_id: forum_id,
+    member_id: member_id,
+    reply_info: replyInfo,
+  });
+}
+//使用者是否點擊該文章愛心過 true/false
+export async function getLikeList(forum_id, member_id, setIfLike) {
+  let res = await axios.post(`${API_URL}/forum/getlikelist`, {
+    forum_id: forum_id,
+    member_id: member_id,
+  });
+  let resLikeListInfo = res.data;
+  setIfLike(resLikeListInfo);
+}
+//文章愛心新增/刪除
+export async function updateForumLike(forum_id, member_id, ifAlreadyLike) {
+  let res = await axios.post(`${API_URL}/forum/updateforumlike`, {
+    forum_id: forum_id,
+    member_id: member_id,
+    ifAlreadyLike: ifAlreadyLike,
+  });
 }
