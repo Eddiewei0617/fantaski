@@ -16,3 +16,4 @@ export const CART_CATEGORY = {
   A: "課程購買",
   B: "裝備租賃",
 };
+export const STATUS_LEVEL = { 1: "雪球", 2: "雪人", 3: "雪狼", 4: "雪怪" };

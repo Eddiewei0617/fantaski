@@ -4,9 +4,70 @@ import { AiFillPicture } from "react-icons/ai";
 import { BsFillPencilFill } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
-// import "./MemberContent.css";
+import { FaUserCircle } from "react-icons/fa";
+import { API_URL, PUBLIC_URL } from "../../config/url";
 
-function MemberContent({ toggleModal }) {
+// import "./MemberContent.css";
+import { useState } from "react";
+import { STATUS_LEVEL } from "../../config/StatusShortcut";
+import Member from "../../pages/member/Member";
+import axios from "axios";
+function MemberContent({
+  toggleModal,
+  name,
+  point,
+  sex,
+  level,
+  birthday,
+  img,
+}) {
+  // const STATUS_ = {};
+  // const [gender, setgender] = useState(`${sex}`);
+  // const [memberbirthday, setmemberbirthday] = useState("");
+  const [memberContent, setmemberContent] = useState({
+    gender: `${sex}`,
+    memberbirthday: `${birthday}`,
+    image: `${img}`,
+  });
+  const [uploadfile, setUploadfile] = useState(`${img}`);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      let res = await axios.post(`${API_URL}/member/membersave`, memberContent);
+      console.log(res);
+    } catch (e) {
+      console.log("handleSubmit", e);
+    }
+  }
+  const handleChange = (e) => {
+    let newMemberContent = {
+      ...memberContent,
+      [e.target.name]: e.target.value,
+    };
+    console.log(newMemberContent);
+    setmemberContent(newMemberContent);
+  };
+  async function handleUpload(e) {
+    // let newMemberUpload = { ...memberContent };
+    // newMemberUpload.image = e.target.files[0];
+    // setUploadfile(newMemberUpload);
+    // console.log(newMemberUpload);
+    e.preventDefault();
+    try {
+      let formData = new FormData();
+      formData.append("image", e.target.files[0]);
+      formData.append("id", 3);
+      let res = await axios.post(`${API_URL}/memberUpload/`, formData);
+      console.log(e.target.files[0]);
+    } catch (e) {
+      console.log("handleUpload錯啦", e);
+    }
+  }
+  // if (memberContent === null) {
+  //   return <></>;
+  // }
+  console.log(memberContent.memberbirthday);
   return (
     <>
       <div>
@@ -15,18 +76,23 @@ function MemberContent({ toggleModal }) {
             <div className="memberContentLeft shadow  d-flex flex-column justify-content-around">
               <div className="memberPhotoRealtive">
                 <div className="memberPhoto mt-4 ">
-                  <img src={`${ORDERIMAGE_URL}/penguin.png`} />
+                  <img src={`${PUBLIC_URL}/${uploadfile}`} />
                 </div>
                 <div className="memberFile shadow-sm ">
-                  <AiFillPicture /> <input type="file"></input>
+                  <AiFillPicture />{" "}
+                  <input
+                    type="file"
+                    name="image"
+                    onChange={handleUpload}
+                  ></input>
                 </div>
               </div>
               <div className="m-2 font-weight-bold">
-                <h5>會員等級:雪人</h5>
+                <h5>會員等級:{STATUS_LEVEL[level]}</h5>
               </div>
 
               <div className="p-3 memberName">
-                Eddie{" "}
+                {name}{" "}
                 {/* <a>
                 <BsFillPencilFill
                   style={{ width: "25", height: "25", margin: "0 0 10 10" }}
@@ -35,7 +101,7 @@ function MemberContent({ toggleModal }) {
               </div>
               <div className="memberContenBorderBotton"></div>
               <div>
-                <h6 className="m-3">點數 :100點</h6>
+                <h5 className="pb-3">點數 :{point}點</h5>
               </div>
               <button
                 className="memberbtn mx-auto mb-5"
@@ -58,7 +124,7 @@ function MemberContent({ toggleModal }) {
                   <div className="col-3 d-flex align-items-center">
                     <div className="memberContentIcon">
                       {" "}
-                      <FcGoogle />
+                      <FaUserCircle />
                     </div>
                   </div>
                   <div className="col-6  d-flex align-items-center ">
@@ -73,7 +139,7 @@ function MemberContent({ toggleModal }) {
                 </div>
                 <div className="col-12 row text-left">
                   <div className="col-3 ">
-                    <div className="memberContentIcon">
+                    <div className="memberContentIcon border border-dark">
                       {" "}
                       <FcGoogle />
                     </div>
@@ -104,7 +170,7 @@ function MemberContent({ toggleModal }) {
                   <div className="memberContentBorderBotton"></div>
                 </div>
               </div>
-              <from>
+              <form onSubmit={handleSubmit}>
                 <div className="text-left">
                   <div className=" pb-2 m-3">性別</div>
                   <div class="form-check form-check-inline ml-5">
@@ -114,6 +180,8 @@ function MemberContent({ toggleModal }) {
                       name="gender"
                       id="male"
                       value="male"
+                      checked={memberContent.gender === "male"}
+                      onChange={handleChange}
                     />
                     <label class="form-check-label" for="male">
                       男
@@ -126,6 +194,12 @@ function MemberContent({ toggleModal }) {
                       name="gender"
                       id="female"
                       value="female"
+                      checked={memberContent.gender === "female"}
+                      // checked={sex === "female" ? true : false}
+                      // onChange={(e) => {
+                      //   setgender(e.target.value);
+                      // }}
+                      onChange={handleChange}
                     />
                     <label class="form-check-label" for="female">
                       女
@@ -138,6 +212,9 @@ function MemberContent({ toggleModal }) {
                       name="gender"
                       id="sexual"
                       value="sexual"
+                      // checked={sex === "sexual" ? true : false}
+                      checked={memberContent.gender === "sexual"}
+                      onChange={handleChange}
                     />
                     <label class="form-check-label" for="sexual">
                       多元性別
@@ -151,18 +228,25 @@ function MemberContent({ toggleModal }) {
                     <input
                       className="ml-5"
                       type="date"
-                      value="1996-01-03"
+                      name="memberbirthday"
+                      // value={memberbirthday ? memberbirthday : birthday}
+                      defaultValue={birthday}
+                      // onChange={(e) => {
+                      //   setmemberbirthday(e.target.value);
+                      // }}
+                      onChange={handleChange}
                     ></input>
                   </div>
                   <div>
-                    <input
+                    <button
                       type="submit"
-                      value="儲存"
                       className="btn btn-danger memberEmailSubmit"
-                    />
+                    >
+                      儲存
+                    </button>
                   </div>
                 </div>
-              </from>
+              </form>
             </div>
           </div>
         </div>
