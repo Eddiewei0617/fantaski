@@ -1,4 +1,10 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
+
 //只開放3年內的預約
 const yearsCanSelect = (year) => {
   let yearsOptions = [];
@@ -17,41 +23,85 @@ function Header(props) {
     year,
     months,
   } = props;
+
+  //左右箭頭點選後函式
+  const selectOnLeftChange = () => {
+    if (selectedMonth === 1) {
+      setSelectedYear(Number(selectedYear) - 1);
+      setSelectedMonth(12);
+    } else {
+      setSelectedMonth(Number(selectedMonth) - 1);
+    }
+  };
+  const selectOnRightChange = () => {
+    console.log(selectedMonth);
+    if (selectedMonth === 12) {
+      setSelectedYear(Number(selectedYear) + 1);
+      setSelectedMonth(1);
+    } else {
+      setSelectedMonth(Number(selectedMonth) + 1);
+    }
+  };
+
   return (
     <div className="text-center calendar-header py-1">
-      {/* 「年」的選單 */}
-      <select
-        className="date-select-box"
-        name=""
-        value={selectedYear}
-        onChange={(e) => {
-          setSelectedYear(e.target.value);
+      <FontAwesomeIcon
+        icon={faChevronLeft}
+        className="change-icons"
+        onClick={(e) => {
+          e.stopPropagation();
+          selectOnLeftChange();
         }}
-      >
-        {yearsCanSelect(year).map((v) => {
-          return (
-            <option value={v} key={v}>
-              {v}
-            </option>
-          );
-        })}
-      </select>
-      {/* 「月」的選單 */}
-      <select
-        name=""
-        value={selectedMonth}
-        onChange={(e) => {
-          setSelectedMonth(e.target.value);
+      />
+      <div>
+        {/* 「年」的選單 */}
+        <select
+          className="date-select-box"
+          name=""
+          value={selectedYear}
+          onChange={(e) => {
+            setSelectedYear(e.target.value);
+          }}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
+          {yearsCanSelect(year).map((v) => {
+            return (
+              <option value={v} key={v}>
+                {v}
+              </option>
+            );
+          })}
+        </select>
+        {/* 「月」的選單 */}
+        <select
+          name=""
+          value={selectedMonth}
+          onChange={(e) => {
+            setSelectedMonth(e.target.value);
+          }}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
+          {months.map((v) => {
+            return (
+              <option value={v} key={v}>
+                {v}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+      <FontAwesomeIcon
+        icon={faChevronRight}
+        className="change-icons"
+        onClick={(e) => {
+          e.stopPropagation();
+          selectOnRightChange();
         }}
-      >
-        {months.map((v) => {
-          return (
-            <option value={v} key={v}>
-              {v}
-            </option>
-          );
-        })}
-      </select>
+      />
     </div>
   );
 }

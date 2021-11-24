@@ -44,24 +44,24 @@
   height: 60px;
   display: block;
   margin-left: 15px;
-  transition: transform 2s ease-in-out, opacity 2s ease-in-out;
+  transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out;
 }
 
 .penguin3 {
   width: 65px;
   height: 60px;
   display: block;
-  transition: transform 2s ease-in-out, opacity 2s ease-in-out;
+  transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out;
 }
 // forwards 的意思是讓動畫停在最後的位置
 .penguinMove {
-  transform: translateX(425px);
+  transform: translateX(450px);
 }
 
 .penguinMove3 {
   // margin-left: 450px;
   // animation: skiing2 3s forwards;
-  transform: translateX(845px);
+  transform: translateX(890px);
 }
 .penguin img {
   width: 100%;
@@ -147,13 +147,34 @@
   height: 5px;
 }
 .first_during_move {
-  animation: progressLine 2s forwards;
+  animation: progressLine 1.5s forwards;
 }
 .first_during_move_back {
-  animation: progressLineBack 2s forwards;
+  animation: progressLineBack 1.5s forwards;
 }
 .first_during3_move_back {
-  animation: progressLineBack 2s forwards;
+  animation: progressLineBack 1.5s forwards;
+}
+
+// 購物車階段變換時動畫
+@keyframes slit-in-vertical {
+  0% {
+    -webkit-transform: translateZ(-800px) rotateY(90deg);
+    transform: translateZ(-800px) rotateY(90deg);
+    opacity: 0;
+  }
+  54% {
+    -webkit-transform: translateZ(-160px) rotateY(87deg);
+    transform: translateZ(-160px) rotateY(87deg);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateZ(0) rotateY(0);
+    transform: translateZ(0) rotateY(0);
+  }
+}
+.slit-in-vertical {
+  animation: slit-in-vertical 0.55s;
 }
 
 // 購物車底色
@@ -367,11 +388,12 @@
 }
 .order_final_bg2 {
   width: 1200px;
-  height: 900px;
+  height: 95%;
   background-color: #fff;
   position: absolute;
   top: 100px;
   border-radius: 0, 0, 20px, 20px;
+  overflow: auto;
 }
 .order_final_bg h2 {
   text-align: center;
@@ -420,7 +442,7 @@
 // 下方最終購買明細
 .final_form {
   border: 3px solid $main-text-darkblue;
-  margin: 10px 30px;
+  margin: -15px 30px;
 }
 .final_table {
   width: 1135px;
@@ -485,20 +507,39 @@
   color: $main-text-darkblue;
   border: 4px solid $main-blue;
 }
-.prevstep:hover {
+.prevstep:hover,
+.final_prev .prevstep:hover {
   background-color: $main-blue;
   color: #fff;
   border: 4px solid $main-blue;
 }
+.final_prev .prevstep {
+  width: 15%;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: white;
+  color: $main-text-darkblue;
+  border: 4px solid $main-blue;
+}
 
-.nextstep,
-.order_submit_icon {
+.nextstep {
   margin-right: 20rem;
   width: 8%;
   border-radius: 20px;
   font-size: 20px;
   font-weight: 600;
   background-color: $background-color;
+  color: $main-text-darkblue;
+  border: 4px solid $main-red;
+}
+.order_submit_icon {
+  width: 15%;
+  height: 100%;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: white;
   color: $main-text-darkblue;
   border: 4px solid $main-red;
 }

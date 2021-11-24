@@ -12,7 +12,12 @@ function Calendar(props) {
   const [selectedYear, setSelectedYear] = useState(year);
   const [selectedMonth, setSelectedMonth] = useState(month);
 
-  const { setCustomerChoose, setShowCalendar, setShowCalendarFloat } = props;
+  const {
+    setCustomerChoose,
+    setShowCalendar,
+    setShowCalendarFloat,
+    showCourse,
+  } = props;
   return (
     <>
       <div className="calendar-wrapper">
@@ -25,6 +30,7 @@ function Calendar(props) {
           months={months}
         />
         <Dates
+          showCourse={showCourse}
           selectedYear={selectedYear}
           selectedMonth={selectedMonth}
           day={day}

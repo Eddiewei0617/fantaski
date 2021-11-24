@@ -5,6 +5,7 @@ const weekdays = ["日", "一", "二", "三", "四", "五", "六"];
 
 function Dates(props) {
   const {
+    showCourse,
     selectedYear,
     selectedMonth,
     day,
@@ -29,6 +30,7 @@ function Dates(props) {
         </thead>
         <tbody>
           <DatesInMonth
+            showCourse={showCourse}
             selectedYear={selectedYear}
             selectedMonth={selectedMonth}
             day={day}

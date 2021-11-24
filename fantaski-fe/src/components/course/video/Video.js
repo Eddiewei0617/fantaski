@@ -23,7 +23,6 @@ const videosLink = [
 ];
 function Video(props) {
   const { showCourse } = props;
-  console.log(showCourse);
   //依據回傳的showCourse決定要放哪個影片
   let videoToPlay = videosLink.filter((item) => {
     return item.name === showCourse;

@@ -1,8 +1,17 @@
 import { useState, useEffect, useRef } from "react";
 import { CART_CATEGORY } from "../../config/StatusShortcut";
-
-function OrderContent({ customerChoose, setCustomerChoose, step }) {
-  const [pointUsed, setPointUsed] = useState(0);
+import axios from "axios";
+function OrderContent({
+  customerChoose,
+  setCustomerChoose,
+  step,
+  memberPoints,
+  setMemberPoints,
+  pointUsed,
+  setPointUsed,
+  itemNumber,
+}) {
+  const [points, setPoints] = useState("---");
 
   let storage = localStorage;
   let itemString = storage["addItemList"];
@@ -17,27 +26,28 @@ function OrderContent({ customerChoose, setCustomerChoose, step }) {
     for (let i = 0; i < items.length; i++) {
       let singlePrice = storage[items[i]].split("|")[3];
       let singleNumber = storage[items[i]].split("|")[5];
-      courseTotal += singlePrice * singleNumber;
       if (storage[items[i]].split("|")[1] === "A") {
-        setCoursePrice(courseTotal);
+        courseTotal += singlePrice * singleNumber;
       }
     }
+    setCoursePrice(courseTotal);
+
     let productTotal = 0;
     for (let j = 0; j < items.length; j++) {
       let singlePrice = storage[items[j]].split("|")[3];
       let singleNumber = storage[items[j]].split("|")[5];
-      productTotal += singlePrice * singleNumber;
       if (storage[items[j]].split("|")[1] === "B") {
-        setProductPrice(productTotal);
+        productTotal += singlePrice * singleNumber;
       }
     }
-  }, [customerChoose]);
+    setProductPrice(productTotal);
+  }, [customerChoose, itemNumber]);
 
-  // const point = useRef();
-  // console.log("point", point);
-  // useEffect(() => {
-  //   setPointUsed(point.current.value);
-  // }, [step]);
+  useEffect(() => {
+    if (memberPoints !== null) {
+      setPointUsed(storage[`${memberPoints[0].name}`]);
+    }
+  }, [step]);
 
   return (
     <>
@@ -55,7 +65,17 @@ function OrderContent({ customerChoose, setCustomerChoose, step }) {
                   </div>
                   <div className="col d-flex">
                     <label className="m-0">會員點數 </label>
-                    <input type="text" value={`${0}  點`} className="p-0" />
+                    <input type="text" value={`${points} 點`} className="p-0" />
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => {
+                        `${points}` === "---"
+                          ? setPoints(`${memberPoints[0].point}`)
+                          : setPoints(`---`);
+                      }}
+                    >
+                      顯示會員點數
+                    </button>
                   </div>
                 </div>
 
@@ -67,14 +87,15 @@ function OrderContent({ customerChoose, setCustomerChoose, step }) {
                   <div className="col d-flex">
                     <label className="m-0">使用點數 </label>
                     <input
-                      // ref={point}
                       type="number"
                       placeholder={`${0}  點`}
                       value={pointUsed}
                       onChange={(e) => {
+                        storage.setItem(memberPoints[0].name, e.target.value);
                         setPointUsed(e.target.value);
                       }}
                       className="p-0"
+                      min="0"
                     />
                   </div>
                 </div>
@@ -83,7 +104,11 @@ function OrderContent({ customerChoose, setCustomerChoose, step }) {
                 <label className="m-0">總金額 NT$ </label>
                 <input
                   type="text"
-                  value={coursePrice + productPrice - pointUsed}
+                  value={
+                    pointUsed === undefined
+                      ? coursePrice + productPrice
+                      : coursePrice + productPrice - pointUsed
+                  }
                   className="mr-4"
                 />
               </div>

@@ -25,6 +25,12 @@ app.use(
   })
 );
 
+app.use(express.static("public"));
+
+//開放public資料夾
+app.use("/public", express.static("public"));
+
+
 //追朔訪問紀錄
 app.use((req, res, next) => {
   let current = new Date();
@@ -35,7 +41,7 @@ app.get("/", (req, res) => {
   res.send("這裡是server你好");
 });
 
-//取得json資料
+//取得前端傳回json body的資料 (必寫，且須寫在前面，由上到下的順序很重要)
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -46,6 +52,32 @@ app.use("/api/course", courseRouter);
 //api路徑中間件(商品)
 let productRouter = require("./routers/products");
 app.use("/api/products", productRouter);
+
+//api路徑中間件(購物車)
+let orderRouter = require("./routers/order");
+app.use("/api/order", orderRouter);
+//api路徑中間件(論壇)
+let forumRouter = require("./routers/forum");
+app.use("/api/forum", forumRouter);
+
+//天氣api
+let weatherRouter = require("./routers/weather");
+app.use("/api/weather", weatherRouter);
+
+// 會員api
+let memberRouter = require("./routers/member");
+app.use("/api/member", memberRouter);
+
+// 圖片檔案上傳
+let memberUploadRouter = require("./routers/memberUpload");
+app.use("/api/memberUpload", memberUploadRouter);
+
+// 會員送入資料庫api
+// let memberSaveRouter = require("./routers/membersave");
+// app.use("/api/membersave", memberSaveRouter);
+//購買紀錄
+let recordRouter = require("./routers/record");
+app.use("/api/record", recordRouter);
 
 //404中間件
 app.use((req, res, next) => {

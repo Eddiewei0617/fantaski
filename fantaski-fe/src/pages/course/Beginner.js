@@ -14,7 +14,7 @@ import "animate.css";
 import { toShowAddCartFloat } from "../../components/course/moduleList";
 
 function Beginner(props) {
-  const { courses, showCourse, setShowCourse } = props;
+  const { courses, showCourse, setShowCourse, setItemNumber } = props;
   //courses ["初體驗", "技能班", "雪橇車", "建冰屋"]
   //showCourse courses[1]
   const [customerChoose, setCustomerChoose] = useState({
@@ -22,6 +22,7 @@ function Beginner(props) {
     number: 1,
   });
   const [scrollTop, setScrollTop] = useState(false);
+  const [ifAddCart, setIfAddCart] = useState(false);
 
   useEffect(() => {
     toShowAddCartFloat(setScrollTop);
@@ -37,9 +38,12 @@ function Beginner(props) {
       <Video showCourse={showCourse} />
       {scrollTop && (
         <AddCartFloat
+          ifAddCart={ifAddCart}
+          setIfAddCart={setIfAddCart}
           showCourse={showCourse}
           customerChoose={customerChoose}
           setCustomerChoose={setCustomerChoose}
+          setItemNumber={setItemNumber}
         />
       )}
       <CourseButtons
@@ -56,12 +60,19 @@ function Beginner(props) {
       <Title titleName="雪友點評" />
       <Comments showCourse={showCourse} />
       <AddCartFix
+        ifAddCart={ifAddCart}
+        setIfAddCart={setIfAddCart}
         showCourse={showCourse}
         customerChoose={customerChoose}
         setCustomerChoose={setCustomerChoose}
+        setItemNumber={setItemNumber}
       />
       <Title titleName="推薦裝備" />
-      <Swiper showCourse={showCourse} />
+      <Swiper
+        showCourse={showCourse}
+        customerChoose={customerChoose}
+        setItemNumber={setItemNumber}
+      />
       <Title titleName="其他課程" />
       <CourseLink setShowCourse={setShowCourse} courses={courses} />
     </>
