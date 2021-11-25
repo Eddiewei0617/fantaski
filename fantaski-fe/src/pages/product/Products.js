@@ -24,10 +24,10 @@ function Products({
   memberInfo,
   cartPositionState,
   handleAddNumber,
+  userInfo,
 }) {
   let storage = localStorage;
   const [square, setSquare] = useState(true);
-
   // 做收藏標籤的點擊變換 start------------------------------
   const [toggleState, setToggleState] = useState({});
   //點擊後切換目標id的狀態false <-> true
@@ -62,16 +62,32 @@ function Products({
   // 接收後端傳來的 product_collection 資料
   const [collected, setCollected] = useState([]);
   const [collectUpdate, setCollectUpdate] = useState(0); // 此狀態是為了讓之後商品點收藏後每次都會重抓一次
+
   useEffect(async () => {
+    console.log("useInfo", userInfo);
     try {
       let res = await axios.post(`${API_URL}/products/collectinfo`, {
-        memberID: 1,
+        memberId: userInfo.id,
       });
       setCollected(res.data);
     } catch (e) {
       console.error("collectinfo", e);
     }
-  }, [collectUpdate]);
+  }, [collectUpdate, userInfo]);
+
+  // useEffect(async () => {
+  //   if (userInfo) {
+  //     console.log("test", userInfo);
+  //     try {
+  //       let res = await axios.post(`${API_URL}/products/collectinfo`, {
+  //         memberId: userInfo.id,
+  //       });
+  //       setCollected(res.data);
+  //     } catch (e) {
+  //       console.error("errorrrr", e);
+  //     }
+  //   }
+  // }, [userInfo]);
   // console.log("collected", collected);
 
   // 傳點到想收藏的資料給後端  // 註: 給一個v變數是因為丟到下面map迴圈裡也需要用到v，所以先在這邊加
@@ -87,7 +103,7 @@ function Products({
     try {
       let res = await axios.post(`${API_URL}/products/collection`, {
         isDelete: isDelete,
-        memberId: memberInfo[0].id,
+        memberId: userInfo.id,
         productId: v.id,
       });
     } catch (err) {
@@ -152,6 +168,7 @@ function Products({
             handleCollect={handleCollect}
             handleChecked={handleChecked}
             handleAddNumber={handleAddNumber}
+            userInfo={userInfo}
           />
         ) : (
           <ProductList

@@ -85,7 +85,8 @@ function ProductList({
                 className={`
                   ${collected.map((collections) => {
                     if (
-                      collections.member_id === 1 &&
+                      memberInfo &&
+                      collections.member_id === memberInfo[0].id &&
                       collections.product_id === v.id
                     ) {
                       return " collect_tagged "; // " "裡前後的空格不可以少，不然和其他被選到收藏的商品className黏在一起就抓不到了
@@ -98,6 +99,7 @@ function ProductList({
                   e.currentTarget.className.includes("collect_tagged")
                     ? handleCollect(v)
                     : handleChecked();
+                  setCollectUpdate(Math.random());
                 }}
               >
                 <BsTagsFill title="加入收藏" />

@@ -17,9 +17,10 @@ function ProductInfo({
   cartPositionState,
   handleCollect,
   handleChecked,
+  userInfo,
 }) {
   let storage = localStorage;
-
+  // console.log("memberInfo", memberInfo[0].id);
   // 傳參數(categoryId)給後端(記得用Post!!!)，跟後端說要哪個id的商品資料，請後端去資料庫撈
   const [snowboards, setSnowboards] = useState([]);
   useEffect(async () => {
@@ -29,8 +30,6 @@ function ProductInfo({
 
     setSnowboards(res.data);
   }, [categoryId]);
-
-  // console.log("cartPositionState", cartPositionState);
 
   // const flyCart = useRef();
   function flytoCart() {
@@ -63,8 +62,10 @@ function ProductInfo({
                     `
                   ${collected.map((collections) => {
                     if (
-                      collections.member_id === 1 &&
+                      memberInfo &&
+                      collections.member_id === memberInfo[0].id &&
                       collections.product_id === v.id
+                      // && 是要全部都是true的時候才會執行，如果有一個不成立(即是false)就不會發生事件
                     ) {
                       return " collect_tagged "; // " "裡前後的空格不可以少，不然和其他被選到收藏的商品className黏在一起就抓不到了
                     }
@@ -82,6 +83,7 @@ function ProductInfo({
                     e.currentTarget.className.includes("collect_tagged")
                       ? handleCollect(v)
                       : handleChecked();
+                    setCollectUpdate(Math.random());
                   }}
                 >
                   <BsTagsFill title="加入收藏" />

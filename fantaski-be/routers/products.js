@@ -40,7 +40,7 @@ router.post("/collectinfo", async (req, res) => {
   try {
     let collectInfo = await connection.queryAsync(
       "SELECT * FROM product_collection WHERE member_id=?",
-      [req.body.memberID]
+      [req.body.memberId]
     );
     // console.log(collectInfo);
     res.json(collectInfo);

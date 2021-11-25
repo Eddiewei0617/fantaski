@@ -66,6 +66,7 @@ router.post("/login", async (req, res) => {
       email: member.email,
       name: member.name,
       image: member.image,
+      point: member.point,
     };
     req.session.member = returnMember;
     res.json({ code: 0, message: "登入成功", member: returnMember });

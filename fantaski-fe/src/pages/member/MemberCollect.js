@@ -7,7 +7,7 @@ import { CATEGORY_WORD } from "../../config/StatusShortcut";
 import { Button } from "react-bootstrap";
 
 import MemberList from "../../components/member/MemberList";
-function MemberCollect({ setItemNumber, memberInfo }) {
+function MemberCollect({ setItemNumber, memberInfo, userInfo }) {
   let storage = localStorage;
   // 抓到storage裡面有幾樣商品的字串後，用split將字串轉成陣列就能顯示出有幾個了
   function handleAddNumber() {
@@ -31,7 +31,7 @@ function MemberCollect({ setItemNumber, memberInfo }) {
   const [memberCollectList, setMemberCollectList] = useState([]);
   useEffect(async () => {
     let res = await axios.post(`${API_URL}/member/membercollection`, {
-      memberId: 1,
+      memberId: userInfo.id,
     });
     setMemberCollectList(res.data);
     // console.log("mem", res);
@@ -41,7 +41,7 @@ function MemberCollect({ setItemNumber, memberInfo }) {
   async function handleCancelCollection(v) {
     try {
       let res = await axios.post(`${API_URL}/products/cancelcollection`, {
-        memberId: memberInfo[0].id,
+        memberId: userInfo.id,
         productId: v.id,
       });
       // console.log("product", v.id);

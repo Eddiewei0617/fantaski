@@ -17,20 +17,34 @@ import OrderSubmitIcon from "../../components/orders/OrderSubmitIcon";
 import { PRODUCTIMAGE_URL, ORDERIMAGE_URL } from "../../config/url";
 import { API_URL } from "../../config/url";
 import { getMemberPoints } from "../../components/orders/ModuleDb";
+// import { getUserInfo } from "../../config/StatusShortcut";
 
 function Orders(props) {
-  const { setItemNumber, itemNumber } = props;
+  const { setItemNumber, itemNumber, userInfo } = props;
   // 為了購物車第一步驟改變日期和數量而設的
   const [customerChoose, setCustomerChoose] = useState({
     date: "",
     number: "",
   });
 
-  // 從資料庫抓member的資料回來
+  // 先抓到現在登入者的session id，再丟給後端抓member資料庫的資料回來
+  const [memberNumber, setMemberNumber] = useState(0);
+  // const [memberInfo, setMemberInfo] = useState(null);
   const [memberPoints, setMemberPoints] = useState(null);
-  useEffect(() => {
-    getMemberPoints(setMemberPoints);
-  }, []);
+  useEffect(async () => {
+    try {
+      // let res = await axios.get(`${API_URL}/auth/userInfo`, {
+      //   withCredentials: true,
+      // });
+      // setMemberInfo(res.data);
+      if (userInfo !== null) {
+        getMemberPoints(setMemberPoints, userInfo.id);
+        console.log("res.data", userInfo);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }, [memberNumber]);
 
   // 為了判斷切換為哪個階段
   const [step, setStep] = useState(1);
@@ -90,6 +104,8 @@ function Orders(props) {
             setItemNumber={setItemNumber}
             itemNumber={itemNumber}
             progressAnimation={progressAnimation}
+            setMemberNumber={setMemberNumber}
+            userInfo={userInfo}
           />
           <div className="box3 d-flex justify-content-end m-5">
             <NextStepIcon
@@ -111,6 +127,7 @@ function Orders(props) {
             pointUsed={pointUsed}
             setPointUsed={setPointUsed}
             progressAnimation={progressAnimation}
+            setMemberNumber={setMemberNumber}
           />
           <div className="box3 d-flex justify-content-end m-5">
             <PrevStepIcon
@@ -137,6 +154,7 @@ function Orders(props) {
             pointUsed={pointUsed}
             setPointUsed={setPointUsed}
             progressAnimation={progressAnimation}
+            userInfo={userInfo}
           />
           {/* <div className="box3 d-flex justify-content-end m-5">
             <PrevStepIcon

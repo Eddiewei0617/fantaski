@@ -12,6 +12,8 @@ function FirstStep({
   setItemNumber,
   itemNumber,
   progressAnimation,
+  setMemberNumber,
+  userInfo,
 }) {
   console.log(pointUsed);
   return (
@@ -32,6 +34,8 @@ function FirstStep({
         pointUsed={pointUsed}
         setPointUsed={setPointUsed}
         itemNumber={itemNumber}
+        setMemberNumber={setMemberNumber}
+        userInfo={userInfo}
       />
     </>
   );

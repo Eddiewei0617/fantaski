@@ -9,6 +9,7 @@ function SecondStep({
   pointUsed,
   setPointUsed,
   progressAnimation,
+  setMemberNumber,
 }) {
   // 載入中Start----------------------
   const [isLoading, setIsLoading] = useState(true);
@@ -32,6 +33,7 @@ function SecondStep({
         setMemberPoints={setMemberPoints}
         pointUsed={pointUsed}
         setPointUsed={setPointUsed}
+        setMemberNumber={setMemberNumber}
       />
     </>
   );

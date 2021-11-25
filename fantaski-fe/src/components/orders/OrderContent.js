@@ -3,13 +3,13 @@ import { CART_CATEGORY } from "../../config/StatusShortcut";
 import axios from "axios";
 function OrderContent({
   customerChoose,
-  setCustomerChoose,
   step,
   memberPoints,
-  setMemberPoints,
   pointUsed,
   setPointUsed,
   itemNumber,
+  setMemberNumber,
+  userInfo,
 }) {
   const [points, setPoints] = useState("---");
 
@@ -43,11 +43,19 @@ function OrderContent({
     setProductPrice(productTotal);
   }, [customerChoose, itemNumber]);
 
+  // 希望換到不同階段時，下方使用點數還繼續顯示著
   useEffect(() => {
     if (memberPoints !== null) {
       setPointUsed(storage[`${memberPoints[0].name}`]);
     }
   }, [step]);
+
+  // 因為非同步的關係，第一次接收到的memberPoints是null，所以要設一個判斷式，判斷係在是不是null
+  useEffect(() => {
+    points === "---"
+      ? setPoints(memberPoints ? memberPoints[0].point : "---")
+      : setPoints(`---`);
+  }, [memberPoints]);
 
   return (
     <>
@@ -69,9 +77,7 @@ function OrderContent({
                     <button
                       className="btn btn-primary"
                       onClick={() => {
-                        `${points}` === "---"
-                          ? setPoints(`${memberPoints[0].point}`)
-                          : setPoints(`---`);
+                        setMemberNumber(Math.random());
                       }}
                     >
                       顯示會員點數
@@ -91,7 +97,10 @@ function OrderContent({
                       placeholder={`${0}  點`}
                       value={pointUsed}
                       onChange={(e) => {
-                        storage.setItem(memberPoints[0].name, e.target.value);
+                        storage.setItem(
+                          memberPoints ? memberPoints[0].name : 0,
+                          e.target.value
+                        );
                         setPointUsed(e.target.value);
                       }}
                       className="p-0"

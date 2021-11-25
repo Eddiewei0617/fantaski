@@ -19,6 +19,7 @@ function OrderFinal({
   setStep,
   scrollToTop,
   progressAnimation,
+  userInfo,
 }) {
   // 代入localStorage裡面存的資料
   var storage = localStorage;
@@ -85,6 +86,7 @@ function OrderFinal({
       let res = await axios.post(`${API_URL}/order/orderconfirm`, {
         orderList,
         orderNumber: orderNo,
+        memberId: userInfo.id,
         total: total - pointUsed,
         pointUsed: pointUsed,
       });
@@ -92,6 +94,7 @@ function OrderFinal({
       // 傳剩餘點數給後端
       let res2 = await axios.post(`${API_URL}/order/pointleft`, {
         pointLeft: memberPoints[0].point - pointUsed,
+        memberId: userInfo.id,
       });
     } catch (e) {
       console.log("handleSubmit", e);
@@ -150,8 +153,10 @@ function OrderFinal({
               </div>
               <div className="col-9 final_word">
                 {pointUsed === undefined
-                  ? memberPoints[0].point
-                  : memberPoints[0].point - pointUsed}
+                  ? memberPoints
+                    ? userInfo.point
+                    : userInfo.point - pointUsed
+                  : userInfo.point - pointUsed}
                 點
               </div>
             </div>

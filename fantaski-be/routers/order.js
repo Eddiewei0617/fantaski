@@ -11,11 +11,13 @@ router.get("/", (res, req) => {
 });
 
 // 拿資料庫(member)的資料給前端(為了用點數)
-router.get("/getMemberPoints", async (req, res) => {
+router.post("/getMemberPoints", async (req, res) => {
   try {
     let getMemberPoints = await connection.queryAsync(
-      "SELECT * FROM member WHERE id = 1"
+      "SELECT * FROM member WHERE id = ?",
+      [req.body.memberId]
     );
+    // console.log("getMemberPoints", getMemberPoints);
     res.json(getMemberPoints);
   } catch (err) {
     res.json({ code: 9999, message: "資料庫讀取錯誤" });
@@ -54,7 +56,13 @@ router.post("/orderconfirm", async (req, res) => {
     // 寫進ordered資料表 // 註!!! 訂單編號req.body.orderNumber 出來是字串，所以資料庫記得要用varchar ***
     let orderConfirm = await connection.queryAsync(
       "INSERT INTO ordered (order_no,member_id, consumption,point_used, created_at) VALUES(?,?,?,?,?) ",
-      [req.body.orderNumber, 1, req.body.total, req.body.pointUsed, created_at]
+      [
+        req.body.orderNumber,
+        req.body.memberId,
+        req.body.total,
+        req.body.pointUsed,
+        created_at,
+      ]
     );
 
     // 寫進order_product資料表
@@ -101,7 +109,7 @@ router.post("/pointleft", async (req, res) => {
   try {
     let memberPointLeft = await connection.queryAsync(
       "UPDATE member SET point=? WHERE id=?",
-      [req.body.pointLeft, 1]
+      [req.body.pointLeft, req.body.memberId]
     );
     res.json({ memberPointLeft });
   } catch (e) {

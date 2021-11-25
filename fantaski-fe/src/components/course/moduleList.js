@@ -81,6 +81,7 @@ export async function getMemberCourseComment(memberId, setMemberCourseComment) {
   });
   let memberCourseComment = res.data;
   setMemberCourseComment(memberCourseComment);
+  console.log("memberCourseComment", memberCourseComment);
 }
 
 //會員更新課程評價api

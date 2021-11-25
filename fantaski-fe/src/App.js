@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { useState, useEffect } from "react";
-
+import { getUserInfo } from "../src/config/StatusShortcut";
 // 引入各分頁(後續寫程式可更動) 頁面用元件
 
 // 課程
@@ -53,11 +53,20 @@ function App() {
   // navbar上購物車的數字
   const [itemNumber, setItemNumber] = useState(0);
 
+  // 抓現在登入的使用者是誰(member資訊)
+  const [userInfo, setUserInfo] = useState(null);
+  useEffect(() => {
+    getUserInfo(setUserInfo);
+  }, []);
+
+  // console.log("userInfo", userInfo);
   // 引入moduleDb.js檔抓取後端member資料庫的資料來顯示會員剩餘點數
   const [memberInfo, setMemberInfo] = useState(null);
   useEffect(() => {
-    getMemberPoints(setMemberInfo);
-  }, []);
+    if (userInfo) {
+      getMemberPoints(setMemberInfo, userInfo.id);
+    }
+  }, [userInfo]);
 
   const [cartPositionState, setCartPositionState] = useState(null);
   //forum 種類
@@ -72,6 +81,13 @@ function App() {
     let items = itemString.substr(0, itemString.length - 2).split(", ");
     setItemNumber(Number(items.length));
   }
+
+  const [isLogin, setIsLogin] = useState(false);
+
+  // if (userInfo) {
+  //   setIsLogin(true);
+  // }
+  // console.log("isLogin", isLogin);
 
   return (
     <>
@@ -153,10 +169,15 @@ function App() {
                 memberInfo={memberInfo}
                 cartPositionState={cartPositionState}
                 handleAddNumber={handleAddNumber}
+                userInfo={userInfo}
               />
             </Route>
             <Route path="/Orders">
-              <Orders setItemNumber={setItemNumber} itemNumber={itemNumber} />
+              <Orders
+                setItemNumber={setItemNumber}
+                itemNumber={itemNumber}
+                userInfo={userInfo}
+              />
             </Route>
             <Route path="/login">
               <Login />
@@ -180,6 +201,7 @@ function App() {
               <MemberCollect
                 setItemNumber={setItemNumber}
                 memberInfo={memberInfo}
+                userInfo={userInfo}
               />
             </Route>
             <Route path="/memberComment">
