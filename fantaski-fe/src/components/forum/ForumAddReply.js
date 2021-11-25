@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { IMAGE_FORUM_URL } from "../../config/url";
+import { IMAGE_FORUM_URL, PUBLIC_URL } from "../../config/url";
+import { getUserInfo } from "../../config/StatusShortcut";
 import { insertReplyInfo } from "./moduleList";
 
 function ForumAddReply({
@@ -17,6 +18,10 @@ function ForumAddReply({
     image: "snowman.svg",
   });
   const [replyContent, setReplyContent] = useState("");
+
+  useEffect(() => {
+    getUserInfo(setMemberInfo);
+  }, []);
 
   function handleChange(e) {
     setReplyContent(e.target.value);
@@ -38,8 +43,10 @@ function ForumAddReply({
       <div className="reply-area">
         <label className="m-3 forum-reply-img">
           <img
-            src={` ${IMAGE_FORUM_URL}/${
-              memberInfo.image === "" ? "snowman.svg" : memberInfo.image
+            src={`${
+              memberInfo.image === null
+                ? `${IMAGE_FORUM_URL}/snowman.svg`
+                : `${PUBLIC_URL}/${memberInfo.image}`
             }`}
             alt="snowman-defult"
           />
