@@ -25,8 +25,11 @@ app.use(
   })
 );
 
+app.use(express.static("public"));
+
 //開放public資料夾
 app.use("/public", express.static("public"));
+
 
 //追朔訪問紀錄
 app.use((req, res, next) => {
@@ -66,9 +69,22 @@ app.use("/api/weather", weatherRouter);
 let memberRouter = require("./routers/member");
 app.use("/api/member", memberRouter);
 
+<<<<<<< HEAD
 // 登入註冊api
 let authRouter = require("./routers/auth");
 app.use("/api/auth", authRouter);
+=======
+// 圖片檔案上傳
+let memberUploadRouter = require("./routers/memberUpload");
+app.use("/api/memberUpload", memberUploadRouter);
+
+// 會員送入資料庫api
+// let memberSaveRouter = require("./routers/membersave");
+// app.use("/api/membersave", memberSaveRouter);
+//購買紀錄
+let recordRouter = require("./routers/record");
+app.use("/api/record", recordRouter);
+>>>>>>> main
 
 //404中間件
 app.use((req, res, next) => {

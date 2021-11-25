@@ -1,31 +1,40 @@
 // import NAvbar from "../components/route/Navbar";
 import MemberList from "../../components//member/MemberList";
 import MemberContent from "../../components/member/MemberContent";
+// import MemberCollect from "./MemberCollect";
+// import CommentsInMember from "../../components/member/commentsinMember/CommentsInMember";
 import { useState, useEffect } from "react";
 import { API_URL } from "../../config/url";
 import axios from "axios";
 
-function Member() {
+function Member({ setShowCourse, setItemNumber }) {
   const [showmodal, setshowmodal] = useState("false");
-  const [member, setMember] = useState([]);
+  const [member, setMember] = useState(null);
+  // console.log(details && details.member[0].name);
   useEffect(async () => {
     let res = await axios.get(`${API_URL}/member/memberInfo`);
-    setMember(res.data);
+    console.log(res.data);
+    if (res.data.length > 0) {
+      setMember(res.data);
+    }
   }, []);
   function toggleModal() {
     setshowmodal(!showmodal);
   }
+  if (member === null) {
+    return <></>;
+  }
   return (
     <div>
       {/* <NAvbar />  */}
-      <div class={`memberpop ${showmodal ? "modal" : ""}`} tabindex="-1">
-        <div class="modal-dialog  modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header ">
-              <h5 class="modal-title memberpopTitle">會員資料修改</h5>
+      <div className={`memberpop ${showmodal ? "modal" : ""}`} tabindex="-1">
+        <div className="modal-dialog  modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header ">
+              <h5 className="modal-title memberpopTitle">會員資料修改</h5>
               {/* <button
                 type="button"
-                class="close"
+                className="close"
                 data-dismiss="modal"
                 aria-label="Close"
               >
@@ -33,7 +42,7 @@ function Member() {
               </button> */}
             </div>
             {/* 彈跳第一行 */}
-            <div class="modal-body m-3 row align-items-center ">
+            <div className="modal-body m-3 row align-items-center ">
               <div className="col-6 row align-items-center ">
                 <div className="col-6 my-3 text-center">會員姓名</div>
                 <div className="col-6 my-3 text-center">
@@ -48,39 +57,39 @@ function Member() {
               <div className="col-6 row align-items-center ">
                 <div className="col-3 text-center">性別</div>
                 <div className="col-9 d-flex justify-content-between">
-                  <div class="form-check form-check-inline">
+                  <div className="form-check form-check-inline">
                     <input
-                      class="form-check-input radioWidth"
+                      className="form-check-input radioWidth"
                       type="radio"
                       name="gender"
                       id="male"
                       value="male"
                     />
-                    <label class="form-check-label" for="male">
+                    <label className="form-check-label" for="male">
                       男
                     </label>
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div className="form-check form-check-inline">
                     <input
-                      class="form-check-input radioWidth"
+                      className="form-check-input radioWidth"
                       type="radio"
                       name="gender"
                       id="female"
                       value="female"
                     />
-                    <label class="form-check-label" for="female">
+                    <label className="form-check-label" for="female">
                       女
                     </label>
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div className="form-check form-check-inline">
                     <input
-                      class="form-check-input radioWidth"
+                      className="form-check-input radioWidth"
                       type="radio"
                       name="gender"
                       id="sexual"
                       value="sexual"
                     />
-                    <label class="form-check-label" for="sexual">
+                    <label className="form-check-label" for="sexual">
                       多元性別
                     </label>
                   </div>
@@ -130,13 +139,16 @@ function Member() {
               </div>
             </div>
 
-            <div class="modal-footer">
+            <div className="modal-footer">
               <button
                 type="button"
-                class="popBtn"
+                className="popBtn"
                 data-dismiss="modal"
                 onClick={toggleModal}
               >
+                取消
+              </button>
+              <button type="submit" class="popBtn">
                 儲存
               </button>
             </div>
@@ -145,7 +157,17 @@ function Member() {
       </div>
       <div className="container">
         <MemberList />
-        <MemberContent toggleModal={toggleModal} />
+
+        <MemberContent
+          toggleModal={toggleModal}
+          name={member[0].name}
+          point={member[0].point}
+          level={member[0].level_id}
+          sex={member[0].gender}
+          birthday={member[0].birthday}
+          img={member[0].image}
+        />
+        {/* <CommentsInMember setShowCourse={setShowCourse} /> */}
       </div>
     </div>
   );

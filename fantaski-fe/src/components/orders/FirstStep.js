@@ -11,6 +11,7 @@ function FirstStep({
   setPointUsed,
   setItemNumber,
   itemNumber,
+  progressAnimation,
 }) {
   console.log(pointUsed);
   return (
@@ -20,6 +21,7 @@ function FirstStep({
         setCustomerChoose={setCustomerChoose}
         setItemNumber={setItemNumber}
         itemNumber={itemNumber}
+        progressAnimation={progressAnimation}
       />
 
       <OrderContent

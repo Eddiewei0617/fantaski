@@ -19,6 +19,7 @@ export const CART_CATEGORY = {
   A: "課程購買",
   B: "裝備租賃",
 };
+<<<<<<< HEAD
 
 //論壇回文資訊api
 export async function getUserInfo(setUserInfo) {
@@ -32,3 +33,6 @@ export async function getUserInfo(setUserInfo) {
     console.log(e);
   }
 }
+=======
+export const STATUS_LEVEL = { 1: "雪球", 2: "雪人", 3: "雪狼", 4: "雪怪" };
+>>>>>>> main

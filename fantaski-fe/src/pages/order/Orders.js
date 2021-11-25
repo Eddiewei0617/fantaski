@@ -61,6 +61,8 @@ function Orders(props) {
 
   const [pointUsed, setPointUsed] = useState(0);
 
+  const [progressAnimation, setProgressAnimation] = useState(0);
+
   // ------------------------------------------------------------------------------------
   return (
     <>
@@ -70,6 +72,7 @@ function Orders(props) {
             step={step}
             setStep={setStep}
             scrollToTop={scrollToTop}
+            setProgressAnimation={setProgressAnimation}
           />
         </div>
       </div>
@@ -86,12 +89,14 @@ function Orders(props) {
             setPointUsed={setPointUsed}
             setItemNumber={setItemNumber}
             itemNumber={itemNumber}
+            progressAnimation={progressAnimation}
           />
           <div className="box3 d-flex justify-content-end m-5">
             <NextStepIcon
               step={step}
               setStep={setStep}
               scrollToTop={scrollToTop}
+              setProgressAnimation={setProgressAnimation}
             />
           </div>
         </>
@@ -105,6 +110,7 @@ function Orders(props) {
             setMemberPoints={setMemberPoints}
             pointUsed={pointUsed}
             setPointUsed={setPointUsed}
+            progressAnimation={progressAnimation}
           />
           <div className="box3 d-flex justify-content-end m-5">
             <PrevStepIcon
@@ -116,6 +122,7 @@ function Orders(props) {
               step={step}
               setStep={setStep}
               scrollToTop={scrollToTop}
+              setProgressAnimation={setProgressAnimation}
             />
           </div>
         </>
@@ -129,6 +136,7 @@ function Orders(props) {
             memberPoints={memberPoints}
             pointUsed={pointUsed}
             setPointUsed={setPointUsed}
+            progressAnimation={progressAnimation}
           />
           {/* <div className="box3 d-flex justify-content-end m-5">
             <PrevStepIcon
