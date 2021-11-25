@@ -23,6 +23,24 @@ const homeRentFromServer = [
     title: "筆刷滿點單板",
     price: 1800,
   },
+  {
+    id: 4,
+    image: `${PRODUCTIMAGE_URL}/beanies2.jpg`,
+    title: "極保暖毛帽",
+    price: 1000,
+  },
+  {
+    id: 5,
+    image: `${PRODUCTIMAGE_URL}/pants1.jpg`,
+    title: "軍綠94褲",
+    price: 2000,
+  },
+  {
+    id: 6,
+    image: `${PRODUCTIMAGE_URL}/goggle1.jpg`,
+    title: "抗紫外光護目鏡",
+    price: 1000,
+  },
 ];
 
 // 自動輪播
@@ -42,7 +60,8 @@ function HomeRentCarousel() {
       loopAdditionalSlides: 30,
       grabCursor: true, // 游標為手掌
       autoplay: {
-        delay: 3000,
+        delay: 2000,
+        disableOnInteraction: false,
       },
     });
   }, []);

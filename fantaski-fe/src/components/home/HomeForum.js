@@ -88,9 +88,9 @@ function HomeForum() {
                             留言數:<span>{v.replyNum}</span>則
                           </div>
                           {/* home-commit-num end */}
-                          <div class="home-arrow-1">
-                            <Link to="/forum">前往觀看</Link>
-                          </div>
+                          <Link to="/forum" className="goto-check">
+                            <div className="home-arrow-1">前往觀看</div>
+                          </Link>
                           {/* home-arrow-1 end */}
                         </div>
                         {/* home-reply-more end */}
@@ -133,9 +133,9 @@ function HomeForum() {
                             留言數:<span>{v.replyNum}</span>則
                           </div>
                           {/* home-commit-num end */}
-                          <div class="home-arrow-1">
-                            <Link to="/forum">前往觀看</Link>
-                          </div>
+                          <Link to="/forum" className="goto-check">
+                            <div className="home-arrow-1">前往觀看</div>
+                          </Link>
                           {/* home-arrow-1 end */}
                         </div>
                         {/* home-reply-more end */}
