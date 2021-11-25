@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { IMAGE_FORUM_URL } from "../../config/url";
+import { IMAGE_FORUM_URL, PUBLIC_URL } from "../../config/url";
 import { getPosterInfo } from "./moduleList";
+import { getUserInfo } from "../../config/StatusShortcut";
 
 function FourmUserName({ forum_id }) {
   const [poster, setPoster] = useState(null);
-  //會員id好之前先打在這，之後要判斷是否登入狀態才可以發文
   const [memberInfo, setMemberInfo] = useState({
     id: 1,
     name: "Eddie",
     gender: "male",
-    image: "snowman.svg",
+    image: null,
   });
   useEffect(() => {
     //點進去別人文章用
     if (forum_id) {
       getPosterInfo(forum_id, setPoster);
     }
+    getUserInfo(setMemberInfo);
   }, [forum_id]);
 
   //axios還沒好或新增／編輯文章用
@@ -25,8 +26,10 @@ function FourmUserName({ forum_id }) {
         <div className="forum-user-img">
           {/* 需規範上傳圖片的限制檔名與K數 */}
           <img
-            src={`${IMAGE_FORUM_URL}/${
-              memberInfo.image === "" ? "snowman.svg" : memberInfo.image
+            src={`${
+              memberInfo.image === null
+                ? `${IMAGE_FORUM_URL}/snowman.svg`
+                : `${PUBLIC_URL}/${memberInfo.image}`
             }`}
             alt="snowman-defult"
           />
@@ -41,8 +44,10 @@ function FourmUserName({ forum_id }) {
       <div className="forum-user-img">
         {/* 需規範上傳圖片的限制檔名與K數 */}
         <img
-          src={`${IMAGE_FORUM_URL}/${
-            poster.image === "" ? "snowman.svg" : poster.image
+          src={`${
+            poster.image === null
+              ? `${IMAGE_FORUM_URL}/snowman.svg`
+              : `${PUBLIC_URL}/${poster.image}`
           }`}
           alt="snowman-defult"
         />
