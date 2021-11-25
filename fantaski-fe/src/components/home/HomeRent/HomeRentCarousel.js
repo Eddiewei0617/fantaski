@@ -1,77 +1,75 @@
 import React, { useState, useEffect } from "react";
 
 import { PRODUCTIMAGE_URL } from "../../../config/url";
-import $ from "jquery";
-import Swiper from "swiper";
+import Swiper, { Autoplay } from "swiper";
+import { Link } from "react-router-dom";
+
+const homeRentFromServer = [
+  {
+    id: 1,
+    image: `${PRODUCTIMAGE_URL}/allblack.jfif`,
+    title: "暗黑滿點單板",
+    price: 1200,
+  },
+  {
+    id: 2,
+    image: `${PRODUCTIMAGE_URL}/santaDeer5.jpg`,
+    title: "肌腸鹿鹿",
+    price: 2800,
+  },
+  {
+    id: 3,
+    image: `${PRODUCTIMAGE_URL}/kz_color.png`,
+    title: "筆刷滿點單板",
+    price: 1800,
+  },
+];
+
+// 自動輪播
+Swiper.use([Autoplay]);
 
 function HomeRentCarousel() {
+  const [indexRent, setIndexRent] = useState(homeRentFromServer);
+
   useEffect(() => {
-    const swiper = new Swiper(".swiper-container", {
+    const swiper = new Swiper(".home-swiper-container", {
       direction: "horizontal", // 方向
       loop: true, // 循環
-      spaceBetween: 1,
+      spaceBetween: 100,
       slidesPerView: 3,
       centeredSlides: true,
       roundLengths: true,
       loopAdditionalSlides: 30,
       grabCursor: true, // 游標為手掌
-      // pagination: {
-      //   el: ".swiper-pagination",
-      //   dynamicBullets: true,
-      // },
-      // navigation: {
-      //   nextEl: ".swiper-button-next",
-      //   prevEl: ".swiper-button-prev",
-      // },
+      autoplay: {
+        delay: 3000,
+      },
     });
   }, []);
   return (
     <>
-      <div className="swiper-container">
-        <div className="swiper-wrapper">
-          <div className="swiper-slide">Slide 1</div>
-          <div className="swiper-slide">Slide 2</div>
-          <div className="swiper-slide">Slide 3</div>
-          <div className="swiper-slide">Slide 4</div>
-          <div className="swiper-slide">Slide 5</div>
+      <div className="home-swiper-container">
+        <div className="swiper-wrapper home-swiper">
+          {indexRent.map((v, i) => {
+            return (
+              <>
+                <div className="swiper-slide">
+                  <Link to="/products">
+                    <div className="home-swiper-area" key={v.i}>
+                      <img src={v.image} alt="" />
+                      <div className="home-slider-text">
+                        <h3>{v.title}</h3>
+                        <p>${v.price}</p>
+                      </div>
+                    </div>
+                  </Link>
+                  {/* home-swiper-area end */}
+                </div>
+              </>
+            );
+          })}
         </div>
-        {/* <div className="swiper-pagination"></div>
-        <div className="swiper-button-prev"></div>
-        <div className="swiper-button-next"></div> */}
       </div>
-      {/* <div className="home-slider-container">
-        <div className="home-slider-card">
-          <div className="home-slider-img">
-            <img src={`${PRODUCTIMAGE_URL}/china_water.jfif`} alt="" />
-          </div>
-          <div className="home-slider-text">
-            <h3>滑雪板</h3>
-            <p>$2000</p>
-          </div>
-        </div>
-
-        <div className="home-slider-card">
-          <div className="home-slider-img">
-            <img src={`${PRODUCTIMAGE_URL}/santa3.jpg`} alt="" />
-          </div>
-          <div className="home-slider-text">
-            <h3>滑雪板</h3>
-            <p>$2000</p>
-          </div>
-        </div>
-
-        <div className="home-slider-card">
-          <div className="home-slider-img">
-            <img src={`${PRODUCTIMAGE_URL}/santaDeer5.jpg`} alt="" />
-          </div>
-          <div className="home-slider-text">
-            <h3>滑雪板</h3>
-            <p>$2000</p>
-          </div>
-        </div> */}
-
-      {/* home-slider-card end */}
-      {/* </div> */}
     </>
   );
 }

@@ -6,7 +6,6 @@ import HomeRentCarousel from "./HomeRent/HomeRentCarousel";
 import { Button } from "react-bootstrap";
 
 const types = ["雪板類", "服飾類", "裝備類"];
-
 function HomeRent() {
   const mainTitle = {
     title: "租點裝備",
@@ -24,7 +23,7 @@ function HomeRent() {
           {/* home-title-area end */}
           <div className="home-rent-area">
             <div className="home-rent-button">
-              {types.map((type) => (
+              {types.map((type, i) => (
                 <Button
                   key={type}
                   active={active === type}

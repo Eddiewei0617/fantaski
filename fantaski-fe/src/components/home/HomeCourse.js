@@ -16,6 +16,9 @@ const homeCourseFromServer = [
     routeCate: "綠線",
     routeColor: "#559360",
     price: 2000,
+    replyNum: 30,
+    stu_limit: 4,
+    href: "beginner",
   },
   {
     id: 2,
@@ -28,6 +31,9 @@ const homeCourseFromServer = [
     routeCate: "紅線",
     routeColor: "#F50505",
     price: 4000,
+    replyNum: 10,
+    stu_limit: 14,
+    href: "skill",
   },
   {
     id: 3,
@@ -37,6 +43,9 @@ const homeCourseFromServer = [
     routeCate: "黑線",
     routeColor: "#000",
     price: 6000,
+    replyNum: 20,
+    stu_limit: 6,
+    href: "sled",
   },
 ];
 
@@ -85,7 +94,11 @@ function HomeCourse(props) {
                       </div>
                       {/* home-area-price end */}
                       <hr />
-                      <HomeCourseMore />
+                      <HomeCourseMore
+                        replyNum={v.replyNum}
+                        stu_limit={v.stu_limit}
+                        href={v.href}
+                      />
                     </div>
                     {/* home-course-detail-area end */}
                   </div>

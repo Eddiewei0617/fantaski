@@ -297,15 +297,14 @@
     left: 11.5%;
     padding: 1%;
     top: -0.5%;
+    path:hover {
+      cursor: pointer;
+      filter: blur(2px);
+    }
   }
 }
-
-.red-route:hover.route-popup {
-  cursor: pointer;
-  filter: blur(2px);
-  // .route-popup {
-  //   visibility: visible;
-  // }
+.route-popup {
+  // visibility: visible;
 }
 .route-popup {
   width: 200px;
@@ -421,56 +420,75 @@
     font-weight: 600;
   }
 }
-.home-slider-container {
-  width: 100%;
-  display: flex;
-  margin: 5% auto 0;
-}
-.home-slider-card {
-  width: calc(100% / 3);
-  margin: 0 3%;
-  .home-slider-img {
-    overflow: hidden;
-    object-fit: cover;
-    margin: 0 auto;
-    height: 400px;
-    img {
-      width: 100%;
-      height: 100%;
-    }
-  }
-  .home-slider-text {
-    text-align: center;
-    margin-top: 10px;
-    color: $main-text-darkblue;
-    p {
-      font-size: $font-l;
-    }
-  }
-}
 
-.swiper-container {
+.home-swiper-container {
   position: relative;
-  width: 90vw;
-  height: 300px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 10%;
+  height: 400px;
 }
-.swiper-container > .swiper-slide__content {
+.home-swiper-container > .swiper-slide__content {
   position: absolute;
   top: 0;
 }
+.home-swiper {
+  width: 100%;
+  margin: 0 auto;
+  // overflow: hidden;
+  // object-fit: cover;
+}
 
 .swiper-slide {
+  width: 350px !important;
   height: 300px;
   display: flex;
-  background: #eee;
+  // background: #eee;
   align-items: center;
   justify-content: center;
   transition: all 200ms linear;
   transform: scale(0.8);
+  // margin-left: -2.5%;
+  filter: grayscale(1);
 
   &.swiper-slide-active {
     transform: scale(1);
-    background: #fc0;
+    // background: #fc0;
+    filter: brightness(1);
+  }
+  .home-swiper-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 400px;
+    margin-top: 15%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 15px 15px 0 0;
+    }
+
+    .home-slider-text {
+      color: $main-text-darkblue;
+      font-weight: 600;
+      // position: absolute;
+      // top: 90%;
+      margin-top: 4%;
+      h3 {
+        display: inline-block;
+        margin-right: 10px;
+      }
+
+      p {
+        font-size: $font-l;
+        display: inline-block;
+        color: $main-red;
+      }
+    }
   }
 }
 .swiper-slide__content {
