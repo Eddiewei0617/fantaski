@@ -53,6 +53,7 @@ app.use("/api/products", productRouter);
 //api路徑中間件(購物車)
 let orderRouter = require("./routers/order");
 app.use("/api/order", orderRouter);
+
 //api路徑中間件(論壇)
 let forumRouter = require("./routers/forum");
 app.use("/api/forum", forumRouter);
@@ -64,6 +65,10 @@ app.use("/api/weather", weatherRouter);
 // 會員api
 let memberRouter = require("./routers/member");
 app.use("/api/member", memberRouter);
+
+// 登入註冊api
+let authRouter = require("./routers/auth");
+app.use("/api/auth", authRouter);
 
 //404中間件
 app.use((req, res, next) => {

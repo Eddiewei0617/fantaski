@@ -95,6 +95,7 @@ function App() {
                 courses={courses}
                 showCourse={showCourse}
                 setShowCourse={setShowCourse}
+                setItemNumber={setItemNumber}
               />
             </Route>
             <Route path="/course/beginner">
