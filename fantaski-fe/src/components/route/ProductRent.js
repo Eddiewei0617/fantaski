@@ -68,9 +68,13 @@ function ProductRent() {
             <div className="col-6 text-left p-0">單板/雙版</div>
             <div className="col-6 text-right p-0">男女裝 :</div>
             <div className="col-6 text-left p-0">外套/雪鞋</div>
-            <div className="col-6 text-right p-0">配件 :</div>
+            <div className="col-6 text-right p-0">
+              配&nbsp;&nbsp;&nbsp;&nbsp;件 :
+            </div>
             <div className="col-6 text-left p-0">護目鏡/護膝</div>
-            <div className="col-6 text-right p-0">器材 :</div>
+            <div className="col-6 text-right p-0">
+              器&nbsp;&nbsp;&nbsp;&nbsp;材 :
+            </div>
             <div className="col-6 text-left p-0">雪橇車/摩托車</div>
           </div>
           <button className="btn btn-primary mt-3 w-50 mx-auto">更多</button>

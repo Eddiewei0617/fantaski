@@ -26,6 +26,7 @@ function Navbar({
   itemNumber,
   setCartPositionState,
   setForumCategory,
+  handleAddNumber,
 }) {
   // 設定該項目被點選時的狀態
 
@@ -116,6 +117,14 @@ function Navbar({
   const cartPosition = useRef(null);
   setCartPositionState(cartPosition);
   // console.log("cartPosition", cartPosition);
+
+  useEffect(() => {
+    if (localStorage["addItemList"] === "") {
+      setItemNumber(0);
+    } else {
+      handleAddNumber();
+    }
+  }, [itemNumber]);
   return (
     <>
       {/* scroll 初始化 */}

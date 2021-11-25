@@ -23,6 +23,7 @@ function Products({
   itemNumber,
   memberInfo,
   cartPositionState,
+  handleAddNumber,
 }) {
   let storage = localStorage;
   const [square, setSquare] = useState(true);
@@ -51,12 +52,12 @@ function Products({
   // 商品種類狀態，有1~8，預設為1(單板)
   const [categoryId, setCategoryId] = useState(1);
 
-  // 抓到storage裡面有幾樣商品的字串後，用split將字串轉成陣列就能顯示出有幾個了
-  function handleAddNumber() {
-    let itemString = storage["addItemList"];
-    let items = itemString.substr(0, itemString.length - 2).split(", ");
-    setItemNumber(Number(items.length));
-  }
+  // // 抓到storage裡面有幾樣商品的字串後，用split將字串轉成陣列就能顯示出有幾個了
+  // function handleAddNumber() {
+  //   let itemString = storage["addItemList"];
+  //   let items = itemString.substr(0, itemString.length - 2).split(", ");
+  //   setItemNumber(Number(items.length));
+  // }
 
   // 接收後端傳來的 product_collection 資料
   const [collected, setCollected] = useState([]);
