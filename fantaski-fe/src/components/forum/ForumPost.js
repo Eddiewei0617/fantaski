@@ -5,7 +5,7 @@ import ForumHeartCommit from "./ForumHeartCommit";
 import { getForumInfo, forumList } from "./moduleList";
 import moment from "moment";
 
-function ForumPost({ forumCategory, setForumCategory }) {
+function ForumPost({ forumCategory, setForumCategory, userInfo }) {
   const [forumModalShow, setForumModalShow] = useState(false);
   const [forumInfo, setForumInfo] = useState(null);
   const [whichPostToShow, setWhichPostToShow] = useState(null);
@@ -118,6 +118,7 @@ function ForumPost({ forumCategory, setForumCategory }) {
           replyList={forumInfo["reply"]}
           replyCount={replyCount}
           setReplyCount={setReplyCount}
+          userInfo={userInfo}
         />
       )}
     </>

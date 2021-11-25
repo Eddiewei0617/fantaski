@@ -77,7 +77,7 @@ router.post("/getposterinfo", async (req, res) => {
   console.log("request for posterInfo");
   try {
     let resPosterInfo = await connection.queryAsync(
-      "SELECT m.name, m.image FROM forum f, member m WHERE f.id = ? AND m.id = f.member_id;",
+      "SELECT m.id, m.name, m.image FROM forum f, member m WHERE f.id = ? AND m.id = f.member_id;",
       req.body.forum_id
     );
     res.json(resPosterInfo);
