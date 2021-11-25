@@ -7,8 +7,14 @@ import { BsHeartFill } from "react-icons/bs";
 import ForumReply from "./ForumReply";
 import ForumAddReply from "./ForumAddReply";
 import FourmUserName from "./ForumUserName";
-import { forumList, getLikeList, updateForumLike } from "./moduleList";
+import {
+  forumList,
+  getLikeList,
+  updateForumLike,
+  getPosterInfo,
+} from "./moduleList";
 import moment from "moment";
+import { post } from "jquery";
 
 // 需做登入狀態判斷，是該帳號登入時，會顯示 threeDot
 
@@ -20,26 +26,34 @@ function ForumModal({
   replyCount,
   setReplyCount,
   replyList,
+  userInfo,
 }) {
   let modalBody = useRef();
   const [ifLike, setIfLike] = useState(false);
   const [ifScrollDown, setIfScrollDown] = useState(false);
+  const [poster, setPoster] = useState(null);
+
   useEffect(() => {
-    //member id先用1
+    //取得會員id是否按該片文章讚
     if (whichPostToShow !== null) {
-      getLikeList(whichPostToShow[0].id, 1, setIfLike);
+      getLikeList(whichPostToShow[0].id, userInfo.id, setIfLike);
+      getPosterInfo(whichPostToShow[0].id, setPoster);
     }
-  }, [whichPostToShow]);
+  }, [whichPostToShow, userInfo]);
+
   function handleHeartToggle() {
-    //member id先用1
-    //讓post的愛心數re-render
-    whichPostToShow[0].heart = ifLike
-      ? whichPostToShow[0].heart - 1
-      : whichPostToShow[0].heart + 1;
-    //  傳到後端做forum_like資料表的增減＆forum-heart增減
-    updateForumLike(whichPostToShow[0].id, 1, ifLike);
-    //改變該用戶是否按愛心的狀態
-    setIfLike(!ifLike);
+    if (userInfo.code === 1201) {
+      alert("請先登入");
+    } else {
+      //讓post的愛心數re-render
+      whichPostToShow[0].heart = ifLike
+        ? whichPostToShow[0].heart - 1
+        : whichPostToShow[0].heart + 1;
+      //  傳到後端做forum_like資料表的增減＆forum-heart增減
+      updateForumLike(whichPostToShow[0].id, userInfo.id, ifLike);
+      //改變該用戶是否按愛心的狀態
+      setIfLike(!ifLike);
+    }
   }
 
   if (whichPostToShow === null || replyCount === null) {
@@ -61,15 +75,18 @@ function ForumModal({
     >
       <Modal.Header closeButton>
         <Modal.Title id="forumModalView">
-          <FourmUserName forum_id={whichPostToShow[0].id} />
+          <FourmUserName forum_id={whichPostToShow[0].id} userInfo={userInfo} />
         </Modal.Title>
-        <div className="forum-pop-threedot">
-          <ForumThreeDots
-            setForumModalShow={setForumModalShow}
-            forum_id={whichPostToShow[0].id}
-            setForumCategory={setForumCategory}
-          />
-        </div>
+        {poster && userInfo.code !== 1201 && poster.id === userInfo.id && (
+          <div className="forum-pop-threedot">
+            <ForumThreeDots
+              setForumModalShow={setForumModalShow}
+              forum_id={whichPostToShow[0].id}
+              setForumCategory={setForumCategory}
+              userInfo={userInfo}
+            />
+          </div>
+        )}
       </Modal.Header>
       <Modal.Body className="forum-modal-body" ref={modalBody}>
         <div className="forum-contents">
@@ -119,6 +136,7 @@ function ForumModal({
           setReplyCount={setReplyCount}
           replyList={replyList}
           setIfScrollDown={setIfScrollDown}
+          userInfo={userInfo}
         />
         {/* <Button onClick={props.onHide}>Close</Button> */}
       </Modal.Footer>

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { getUserInfo } from "./config/StatusShortcut";
 
 // 引入各分頁(後續寫程式可更動) 頁面用元件
 
@@ -53,8 +54,14 @@ function App() {
   // navbar上購物車的數字
   const [itemNumber, setItemNumber] = useState(0);
 
+  const [userInfo, setUserInfo] = useState(null);
+  useEffect(() => {
+    getUserInfo(setUserInfo);
+  }, []);
+
   // 引入moduleDb.js檔抓取後端member資料庫的資料來顯示會員剩餘點數
   const [memberInfo, setMemberInfo] = useState(null);
+
   useEffect(() => {
     getMemberPoints(setMemberInfo);
   }, []);
@@ -76,6 +83,8 @@ function App() {
           setForumCategory={setForumCategory}
           itemNumber={itemNumber}
           setCartPositionState={setCartPositionState}
+          userInfo={userInfo}
+          setUserInfo={setUserInfo}
         />
         {/* LOGO+標題+導覽列+上方選單 */}
         {/* 主內容區 */}
@@ -98,13 +107,6 @@ function App() {
         <Link to="/Member">到會員</Link>
         <ScrollToTop>
           <Switch>
-            <Route path="/course/beginner">
-              <Beginner
-                courses={courses}
-                showCourse={showCourse}
-                setShowCourse={setShowCourse}
-              />
-            </Route>
             <Route path="/course/beginner">
               <Beginner
                 courses={courses}
@@ -149,7 +151,7 @@ function App() {
               <Orders setItemNumber={setItemNumber} itemNumber={itemNumber} />
             </Route>
             <Route path="/login">
-              <Login />
+              <Login setUserInfo={setUserInfo} />
             </Route>
             <Route path="/member">
               <Member />
@@ -158,6 +160,7 @@ function App() {
               <NewPost
                 forumCategory={forumCategory}
                 setForumCategory={setForumCategory}
+                userInfo={userInfo}
               />
             </Route>
             <Route path="/memberRecord">
@@ -180,6 +183,7 @@ function App() {
               <Forum
                 forumCategory={forumCategory}
                 setForumCategory={setForumCategory}
+                userInfo={userInfo}
               />
             </Route>
             <Route path="/mountainroute">

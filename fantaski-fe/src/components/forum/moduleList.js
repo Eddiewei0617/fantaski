@@ -24,7 +24,7 @@ export async function getReplyInfo(forumId, setReplyList) {
   let resReplyInfo = res.data;
   setReplyList(resReplyInfo);
 }
-//論壇回文資訊api
+//論壇發文資訊api
 export async function getPosterInfo(forumId, setPoster) {
   let res = await axios.post(`${API_URL}/forum/getposterinfo`, {
     forum_id: forumId,

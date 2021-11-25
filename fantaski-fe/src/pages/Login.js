@@ -1,9 +1,24 @@
 import React, { useState } from "react";
 // import "../App.css";
 import { useSpring, animated } from "react-spring";
+import axios from "axios";
+import { API_URL } from "../config/url";
+import { withRouter } from "react-router-dom";
 
-function Login() {
+function Login(props) {
+  const { setUserInfo } = props;
   const [registrationFormStatus, setRegistartionFormStatus] = useState(false);
+  const [registerInfo, setRegisterInfo] = useState({
+    name: "jessie",
+    email: "jessie@fantaski.com",
+    password: "11241114",
+    confirmPassword: "11241114",
+  });
+  const [loginInfo, setLoginInfo] = useState({
+    email: "jessie@fantaski.com",
+    password: "11241114",
+  });
+
   const loginProps = useSpring({
     left: registrationFormStatus ? -500 : 0,
     // Login form sliding positions
@@ -30,6 +45,22 @@ function Login() {
   function loginClicked() {
     setRegistartionFormStatus(false);
   }
+  //註冊呼叫api
+  async function handleRegSubmit() {
+    let res = await axios.post(`${API_URL}/auth/register`, registerInfo);
+  }
+  //登入呼叫api
+  async function handleLoginSubmit() {
+    try {
+      let res = await axios.post(`${API_URL}/auth/login`, loginInfo, {
+        withCredentials: true,
+      });
+      setUserInfo(res.data.member);
+      props.history.goBack();
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   return (
     <div className="login-register-wrapper">
@@ -51,6 +82,8 @@ function Login() {
           註冊
         </animated.button>
       </div>
+      <div onClick={handleRegSubmit}>註冊</div>
+      <div onClick={handleLoginSubmit}>登入</div>
       <div className="form-group">
         <animated.form action="" id="loginform" style={loginProps}>
           <LoginForm />
@@ -94,4 +127,4 @@ function RegisterForm() {
   );
 }
 
-export default Login;
+export default withRouter(Login);

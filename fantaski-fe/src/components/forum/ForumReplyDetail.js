@@ -1,5 +1,5 @@
 import React from "react";
-import { IMAGE_FORUM_URL } from "../../config/url";
+import { IMAGE_FORUM_URL, PUBLIC_URL } from "../../config/url";
 import moment from "moment";
 
 function ForumReplyDetail({ singleReply, sequence }) {
@@ -29,8 +29,10 @@ function ForumReplyDetail({ singleReply, sequence }) {
           <div className="forum-reply-img">
             {/* 需規範上傳圖片的限制檔名與K數 */}
             <img
-              src={`${IMAGE_FORUM_URL}/${
-                singleReply.image === "" ? "snowman.svg" : singleReply.image
+              src={`${
+                singleReply.image === null
+                  ? `${IMAGE_FORUM_URL}/snowman.svg`
+                  : `${PUBLIC_URL}/${singleReply.image}`
               }`}
               alt="snowman-defult"
             />
