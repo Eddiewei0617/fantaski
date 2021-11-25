@@ -11,7 +11,7 @@ import {
 import { PUBLIC_URL } from "../../config/url";
 import { getUserInfo } from "../../config/StatusShortcut";
 
-function NewPost({ forumCategory, setForumCategory }) {
+function NewPost({ forumCategory, setForumCategory, userInfo }) {
   const [editContent, setEditContent] = useState({
     category: "",
     subject: "",
@@ -93,7 +93,7 @@ function NewPost({ forumCategory, setForumCategory }) {
       <main className="forum-main">
         <div className="container forum-container forum-edit-area">
           <div className="fourmedit-head-area">
-            <FourmUserName />
+            <FourmUserName userInfo={userInfo} />
             {/* <Button>Close</Button> */}
           </div>
           <hr />

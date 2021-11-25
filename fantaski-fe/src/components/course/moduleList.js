@@ -37,6 +37,7 @@ export function toShowAddCartFloat(setScrollTop) {
 }
 
 export const starMapping = {
+  null: ["empty-star", "empty-star", "empty-star", "empty-star", "empty-star"],
   0: ["empty-star", "empty-star", "empty-star", "empty-star", "empty-star"],
   1: ["full-star", "empty-star", "empty-star", "empty-star", "empty-star"],
   2: ["full-star", "full-star", "empty-star", "empty-star", "empty-star"],

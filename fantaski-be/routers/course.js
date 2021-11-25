@@ -55,7 +55,7 @@ router.post("/getmembercoursecomment", async (req, res) => {
   console.log("request for getMemberCourseComment");
   try {
     let memberCourseComment = await connection.queryAsync(
-      "SELECT m.id member_id, oc.amount, oc.booking_date, oc.star, oc.comment, oc.id order_course_id, c.name, c.img, c.price, o.order_no FROM member m, order_course oc, course c, ordered o WHERE oc.star is NOT NULL AND m.id = ? AND m.id = o.member_id AND oc.course_id = c.id AND oc.order_id = o.id ;",
+      "SELECT m.id member_id, oc.amount, oc.booking_date, oc.star, oc.comment, oc.id order_course_id, c.name, c.img, c.price, o.order_no FROM member m, order_course oc, course c, ordered o WHERE m.id = ? AND m.id = o.member_id AND oc.course_id = c.id AND oc.order_id = o.id ;",
       req.body.member_id
     );
     res.json(memberCourseComment);
