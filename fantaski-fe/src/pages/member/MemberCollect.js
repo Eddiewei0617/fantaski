@@ -30,11 +30,12 @@ function MemberCollect({ setItemNumber, memberInfo, userInfo }) {
   // 請後端拿資料庫product JOIN produtc_collection的資料
   const [memberCollectList, setMemberCollectList] = useState([]);
   useEffect(async () => {
-    let res = await axios.post(`${API_URL}/member/membercollection`, {
-      memberId: userInfo.id,
-    });
-    setMemberCollectList(res.data);
-    // console.log("mem", res);
+    if (userInfo !== null) {
+      let res = await axios.post(`${API_URL}/member/membercollection`, {
+        memberId: userInfo.id,
+      });
+      setMemberCollectList(res.data);
+    }
   }, [forRefresh]);
 
   // 點擊取消收藏後，傳回後端刪除資料表資料
@@ -129,14 +130,6 @@ function MemberCollect({ setItemNumber, memberInfo, userInfo }) {
       </table>
     </>
   );
-  {
-    /* <div>
-      <MemberList />
-      <div className="text-center">
-        <h1>我的收藏</h1>
-      </div>
-    </div> */
-  }
 }
 
 export default MemberCollect;

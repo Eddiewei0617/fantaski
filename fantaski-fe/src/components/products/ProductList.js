@@ -1,6 +1,6 @@
 // 內建通用元件
 import { useState, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
 import { CATEGORY_WORD } from "../../config/StatusShortcut";
 import { API_URL } from "../../config/url";
@@ -11,12 +11,9 @@ import { PRODUCTIMAGE_URL } from "../../config/url";
 import { Button } from "react-bootstrap";
 import { BsTagsFill } from "react-icons/bs";
 
+const moment = require("moment");
 function ProductList({
-  clickToChangeToggle,
-  setToggleState,
-  toggleState,
   setItemNumber,
-  itemNumber,
   onClick,
   categoryId,
   memberInfo,
@@ -64,6 +61,11 @@ function ProductList({
     setProducts(totalProductList[pageNow - 1]);
   }, [pageNow, categoryId]);
 
+  // 為了讓商品被加入購物車有動畫效果
+  const [flyCart, setFlyCart] = useState(0);
+  // 讓一開始的訂購日期顯示在當天
+  let orderDate = moment().format("YYYY-MM-DD");
+
   const display = (
     <ul className="all_image_l ">
       {products.map((v, i) => {
@@ -94,7 +96,6 @@ function ProductList({
                   })} 
                    collect_tag`}
                 onClick={(e) => {
-                  //clickToChangeToggle(e);
                   handleCollect(v);
                   e.currentTarget.className.includes("collect_tagged")
                     ? handleCollect(v)
@@ -107,13 +108,12 @@ function ProductList({
               <img
                 src={`${PRODUCTIMAGE_URL}/${v.image}`}
                 alt=""
-                className="size"
+                className={`${flyCart == v.id && "scale-out-tr"}   size `}
               />
             </div>
             <div className="product_description">
               <p>{v.name}</p>
               <p>{v.content}</p>
-              {/* <p>適合對象 : {v.suitable}</p> */}
               <p>租購價 : NT$ {v.price}</p>
 
               <Button
@@ -132,12 +132,13 @@ function ProductList({
                     storage["addItemList"] += `${itemId}, `;
                   }
                   handleAddNumber();
+                  setFlyCart(Number(`${v.id}`));
                 }}
               >
                 加入購物車
                 <input
                   type="hidden"
-                  value={`${PRODUCTIMAGE_URL}/${v.image}|B|${v.name}|${v.price}|2021-11-15|1`}
+                  value={`${PRODUCTIMAGE_URL}/${v.image}|B|${v.name}|${v.price}|${orderDate}|1`}
                 />
               </Button>
             </div>
@@ -146,6 +147,8 @@ function ProductList({
       })}
     </ul>
   );
+
+  // 下方頁碼切換
   const [pageButton, setPageButton] = useState(0);
   function handlePageButton(e) {
     let pageId = Number(e.target.id);

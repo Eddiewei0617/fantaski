@@ -7,5 +7,5 @@ export async function getMemberPoints(setMember, memberID) {
     memberId: memberID,
   });
   setMember(res.data);
-  console.log("res", res.data);
+  // console.log("res", res.data);
 }

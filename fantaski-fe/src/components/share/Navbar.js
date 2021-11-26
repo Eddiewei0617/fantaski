@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { ParallaxProvider } from "react-scroll-parallax";
 import { axios } from "axios";
 import { getWeatherInfo } from "../course/moduleList";
+import Swal from "sweetalert2";
 
 // icon
 import {
@@ -27,6 +28,7 @@ function Navbar({
   setCartPositionState,
   setForumCategory,
   handleAddNumber,
+  userInfo,
 }) {
   // 設定該項目被點選時的狀態
 
@@ -118,6 +120,7 @@ function Navbar({
   setCartPositionState(cartPosition);
   // console.log("cartPosition", cartPosition);
 
+  // 進到任何頁面 Navbar就先抓產品數量的數字
   useEffect(() => {
     if (localStorage["addItemList"] === "") {
       setItemNumber(0);
@@ -125,6 +128,17 @@ function Navbar({
       handleAddNumber();
     }
   }, [itemNumber]);
+
+  // 在非會員的狀態下點選購物車的彈跳視窗
+  function loginPlease() {
+    Swal.fire({
+      position: "center",
+      icon: "error",
+      title: "請先登入會員",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
   return (
     <>
       {/* scroll 初始化 */}
@@ -250,7 +264,11 @@ function Navbar({
                 <li className="left-line"></li>
                 <li className="nav-item" ref={cartPosition}>
                   {localStorage["addItemList"] === "" ? (
-                    <Link className="nav-link position-relative" to="/products">
+                    <Link
+                      className="nav-link position-relative"
+                      to="/products"
+                      // onClick={loginPlease}
+                    >
                       <BsFillCartFill className="all-icon-nav" size={25} />
                       <p className="shopping-cart-circle" id="itemNumber">
                         {itemNumber}

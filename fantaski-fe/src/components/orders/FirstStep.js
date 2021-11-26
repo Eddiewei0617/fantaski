@@ -15,7 +15,6 @@ function FirstStep({
   setMemberNumber,
   userInfo,
 }) {
-  console.log(pointUsed);
   return (
     <>
       <CartContent

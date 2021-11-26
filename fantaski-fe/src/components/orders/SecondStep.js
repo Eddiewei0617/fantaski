@@ -10,6 +10,7 @@ function SecondStep({
   setPointUsed,
   progressAnimation,
   setMemberNumber,
+  userInfo,
 }) {
   // 載入中Start----------------------
   const [isLoading, setIsLoading] = useState(true);
@@ -19,7 +20,7 @@ function SecondStep({
     }, 1000);
   }, []);
   // 載入中End------------------------
-  console.log(pointUsed);
+  // console.log(pointUsed);
   return (
     <>
       <CreditCard
@@ -34,6 +35,7 @@ function SecondStep({
         pointUsed={pointUsed}
         setPointUsed={setPointUsed}
         setMemberNumber={setMemberNumber}
+        userInfo={userInfo}
       />
     </>
   );

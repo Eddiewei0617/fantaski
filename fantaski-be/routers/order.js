@@ -26,81 +26,134 @@ router.post("/getMemberPoints", async (req, res) => {
 
 // 接前端購物車列表的資料，並且寫進資料庫
 router.post("/orderconfirm", async (req, res) => {
-  try {
-    // console.log(req.body) 出來的東西 ==>
-    // {
-    //   orderList: [
-    //     {
-    //       id: 'p-1',
-    //       name: '暗黑滿點單板',
-    //       category: 'B',
-    //       price: '1200',
-    //       image: 'http://localhost:3000/assets/images_product/allblack.jfif',
-    //       date: '2021-11-15',
-    //       number: '1'
-    //     },
-    //     {
-    //       id: 'p-2',
-    //       name: '可愛滿點單板',
-    //       category: 'B',
-    //       price: '1000',
-    //       image: 'http://localhost:3000/assets/images_product/Elmo.jfif',
-    //       date: '2021-11-15',
-    //       number: '2'
-    //     }
-    //   ],
-    //   orderNumber: '163722531940975',
-    //   total: 3195
-    // }
+  if (req.body.memberId == undefined) {
+    try {
+      // 寫進ordered資料表 // 註!!! 訂單編號req.body.orderNumber 出來是字串，所以資料庫記得要用varchar ***
+      let orderConfirm = await connection.queryAsync(
+        "INSERT INTO ordered (order_no,member_id, consumption,point_used, created_at) VALUES(?,?,?,?,?) ",
+        [
+          req.body.orderNumber,
+          0,
+          req.body.total,
+          req.body.pointUsed,
+          created_at,
+        ]
+      );
 
-    // 寫進ordered資料表 // 註!!! 訂單編號req.body.orderNumber 出來是字串，所以資料庫記得要用varchar ***
-    let orderConfirm = await connection.queryAsync(
-      "INSERT INTO ordered (order_no,member_id, consumption,point_used, created_at) VALUES(?,?,?,?,?) ",
-      [
-        req.body.orderNumber,
-        req.body.memberId,
-        req.body.total,
-        req.body.pointUsed,
-        created_at,
-      ]
-    );
+      // 寫進order_product資料表
+      for (let i = 0; i < req.body.orderList.length; i++) {
+        if (req.body.orderList[i].category === "B") {
+          let orderList = await connection.queryAsync(
+            "INSERT INTO order_product (order_id, product_id, amount, booking_date, created_at, valid) VALUES(?,?,?,?,?,?) ",
+            [
+              orderConfirm.insertId,
+              req.body.orderList[i].id.substr(2, 1),
+              req.body.orderList[i].number,
+              req.body.orderList[i].date,
+              created_at,
+              1,
+            ]
+          );
+        }
+      }
+      // 寫進order_course資料表
+      for (let i = 0; i < req.body.orderList.length; i++) {
+        if (req.body.orderList[i].category === "A") {
+          let orderList = await connection.queryAsync(
+            "INSERT INTO order_course (order_id, course_id, amount, booking_date, created_at, valid) VALUES(?,?,?,?,?,?) ",
+            [
+              orderConfirm.insertId,
+              req.body.orderList[i].id.substr(2, 1),
+              req.body.orderList[i].number,
+              req.body.orderList[i].date,
+              created_at,
+              1,
+            ]
+          );
+        }
+      }
+      res.json({ result: "okok" });
+    } catch (e) {
+      console.error(e);
+      res.json({ code: "0001", message: "接收前端資料錯誤" });
+    }
+  } else {
+    try {
+      // console.log(req.body) 出來的東西 ==>
+      // {
+      //   orderList: [
+      //     {
+      //       id: 'p-1',
+      //       name: '暗黑滿點單板',
+      //       category: 'B',
+      //       price: '1200',
+      //       image: 'http://localhost:3000/assets/images_product/allblack.jfif',
+      //       date: '2021-11-15',
+      //       number: '1'
+      //     },
+      //     {
+      //       id: 'p-2',
+      //       name: '可愛滿點單板',
+      //       category: 'B',
+      //       price: '1000',
+      //       image: 'http://localhost:3000/assets/images_product/Elmo.jfif',
+      //       date: '2021-11-15',
+      //       number: '2'
+      //     }
+      //   ],
+      //   orderNumber: '163722531940975',
+      //   total: 3195
+      // }
 
-    // 寫進order_product資料表
-    for (let i = 0; i < req.body.orderList.length; i++) {
-      if (req.body.orderList[i].category === "B") {
-        let orderList = await connection.queryAsync(
-          "INSERT INTO order_product (order_id, product_id, amount, booking_date, created_at, valid) VALUES(?,?,?,?,?,?) ",
-          [
-            orderConfirm.insertId,
-            req.body.orderList[i].id.substr(2, 1),
-            req.body.orderList[i].number,
-            req.body.orderList[i].date,
-            created_at,
-            1,
-          ]
-        );
+      // 寫進ordered資料表 // 註!!! 訂單編號req.body.orderNumber 出來是字串，所以資料庫記得要用varchar ***
+      let orderConfirm = await connection.queryAsync(
+        "INSERT INTO ordered (order_no,member_id, consumption,point_used, created_at) VALUES(?,?,?,?,?) ",
+        [
+          req.body.orderNumber,
+          req.body.memberId,
+          req.body.total,
+          req.body.pointUsed,
+          created_at,
+        ]
+      );
+
+      // 寫進order_product資料表
+      for (let i = 0; i < req.body.orderList.length; i++) {
+        if (req.body.orderList[i].category === "B") {
+          let orderList = await connection.queryAsync(
+            "INSERT INTO order_product (order_id, product_id, amount, booking_date, created_at, valid) VALUES(?,?,?,?,?,?) ",
+            [
+              orderConfirm.insertId,
+              req.body.orderList[i].id.substr(2, 1),
+              req.body.orderList[i].number,
+              req.body.orderList[i].date,
+              created_at,
+              1,
+            ]
+          );
+        }
       }
-    }
-    // 寫進order_course資料表
-    for (let i = 0; i < req.body.orderList.length; i++) {
-      if (req.body.orderList[i].category === "A") {
-        let orderList = await connection.queryAsync(
-          "INSERT INTO order_course (order_id, course_id, amount, booking_date, created_at, valid) VALUES(?,?,?,?,?,?) ",
-          [
-            orderConfirm.insertId,
-            req.body.orderList[i].id.substr(2, 1),
-            req.body.orderList[i].number,
-            req.body.orderList[i].date,
-            created_at,
-            1,
-          ]
-        );
+      // 寫進order_course資料表
+      for (let i = 0; i < req.body.orderList.length; i++) {
+        if (req.body.orderList[i].category === "A") {
+          let orderList = await connection.queryAsync(
+            "INSERT INTO order_course (order_id, course_id, amount, booking_date, created_at, valid) VALUES(?,?,?,?,?,?) ",
+            [
+              orderConfirm.insertId,
+              req.body.orderList[i].id.substr(2, 1),
+              req.body.orderList[i].number,
+              req.body.orderList[i].date,
+              created_at,
+              1,
+            ]
+          );
+        }
       }
+      res.json({ result: "okok" });
+    } catch (e) {
+      console.error(e);
+      res.json({ code: "0001", message: "接收前端資料錯誤" });
     }
-    res.json({ result: "okok" });
-  } catch (e) {
-    console.error(e);
-    res.json({ code: "0001", message: "接收前端資料錯誤" });
   }
 });
 

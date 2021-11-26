@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Cards from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
 
-function CreditCard({ memberPoints, step, progressAnimation }) {
+function CreditCard({ step, progressAnimation }) {
   let storage = localStorage;
   const [number, setNumber] = useState("");
   const [name, setName] = useState("");

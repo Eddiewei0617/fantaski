@@ -14,7 +14,6 @@ const moment = require("moment");
 function OrderFinal({
   memberPoints,
   pointUsed,
-  setPointUsed,
   step,
   setStep,
   scrollToTop,
@@ -73,11 +72,6 @@ function OrderFinal({
 
   // 訂購時間(用moment套件)
   let orderTime = moment().format("YYYY-MM-DD hh:mm:ss a");
-  // let times = document.querySelector("#time");
-  // function clock() {
-  //   times.innerText = orderTime;
-  // }
-  // setInterval(clock, 1000);
 
   async function handleSubmit(e) {
     // e.preventDefault();
@@ -100,6 +94,7 @@ function OrderFinal({
       console.log("handleSubmit", e);
     }
   }
+
   // 表單出後清空localStorage資料並自動跳轉頁面回商品頁
   let history = useHistory();
   async function handleJupmto() {

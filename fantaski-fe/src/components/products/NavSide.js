@@ -1,18 +1,10 @@
-import { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { Accordion, Card } from "react-bootstrap";
 import { GiSnowboard } from "react-icons/gi";
 import { GrCoatCheck } from "react-icons/gr";
 import { GiProtectionGlasses } from "react-icons/gi";
-import { GiDeer } from "react-icons/gi";
-import axios from "axios";
-import { API_URL } from "../../config/url";
-import { PRODUCTIMAGE_URL } from "../../config/url";
-import { BsTagsFill } from "react-icons/bs";
 
 function NavSide({ setCategoryId, setCollectUpdate }) {
-  let storage = localStorage;
-
   return (
     <>
       {/* 側邊欄區域 */}

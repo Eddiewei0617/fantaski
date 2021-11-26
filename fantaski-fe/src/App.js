@@ -59,7 +59,6 @@ function App() {
     getUserInfo(setUserInfo);
   }, []);
 
-  // console.log("userInfo", userInfo);
   // 引入moduleDb.js檔抓取後端member資料庫的資料來顯示會員剩餘點數
   const [memberInfo, setMemberInfo] = useState(null);
   useEffect(() => {
@@ -82,13 +81,6 @@ function App() {
     setItemNumber(Number(items.length));
   }
 
-  const [isLogin, setIsLogin] = useState(false);
-
-  // if (userInfo) {
-  //   setIsLogin(true);
-  // }
-  // console.log("isLogin", isLogin);
-
   return (
     <>
       <Router>
@@ -100,6 +92,7 @@ function App() {
           itemNumber={itemNumber}
           setCartPositionState={setCartPositionState}
           handleAddNumber={handleAddNumber}
+          userInfo={userInfo}
         />
         {/* LOGO+標題+導覽列+上方選單 */}
         {/* 主內容區 */}

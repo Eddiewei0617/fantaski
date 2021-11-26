@@ -1,13 +1,12 @@
 // 內建共用元件
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import axios from "axios";
 
 // 不同階段渲染元件
 import FirstStep from "../../components/orders/FirstStep";
 import SecondStep from "../../components/orders/SecondStep";
 import ThirdStep from "../../components/orders/ThirdStep";
-import OrderContent from "../../components/orders/OrderContent";
 
 // 頁面通用元件
 import ProgressBar from "../../components/orders/ProgressBar";
@@ -17,10 +16,18 @@ import OrderSubmitIcon from "../../components/orders/OrderSubmitIcon";
 import { PRODUCTIMAGE_URL, ORDERIMAGE_URL } from "../../config/url";
 import { API_URL } from "../../config/url";
 import { getMemberPoints } from "../../components/orders/ModuleDb";
-// import { getUserInfo } from "../../config/StatusShortcut";
 
 function Orders(props) {
   const { setItemNumber, itemNumber, userInfo } = props;
+
+  // 一旦購物車被清空了，就跳轉回商品頁
+  let history = useHistory();
+  useEffect(async () => {
+    if (itemNumber === 0) {
+      let cartZero = await history.push("/products");
+    }
+  }, [itemNumber]);
+
   // 為了購物車第一步驟改變日期和數量而設的
   const [customerChoose, setCustomerChoose] = useState({
     date: "",
@@ -29,22 +36,18 @@ function Orders(props) {
 
   // 先抓到現在登入者的session id，再丟給後端抓member資料庫的資料回來
   const [memberNumber, setMemberNumber] = useState(0);
-  // const [memberInfo, setMemberInfo] = useState(null);
   const [memberPoints, setMemberPoints] = useState(null);
   useEffect(async () => {
     try {
-      // let res = await axios.get(`${API_URL}/auth/userInfo`, {
-      //   withCredentials: true,
-      // });
-      // setMemberInfo(res.data);
       if (userInfo !== null) {
         getMemberPoints(setMemberPoints, userInfo.id);
-        console.log("res.data", userInfo);
+        // console.log("res.data", userInfo);
       }
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }, [memberNumber]);
+  // console.log("memberpoint", memberPoints);
 
   // 為了判斷切換為哪個階段
   const [step, setStep] = useState(1);
@@ -128,6 +131,7 @@ function Orders(props) {
             setPointUsed={setPointUsed}
             progressAnimation={progressAnimation}
             setMemberNumber={setMemberNumber}
+            userInfo={userInfo}
           />
           <div className="box3 d-flex justify-content-end m-5">
             <PrevStepIcon
@@ -156,14 +160,6 @@ function Orders(props) {
             progressAnimation={progressAnimation}
             userInfo={userInfo}
           />
-          {/* <div className="box3 d-flex justify-content-end m-5">
-            <PrevStepIcon
-              step={step}
-              setStep={setStep}
-              scrollToTop={scrollToTop}
-            />
-            <OrderSubmitIcon />
-          </div> */}
         </>
       )}
     </>
