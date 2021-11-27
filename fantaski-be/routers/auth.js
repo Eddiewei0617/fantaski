@@ -75,6 +75,17 @@ router.post("/login", async (req, res) => {
   }
 });
 
+//登出
+router.get("/logout", async (req, res) => {
+  console.log("query for logout");
+  try {
+    req.session.member = null;
+    res.json({ code: 1201, message: "登出成功" });
+  } catch (e) {
+    res.json({ code: 9999, message: "登出失敗，請洽系統管理員" });
+  }
+});
+
 //確認是否登入
 router.get("/userInfo", async (req, res) => {
   console.log("query for userInfo");

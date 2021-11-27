@@ -2,6 +2,7 @@ express = require("express");
 const router = express.Router();
 const connection = require("../utils/db");
 const path = require("path");
+const { loginCheckMiddleware } = require("../middlewares/auth");
 
 router.post("/", (req, res) => {
   console.log("有人訪問課程api");
@@ -77,7 +78,7 @@ router.post("/getposterinfo", async (req, res) => {
   console.log("request for posterInfo");
   try {
     let resPosterInfo = await connection.queryAsync(
-      "SELECT m.name, m.image FROM forum f, member m WHERE f.id = ? AND m.id = f.member_id;",
+      "SELECT m.id, m.name, m.image FROM forum f, member m WHERE f.id = ? AND m.id = f.member_id;",
       req.body.forum_id
     );
     res.json(resPosterInfo);
@@ -113,98 +114,113 @@ const uploader = multer({
   // },
 });
 //加入資料庫
-router.post("/insertpostinfo", uploader.single("image"), async (req, res) => {
-  console.log("request for insertpostinfo");
-  let filename = req.file ? "/uploads/" + req.file.filename : "";
-  let now = new Date();
+router.post(
+  "/insertpostinfo",
+  loginCheckMiddleware,
+  uploader.single("image"),
+  async (req, res) => {
+    console.log("request for insertpostinfo");
+    let filename = req.file ? "/uploads/" + req.file.filename : "";
+    let now = new Date();
 
-  try {
-    let resNewPostInfo = await connection.queryAsync(
-      "INSERT INTO forum (category_id, member_id, subject, content, image, heart, created_at, valid) VALUES(?);",
-      [
+    try {
+      let resNewPostInfo = await connection.queryAsync(
+        "INSERT INTO forum (category_id, member_id, subject, content, image, heart, created_at, valid) VALUES(?);",
         [
-          req.body.category,
-          req.body.member_id,
-          req.body.subject,
-          req.body.content,
-          filename,
-          0,
-          now,
-          1,
-        ],
-      ]
-    );
-    res.json({
-      code: "0",
-      message: "已建立文章",
-      lastInsertId: resNewPostInfo.insertId,
-    });
-  } catch (e) {
-    console.log("query for insertpostinfo failed:", e);
-    res.json({ code: 9999, message: "資料庫讀取錯誤" });
+          [
+            req.body.category,
+            req.session.member.id,
+            req.body.subject,
+            req.body.content,
+            filename,
+            0,
+            now,
+            1,
+          ],
+        ]
+      );
+      res.json({
+        code: "0",
+        message: "已建立文章",
+        lastInsertId: resNewPostInfo.insertId,
+      });
+    } catch (e) {
+      console.log("query for insertpostinfo failed:", e);
+      res.json({ code: 9999, message: "資料庫讀取錯誤" });
+    }
   }
-});
+);
 
 //編輯文章api
-router.post("/updatepostinfo", uploader.single("image"), async (req, res) => {
-  console.log("request for updatepostinfo");
-  let filename = req.file ? "/uploads/" + req.file.filename : "";
-  let now = new Date();
-  try {
-    let resUpdatePostInfo = await connection.queryAsync(
-      "UPDATE forum SET category_id = ? , subject = ?, content = ?, created_at=? WHERE id = ?;",
-      [
-        req.body.category,
-        req.body.subject,
-        req.body.content,
-        now,
-        req.body.forum_id,
-      ]
-    );
-    //判斷req.file有沒有值，有值才update image
-    if (filename) {
-      let resImgPostInfo = await connection.queryAsync(
-        "UPDATE forum SET image = ? WHERE id = ?;",
-        [filename, req.body.forum_id]
+router.post(
+  "/updatepostinfo",
+  loginCheckMiddleware,
+  uploader.single("image"),
+  async (req, res) => {
+    console.log("request for updatepostinfo");
+    let filename = req.file ? "/uploads/" + req.file.filename : "";
+    let now = new Date();
+    try {
+      let resUpdatePostInfo = await connection.queryAsync(
+        "UPDATE forum SET category_id = ? , subject = ?, content = ?, created_at=? WHERE id = ?;",
+        [
+          req.body.category,
+          req.body.subject,
+          req.body.content,
+          now,
+          req.body.forum_id,
+        ]
       );
+      //判斷req.file有沒有值，有值才update image
+      if (filename) {
+        let resImgPostInfo = await connection.queryAsync(
+          "UPDATE forum SET image = ? WHERE id = ?;",
+          [filename, req.body.forum_id]
+        );
+      }
+      res.json({
+        code: "0",
+        message: "已更新文章",
+      });
+    } catch (e) {
+      console.log("query for updatepostinfo failed:", e);
+      res.json({ code: 9999, message: "資料庫讀取錯誤" });
     }
-    res.json({
-      code: "0",
-      message: "已更新文章",
-    });
-  } catch (e) {
-    console.log("query for updatepostinfo failed:", e);
-    res.json({ code: 9999, message: "資料庫讀取錯誤" });
   }
-});
+);
 //刪除文章api
-router.post("/delpostinfo", uploader.single("image"), async (req, res) => {
-  console.log("request for delPostInfo");
-  let now = new Date();
-  try {
-    let resDelPostInfo = await connection.queryAsync(
-      "UPDATE forum SET valid = 0 WHERE id = ?;",
-      [req.body.forumId]
-    );
-    res.json({
-      code: "0",
-      message: "已(軟)刪除文章",
-    });
-  } catch (e) {
-    console.log("query for delpostinfo failed:", e);
-    res.json({ code: 9999, message: "資料庫讀取錯誤" });
+router.post(
+  "/delpostinfo",
+  loginCheckMiddleware,
+  uploader.single("image"),
+  async (req, res) => {
+    console.log("request for delPostInfo");
+    let now = new Date();
+    try {
+      let resDelPostInfo = await connection.queryAsync(
+        "UPDATE forum SET valid = 0 WHERE id = ?;",
+        [req.body.forumId]
+      );
+      res.json({
+        code: "0",
+        message: "已(軟)刪除文章",
+      });
+    } catch (e) {
+      console.log("query for delpostinfo failed:", e);
+      res.json({ code: 9999, message: "資料庫讀取錯誤" });
+    }
   }
-});
+);
 
 //新增回文
-router.post("/insertreplyinfo", async (req, res) => {
+router.post("/insertreplyinfo", loginCheckMiddleware, async (req, res) => {
   let now = new Date();
 
   console.log("request for insertReplyInfo");
   try {
     let resInsertReplyInfo = await connection.queryAsync(
       "INSERT INTO reply (member_id, forum_id, reply, created_at, valid) VALUES(?);",
-      [[req.body.member_id, req.body.forum_id, req.body.reply_info, now, 1]]
+      [[req.session.member.id, req.body.forum_id, req.body.reply_info, now, 1]]
     );
     res.json({ code: "0", message: "已建立" });
   } catch (e) {
@@ -214,12 +230,12 @@ router.post("/insertreplyinfo", async (req, res) => {
 });
 
 //取得使用者是否有按該文章愛心
-router.post("/getlikelist", async (req, res) => {
+router.post("/getlikelist", loginCheckMiddleware, async (req, res) => {
   console.log("request for likeListInfo");
   try {
     let resLikeListInfo = await connection.queryAsync(
       "SELECT * FROM forum_like WHERE member_id = ? AND forum_id = ?;",
-      [req.body.member_id, req.body.forum_id]
+      [req.session.member.id, req.body.forum_id]
     );
     let result = resLikeListInfo.length > 0 ? true : false;
     res.json(result);
@@ -230,14 +246,14 @@ router.post("/getlikelist", async (req, res) => {
 });
 
 //新增or刪除文章愛心
-router.post("/updateforumlike", async (req, res) => {
+router.post("/updateforumlike", loginCheckMiddleware, async (req, res) => {
   console.log("update for updateforumlike");
   try {
     if (req.body.ifAlreadyLike) {
       //如果原本已給愛心，要拿掉
       let resDel = await connection.queryAsync(
         "DELETE FROM forum_like WHERE member_id = ? AND forum_id = ? ;",
-        [req.body.member_id, req.body.forum_id]
+        [req.session.member.id, req.body.forum_id]
       );
       let resUpd = await connection.queryAsync(
         "UPDATE forum SET heart = heart - 1 WHERE id = ? ;",
@@ -247,7 +263,7 @@ router.post("/updateforumlike", async (req, res) => {
       //如果原本沒有愛心，要新增
       let resInsert = await connection.queryAsync(
         "INSERT INTO forum_like (member_id, forum_id) VALUES(?);",
-        [[req.body.member_id, req.body.forum_id]]
+        [[req.session.member.id, req.body.forum_id]]
       );
       let resUpd = await connection.queryAsync(
         "UPDATE forum SET heart = heart + 1 WHERE id = ? ;",

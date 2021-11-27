@@ -3,7 +3,10 @@ import React, { useState } from "react";
 import { useSpring, animated } from "react-spring";
 import axios from "axios";
 import { API_URL } from "../config/url";
-function Login() {
+import { withRouter } from "react-router-dom";
+
+function Login(props) {
+  const { setUserInfo } = props;
   const [registrationFormStatus, setRegistartionFormStatus] = useState(false);
   const [registerInfo, setRegisterInfo] = useState({
     name: "jessie",
@@ -45,7 +48,6 @@ function Login() {
   //註冊呼叫api
   async function handleRegSubmit() {
     let res = await axios.post(`${API_URL}/auth/register`, registerInfo);
-    console.log(res.data);
   }
   //登入呼叫api
   async function handleLoginSubmit() {
@@ -53,7 +55,8 @@ function Login() {
       let res = await axios.post(`${API_URL}/auth/login`, loginInfo, {
         withCredentials: true,
       });
-      console.log(res.data);
+      setUserInfo(res.data.member);
+      props.history.goBack();
     } catch (e) {
       console.log(e);
     }
@@ -124,4 +127,4 @@ function RegisterForm() {
   );
 }
 
-export default Login;
+export default withRouter(Login);

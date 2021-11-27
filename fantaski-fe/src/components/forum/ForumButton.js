@@ -46,18 +46,6 @@ function ForumButton({ setForumCategory }) {
               裝備體驗
             </a>
           </li>
-          {/* <Link className="forum-button-link" to="/forum/skiexperience">
-              滑雪經驗
-            </Link>
-          <li className="buttonto-forum">
-            <Link className="forum-button-link" to="/forum/courseshare">
-              課程分享
-            </Link>
-          </li>
-          <li className="buttonto-forum">
-            <Link className="forum-button-link" to="/forum/equipment">
-              裝備體驗
-            </Link> */}
         </ul>
       </div>
     </>

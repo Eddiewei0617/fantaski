@@ -37,6 +37,7 @@ export function toShowAddCartFloat(setScrollTop) {
 }
 
 export const starMapping = {
+  null: ["empty-star", "empty-star", "empty-star", "empty-star", "empty-star"],
   0: ["empty-star", "empty-star", "empty-star", "empty-star", "empty-star"],
   1: ["full-star", "empty-star", "empty-star", "empty-star", "empty-star"],
   2: ["full-star", "full-star", "empty-star", "empty-star", "empty-star"],
@@ -75,9 +76,9 @@ export async function getAdviceInfo(showCourse, setAdviceInfo) {
 }
 
 //會員購買課程api
-export async function getMemberCourseComment(memberId, setMemberCourseComment) {
-  let res = await axios.post(`${API_URL}/course/getmembercoursecomment`, {
-    member_id: memberId,
+export async function getMemberCourseComment(setMemberCourseComment) {
+  let res = await axios.get(`${API_URL}/course/getmembercoursecomment`, {
+    withCredentials: true,
   });
   let memberCourseComment = res.data;
   setMemberCourseComment(memberCourseComment);

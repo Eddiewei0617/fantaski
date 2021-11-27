@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
-import { IMAGE_SHARE_URL } from "../../config/url";
+import { IMAGE_SHARE_URL, API_URL } from "../../config/url";
 import { Link } from "react-router-dom";
 import { ParallaxProvider } from "react-scroll-parallax";
-import { axios } from "axios";
+import axios from "axios";
 import { getWeatherInfo } from "../course/moduleList";
 import Swal from "sweetalert2";
 
@@ -20,16 +20,18 @@ import { FaUserAlt, FaCloudSunRain } from "react-icons/fa";
 
 import $ from "jquery";
 
-function Navbar({
-  courses,
-  setShowCourse,
-  setItemNumber,
-  itemNumber,
-  setCartPositionState,
-  setForumCategory,
-  handleAddNumber,
-  userInfo,
-}) {
+function Navbar(props) {
+  const {
+    courses,
+    setShowCourse,
+    setItemNumber,
+    itemNumber,
+    setCartPositionState,
+    setForumCategory,
+    handleAddNumber,
+    userInfo,
+    setUserInfo,
+  } = props;
   // 設定該項目被點選時的狀態
 
   let [colorButton, setColorButton] = useState("FANTASKI");
@@ -115,7 +117,19 @@ function Navbar({
     }
     setWeatherIcon(weatherIconTag);
   }
-
+  async function handleLogout() {
+    try {
+      let res = await axios.get(`${API_URL}/auth/logout`, {
+        withCredentials: true,
+      });
+      if (res.data.code === 1201) {
+        setUserInfo(res.data);
+        console.log(res.data);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
   const cartPosition = useRef(null);
   setCartPositionState(cartPosition);
   // console.log("cartPosition", cartPosition);
@@ -301,10 +315,24 @@ function Navbar({
                       colorButton === "login" && "active"
                     }`}
                     to="/login"
-                    onClick={handleClick}
+                    onClick={async (e) => {
+                      handleClick(e);
+                      if (userInfo && userInfo.code !== 1201) {
+                        e.preventDefault();
+                        if (window.confirm("要登出嗎？")) {
+                          handleLogout();
+                        }
+                      }
+                    }}
                   >
                     {/* 會員登入後，要將(登入/註冊)改為會員的ID(帳號名稱) */}
-                    <span className="login">登入/註冊</span>
+                    <span className="login">
+                      {userInfo && userInfo.code === 1201
+                        ? "登入/註冊"
+                        : userInfo &&
+                          userInfo.code !== 1201 &&
+                          `Hi ${userInfo.name}`}
+                    </span>
                   </Link>
                 </li>
               </ul>

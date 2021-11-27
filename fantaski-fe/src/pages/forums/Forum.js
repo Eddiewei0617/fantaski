@@ -4,7 +4,7 @@ import ForumHeadBtn from "../../components/forum/ForumHeadBtn";
 import ForumPost from "../../components/forum/ForumPost";
 import ForumThreeDots from "../../components/forum/ForumThreeDots";
 
-function Fourm({ forumCategory, setForumCategory }) {
+function Fourm({ forumCategory, setForumCategory, userInfo }) {
   return (
     <>
       <main className="forum-main">
@@ -20,7 +20,10 @@ function Fourm({ forumCategory, setForumCategory }) {
                   setForumCategory={setForumCategory}
                 />
                 {/* content-head-button end */}
-                <ForumThreeDots setForumCategory={setForumCategory} />
+                <ForumThreeDots
+                  setForumCategory={setForumCategory}
+                  userInfo={userInfo}
+                />
                 {/* forum-more-button end */}
               </div>
               {/* content-head-buttonall end */}
@@ -31,6 +34,7 @@ function Fourm({ forumCategory, setForumCategory }) {
             <ForumPost
               forumCategory={forumCategory}
               setForumCategory={setForumCategory}
+              userInfo={userInfo}
             />
           </div>
         </div>

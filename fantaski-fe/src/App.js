@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getUserInfo } from "../src/config/StatusShortcut";
+import { getUserInfo } from "./config/StatusShortcut";
 // 引入各分頁(後續寫程式可更動) 頁面用元件
 
 // 課程
@@ -61,6 +61,7 @@ function App() {
 
   // 引入moduleDb.js檔抓取後端member資料庫的資料來顯示會員剩餘點數
   const [memberInfo, setMemberInfo] = useState(null);
+
   useEffect(() => {
     if (userInfo) {
       getMemberPoints(setMemberInfo, userInfo.id);
@@ -93,6 +94,7 @@ function App() {
           setCartPositionState={setCartPositionState}
           handleAddNumber={handleAddNumber}
           userInfo={userInfo}
+          setUserInfo={setUserInfo}
         />
         {/* LOGO+標題+導覽列+上方選單 */}
         {/* 主內容區 */}
@@ -115,14 +117,6 @@ function App() {
         <Link to="/Member">到會員</Link>
         <ScrollToTop>
           <Switch>
-            <Route path="/course/beginner">
-              <Beginner
-                courses={courses}
-                showCourse={showCourse}
-                setShowCourse={setShowCourse}
-                setItemNumber={setItemNumber}
-              />
-            </Route>
             <Route path="/course/beginner">
               <Beginner
                 courses={courses}
@@ -173,7 +167,7 @@ function App() {
               />
             </Route>
             <Route path="/login">
-              <Login />
+              <Login setUserInfo={setUserInfo} />
             </Route>
             <Route path="/member">
               <Member />
@@ -182,6 +176,7 @@ function App() {
               <NewPost
                 forumCategory={forumCategory}
                 setForumCategory={setForumCategory}
+                userInfo={userInfo}
               />
             </Route>
             <Route path="/memberRecord">
@@ -198,13 +193,17 @@ function App() {
               />
             </Route>
             <Route path="/memberComment">
-              <MemberComment setShowCourse={setShowCourse} />
+              <MemberComment
+                setShowCourse={setShowCourse}
+                userInfo={userInfo}
+              />
             </Route>
 
             <Route path="/forum">
               <Forum
                 forumCategory={forumCategory}
                 setForumCategory={setForumCategory}
+                userInfo={userInfo}
               />
             </Route>
             <Route path="/mountainroute">

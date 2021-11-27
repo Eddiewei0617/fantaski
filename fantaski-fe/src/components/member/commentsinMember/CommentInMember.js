@@ -69,7 +69,7 @@ function CommentInMember({ orderCourse, setShowCourse }) {
         <div className="col-6">
           <div className="row">
             <div className="col-3">我的評價</div>
-            <div classNmae="col-8">
+            <div className="col-8">
               {starMapping[isStarsClick].map((item, i) => {
                 return (
                   <>

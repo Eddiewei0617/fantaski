@@ -9,9 +9,8 @@ import {
   updatePostInfo,
 } from "../../components/forum/moduleList";
 import { PUBLIC_URL } from "../../config/url";
-import { getUserInfo } from "../../config/StatusShortcut";
 
-function NewPost({ forumCategory, setForumCategory }) {
+function NewPost({ forumCategory, setForumCategory, userInfo }) {
   const [editContent, setEditContent] = useState({
     category: "",
     subject: "",
@@ -19,7 +18,6 @@ function NewPost({ forumCategory, setForumCategory }) {
     image: "",
   });
   const [previewFile, setPreviewFile] = useState(null);
-  const [memberInfo, setMemberInfo] = useState(null);
   //先判斷如果是編輯文章，把原文章內容存進editContent並顯示在網頁上
   useEffect(() => {
     if (forumCategory.nowaForumInfo && forumCategory.nowaForumInfo !== "") {
@@ -39,7 +37,6 @@ function NewPost({ forumCategory, setForumCategory }) {
     setForumCategory((cur) => {
       return { ...cur, lastUpdate: false };
     });
-    getUserInfo(setMemberInfo);
   }, []);
 
   async function handleSubmit(e) {
@@ -55,7 +52,6 @@ function NewPost({ forumCategory, setForumCategory }) {
     } else {
       try {
         let formData = new FormData();
-        formData.append("member_id", memberInfo.id);
         formData.append("category", editContent.category);
         formData.append("subject", editContent.subject);
         formData.append("content", editContent.content);
@@ -93,7 +89,7 @@ function NewPost({ forumCategory, setForumCategory }) {
       <main className="forum-main">
         <div className="container forum-container forum-edit-area">
           <div className="fourmedit-head-area">
-            <FourmUserName />
+            <FourmUserName userInfo={userInfo} />
             {/* <Button>Close</Button> */}
           </div>
           <hr />
