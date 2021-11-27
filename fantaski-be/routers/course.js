@@ -1,6 +1,7 @@
 express = require("express");
 const router = express.Router();
 const connection = require("../utils/db");
+const { loginCheckMiddleware } = require("../middlewares/auth");
 
 //起始頁(沒做啥，確認api有沒有成功連上而已)
 router.get("/", (req, res) => {
@@ -51,19 +52,23 @@ router.post("/getadviceinfo", async (req, res) => {
 });
 
 //member(id) + order_course(id, amount, booking_date, star, comment) + course(name, img) + ordered(sequence) -->會員購買課程api
-router.post("/getmembercoursecomment", async (req, res) => {
-  console.log("request for getMemberCourseComment");
-  try {
-    let memberCourseComment = await connection.queryAsync(
-      "SELECT m.id member_id, oc.amount, oc.booking_date, oc.star, oc.comment, oc.id order_course_id, c.name, c.img, c.price, o.order_no FROM member m, order_course oc, course c, ordered o WHERE m.id = ? AND m.id = o.member_id AND oc.course_id = c.id AND oc.order_id = o.id ;",
-      req.body.member_id
-    );
-    res.json(memberCourseComment);
-  } catch (e) {
-    console.log("query for adviceInfoList failed:", e);
-    res.json({ code: 9999, message: "資料庫讀取錯誤" });
+router.get(
+  "/getmembercoursecomment",
+  loginCheckMiddleware,
+  async (req, res) => {
+    console.log("request for getMemberCourseComment");
+    try {
+      let memberCourseComment = await connection.queryAsync(
+        "SELECT m.id member_id, oc.amount, oc.booking_date, oc.star, oc.comment, oc.id order_course_id, c.name, c.img, c.price, o.order_no FROM member m, order_course oc, course c, ordered o WHERE m.id = ? AND m.id = o.member_id AND oc.course_id = c.id AND oc.order_id = o.id ;",
+        req.session.member.id
+      );
+      res.json(memberCourseComment);
+    } catch (e) {
+      console.log("query for adviceInfoList failed:", e);
+      res.json({ code: 9999, message: "資料庫讀取錯誤" });
+    }
   }
-});
+);
 
 //更新order_course 星星 -->會員更新課程評價api
 router.post("/postcoursecommentstar", async (req, res) => {
