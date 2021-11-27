@@ -46,12 +46,13 @@ function OrderContent({
 
   // 希望換到不同階段時，下方使用點數還繼續顯示著
   useEffect(() => {
-    if (memberPoints === null || !storage[`${memberPoints}`]) {
+    if (memberPoints === null || !!storage[`${memberPoints}`]) {
       setPointUsed(0);
     } else {
       setPointUsed(storage[`${memberPoints[0].name}`]);
     }
   }, [step]);
+  // console.log("564", !!storage[`${memberPoints}`]);
 
   // 非會員進入購物車時，不能顯示會員點數，也不能使用點數
   useEffect(() => {

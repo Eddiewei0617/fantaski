@@ -46,13 +46,19 @@ function Products({
   const [collected, setCollected] = useState([]);
   const [collectUpdate, setCollectUpdate] = useState(0); // 此狀態是為了讓之後商品點收藏後每次都會重抓一次
 
+  // 抓資料庫該會員的收藏資料，就可以顯示在他登入後的商品頁面上了
   useEffect(async () => {
-    // console.log("useInfo", userInfo);
     try {
-      let res = await axios.post(`${API_URL}/products/collectinfo`, {
-        memberId: userInfo.id,
+      let res = await axios.get(`${API_URL}/products/collectinfo`, {
+        withCredentials: true,
       });
+
       setCollected(res.data);
+      // try {
+      //   let res = await axios.post(`${API_URL}/products/collectinfo`, {
+      //     memberId: userInfo.id,
+      //   });
+      //   setCollected(res.data);
     } catch (e) {
       console.error("collectinfo", e);
     }

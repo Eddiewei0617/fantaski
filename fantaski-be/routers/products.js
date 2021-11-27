@@ -9,6 +9,7 @@ let created_at = moment().format("YYYY-MM-DD hh:mm:ss a");
 router.get("/", (res, req) => {
   res.send("歡迎來到商品後台");
 });
+
 // 全部商品資料
 router.get("/allproducts", async (req, res) => {
   try {
@@ -21,29 +22,58 @@ router.get("/allproducts", async (req, res) => {
 });
 
 // 用post請求從前端來的參數(category_id)，然後前端的categoeyId如果有改變就丟回不同的資料庫資料回去
-router.post("/productsInfoList", async (req, res) => {
+router.get("/productsInfoList/:categoryId?", async (req, res) => {
   try {
     let productsInfoList = await connection.queryAsync(
       "SELECT * FROM product WHERE category_id= ?",
-      [req.body.category]
+      [req.params.categoryId]
     );
-    console.log({ result: "very good" });
+    // console.log("req.params", req.params);    取到--> req.params { categoryId: '點到的數字' }
     res.json(productsInfoList);
+    // try {
+    //   let productsInfoList = await connection.queryAsync(
+    //     "SELECT * FROM product WHERE category_id= ?",
+    //     [req.body.category]
+    //   );
+    //   console.log({ result: "very good" });
+    //   res.json(productsInfoList);
   } catch (err) {
     res.json({ code: 9999, message: "資料庫讀取錯誤" });
     console.error(err);
   }
 });
 
+// function loginCheckMiddleware() {
+//   if (req.session.member) {
+//     next();
+//   } else {
+//     res.status(404);
+//   }
+// }
+let loginCheckMiddleware = (req, res, next) => {
+  if (req.session.member) {
+    next();
+  } else {
+    res.status(404);
+  }
+};
 // 拿資料庫product_collection裡member_id=?的資料給前端
-router.post("/collectinfo", async (req, res) => {
+router.get("/collectinfo", loginCheckMiddleware, async (req, res) => {
   try {
     let collectInfo = await connection.queryAsync(
       "SELECT * FROM product_collection WHERE member_id=?",
-      [req.body.memberId]
+      [req.session.member.id]
     );
-    // console.log(collectInfo);
+    // console.log("collectInfo", collectInfo);
+    // console.log("memberse", req.session);
     res.json(collectInfo);
+    // try {
+    //   let collectInfo = await connection.queryAsync(
+    //     "SELECT * FROM product_collection WHERE member_id=?",
+    //     [req.body.memberId]
+    //   );
+    //   // console.log(collectInfo);
+    //   res.json(collectInfo);
   } catch (e) {
     res.json({ code: 9999, message: "資料庫讀取錯誤" });
     console.error("Select from product_collection error", e);

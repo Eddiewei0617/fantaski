@@ -27,7 +27,7 @@ export async function getUserInfo(setUserInfo) {
       withCredentials: true,
     });
     setUserInfo(res.data);
-    // console.log("res.data", res.data);
+    console.log("res.data", res.data);
   } catch (e) {
     console.log(e);
   }
