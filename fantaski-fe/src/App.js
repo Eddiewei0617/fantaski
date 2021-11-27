@@ -176,7 +176,10 @@ function App() {
               />
             </Route>
             <Route path="/memberComment">
-              <MemberComment setShowCourse={setShowCourse} />
+              <MemberComment
+                setShowCourse={setShowCourse}
+                userInfo={userInfo}
+              />
             </Route>
 
             <Route path="/forum">
