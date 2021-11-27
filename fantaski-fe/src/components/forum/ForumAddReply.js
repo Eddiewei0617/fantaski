@@ -11,18 +11,7 @@ function ForumAddReply({
   setIfScrollDown,
   userInfo,
 }) {
-  // //會員id好之前先打在這，之後要判斷是否登入狀態才可以發文
-  // const [memberInfo, setMemberInfo] = useState({
-  //   id: 1,
-  //   name: "Eddie",
-  //   gender: "male",
-  //   image: "snowman.svg",
-  // });
   const [replyContent, setReplyContent] = useState("");
-
-  // useEffect(() => {
-  //   getUserInfo(setMemberInfo);
-  // }, []);
 
   function handleChange(e) {
     setReplyContent(e.target.value);
@@ -33,7 +22,7 @@ function ForumAddReply({
       return;
     } else {
       setIfScrollDown(true);
-      await insertReplyInfo(forum_id, userInfo.id, replyContent);
+      await insertReplyInfo(forum_id, replyContent);
       setReplyContent("");
       setReplyCount(replyCount + 1);
       replyList[forum_id] = replyCount + 1;

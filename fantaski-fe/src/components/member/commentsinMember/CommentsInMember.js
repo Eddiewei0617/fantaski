@@ -2,21 +2,14 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import CommentInMember from "./CommentInMember";
 import { getMemberCourseComment } from "../../course/moduleList";
-import { GiEdgedShield } from "react-icons/gi";
-import { getUserInfo } from "../../../config/StatusShortcut";
 
-function CommentsInMember({ setShowCourse }) {
+function CommentsInMember({ setShowCourse, userInfo }) {
   const [memberCourseComment, setMemberCourseComment] = useState(null);
-  const [memberInfo, setMemberInfo] = useState(null);
-
   useEffect(() => {
-    getUserInfo(setMemberInfo);
-  }, []);
-  useEffect(() => {
-    if (memberInfo) {
-      getMemberCourseComment(memberInfo.id, setMemberCourseComment);
+    if (userInfo) {
+      getMemberCourseComment(setMemberCourseComment);
     }
-  }, [memberInfo]);
+  }, [userInfo]);
   if (memberCourseComment === null || memberCourseComment.length === 0) {
     return (
       <div className="text-center">
