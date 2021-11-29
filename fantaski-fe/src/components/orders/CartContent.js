@@ -6,10 +6,15 @@ function CartContent({
   setCustomerChoose,
   setItemNumber,
   itemNumber,
+  progressAnimation,
 }) {
   return (
     <>
-      <div className="cart_content_bg">
+      <div
+        className={`
+          ${progressAnimation === 1 && "slit-in-vertical"}
+          cart_content_bg`}
+      >
         <div className="row header">
           <div className="col-sm">圖片</div>
           <div className="col-sm">種類</div>

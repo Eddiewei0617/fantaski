@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import Calendar from "../calendar/Calendar";
 import { COURSE_IMG_URL } from "../../../config/url";
-import { getCourseInfo } from "../moduleList";
+import { getCourseInfo, handleAddNumber } from "../moduleList";
 
 function AddCartFix({
   showCourse,
@@ -11,6 +11,7 @@ function AddCartFix({
   setCustomerChoose,
   ifAddCart,
   setIfAddCart,
+  setItemNumber,
 }) {
   const [showCalendar, setShowCalendar] = useState(false);
   const [courseInfo, setCourseInfo] = useState(null);
@@ -42,6 +43,17 @@ function AddCartFix({
   useEffect(() => {
     if (courseInfo !== null && storage[`c-${courseInfo[0].id}`]) {
       setIfAddCart(true);
+      //如果課程已加入購物車，萬年曆人數要減相應人數
+      let addCartDate = storage[`c-${courseInfo[0].id}`].split("|")[4];
+      let addCartAmount = storage[`c-${courseInfo[0].id}`].split("|")[5];
+      console.log(addCartDate, addCartAmount);
+      setCustomerChoose((cur) => {
+        return {
+          ...cur,
+          addCartDate: addCartDate,
+          addCartAmount: addCartAmount,
+        };
+      });
     }
   }, [courseInfo]);
 
@@ -50,6 +62,7 @@ function AddCartFix({
   if (storage["addItemList"] == null) {
     storage["addItemList"] = "";
   }
+
   if (courseInfo === null) {
     return (
       <>
@@ -98,6 +111,7 @@ function AddCartFix({
               <div className="custom-calendar">
                 <Calendar
                   showCourse={showCourse}
+                  customerChoose={customerChoose}
                   setCustomerChoose={setCustomerChoose}
                   setShowCalendar={setShowCalendar}
                 />
@@ -156,6 +170,19 @@ function AddCartFix({
 
                   storage.setItem(itemId, productInfo);
                   storage["addItemList"] += `${itemId}, `;
+                  handleAddNumber(storage, setItemNumber);
+                  //如果課程已加入購物車，萬年曆人數要減相應人數
+                  let addCartDate =
+                    storage[`c-${courseInfo[0].id}`].split("|")[4];
+                  let addCartAmount =
+                    storage[`c-${courseInfo[0].id}`].split("|")[5];
+                  setCustomerChoose((cur) => {
+                    return {
+                      ...cur,
+                      addCartDate: addCartDate,
+                      addCartAmount: addCartAmount,
+                    };
+                  });
                 }
               }}
             >

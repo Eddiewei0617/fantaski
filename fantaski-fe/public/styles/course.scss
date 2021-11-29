@@ -330,7 +330,7 @@
   position: absolute;
   top: 100%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-55%);
   z-index: 999;
   box-shadow: 1px 1px 3px gray;
 }
@@ -459,6 +459,7 @@
 .calendar-wrapper table td {
   vertical-align: middle;
   height: 35px;
+  width: 50px;
   padding: 1px;
 }
 .calendar-dates-box-last {
@@ -470,7 +471,7 @@
   cursor: pointer;
 }
 .calendar-dates-box-this-today {
-  color: rgb(226, 109, 109);
+  font-weight: bolder;
   cursor: pointer;
 }
 .calendar-dates-box-this-today:hover,
@@ -745,7 +746,7 @@
 }
 //------------------------------課程訂單評價------------------------------//
 .order-comments-wrapper {
-  width: 80%;
+  width: 70%;
   padding: 5px;
   margin: 0 auto;
 }

@@ -24,7 +24,12 @@ app.use(
     saveUninitialized: false,
   })
 );
+
 app.use(express.static("public"));
+
+//開放public資料夾
+app.use("/public", express.static("public"));
+
 //追朔訪問紀錄
 app.use((req, res, next) => {
   let current = new Date();
@@ -39,6 +44,10 @@ app.get("/", (req, res) => {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// api路徑中間件(首頁)
+let homeRouter = require("./routers/home");
+app.use("/api/home", homeRouter);
+
 //api路徑中間件(課程)
 let courseRouter = require("./routers/course");
 app.use("/api/course", courseRouter);
@@ -50,6 +59,7 @@ app.use("/api/products", productRouter);
 //api路徑中間件(購物車)
 let orderRouter = require("./routers/order");
 app.use("/api/order", orderRouter);
+
 //api路徑中間件(論壇)
 let forumRouter = require("./routers/forum");
 app.use("/api/forum", forumRouter);
@@ -61,6 +71,10 @@ app.use("/api/weather", weatherRouter);
 // 會員api
 let memberRouter = require("./routers/member");
 app.use("/api/member", memberRouter);
+
+// 登入註冊api
+let authRouter = require("./routers/auth");
+app.use("/api/auth", authRouter);
 
 // 圖片檔案上傳
 let memberUploadRouter = require("./routers/memberUpload");

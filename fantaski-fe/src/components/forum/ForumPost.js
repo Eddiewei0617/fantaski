@@ -1,25 +1,38 @@
 import React, { useState, useEffect } from "react";
-import { IMAGE_FORUM_URL } from "../../config/url";
+import { IMAGE_FORUM_URL, PUBLIC_URL } from "../../config/url";
 import ForumModal from "./ForumModal";
 import ForumHeartCommit from "./ForumHeartCommit";
 import { getForumInfo, forumList } from "./moduleList";
 import moment from "moment";
 
-function ForumPost({ forumCategory }) {
+function ForumPost({ forumCategory, setForumCategory, userInfo }) {
   const [forumModalShow, setForumModalShow] = useState(false);
   const [forumInfo, setForumInfo] = useState(null);
   const [whichPostToShow, setWhichPostToShow] = useState(null);
   const [replyCount, setReplyCount] = useState(0);
+  let sevenDaysAgo = moment().subtract(7, "days").format("YYYY-MM-DD HH:mm");
+  let today = moment().format("YYYY-MM-DD HH:mm");
   // const handleClose = () => setForumModalShow(false);
   const handleShow = (e) => {
     setForumModalShow(true);
     let postId = Number(e.currentTarget.id.split("-").pop());
+    //抓彈跳視窗的文章
     let singlepost = forumInfo["postList"].filter((post) => {
       return post.id === postId;
     });
-    let singleReply = forumInfo["reply"][postId];
     setWhichPostToShow(singlepost);
-    setReplyCount(singleReply);
+    //把彈跳視窗的文章傳到編輯文章頁面
+    setForumCategory((cur) => {
+      return { ...cur, nowaForumInfo: singlepost };
+    });
+
+    //抓彈跳視窗文章的回覆數
+    let singleReplyCount = forumInfo["reply"][postId];
+    if (singleReplyCount) {
+      setReplyCount(singleReplyCount);
+    } else {
+      setReplyCount(0);
+    }
   };
 
   useEffect(() => {
@@ -33,6 +46,22 @@ function ForumPost({ forumCategory }) {
   return (
     <>
       {forumInfo["postList"].map((post, i) => {
+        let postTime = moment(post.created_at).format("YYYY-MM-DD HH:mm");
+        if (!moment(postTime).isBefore(sevenDaysAgo)) {
+          //天數差單位毫秒-->分鐘
+          let diffInTotalMinutes = moment(today).diff(postTime) / (1000 * 60);
+          let days = Math.floor(diffInTotalMinutes / 60 / 24);
+          let hours = Math.floor(diffInTotalMinutes / 60);
+          let minutes = Math.floor(diffInTotalMinutes % 60);
+          postTime =
+            days > 0
+              ? days + "天前"
+              : hours > 0
+              ? hours + "小時前"
+              : minutes > 0
+              ? minutes + "分鐘前"
+              : "剛發布";
+        }
         return (
           <>
             <section
@@ -49,9 +78,7 @@ function ForumPost({ forumCategory }) {
                     <div className="post-kind">
                       {forumList[post.category_id]}
                     </div>
-                    <div className="post-time">
-                      {moment(post.created_at).format("YYYY-MM-DD HH:mm:ss")}
-                    </div>
+                    <div className="post-time">{postTime}</div>
                     {/* <div className="post-time">3天前</div> */}
                   </div>
                   {/*post-head end*/}
@@ -64,14 +91,15 @@ function ForumPost({ forumCategory }) {
                     </div>
                     <ForumHeartCommit
                       heart={post.heart}
-                      reply={forumInfo["reply"][post.id]}
+                      replyCount={
+                        forumInfo["reply"][post.id]
+                          ? forumInfo["reply"][post.id]
+                          : 0
+                      }
                     />
                     {post.image !== "" && (
                       <div className="post-img">
-                        <img
-                          src={`${IMAGE_FORUM_URL}/${post.image}`}
-                          alt="postimg"
-                        />
+                        <img src={`${PUBLIC_URL}${post.image}`} alt="postimg" />
                       </div>
                     )}
                   </div>
@@ -85,8 +113,12 @@ function ForumPost({ forumCategory }) {
         <ForumModal
           forumModalShow={forumModalShow}
           setForumModalShow={setForumModalShow}
+          setForumCategory={setForumCategory}
           whichPostToShow={whichPostToShow}
-          reply={replyCount}
+          replyList={forumInfo["reply"]}
+          replyCount={replyCount}
+          setReplyCount={setReplyCount}
+          userInfo={userInfo}
         />
       )}
     </>

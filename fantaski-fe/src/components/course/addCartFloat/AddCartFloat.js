@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Calendar from "../calendar/Calendar";
 import { COURSE_IMG_URL } from "../../../config/url";
-import { getCourseInfo } from "../moduleList";
+import { getCourseInfo, handleAddNumber } from "../moduleList";
 
 function AddCartFloat({
   customerChoose,
@@ -15,6 +15,7 @@ function AddCartFloat({
   showCourse,
   ifAddCart,
   setIfAddCart,
+  setItemNumber,
 }) {
   const [showCalendarFloat, setShowCalendarFloat] = useState(false);
   const [showAddCart, setShowAddCart] = useState(false);
@@ -171,6 +172,19 @@ function AddCartFloat({
 
                 storage.setItem(itemId, productInfo);
                 storage["addItemList"] += `${itemId}, `;
+                handleAddNumber(storage, setItemNumber);
+                //如果課程已加入購物車，萬年曆人數要減相應人數
+                let addCartDate =
+                  storage[`c-${courseInfo[0].id}`].split("|")[4];
+                let addCartAmount =
+                  storage[`c-${courseInfo[0].id}`].split("|")[5];
+                setCustomerChoose((cur) => {
+                  return {
+                    ...cur,
+                    addCartDate: addCartDate,
+                    addCartAmount: addCartAmount,
+                  };
+                });
               }
             }}
             className={ifAddCart ? "button-clicked" : ""}

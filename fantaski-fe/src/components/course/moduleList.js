@@ -9,7 +9,7 @@ export const courseIdName = {
   },
   技能班: { id: 2, eng: "skill" },
   雪橇車: { id: 3, eng: "sled" },
-  建冰屋: { id: 4, eng: "igloo" },
+  建冰屋: { id: 5, eng: "igloo" },
 };
 
 //https://openweathermap.org/weather-conditions 對照表
@@ -37,6 +37,7 @@ export function toShowAddCartFloat(setScrollTop) {
 }
 
 export const starMapping = {
+  null: ["empty-star", "empty-star", "empty-star", "empty-star", "empty-star"],
   0: ["empty-star", "empty-star", "empty-star", "empty-star", "empty-star"],
   1: ["full-star", "empty-star", "empty-star", "empty-star", "empty-star"],
   2: ["full-star", "full-star", "empty-star", "empty-star", "empty-star"],
@@ -75,9 +76,9 @@ export async function getAdviceInfo(showCourse, setAdviceInfo) {
 }
 
 //會員購買課程api
-export async function getMemberCourseComment(memberId, setMemberCourseComment) {
-  let res = await axios.post(`${API_URL}/course/getmembercoursecomment`, {
-    member_id: memberId,
+export async function getMemberCourseComment(setMemberCourseComment) {
+  let res = await axios.get(`${API_URL}/course/getmembercoursecomment`, {
+    withCredentials: true,
   });
   let memberCourseComment = res.data;
   setMemberCourseComment(memberCourseComment);
@@ -118,7 +119,7 @@ export async function getDailyCourseLeft(
   let dailyLeftObj = {};
   let leftArray = dailyCourseLeft["dailyLeft"];
   for (let i = 0; i < leftArray.length; i++) {
-    let date = moment.utc(leftArray[i]["booking_date"]).format("YYYY-MM-DD");
+    let date = moment(leftArray[i]["booking_date"]).format("YYYY-MM-DD");
     dailyLeftObj[date] = leftArray[i]["totalAmount"];
   }
   if (setDailyCourseLeft !== null) {
@@ -134,4 +135,12 @@ export async function getWeatherInfo(setWeatherInfo) {
   let res = await axios.get(`${API_URL}/weather`);
   let resWeather = res.data.data;
   setWeatherInfo(resWeather);
+  console.log(resWeather);
+}
+
+// 抓到storage裡面有幾樣商品的字串後，用split將字串轉成陣列就能顯示出有幾個了
+export function handleAddNumber(storage, setItemNumber) {
+  let itemString = storage["addItemList"];
+  let items = itemString.substr(0, itemString.length - 2).split(", ");
+  setItemNumber(Number(items.length));
 }

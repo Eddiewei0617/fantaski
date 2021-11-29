@@ -1,14 +1,24 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
+
 import MemberList from "../../components/member/MemberList";
-function MemberComment() {
+import CommentsInMember from "../../components/member/commentsinMember/CommentsInMember";
+
+function MemberComment(props) {
+  const { setShowCourse, userInfo } = props;
+  if (userInfo === null) {
+    return <div></div>;
+  }
+  if (userInfo.code === 1201) {
+    alert("請先登入");
+    props.history.push("/login");
+  }
   return (
     <div>
       <MemberList />
-      <div className="text-center">
-        <h1>我的點評</h1>
-      </div>
+      <CommentsInMember setShowCourse={setShowCourse} userInfo={userInfo} />
     </div>
   );
 }
 
-export default MemberComment;
+export default withRouter(MemberComment);

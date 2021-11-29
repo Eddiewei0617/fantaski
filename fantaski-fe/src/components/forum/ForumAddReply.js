@@ -1,21 +1,57 @@
-import React from "react";
-import { IMAGE_FORUM_URL } from "../../config/url";
+import React, { useState, useEffect } from "react";
+import { IMAGE_FORUM_URL, PUBLIC_URL } from "../../config/url";
+import { getUserInfo } from "../../config/StatusShortcut";
+import { insertReplyInfo } from "./moduleList";
 
-function ForumAddReply() {
+function ForumAddReply({
+  forum_id,
+  replyCount,
+  setReplyCount,
+  replyList,
+  setIfScrollDown,
+  userInfo,
+}) {
+  const [replyContent, setReplyContent] = useState("");
+
+  function handleChange(e) {
+    setReplyContent(e.target.value);
+  }
+  async function handleSubmit() {
+    if (replyContent === "") {
+      alert("回覆內容不可空白哦！");
+      return;
+    } else {
+      setIfScrollDown(true);
+      await insertReplyInfo(forum_id, replyContent);
+      setReplyContent("");
+      setReplyCount(replyCount + 1);
+      replyList[forum_id] = replyCount + 1;
+    }
+  }
+  if (userInfo.code === 1201) {
+    return <div>請先登入後才能回覆哦</div>;
+  }
   return (
     <>
       <div className="reply-area">
         <label className="m-3 forum-reply-img">
-          <img src={`${IMAGE_FORUM_URL}/snowman.svg`} alt="snowman-defult" />
+          <img
+            src={`${
+              userInfo.image === null
+                ? `${IMAGE_FORUM_URL}/snowman.svg`
+                : `${PUBLIC_URL}/${userInfo.image}`
+            }`}
+            alt="snowman-defult"
+          />
         </label>
         <input
           type="text"
-          name="reply" // 給Formdata使用
-          value=""
+          value={replyContent}
           placeholder="新增留言:"
           required
+          onChange={handleChange}
         />
-        <button type="submit" className="reply-submit">
+        <button type=" button" className="reply-submit" onClick={handleSubmit}>
           新增
         </button>
       </div>

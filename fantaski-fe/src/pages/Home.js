@@ -1,9 +1,26 @@
 import React from "react";
+import HomeCourse from "../components/home/HomeCourse";
+import HomeCourseShare from "../components/home/HomeCourseShare";
+import HomeMountainMap from "../components/home/HomeMountainMap";
+import HomeBanner from "../components/home/HomeBanner";
+import HomeRent from "../components/home/HomeRent";
+import HomeForum from "../components/home/HomeForum";
 
-function Home(props) {
+import HomeParallax from "../components/home/HomeParallax";
+
+function Home() {
   return (
     <>
-      <h1>Home</h1>
+      <main className="home-main">
+        <HomeParallax />
+
+        <HomeCourse />
+        <HomeCourseShare />
+        <HomeMountainMap />
+        <HomeBanner />
+        <HomeRent />
+        <HomeForum />
+      </main>
     </>
   );
 }

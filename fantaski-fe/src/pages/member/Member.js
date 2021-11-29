@@ -1,13 +1,14 @@
 // import NAvbar from "../components/route/Navbar";
 import MemberList from "../../components//member/MemberList";
 import MemberContent from "../../components/member/MemberContent";
+// import MemberCollect from "./MemberCollect";
 // import CommentsInMember from "../../components/member/commentsinMember/CommentsInMember";
 import { useState, useEffect } from "react";
 import { API_URL } from "../../config/url";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-function Member({ setShowCourse }) {
+function Member({ setShowCourse, setItemNumber }) {
   const [showmodal, setshowmodal] = useState("false");
   const [member, setMember] = useState(null);
   let history = useHistory();
@@ -63,7 +64,7 @@ function Member({ setShowCourse }) {
                 <h5 class="modal-title memberpopTitle">會員資料修改</h5>
                 {/* <button
                 type="button"
-                class="close"
+                className="close"
                 data-dismiss="modal"
                 aria-label="Close"
               >
@@ -204,6 +205,7 @@ function Member({ setShowCourse }) {
 
       <div className="container">
         <MemberList />
+
         <MemberContent
           toggleModal={toggleModal}
           name={member.name}

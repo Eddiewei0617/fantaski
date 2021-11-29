@@ -57,19 +57,19 @@ function CommentInMember({ orderCourse, setShowCourse }) {
           </div>
         </div>
         <div className="order-course-info col-4">
-          <div>訂單編號：{orderCourse.sequence}</div>
+          <div>訂單編號：{orderCourse.order_no}</div>
           <div>課程名稱：{orderCourse.name}</div>
           <div>報名人數：{orderCourse.amount}</div>
           <div>
             報名日期：
-            {moment.utc(orderCourse.booking_date).format("YYYY-MM-DD")}
+            {moment(orderCourse.booking_date).format("YYYY-MM-DD")}
           </div>
           <div>課程金額：{orderCourse.price * orderCourse.amount}</div>
         </div>
         <div className="col-6">
           <div className="row">
             <div className="col-3">我的評價</div>
-            <div classNmae="col-8">
+            <div className="col-8">
               {starMapping[isStarsClick].map((item, i) => {
                 return (
                   <>
@@ -96,7 +96,7 @@ function CommentInMember({ orderCourse, setShowCourse }) {
               rows="4"
               col="40"
               className="col-8"
-              placeholder={contentInTextarea === "" && "尚未留下評論..."}
+              placeholder={contentInTextarea === null && "尚未留下評論..."}
               value={contentInTextarea}
               onChange={handleTextChange}
             ></textarea>

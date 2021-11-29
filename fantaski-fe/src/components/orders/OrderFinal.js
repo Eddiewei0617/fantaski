@@ -18,6 +18,7 @@ function OrderFinal({
   step,
   setStep,
   scrollToTop,
+  progressAnimation,
 }) {
   // 代入localStorage裡面存的資料
   var storage = localStorage;
@@ -85,6 +86,7 @@ function OrderFinal({
         orderList,
         orderNumber: orderNo,
         total: total - pointUsed,
+        pointUsed: pointUsed,
       });
 
       // 傳剩餘點數給後端
@@ -95,9 +97,10 @@ function OrderFinal({
       console.log("handleSubmit", e);
     }
   }
-  // 表單出後自動跳轉頁面回商品頁
+  // 表單出後清空localStorage資料並自動跳轉頁面回商品頁
   let history = useHistory();
   async function handleJupmto() {
+    await storage.clear();
     let trans = await history.push("/products");
     Swal.fire({
       position: "top:100px",
@@ -110,7 +113,11 @@ function OrderFinal({
 
   return (
     <>
-      <div className="order_final_bg">
+      <div
+        className={`${
+          progressAnimation === 3 && "slit-in-vertical"
+        }  order_final_bg`}
+      >
         <h2>確認訂單</h2>
         <div className="order_final_bg2">
           {/* 上方欄位 */}

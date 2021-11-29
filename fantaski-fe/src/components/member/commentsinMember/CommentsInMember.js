@@ -3,11 +3,13 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import CommentInMember from "./CommentInMember";
 import { getMemberCourseComment } from "../../course/moduleList";
 
-function CommentsInMember({ setShowCourse }) {
+function CommentsInMember({ setShowCourse, userInfo }) {
   const [memberCourseComment, setMemberCourseComment] = useState(null);
   useEffect(() => {
-    getMemberCourseComment(1, setMemberCourseComment);
-  }, []);
+    if (userInfo) {
+      getMemberCourseComment(setMemberCourseComment);
+    }
+  }, [userInfo]);
   if (memberCourseComment === null || memberCourseComment.length === 0) {
     return (
       <div className="text-center">

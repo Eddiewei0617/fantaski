@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { getUserInfo } from "./config/StatusShortcut";
 
 // 引入各分頁(後續寫程式可更動) 頁面用元件
 
@@ -43,7 +44,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import Navbar from "./components/share/Navbar";
 import Footer from "./components/share/Footer";
 import Gotop from "./components/share/Gotop";
-
+import { getMemberPoints } from "../src/components/orders/ModuleDb";
 const courses = ["初體驗", "技能班", "雪橇車", "建冰屋"];
 
 function App() {
@@ -53,6 +54,25 @@ function App() {
   // navbar上購物車的數字
   const [itemNumber, setItemNumber] = useState(0);
 
+  const [userInfo, setUserInfo] = useState(null);
+  useEffect(() => {
+    getUserInfo(setUserInfo);
+  }, []);
+
+  // 引入moduleDb.js檔抓取後端member資料庫的資料來顯示會員剩餘點數
+  const [memberInfo, setMemberInfo] = useState(null);
+
+  useEffect(() => {
+    getMemberPoints(setMemberInfo);
+  }, []);
+
+  const [cartPositionState, setCartPositionState] = useState(null);
+  //forum 種類
+  const [forumCategory, setForumCategory] = useState({
+    forumCategory: 0,
+    isHot: true,
+  });
+
   return (
     <>
       <Router>
@@ -60,7 +80,11 @@ function App() {
           courses={courses}
           setShowCourse={setShowCourse}
           setItemNumber={setItemNumber}
+          setForumCategory={setForumCategory}
           itemNumber={itemNumber}
+          setCartPositionState={setCartPositionState}
+          userInfo={userInfo}
+          setUserInfo={setUserInfo}
         />
         {/* LOGO+標題+導覽列+上方選單 */}
         {/* 主內容區 */}
@@ -88,13 +112,7 @@ function App() {
                 courses={courses}
                 showCourse={showCourse}
                 setShowCourse={setShowCourse}
-              />
-            </Route>
-            <Route path="/course/beginner">
-              <Beginner
-                courses={courses}
-                showCourse={showCourse}
-                setShowCourse={setShowCourse}
+                setItemNumber={setItemNumber}
               />
             </Route>
             <Route path="/course/skill">
@@ -102,6 +120,7 @@ function App() {
                 courses={courses}
                 showCourse={showCourse}
                 setShowCourse={setShowCourse}
+                setItemNumber={setItemNumber}
               />
             </Route>
             <Route path="/course/sled">
@@ -109,6 +128,7 @@ function App() {
                 courses={courses}
                 showCourse={showCourse}
                 setShowCourse={setShowCourse}
+                setItemNumber={setItemNumber}
               />
             </Route>
             <Route path="/course/igloo">
@@ -116,22 +136,32 @@ function App() {
                 courses={courses}
                 showCourse={showCourse}
                 setShowCourse={setShowCourse}
+                setItemNumber={setItemNumber}
               />
             </Route>
             <Route path="/products">
-              <Products setItemNumber={setItemNumber} itemNumber={itemNumber} />
+              <Products
+                setItemNumber={setItemNumber}
+                itemNumber={itemNumber}
+                memberInfo={memberInfo}
+                cartPositionState={cartPositionState}
+              />
             </Route>
             <Route path="/Orders">
               <Orders setItemNumber={setItemNumber} itemNumber={itemNumber} />
             </Route>
             <Route path="/login">
-              <Login />
+              <Login setUserInfo={setUserInfo} />
             </Route>
             <Route path="/member">
-              <Member setShowCourse={setShowCourse} />
+              <Member />
             </Route>
             <Route path="/forum/new-post">
-              <NewPost />
+              <NewPost
+                forumCategory={forumCategory}
+                setForumCategory={setForumCategory}
+                userInfo={userInfo}
+              />
             </Route>
             <Route path="/memberRecord">
               <Record />
@@ -140,14 +170,24 @@ function App() {
               <MemberForum />
             </Route>
             <Route path="/memberCollect">
-              <MemberCollect />
+              <MemberCollect
+                setItemNumber={setItemNumber}
+                memberInfo={memberInfo}
+              />
             </Route>
             <Route path="/memberComment">
-              <MemberComment />
+              <MemberComment
+                setShowCourse={setShowCourse}
+                userInfo={userInfo}
+              />
             </Route>
 
             <Route path="/forum">
-              <Forum />
+              <Forum
+                forumCategory={forumCategory}
+                setForumCategory={setForumCategory}
+                userInfo={userInfo}
+              />
             </Route>
             <Route path="/mountainroute">
               <MountainRoute />

@@ -1,3 +1,6 @@
+import axios from "axios";
+import { API_URL } from "./url";
+
 // 查表法: 因為product資料表的category是數字，為了顯示在畫面上是文字用這招
 // 商品種類:
 export const CATEGORY_WORD = {
@@ -16,4 +19,23 @@ export const CART_CATEGORY = {
   A: "課程購買",
   B: "裝備租賃",
 };
+
+//論壇回文資訊api
+export async function getUserInfo(setUserInfo) {
+  try {
+    let res = await axios.get(`${API_URL}/auth/userInfo`, {
+      withCredentials: true,
+    });
+    setUserInfo(res.data);
+  } catch (e) {
+    console.log(e);
+  }
+}
 export const STATUS_LEVEL = { 1: "雪球", 2: "雪人", 3: "雪狼", 4: "雪怪" };
+
+// 首頁文章類別
+export const FORUM_STATUS_WORD = {
+  1: "滑雪經驗",
+  2: "課程分享",
+  3: "裝備體驗",
+};

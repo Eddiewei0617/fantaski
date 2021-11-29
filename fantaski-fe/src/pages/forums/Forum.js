@@ -4,12 +4,7 @@ import ForumHeadBtn from "../../components/forum/ForumHeadBtn";
 import ForumPost from "../../components/forum/ForumPost";
 import ForumThreeDots from "../../components/forum/ForumThreeDots";
 
-function Fourm() {
-  const [forumCategory, setForumCategory] = useState({
-    forumCategory: 0,
-    isHot: true,
-  });
-
+function Fourm({ forumCategory, setForumCategory, userInfo }) {
   return (
     <>
       <main className="forum-main">
@@ -20,9 +15,15 @@ function Fourm() {
           <div className="forum-content">
             <section className="forum-content-head">
               <div className="content-head-buttonall">
-                <ForumHeadBtn setForumCategory={setForumCategory} />
+                <ForumHeadBtn
+                  forumCategory={forumCategory}
+                  setForumCategory={setForumCategory}
+                />
                 {/* content-head-button end */}
-                <ForumThreeDots />
+                <ForumThreeDots
+                  setForumCategory={setForumCategory}
+                  userInfo={userInfo}
+                />
                 {/* forum-more-button end */}
               </div>
               {/* content-head-buttonall end */}
@@ -30,7 +31,11 @@ function Fourm() {
             {/*forum-content-head end*/}
 
             {/* ====post 區==== */}
-            <ForumPost forumCategory={forumCategory} />
+            <ForumPost
+              forumCategory={forumCategory}
+              setForumCategory={setForumCategory}
+              userInfo={userInfo}
+            />
           </div>
         </div>
       </main>

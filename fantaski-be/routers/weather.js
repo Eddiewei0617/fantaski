@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
       // dataAll: resWeather.data,
       data: {
         time: moment.unix(resWeather.data.dt).format("HH:mm"),
-        temp: resWeather.data.main.temp,
+        temp: Math.round(resWeather.data.main.temp),
         statusId: resWeather.data.weather[0].id,
         status: resWeather.data.weather[0].main,
       },

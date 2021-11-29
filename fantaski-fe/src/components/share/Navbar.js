@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { IMAGE_SHARE_URL } from "../../config/url";
+import React, { useEffect, useState, useRef } from "react";
+import { IMAGE_SHARE_URL, API_URL } from "../../config/url";
 import { Link } from "react-router-dom";
 import { ParallaxProvider } from "react-scroll-parallax";
-import { axios } from "axios";
+import axios from "axios";
 import { getWeatherInfo } from "../course/moduleList";
 
 // icon
@@ -19,12 +19,18 @@ import { FaUserAlt, FaCloudSunRain } from "react-icons/fa";
 
 import $ from "jquery";
 
-function Navbar({ courses, setShowCourse, setItemNumber, itemNumber }) {
+function Navbar(props) {
+  const {
+    courses,
+    setShowCourse,
+    setItemNumber,
+    itemNumber,
+    setCartPositionState,
+    setForumCategory,
+    userInfo,
+    setUserInfo,
+  } = props;
   // 設定該項目被點選時的狀態
-  const [forumCategory, setForumCategory] = useState({
-    forumCategory: 0,
-    isHot: true,
-  });
 
   let [colorButton, setColorButton] = useState("FANTASKI");
   const [weatherInfo, setWeatherInfo] = useState(null);
@@ -109,7 +115,21 @@ function Navbar({ courses, setShowCourse, setItemNumber, itemNumber }) {
     }
     setWeatherIcon(weatherIconTag);
   }
-
+  async function handleLogout() {
+    try {
+      let res = await axios.get(`${API_URL}/auth/logout`, {
+        withCredentials: true,
+      });
+      if (res.data.code == 1201) {
+        setUserInfo(res.data);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  const cartPosition = useRef(null);
+  setCartPositionState(cartPosition);
+  // console.log("cartPosition", cartPosition);
   return (
     <>
       {/* scroll 初始化 */}
@@ -191,7 +211,13 @@ function Navbar({ courses, setShowCourse, setItemNumber, itemNumber }) {
                       colorButton === "滑雪論壇" && "active"
                     }`}
                     to="/forum"
-                    onClick={handleClick}
+                    onClick={(e) => {
+                      handleClick(e);
+                      setForumCategory({
+                        forumCategory: 0,
+                        isHot: true,
+                      });
+                    }}
                   >
                     滑雪論壇
                   </Link>
@@ -207,7 +233,6 @@ function Navbar({ courses, setShowCourse, setItemNumber, itemNumber }) {
                   <Link
                     className={`nav-link ${colorButton === "天氣" && "active"}`}
                     to="/#"
-                    onClick={handleClick}
                   >
                     {weatherIcon}
                     {/* 天氣小圖&溫度要抓天氣API */}
@@ -228,7 +253,7 @@ function Navbar({ courses, setShowCourse, setItemNumber, itemNumber }) {
                   </Link>
                 </li>
                 <li className="left-line"></li>
-                <li className="nav-item">
+                <li className="nav-item" ref={cartPosition}>
                   {localStorage["addItemList"] === "" ? (
                     <Link className="nav-link position-relative" to="/products">
                       <BsFillCartFill className="all-icon-nav" size={25} />
@@ -238,7 +263,6 @@ function Navbar({ courses, setShowCourse, setItemNumber, itemNumber }) {
                     </Link>
                   ) : (
                     <Link className="nav-link position-relative" to="/orders">
-                      {" "}
                       <BsFillCartFill className="all-icon-nav" size={25} />
                       <p className="shopping-cart-circle" id="itemNumber">
                         {itemNumber}
@@ -264,10 +288,24 @@ function Navbar({ courses, setShowCourse, setItemNumber, itemNumber }) {
                       colorButton === "login" && "active"
                     }`}
                     to="/login"
-                    onClick={handleClick}
+                    onClick={async (e) => {
+                      handleClick(e);
+                      if (userInfo && userInfo.code !== 1201) {
+                        e.preventDefault();
+                        if (window.confirm("要登出嗎？")) {
+                          handleLogout();
+                        }
+                      }
+                    }}
                   >
                     {/* 會員登入後，要將(登入/註冊)改為會員的ID(帳號名稱) */}
-                    <span className="login">登入/註冊</span>
+                    <span className="login">
+                      {userInfo && userInfo.code === 1201
+                        ? "登入/註冊"
+                        : userInfo &&
+                          userInfo.code !== 1201 &&
+                          `Hi ${userInfo.name}`}
+                    </span>
                   </Link>
                 </li>
               </ul>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 import { BsTagsFill } from "react-icons/bs";
@@ -14,6 +14,9 @@ function ProductInfo({
   memberInfo,
   collected,
   setCollectUpdate,
+  cartPositionState,
+  handleCollect,
+  handleChecked,
 }) {
   let storage = localStorage;
 
@@ -27,26 +30,14 @@ function ProductInfo({
     setSnowboards(res.data);
   }, [categoryId]);
 
-  // 傳點到想收藏的資料給後端  // 註: 給一個v變數是因為丟到下面map迴圈裡也需要用到v，所以先在這邊加
-  // 因為傳給後端後同時有刪除也有insert，所以要一個判斷是判斷我點的這個商品是不是已經在product_collection裡面出現過了
-  async function handleCollect(v) {
-    let isDelete = false;
-    collected.forEach((item, index) => {
-      if (v.id === item.product_id) {
-        isDelete = true;
-      }
-    });
-    setCollectUpdate(Math.random());
-    try {
-      let res = await axios.post(`${API_URL}/products/collection`, {
-        isDelete: isDelete,
-        memberId: memberInfo[0].id,
-        productId: v.id,
-      });
-    } catch (err) {
-      console.error("handleCollect", err);
-    }
+  // console.log("cartPositionState", cartPositionState);
+
+  // const flyCart = useRef();
+  function flytoCart() {
+    console.log("get", flyCart);
+    // flyCart.current.classList.add("new_flyCart");
   }
+  const [flyCart, setFlyCart] = useState(0);
 
   return (
     <>
@@ -64,7 +55,7 @@ function ProductInfo({
                     snowboards[i].category_id === 7 ||
                     snowboards[i].category_id === 8) &&
                   "product_image_jackets"
-                }`}
+                } `}
               >
                 <button
                   id={i + 1}
@@ -78,7 +69,7 @@ function ProductInfo({
                       return " collect_tagged "; // " "裡前後的空格不可以少，不然和其他被選到收藏的商品className黏在一起就抓不到了
                     }
                   })} 
-                   collect_tag`
+                   collect_tag `
                     //  ${
                     //   toggleState[i + 1] === true
                     //     ? "collect_tagged"
@@ -88,14 +79,18 @@ function ProductInfo({
                   onClick={(e) => {
                     //clickToChangeToggle(e);
                     handleCollect(v);
+                    e.currentTarget.className.includes("collect_tagged")
+                      ? handleCollect(v)
+                      : handleChecked();
                   }}
                 >
                   <BsTagsFill title="加入收藏" />
                 </button>
                 <img
+                  id={v.id}
                   src={`${PRODUCTIMAGE_URL}/${v.image}`}
                   alt=""
-                  className="size"
+                  className={`${flyCart == v.id && "scale-out-tr"}   size `}
                 />
               </div>
               <p className="mt-3 h5">{v.name}</p>
@@ -117,6 +112,8 @@ function ProductInfo({
                     storage["addItemList"] += `${itemId}, `;
                   }
                   handleAddNumber();
+                  setFlyCart(Number(`${v.id}`));
+                  // console.log("id", v.id);
                 }}
               >
                 加入購物車
