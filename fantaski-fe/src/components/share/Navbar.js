@@ -69,7 +69,7 @@ function Navbar(props) {
     // getWeatherInfo(setWeatherInfo);
     //用哪個天氣小圖
     decideWeatherIcon();
-  }, [weatherInfo]);
+  }, []);
   // 決定要用哪個天氣小圖
   function decideWeatherIcon() {
     let weatherIconTag;
