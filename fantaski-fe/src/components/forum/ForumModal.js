@@ -36,7 +36,7 @@ function ForumModal({
   useEffect(() => {
     //取得會員id是否按該片文章讚
     if (whichPostToShow !== null) {
-      getLikeList(whichPostToShow[0].id, userInfo.id, setIfLike);
+      getLikeList(whichPostToShow[0].id, setIfLike);
       getPosterInfo(whichPostToShow[0].id, setPoster);
     }
   }, [whichPostToShow, userInfo]);
@@ -50,7 +50,7 @@ function ForumModal({
         ? whichPostToShow[0].heart - 1
         : whichPostToShow[0].heart + 1;
       //  傳到後端做forum_like資料表的增減＆forum-heart增減
-      updateForumLike(whichPostToShow[0].id, userInfo.id, ifLike);
+      updateForumLike(whichPostToShow[0].id, ifLike);
       //改變該用戶是否按愛心的狀態
       setIfLike(!ifLike);
     }
