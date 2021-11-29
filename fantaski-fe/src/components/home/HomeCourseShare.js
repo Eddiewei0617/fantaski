@@ -1,6 +1,6 @@
 import React from "react";
 
-import HomeSharePost from "./homeShare/HomeSharePost";
+import HomeSharePost from "./homeShare/HomeSarePost";
 
 function HomeCourseShare(props) {
   return (

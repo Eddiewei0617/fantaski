@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 import MemberList from "../../components/member/MemberList";
 import $ from "jquery";
 import { PRODUCTIMAGE_URL, API_URL } from "../../config/url";
-
 import axios from "axios";
+
 function Record() {
   // collapse.collapse();
   function buttonToggle(e) {
@@ -15,30 +16,39 @@ function Record() {
       target.classList.remove("show");
     }
   }
-
-  const [record, setRecord] = useState([]);
-
+  const [record, setRecord] = useState();
   useEffect(async () => {
-    let res = await axios.get(`${API_URL}/member/memberRecord`);
+    let res = await axios.get(`${API_URL}/member/memberRecord`, {
+      withCredentials: true,
+    });
     setRecord(res.data);
-    console.log(record);
   }, []);
+  console.log(record);
+
+  if (!record) {
+    return <></>;
+  }
   return (
     <>
       <div>
-        <MemberList />
+        <MemberList page={2} />
+
         <div className="w-75 mx-auto">
           <div className=" row mt-3 recordTitle p-3 ">
             <div className="col-2">訂單標號</div>
             <div className="col-2">訂單成立時間</div>
             <div className="col-2">課程數量</div>
-            <div className="col-2">商品數量</div>
+            <div className="col-2">租賃數量</div>
             <div className="col-2">使用點數</div>
             <div className="col-2">總計</div>
           </div>
-          {record.map((item) => {
+          {record.orders.map((order) => {
             return (
-              <div class="accordion accordionWidth" id="accordionExample">
+              <div
+                class="accordion accordionWidth"
+                id="accordionExample"
+                key={order.id}
+              >
                 <div class="card">
                   <div class="card-header" id="headingOne">
                     <h2 class="mb-0">
@@ -51,14 +61,22 @@ function Record() {
                         aria-controls="collapseOne"
                         onClick={buttonToggle}
                       >
+                        {/* {orders.map((orderNo) => {
+                          return ( */}
                         <div className=" row text-center font-weight-bold">
-                          <div className="col-2">190124011229</div>
-                          <div className="col-2">2021-10-04 18:15:00</div>
-                          <div className="col-2">{1}</div>
-                          <div className="col-2">1</div>
-                          <div className="col-2">1 點</div>
-                          <div className="col-2">$3799</div>
+                          <div className="col-2">{order.order_no}</div>
+                          <div className="col-2">{order.created_at}</div>
+                          <div className="col-2">
+                            {record.orderCourse[order.id].length}
+                          </div>
+                          <div className="col-2">
+                            {record.orderProduct[order.id].length}
+                          </div>
+                          <div className="col-2">{order.point_used} 點</div>
+                          <div className="col-2">$ {order.consumption}</div>
                         </div>
+                        {/* );
+                        })} */}
                       </button>
                     </h2>
                   </div>

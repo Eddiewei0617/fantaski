@@ -43,17 +43,6 @@ function AddCartFix({
   useEffect(() => {
     if (courseInfo !== null && storage[`c-${courseInfo[0].id}`]) {
       setIfAddCart(true);
-      //如果課程已加入購物車，萬年曆人數要減相應人數
-      let addCartDate = storage[`c-${courseInfo[0].id}`].split("|")[4];
-      let addCartAmount = storage[`c-${courseInfo[0].id}`].split("|")[5];
-      console.log(addCartDate, addCartAmount);
-      setCustomerChoose((cur) => {
-        return {
-          ...cur,
-          addCartDate: addCartDate,
-          addCartAmount: addCartAmount,
-        };
-      });
     }
   }, [courseInfo]);
 
@@ -111,7 +100,6 @@ function AddCartFix({
               <div className="custom-calendar">
                 <Calendar
                   showCourse={showCourse}
-                  customerChoose={customerChoose}
                   setCustomerChoose={setCustomerChoose}
                   setShowCalendar={setShowCalendar}
                 />
@@ -171,18 +159,6 @@ function AddCartFix({
                   storage.setItem(itemId, productInfo);
                   storage["addItemList"] += `${itemId}, `;
                   handleAddNumber(storage, setItemNumber);
-                  //如果課程已加入購物車，萬年曆人數要減相應人數
-                  let addCartDate =
-                    storage[`c-${courseInfo[0].id}`].split("|")[4];
-                  let addCartAmount =
-                    storage[`c-${courseInfo[0].id}`].split("|")[5];
-                  setCustomerChoose((cur) => {
-                    return {
-                      ...cur,
-                      addCartDate: addCartDate,
-                      addCartAmount: addCartAmount,
-                    };
-                  });
                 }
               }}
             >

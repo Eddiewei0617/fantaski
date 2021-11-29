@@ -33,9 +33,8 @@ export async function getUserInfo(setUserInfo) {
 }
 export const STATUS_LEVEL = { 1: "雪球", 2: "雪人", 3: "雪狼", 4: "雪怪" };
 
-// 首頁文章類別
-export const FORUM_STATUS_WORD = {
+export const FORUM_CATEGORY = {
   1: "滑雪經驗",
   2: "課程分享",
-  3: "裝備體驗",
+  3: "裝備經驗",
 };

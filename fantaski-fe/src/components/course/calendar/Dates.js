@@ -9,7 +9,6 @@ function Dates(props) {
     selectedYear,
     selectedMonth,
     day,
-    customerChoose,
     setCustomerChoose,
     setShowCalendar,
     setShowCalendarFloat,
@@ -35,7 +34,6 @@ function Dates(props) {
             selectedYear={selectedYear}
             selectedMonth={selectedMonth}
             day={day}
-            customerChoose={customerChoose}
             setCustomerChoose={setCustomerChoose}
             setShowCalendar={setShowCalendar}
             setShowCalendarFloat={setShowCalendarFloat}

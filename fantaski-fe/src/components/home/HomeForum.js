@@ -1,54 +1,46 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import HomeTitle from "./HomeTitle";
+import { IMAGE_HOME_URL } from "../../config/url";
 import { Link } from "react-router-dom";
 
-import axios from "axios";
-import { API_URL } from "../../config/url";
-import { FORUM_STATUS_WORD } from "../../config/StatusShortcut";
-import moment from "moment";
+const homeForumNewsFromServer = [
+  {
+    id: 1,
+    kind: "滑雪經驗",
+    title: "滑雪遇到大雪怪",
+    content:
+      "滑雪遇到大腳印，滑雪遇到大腳印（///▽///）️滑雪遇到大腳印，滑雪遇到大腳印（///▽///）️滑雪遇到大腳印，滑雪遇到大腳印（///▽///）️",
+    replyNum: "0",
+  },
+  {
+    id: 2,
+    kind: "課程分享",
+    title: "聖誕老人真可愛",
+    content:
+      "聖誕老人真可愛(///▽///）️️聖誕老人真可愛(///▽///）️️聖誕老人真可愛(///▽///）️️聖誕老人真可愛(///▽///）️️聖誕老人真可愛(///▽///）️️聖誕老人真可愛(///▽///）️️",
+    replyNum: "0",
+  },
+];
 
-// const homeForumNewsFromServer = [
-//   {
-//     id: 1,
-//     kind: "滑雪經驗",
-//     time: "2021-11-25 08:12",
-//     title: "滑雪遇到大雪怪",
-//     content:
-//       "滑雪遇到大腳印，滑雪遇到大腳印（///▽///）️滑雪遇到大腳印，滑雪遇到大腳印（///▽///）️滑雪遇到大腳印，滑雪遇到大腳印（///▽///）️",
-//     replyNum: "0",
-//   },
-//   {
-//     id: 2,
-//     kind: "課程分享",
-//     time: "2021-11-26 08:12",
-//     title: "聖誕老人真可愛",
-//     content:
-//       "聖誕老人真可愛(///▽///）️️聖誕老人真可愛(///▽///）️️聖誕老人真可愛(///▽///）️️聖誕老人真可愛(///▽///）️️聖誕老人真可愛(///▽///）️️聖誕老人真可愛(///▽///）️️",
-//     replyNum: "0",
-//   },
-// ];
-
-// const homeForumHotFromServer = [
-//   {
-//     id: 1,
-//     kind: "裝備體驗",
-//     time: "2021-10-25 08:12",
-//     title: "滑雪板又酷又好用",
-//     content:
-//       "酷炫滑雪板(>////<)酷炫滑雪板(>////<)酷炫滑雪板(>////<)酷炫滑雪板(>////<)酷炫滑雪板(>////<)酷炫滑雪板(>////<)酷炫滑雪板(>////<)",
-//     replyNum: "20",
-//   },
-//   {
-//     id: 2,
-//     kind: "滑雪課程",
-//     time: "2021-11-05 08:12",
-//     title: "小熊真可愛",
-//     content:
-//       "小熊真可愛(///▽///）️️小熊真可愛(///▽///）️️小熊真可愛(///▽///）️️小熊真可愛(///▽///）️️小熊真可愛(///▽///）️️小熊真可愛(///▽///）️️小熊真可愛(///▽///）️️",
-//     replyNum: "50",
-//   },
-// ];
+const homeForumHotFromServer = [
+  {
+    id: 1,
+    kind: "裝備體驗",
+    title: "滑雪板又酷又好用",
+    content:
+      "酷炫滑雪板(>////<)酷炫滑雪板(>////<)酷炫滑雪板(>////<)酷炫滑雪板(>////<)酷炫滑雪板(>////<)酷炫滑雪板(>////<)酷炫滑雪板(>////<)",
+    replyNum: "20",
+  },
+  {
+    id: 2,
+    kind: "滑雪課程",
+    title: "小熊真可愛",
+    content:
+      "小熊真可愛(///▽///）️️小熊真可愛(///▽///）️️小熊真可愛(///▽///）️️小熊真可愛(///▽///）️️小熊真可愛(///▽///）️️小熊真可愛(///▽///）️️小熊真可愛(///▽///）️️",
+    replyNum: "50",
+  },
+];
 
 function HomeForum() {
   const mainTitle = {
@@ -56,22 +48,9 @@ function HomeForum() {
     subTitle: "奇聞軼事 | 天⾺⾏空",
   };
 
-  // 接後端資料顯示於頁面上
-  const [indexForumNews, setIndexForumNews] = useState([]);
+  const [indexForumNews, setIndexForumNews] = useState(homeForumNewsFromServer);
 
-  // 最新文章
-  useEffect(async () => {
-    let res = await axios.get(`${API_URL}/home/indexforumnews`);
-    setIndexForumNews(res.data);
-  }, []);
-
-  const [indexForumHot, setIndexForumHot] = useState([]);
-
-  // 熱門文章
-  useEffect(async () => {
-    let res = await axios.get(`${API_URL}/home/indexforumhot`);
-    setIndexForumHot(res.data);
-  }, []);
+  const [indexForumHot, setIndexForumHot] = useState(homeForumHotFromServer);
 
   return (
     <>
@@ -87,31 +66,26 @@ function HomeForum() {
               <h2>最新文章</h2>
             </div>
 
-            {indexForumNews.map((item) => {
+            {indexForumNews.map((v, i) => {
               return (
                 <>
                   <div className="home-forum-p">
-                    <div className="home-post-head" key={item.id}>
+                    <div className="home-post-head" key={v.i}>
                       <div className="postuser-color"></div>
-                      <div className="home-post-kind">
-                        {FORUM_STATUS_WORD[item.category_id]}
-                        <span className="home-forum-time">
-                          {item.created_at}
-                        </span>
-                      </div>
+                      <div className="home-post-kind">{v.kind}</div>
                     </div>
                     {/* home-post-head end */}
 
                     <div className="home-post-content">
-                      <h2>{item.subject}</h2>
+                      <h2>{v.title}</h2>
                       <div className="home-post-p-area">
                         <div className="home-post-p">
-                          <span>{item.content}</span>
+                          <span>{v.content}</span>
                         </div>
                         {/* home-post-p end */}
                         <div className="home-reply-more">
                           <div className="home-commit-num">
-                            留言數:<span>{item.replyNum}</span>則
+                            留言數:<span>{v.replyNum}</span>則
                           </div>
                           {/* home-commit-num end */}
                           <Link to="/forum" className="goto-check">
@@ -137,31 +111,26 @@ function HomeForum() {
               <h2>熱門文章</h2>
             </div>
 
-            {indexForumHot.map((item) => {
+            {indexForumHot.map((v, i) => {
               return (
                 <>
                   <div className="home-forum-p">
-                    <div className="home-post-head" key={item.id}>
+                    <div className="home-post-head" key={v.i}>
                       <div className="postuser-color"></div>
-                      <div className="home-post-kind">
-                        {FORUM_STATUS_WORD[item.category_id]}
-                        <span className="home-forum-time">
-                          {item.created_at}
-                        </span>
-                      </div>
+                      <div className="home-post-kind">{v.kind}</div>
                     </div>
                     {/* home-post-head end */}
 
                     <div className="home-post-content">
-                      <h2>{item.subject}</h2>
+                      <h2>{v.title}</h2>
                       <div className="home-post-p-area">
                         <div className="home-post-p">
-                          <span>{item.content}</span>
+                          <span>{v.content}</span>
                         </div>
                         {/* home-post-p end */}
                         <div className="home-reply-more">
                           <div className="home-commit-num">
-                            留言數:<span>{item.replyNum}</span>則
+                            留言數:<span>{v.replyNum}</span>則
                           </div>
                           {/* home-commit-num end */}
                           <Link to="/forum" className="goto-check">

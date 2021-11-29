@@ -56,7 +56,7 @@ const daysInThisMonth = (year, month) => {
 };
 //次月的天數陣列
 const daysInNextMonth = (daysThisLastMonth, month, year) => {
-  let yearForNextMonth = Number(year);
+  let yearForNextMonth = year;
   let nextMonth = Number(month) + 1;
   if (month === 12) {
     yearForNextMonth += 1;
@@ -76,7 +76,6 @@ function DatesInMonth(props) {
     selectedYear,
     selectedMonth,
     day,
-    customerChoose,
     setCustomerChoose,
     setShowCalendar,
     setShowCalendarFloat,
@@ -98,7 +97,7 @@ function DatesInMonth(props) {
       setDailyCourseLeft, //課程剩餘人數物件
       setStuLimit //課程人數上限
     );
-  }, [selectedYear, selectedMonth, customerChoose]);
+  }, []);
 
   let totalDaysLT = weekDayInLastMonth(selectedYear, selectedMonth).concat(
     daysInThisMonth(selectedYear, selectedMonth, day)
@@ -107,7 +106,6 @@ function DatesInMonth(props) {
   let totalDays = totalDaysLT.concat(
     daysInNextMonth(totalDaysLT.length, selectedMonth, selectedYear)
   );
-
   //整個日曆的天數再分成七天一組，渲染時：先map一整排，裡面再map一整排的天數(幾號)
   let totaldata = [],
     tempdata = [];
@@ -118,7 +116,7 @@ function DatesInMonth(props) {
       tempdata = [];
     }
   }
-  //使用者點選課程日期
+  //使用者切換年月時
   const handleChange = (y, m, d) => {
     if (d < 10) d = `0${d}`;
     if (m < 10) m = `0${m}`;
@@ -131,6 +129,7 @@ function DatesInMonth(props) {
           alert("該課程人數已滿，請選擇其他日期");
           return;
         } else if (left > 0) {
+          console.log(Columntoday, today);
           setCustomerChoose((cur) => {
             return {
               ...cur,
@@ -161,18 +160,15 @@ function DatesInMonth(props) {
   function handleStyleChange(y, m, d) {
     if (d < 10) d = `0${d}`;
     if (m < 10) m = `0${m}`;
-    let selectedYearVar = selectedYear;
-    let selectedMonthVar = selectedMonth;
-    if (selectedMonthVar < 10) selectedMonthVar = `0${selectedMonthVar}`;
     let lastNextStyle = "calendar-dates-box-last";
     let thisMonthStyle = "calendar-dates-box-this";
     let thisMonth = `${y}-${m}`;
-    let selectMonth = `${selectedYearVar}-${selectedMonthVar}`;
-    let columnToday = `${y}-${m}-${d}`;
+    let selectMonth = `${selectedYear}-${selectedMonth}`;
+    let Columntoday = `${y}-${m}-${d}`;
     if (thisMonth === selectMonth) {
-      if (columnToday > today) {
+      if (Columntoday > today) {
         return thisMonthStyle;
-      } else if (columnToday < today) {
+      } else if (Columntoday < today) {
         return lastNextStyle;
       } else {
         let todayStyle = "calendar-dates-box-this-today";
@@ -187,7 +183,6 @@ function DatesInMonth(props) {
     if (d < 10) d = `0${d}`;
     if (m < 10) m = `0${m}`;
     let theDate = `${y}-${m}-${d}`;
-
     if (dailyCourseLeft === null) {
       return;
     } else if (theDate < today) {
@@ -196,17 +191,9 @@ function DatesInMonth(props) {
       if (dailyCourseLeft.hasOwnProperty(theDate)) {
         let left = stuLimit - dailyCourseLeft[theDate];
         if (left < 0) left = 0;
-        if (customerChoose.addCartDate == theDate) {
-          return `剩${left - customerChoose.addCartAmount}人`;
-        } else {
-          return `剩${left}人`;
-        }
+        return `剩${left}人`;
       } else {
-        if (customerChoose.addCartDate == theDate) {
-          return `剩${stuLimit - customerChoose.addCartAmount}人`;
-        } else {
-          return `剩${stuLimit}人`;
-        }
+        return `剩${stuLimit}人`;
       }
     }
   }
@@ -214,7 +201,7 @@ function DatesInMonth(props) {
   function bgColorByLeft(leftFunction) {
     if (leftFunction) {
       let leftAmount = leftFunction.replace(/[^0-9]/gi, "");
-      if (leftAmount <= 3 && leftAmount > 0) {
+      if (leftAmount < 3 && leftAmount > 0) {
         return "bgLessThan3";
       } else if (leftAmount <= 0) {
         return "bgLessThan0";

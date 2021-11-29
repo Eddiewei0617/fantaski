@@ -2,9 +2,7 @@ import React from "react";
 
 function MemberInformation() {
   return (
-   <div>
-     
-   </div>
+   
   );
 }
 
