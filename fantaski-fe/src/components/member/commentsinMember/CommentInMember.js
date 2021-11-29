@@ -62,7 +62,7 @@ function CommentInMember({ orderCourse, setShowCourse }) {
           <div>報名人數：{orderCourse.amount}</div>
           <div>
             報名日期：
-            {moment.utc(orderCourse.booking_date).format("YYYY-MM-DD")}
+            {moment(orderCourse.booking_date).format("YYYY-MM-DD")}
           </div>
           <div>課程金額：{orderCourse.price * orderCourse.amount}</div>
         </div>
