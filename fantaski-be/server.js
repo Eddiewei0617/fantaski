@@ -44,6 +44,10 @@ app.get("/", (req, res) => {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// api路徑中間件(首頁)
+let homeRouter = require("./routers/home");
+app.use("/api/home", homeRouter);
+
 //api路徑中間件(課程)
 let courseRouter = require("./routers/course");
 app.use("/api/course", courseRouter);
@@ -71,6 +75,7 @@ app.use("/api/member", memberRouter);
 // 登入註冊api
 let authRouter = require("./routers/auth");
 app.use("/api/auth", authRouter);
+
 // 圖片檔案上傳
 let memberUploadRouter = require("./routers/memberUpload");
 app.use("/api/memberUpload", memberUploadRouter);
