@@ -61,7 +61,7 @@ function MemberCollect({ setItemNumber, memberInfo }) {
   return (
     <>
       <div>
-        <MemberList setItemNumber={setItemNumber} />
+        <MemberList setItemNumber={setItemNumber} page={4} />
       </div>
       <table className="member_collect_bg">
         <thead className="collect_header">

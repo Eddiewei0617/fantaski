@@ -29,12 +29,17 @@ function Map() {
       setRedMapView("");
     }
   }
+
   const [whiteMapView, setWhiteMapView] = useState("modal");
   function mapWhite() {
     if (whiteMapView === "modal") {
       setWhiteMapView("");
     }
   }
+  const [routeImg, setRouteImg] = useState("pexels-photo-3969999.jpeg");
+  const [routeRedImg, setRouteRedImg] = useState("red5.jpg");
+  const [routeBlackImg, setRouteBlackImg] = useState("snowmobile2.jpg");
+  const [routeWhiteImg, setRouteWhiteImg] = useState("red5.jpg");
   return (
     <div>
       {/* 地圖及路線 */}
@@ -69,26 +74,42 @@ function Map() {
               {/* 視窗內部內容 */}
               <div className="modal-body d-flex row">
                 <div className="col-6 d-flex row">
-                  <div className="imageBoxTop col-12 text-center mb-3">
+                  <div
+                    className="imageBoxTop col-12 text-center mb-3"
+                    onClick={(e) => {}}
+                  >
                     {/* <img
                     className="shadow-sm bg-white rounded"
                     src="assets/pexels-tiffany-bui-2405062.jpg"
                   ></img> */}
                     <img
                       className="shadow-sm bg-white  border border-dark"
-                      src={`${IMAGE_ROUTER_URL}/pexels-photo-3969999.jpeg`}
+                      src={`${IMAGE_ROUTER_URL}/${routeImg}`}
+                      alt=""
                     />
                   </div>
-                  <div className="col-6 imageBoxLeft imageBoxImg">
+                  <div
+                    className="col-6 imageBoxLeft imageBoxImg"
+                    onClick={() => {
+                      setRouteImg("skiing.jpg");
+                    }}
+                  >
                     <img
                       className="shadow-sm bg-white border border-dark"
                       src={`${IMAGE_ROUTER_URL}/skiing.jpg`}
+                      alt=""
                     ></img>
                   </div>
-                  <div className="col-6 imageBoxRight imageBoxImg">
+                  <div
+                    className="col-6 imageBoxRight imageBoxImg"
+                    onClick={() => {
+                      setRouteImg("5781362573_3a6e7f5066_o.jpg");
+                    }}
+                  >
                     <img
                       className="shadow-sm bg-white border border-dark"
                       src={`${IMAGE_ROUTER_URL}/5781362573_3a6e7f5066_o.jpg`}
+                      alt=""
                     ></img>
                   </div>
                 </div>
@@ -163,19 +184,32 @@ function Map() {
                   ></img> */}
                     <img
                       className="shadow-sm bg-white  border border-dark"
-                      src={`${IMAGE_ROUTER_URL}/red5.jpg`}
+                      src={`${IMAGE_ROUTER_URL}/${routeRedImg}`}
+                      alt=""
                     />
                   </div>
-                  <div className="col-6 imageBoxLeft imageBoxImg">
+                  <div
+                    className="col-6 imageBoxLeft imageBoxImg"
+                    onClick={() => {
+                      setRouteRedImg("red4.jpg");
+                    }}
+                  >
                     <img
                       className="shadow-sm bg-white border border-dark"
                       src={`${IMAGE_ROUTER_URL}/red4.jpg`}
+                      alt=""
                     ></img>
                   </div>
-                  <div className="col-6 imageBoxRight imageBoxImg">
+                  <div
+                    className="col-6 imageBoxRight imageBoxImg"
+                    onClick={() => {
+                      setRouteRedImg("red3.jpg");
+                    }}
+                  >
                     <img
                       className="shadow-sm bg-white border border-dark"
                       src={`${IMAGE_ROUTER_URL}/red3.jpg`}
+                      alt=""
                     ></img>
                   </div>
                 </div>
@@ -247,19 +281,32 @@ function Map() {
                   ></img> */}
                     <img
                       className="shadow-sm bg-white  border border-dark"
-                      src={`${PRODUCTIMAGE_URL}/snowmobile2.jpg`}
+                      src={`${PRODUCTIMAGE_URL}/${routeBlackImg}`}
+                      alt=""
                     />
                   </div>
-                  <div className="col-6 imageBoxLeft imageBoxImg">
+                  <div
+                    className="col-6 imageBoxLeft imageBoxImg"
+                    onClick={() => {
+                      setRouteBlackImg("snowmobile2.jpg");
+                    }}
+                  >
                     <img
                       className="shadow-sm bg-white border border-dark"
-                      src={`${PRODUCTIMAGE_URL}/santaDeer5.jpg`}
+                      src={`${PRODUCTIMAGE_URL}/snowmobile2.jpg`}
+                      alt=""
                     ></img>
                   </div>
-                  <div className="col-6 imageBoxRight imageBoxImg">
+                  <div
+                    className="col-6 imageBoxRight imageBoxImg"
+                    onClick={() => {
+                      setRouteBlackImg("snowmobile9.jpg");
+                    }}
+                  >
                     <img
                       className="shadow-sm bg-white border border-dark"
-                      src={`${PRODUCTIMAGE_URL}/snowmobile8.jpg`}
+                      src={`${PRODUCTIMAGE_URL}/snowmobile9.jpg`}
+                      alt=""
                     ></img>
                   </div>
                 </div>
@@ -331,19 +378,22 @@ function Map() {
                   ></img> */}
                     <img
                       className="shadow-sm bg-white  border border-dark"
-                      src={`${IMAGE_ROUTER_URL}/snow3.jpg`}
+                      src={`${IMAGE_ROUTER_URL}/igloo2.jpeg`}
+                      alt=""
                     />
                   </div>
                   <div className="col-6 imageBoxLeft imageBoxImg">
                     <img
                       className="shadow-sm bg-white border border-dark"
-                      src={`${IMAGE_ROUTER_URL}/snow3.jpg`}
+                      src={`${IMAGE_ROUTER_URL}/igloo2.jpeg`}
+                      alt=""
                     ></img>
                   </div>
                   <div className="col-6 imageBoxRight imageBoxImg">
                     <img
                       className="shadow-sm bg-white border border-dark"
-                      src={`${IMAGE_ROUTER_URL}/snow3.jpg`}
+                      src={`${IMAGE_ROUTER_URL}/igloo2.jpeg`}
+                      alt=""
                     ></img>
                   </div>
                 </div>
@@ -390,6 +440,7 @@ function Map() {
             }}
             className="mapIgloo mapIglooBg"
             src={`${IMAGE_ROUTER_URL}/igloo.png`}
+            alt=""
           />
           {/* <img
             className="mapIgloo mapIglooBg"

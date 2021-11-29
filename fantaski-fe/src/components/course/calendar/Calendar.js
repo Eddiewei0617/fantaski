@@ -13,7 +13,6 @@ function Calendar(props) {
   const [selectedMonth, setSelectedMonth] = useState(month);
 
   const {
-    customerChoose,
     setCustomerChoose,
     setShowCalendar,
     setShowCalendarFloat,
@@ -35,7 +34,6 @@ function Calendar(props) {
           selectedYear={selectedYear}
           selectedMonth={selectedMonth}
           day={day}
-          customerChoose={customerChoose}
           setCustomerChoose={setCustomerChoose}
           setShowCalendar={setShowCalendar}
           setShowCalendarFloat={setShowCalendarFloat}

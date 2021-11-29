@@ -70,6 +70,7 @@ router.post("/login", async (req, res) => {
     req.session.member = returnMember;
     res.json({ code: 0, message: "登入成功", member: returnMember });
   } catch (e) {
+    console.log(e);
     res.json({ code: 1109, message: "登入失敗" });
   }
 });

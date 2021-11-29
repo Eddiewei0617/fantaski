@@ -7,9 +7,11 @@ import { useState, useEffect } from "react";
 import { API_URL } from "../../config/url";
 import axios from "axios";
 
-function Member({ setShowCourse, setItemNumber }) {
+function Member() {
   const [showmodal, setshowmodal] = useState("false");
   const [member, setMember] = useState(null);
+  // const { active, setActive } = props;
+
   // console.log(details && details.member[0].name);
   useEffect(async () => {
     let res = await axios.get(`${API_URL}/member/memberInfo`);
@@ -156,7 +158,7 @@ function Member({ setShowCourse, setItemNumber }) {
         </div>
       </div>
       <div className="container">
-        <MemberList />
+        <MemberList page={1} />
 
         <MemberContent
           toggleModal={toggleModal}

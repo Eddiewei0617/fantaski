@@ -7,6 +7,9 @@
   color: var(--rLinkColor);
   text-decoration: none;
 }
+.eddie {
+  color: red;
+}
 .r-list {
   padding-left: 0;
   margin-top: 100px;
@@ -25,11 +28,11 @@
   font-weight: 700;
 }
 
-.menuLink:focus {
-  outline: var(--menuLinkOutlineWidth, 2px) solid
-    var(--menuLinkOutlineColor, currentColor);
-  outline-offset: var(--menuLinkOutlineOffset);
-}
+// .menuLink:focus {
+//   outline: var(--menuLinkOutlineWidth, 2px) solid
+//     var(--menuLinkOutlineColor, currentColor);
+//   outline-offset: var(--menuLinkOutlineOffset);
+// }
 
 .menu:hover .menuLink:not(:hover) {
   --rLinkColor: var(--menuLinkColorUnactive, rgba(22, 22, 22, 0.35));
@@ -293,6 +296,33 @@
 //   padding-top: 140px;
 //   padding-bottom: 140px;
 // }
+// 文章頁面開始
+.memberForumContent {
+  height: 730px;
+  background-color: white;
+  border-radius: 30px;
+  width: 100%;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important ;
+  font-weight: 500;
+  color: $main-text-darkblue;
+  font-size: $font-m;
+}
+.memberForumContentTitle {
+  font-size: $font-l;
+  font-weight: 900;
+}
+.memberForumContentBorder {
+  border-bottom: 2px dashed #707070;
+  width: 100%;
+}
+.articleWrapper {
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 30px 70px;
+  height: 600px;
+  // padding: 0 50px;
+}
+// 文章頁面結束
 
 .login-register-wrapper {
   font-size: 16px;

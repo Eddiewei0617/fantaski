@@ -36,11 +36,7 @@ function ForumModal({
   useEffect(() => {
     //取得會員id是否按該片文章讚
     if (whichPostToShow !== null) {
-      if (userInfo.code == 1201) {
-        setIfLike(false);
-      } else {
-        getLikeList(whichPostToShow[0].id, setIfLike);
-      }
+      getLikeList(whichPostToShow[0].id, setIfLike);
       getPosterInfo(whichPostToShow[0].id, setPoster);
     }
   }, [whichPostToShow, userInfo]);

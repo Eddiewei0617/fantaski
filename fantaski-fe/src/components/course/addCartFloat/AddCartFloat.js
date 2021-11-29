@@ -173,18 +173,6 @@ function AddCartFloat({
                 storage.setItem(itemId, productInfo);
                 storage["addItemList"] += `${itemId}, `;
                 handleAddNumber(storage, setItemNumber);
-                //如果課程已加入購物車，萬年曆人數要減相應人數
-                let addCartDate =
-                  storage[`c-${courseInfo[0].id}`].split("|")[4];
-                let addCartAmount =
-                  storage[`c-${courseInfo[0].id}`].split("|")[5];
-                setCustomerChoose((cur) => {
-                  return {
-                    ...cur,
-                    addCartDate: addCartDate,
-                    addCartAmount: addCartAmount,
-                  };
-                });
               }
             }}
             className={ifAddCart ? "button-clicked" : ""}
