@@ -108,7 +108,8 @@ function OrderFinal({
       timer: 3000,
     });
   }
-
+  // console.log("memberlist", memberPoints[0].point);
+  console.log("pointUsed", pointUsed);
   return (
     <>
       <div
@@ -147,11 +148,16 @@ function OrderFinal({
                 <div>剩餘點數</div>
               </div>
               <div className="col-9 final_word">
-                {pointUsed === undefined
+                {pointUsed === 0
+                  ? 0
+                  : pointUsed === undefined
+                  ? memberPoints[0].point
+                  : memberPoints[0].point - pointUsed}
+                {/* {pointUsed === undefined
                   ? memberPoints
                     ? userInfo.point
                     : userInfo.point - pointUsed
-                  : userInfo.point - pointUsed}
+                  : userInfo.point - pointUsed} */}
                 點
               </div>
             </div>

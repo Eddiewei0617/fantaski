@@ -62,6 +62,7 @@ function ProductInfo({
                   className={`
                   ${collected.map((collections) => {
                     if (
+                      (userInfo !== null || userInfo.code !== 1201) &&
                       memberInfo &&
                       collections.member_id === memberInfo[0].id &&
                       collections.product_id === v.id

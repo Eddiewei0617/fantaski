@@ -64,7 +64,7 @@ function App() {
 
   useEffect(() => {
     if (userInfo) {
-      getMemberPoints(setMemberInfo, userInfo.id);
+      getMemberPoints(setMemberInfo);
     }
   }, [userInfo]);
 

@@ -40,7 +40,7 @@ function Orders(props) {
   useEffect(async () => {
     try {
       if (userInfo !== null) {
-        getMemberPoints(setMemberPoints, userInfo.id);
+        getMemberPoints(setMemberPoints);
         // console.log("res.data", userInfo);
       }
     } catch (e) {

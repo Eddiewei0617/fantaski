@@ -27,9 +27,13 @@ function Products({
   handleAddNumber,
   userInfo,
 }) {
+  // 想要傳參數給後端新增或找資料 :
+  // axios.post(“url”, params, {withCredential:true})
+  // params就是{categoryId: category_id} 之類的參數
+  // ----------------------------------------------------------------------------
   const [square, setSquare] = useState(true);
 
-  console.log("userInfo", userInfo);
+  // console.log("userInfo", userInfo);
   // 用一個ref抓到要跳轉到的位置區塊，再寫一個function scrollTo
   // 點小手指跳到商品主頁
   const productSection = useRef(null);
@@ -76,11 +80,15 @@ function Products({
       });
       setCollectUpdate(Math.random());
       try {
-        let res = await axios.post(`${API_URL}/products/collection`, {
-          isDelete: isDelete,
-          memberId: userInfo.id,
-          productId: v.id,
-        });
+        let res = await axios.post(
+          `${API_URL}/products/collection`,
+          {
+            isDelete: isDelete,
+            // memberId: userInfo.id,
+            productId: v.id,
+          },
+          { withCredentials: true }
+        );
       } catch (err) {
         console.error("handleCollect", err);
       }

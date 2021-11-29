@@ -1,6 +1,7 @@
 express = require("express");
 const router = express.Router();
 const connection = require("../utils/db");
+const { loginCheckMiddleware } = require("../middlewares/auth");
 
 // 使用moment套件自動生成匯入資料庫的時間
 const moment = require("moment");
@@ -11,11 +12,11 @@ router.get("/", (res, req) => {
 });
 
 // 拿資料庫(member)的資料給前端(為了用點數)
-router.post("/getMemberPoints", async (req, res) => {
+router.get("/getMemberPoints", loginCheckMiddleware, async (req, res) => {
   try {
     let getMemberPoints = await connection.queryAsync(
       "SELECT * FROM member WHERE id = ?",
-      [req.body.memberId]
+      [req.session.member.id]
     );
     // console.log("getMemberPoints", getMemberPoints);
     res.json(getMemberPoints);

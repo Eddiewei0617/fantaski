@@ -43,9 +43,10 @@ function ProductList({
   const [products, setProducts] = useState([]);
   const [pageNow, setPageNow] = useState(1); // 為了偵測在哪一頁，然後切換頁面會顯示不同商品
   useEffect(async () => {
-    let res = await axios.post(`${API_URL}/products/productsInfoList`, {
-      category: categoryId,
-    });
+    let res = await axios.get(
+      `${API_URL}/products/productsInfoList/${categoryId}`
+    );
+
     // 先假設一個productList空[]放單頁商品的；totalProductList空[]是放全部商品的
     // 判斷式 : 如果一頁商品數量除以5的餘數是0，那就把這些商品push進總陣列，然後把小陣列歸零，繼續跑迴圈
     let productList = [];

@@ -33,7 +33,7 @@ app.use("/public", express.static("public"));
 //追朔訪問紀錄
 app.use((req, res, next) => {
   let current = new Date();
-  console.log(`有人來訪問at ${current.toISOString()}`);
+  // console.log(`有人來訪問at ${current.toISOString()}`);
   next();
 });
 app.get("/", (req, res) => {
