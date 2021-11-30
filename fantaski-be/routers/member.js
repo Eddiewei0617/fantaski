@@ -63,4 +63,67 @@ router.post("/updataImg", async (req, res) => {
   }
   res.json({ result: "123OK" });
 });
+
+// 接論壇管理的api
+router.get("/memberArticle", async (req, res) => {
+  try {
+    let data = await connection.queryAsync(
+      "SELECT * FROM forum WHERE member_id=?",
+      [3]
+      // [req.session.member.id]
+    );
+    if (res) {
+      for (i = 0; i < data.length; i++) {
+        data[i].created_at = moment(data[i].created_at).format("YYYY-MM-DD");
+      }
+    }
+    res.json(data);
+  } catch (e) {
+    console.log("論壇錯誤", e);
+  }
+});
+
+router.get("/memberRecord", async (req, res) => {
+  try {
+    let memberOrder = await connection.queryAsync(
+      "SELECT * FROM ordered WHERE member_id=?",
+      [3]
+      // [req.session.member.id]
+    );
+    console.log(memberOrder);
+    let orderCourse = {};
+    for (i = 0; i < memberOrder.length; i++) {
+      orderCourse[memberOrder[i].id] = [];
+      let orderItems = await connection.queryAsync(
+        "SELECT * FROM  order_course WHERE order_id=?",
+        [memberOrder[i].id]
+      );
+      // orderItems.push(orderCourse[0]);
+      for (let j = 0; j < orderItems.length; j++) {
+        orderCourse[memberOrder[i].id].push(orderItems[j]);
+      }
+    }
+    let orderProduct = {};
+    for (i = 0; i < memberOrder.length; i++) {
+      orderProduct[memberOrder[i].id] = [];
+      let orderItems = await connection.queryAsync(
+        "SELECT order_product.* , product.name AS product_name FROM  order_product JOIN product ON order_product.product_id = product.id WHERE order_id=?",
+        [memberOrder[i].id]
+      );
+      // orderItems.push(orderCourse[0]);
+      for (let j = 0; j < orderItems.length; j++) {
+        orderProduct[memberOrder[i].id].push(orderItems[j]);
+      }
+    }
+
+    let result = {
+      orders: memberOrder,
+      orderCourse: orderCourse,
+      orderProduct: orderProduct,
+    };
+    res.json(result);
+  } catch (e) {
+    console.log("購買紀錄錯誤", e);
+  }
+});
 module.exports = router;

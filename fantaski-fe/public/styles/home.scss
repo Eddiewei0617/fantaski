@@ -243,9 +243,7 @@
           overflow: hidden;
           color: #a5a4a4;
           line-height: 2;
-          // text-align: justify;
-          // text-overflow: ellipsis;
-          // white-space: nowrap;
+          text-align: justify;
         }
 
         .home-share-under {
@@ -254,14 +252,10 @@
           align-items: flex-end;
           list-style: none;
           margin-top: 10%;
-          // .home-hashtag li {
-          //   color: $main-blue;
-          //   margin-bottom: 5px;
-          //   font-size: 14px;
-          // }
-          .home-hashtag {
-            width: 100px;
-            height: 10px;
+          .home-hashtag li {
+            color: $main-blue;
+            margin-bottom: 5px;
+            font-size: 14px;
           }
           .home-share-user {
             display: flex;
@@ -409,9 +403,6 @@
 }
 // =====================================
 // home-rent
-.home-rent-area {
-  overflow: hidden;
-}
 .home-rent-button {
   width: 100%;
   margin: 0 auto;
@@ -565,10 +556,6 @@
     margin-bottom: 2%;
     .home-post-kind {
       color: #6b6b6b;
-      .home-forum-time {
-        font-size: 14px;
-        margin: 0 10px;
-      }
     }
   }
   .home-post-content h2 {

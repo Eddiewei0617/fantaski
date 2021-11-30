@@ -15,7 +15,7 @@ function MemberComment(props) {
   }
   return (
     <div>
-      <MemberList />
+      <MemberList page={5} />
       <CommentsInMember setShowCourse={setShowCourse} userInfo={userInfo} />
     </div>
   );
