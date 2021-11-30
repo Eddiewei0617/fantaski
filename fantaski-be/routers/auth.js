@@ -3,7 +3,8 @@ const router = express.Router();
 const connection = require("../utils/db");
 const path = require("path");
 const bcrypt = require("bcrypt");
-
+const passport = require("passport");
+require("./auth-google");
 //驗證註冊資料
 const { body, validationResult } = require("express-validator");
 const registerRules = [
@@ -95,5 +96,33 @@ router.get("/userInfo", async (req, res) => {
     res.json({ code: 1201, message: "尚未登入" });
   }
 });
+
+// google登入
+function isLoggedIn(req, res, next) {
+  req.user ? next() : res.sendStatus(401);
+  //   console.log("req.user", req.user);
+}
+// router.get(
+//   "/google",
+//   passport.authenticate("google", { scope: ["email", "profile"] }),
+//   async (req, res) => {
+//     console.log("connect to backend");
+//     console.log("req.user", req.user);
+//     res.json(req.user);
+//   }
+// );
+// router.get(
+//   "/callback",
+//   passport.authenticate("google", {
+//     successRedirect: "/api/auth/protected",
+//     failureRedirect: "/api/auth/failure",
+//   })
+// );
+// router.get("/failure", (req, res) => {
+//   res.send("something went wrong...");
+// });
+// router.get("/protected", isLoggedIn, (req, res) => {
+//   res.send("Hello!");
+// });
 
 module.exports = router;

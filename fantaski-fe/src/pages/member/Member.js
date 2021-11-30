@@ -13,7 +13,7 @@ function Member({ setShowCourse, setItemNumber }) {
   // console.log(details && details.member[0].name);
   useEffect(async () => {
     let res = await axios.get(`${API_URL}/member/memberInfo`);
-    console.log(res.data);
+    // console.log(res.data);
     if (res.data.length > 0) {
       setMember(res.data);
     }

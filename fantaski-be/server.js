@@ -1,9 +1,15 @@
 const express = require("express");
+const session = require("express-session");
 const path = require("path");
 require("dotenv").config();
 const cors = require("cors");
+const passport = require("passport");
+require("../fantaski-be/routers/auth-google");
 
 let app = express();
+app.use(session({ secret: "cats" }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 //開放前端權限
 app.use(
@@ -12,6 +18,11 @@ app.use(
     credentials: true,
   })
 );
+
+function isLoggedIn(req, res, next) {
+  req.user ? next() : res.sendStatus(401);
+  // console.log("req.user", req.user);
+}
 
 // 設定session存取
 const expressSession = require("express-session");
@@ -37,8 +48,31 @@ app.use((req, res, next) => {
   next();
 });
 app.get("/", (req, res) => {
-  res.send("這裡是server你好");
+  res.send('<a href="/auth/google">這裡是server你好</a>');
 });
+// google登入--------------------------------------------------
+app.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["email", "profile"] })
+);
+app.get(
+  "/api/auth/callback",
+  // "localhost:3000",
+  passport.authenticate("google", {
+    successRedirect: "/protected",
+    // successRedirect: "/auth/protected",
+    failureRedirect: "/auth/failure",
+  })
+);
+app.get("/auth/failure", (req, res) => {
+  res.send("something went wrong...");
+});
+app.get("/protected", isLoggedIn, (req, res) => {
+  res.send("Hello!");
+  console.log("req.user", req.user);
+  // console.log("4564res", res);
+});
+// google登入--------------------------------------------------
 
 //取得前端傳回json body的資料 (必寫，且須寫在前面，由上到下的順序很重要)
 app.use(express.urlencoded({ extended: true }));
