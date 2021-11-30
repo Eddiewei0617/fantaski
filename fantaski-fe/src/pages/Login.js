@@ -8,7 +8,6 @@ import OverImg from "../components/login/OverImg";
 // icon
 import { FaUser, FaLock } from "react-icons/fa";
 import { HiMail } from "react-icons/hi";
-import { FcGoogle } from "react-icons/fc";
 
 // 後端
 import axios from "axios";
@@ -54,20 +53,6 @@ function Login(props) {
       console.log(e);
     }
   }
-  // google登入
-  useEffect(async () => {
-    try {
-      let res = await axios.get(`http://localhost:3001/auth/protected`, {
-        withCredentials: true,
-      });
-      console.log("google", res);
-    } catch (e) {
-      console.error(e);
-    }
-  }, []);
-  // async function loginByGoogle() {
-
-  // }
 
   return (
     <>
@@ -213,13 +198,9 @@ function Login(props) {
           <OverImg signUpBtn={signUpBtn} signInBtn={signInBtn} />
         </div>
         {/* container login-container end */}
-        <a href="http://localhost:3001/auth/google">
-          {/* <button onClick={loginByGoogle}> */} <FcGoogle />
-          {/* </button> */}
-        </a>
       </main>
     </>
   );
 }
 
-export default Login;
+export default withRouter(Login);
