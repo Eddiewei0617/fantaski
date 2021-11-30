@@ -130,6 +130,8 @@ function Navbar(props) {
   const cartPosition = useRef(null);
   setCartPositionState(cartPosition);
   // console.log("cartPosition", cartPosition);
+  console.log(cartPosition);
+
   return (
     <>
       {/* scroll 初始化 */}

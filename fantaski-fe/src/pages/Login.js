@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import "../App.css";
 import { useSpring, animated } from "react-spring";
 import axios from "axios";
 import { API_URL } from "../config/url";
 import { withRouter } from "react-router-dom";
+// import FBLogin from "../components/login/FBLogin";
 
 function Login(props) {
   const { setUserInfo } = props;
@@ -14,6 +15,7 @@ function Login(props) {
     password: "11241114",
     confirmPassword: "11241114",
   });
+
   const [loginInfo, setLoginInfo] = useState({
     email: "jessie@fantaski.com",
     password: "11241114",
@@ -45,6 +47,7 @@ function Login(props) {
   function loginClicked() {
     setRegistartionFormStatus(false);
   }
+
   //註冊呼叫api
   async function handleRegSubmit() {
     let res = await axios.post(`${API_URL}/auth/register`, registerInfo);
@@ -82,8 +85,10 @@ function Login(props) {
           註冊
         </animated.button>
       </div>
+      {/* <FBLogin /> */}
       <div onClick={handleRegSubmit}>註冊</div>
       <div onClick={handleLoginSubmit}>登入</div>
+
       <div className="form-group">
         <animated.form action="" id="loginform" style={loginProps}>
           <LoginForm />

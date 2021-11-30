@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import Calendar from "../calendar/Calendar";
 import { COURSE_IMG_URL } from "../../../config/url";
 import { getCourseInfo, handleAddNumber } from "../moduleList";
+import { element } from "prop-types";
 
 function AddCartFix({
   showCourse,
@@ -12,9 +13,12 @@ function AddCartFix({
   ifAddCart,
   setIfAddCart,
   setItemNumber,
+  cartPositionState,
 }) {
   const [showCalendar, setShowCalendar] = useState(false);
   const [courseInfo, setCourseInfo] = useState(null);
+  const FlyToCart = useRef();
+
   //檢查日期用
   var regDate = /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
   var regExp = new RegExp(regDate);
@@ -46,7 +50,6 @@ function AddCartFix({
       //如果課程已加入購物車，萬年曆人數要減相應人數
       let addCartDate = storage[`c-${courseInfo[0].id}`].split("|")[4];
       let addCartAmount = storage[`c-${courseInfo[0].id}`].split("|")[5];
-      console.log(addCartDate, addCartAmount);
       setCustomerChoose((cur) => {
         return {
           ...cur,
@@ -63,6 +66,28 @@ function AddCartFix({
     storage["addItemList"] = "";
   }
 
+  function handleFlyToCart(e) {
+    FlyToCart.current.style.top = `${
+      e.clientY - FlyToCart.current.clientHeight / 2
+    }px`;
+    FlyToCart.current.style.left = `${
+      e.clientX - FlyToCart.current.clientWidth / 2
+    }px`;
+    let cartX =
+      cartPositionState.current.offsetLeft +
+      cartPositionState.current.clientWidth / 2;
+    let cartY =
+      cartPositionState.current.offsetTop +
+      cartPositionState.current.clientHeight / 2;
+    setTimeout(() => {
+      FlyToCart.current.style.top = `${cartY}px`;
+      FlyToCart.current.style.left = `${cartX}px`;
+      FlyToCart.current.style.width = "10px";
+      FlyToCart.current.style.height = "10px";
+      FlyToCart.current.style.opacity = "0";
+    }, 0);
+  }
+
   if (courseInfo === null) {
     return (
       <>
@@ -73,6 +98,7 @@ function AddCartFix({
 
   return (
     <>
+      <div className="fly-to-cart" ref={FlyToCart}></div>
       <div className="add-cart-fix-wrapper">
         <div className="decoration-skill">
           <img
@@ -162,6 +188,8 @@ function AddCartFix({
                   alert("日期格式不正確，正確格式為：YYYY-MM-DD");
                   return;
                 } else {
+                  handleFlyToCart(e);
+
                   setIfAddCart(true);
                   let productInfo = e.currentTarget.children[0].value;
                   // console.log("value", productInfo); //http://localhost:3000/assets/images_product/allblack.jfif|雪板類|暗黑滿點單板|1200
