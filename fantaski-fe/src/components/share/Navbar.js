@@ -120,9 +120,8 @@ function Navbar(props) {
       let res = await axios.get(`${API_URL}/auth/logout`, {
         withCredentials: true,
       });
-      if (res.data.code === 1201) {
+      if (res.data.code == 1201) {
         setUserInfo(res.data);
-        console.log(res.data);
       }
     } catch (e) {
       console.log(e);
