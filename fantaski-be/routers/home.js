@@ -81,9 +81,9 @@ router.get("/indexrent", async (req, res) => {
             p.image,
             p.price,
             cp.name,
-            (CASE   WHEN p.category_id IN (1, 2) THEN '雪板類'
-                    WHEN p.category_id IN (3, 4, 5, 6) THEN '服飾類'
-                    WHEN p.category_id IN (7, 8) THEN '裝備類' END) AS 'type'
+            (CASE WHEN p.category_id BETWEEN 1 AND 2 THEN '雪板類'
+                  WHEN p.category_id BETWEEN 3 AND 6 THEN '服飾類'
+                  WHEN p.category_id BETWEEN 7 AND 8 THEN '裝備類' END) AS 'type'
     FROM product p
     JOIN category_product cp
     ON p.category_id = cp.id
@@ -124,7 +124,7 @@ router.get("/indexforumhot", async (req, res) => {
   try {
     let indexForumHot = await connection.queryAsync(`
     SELECT  f.id,
-	        f.category_id,
+	          f.category_id,
             f.subject,
             f.content,
             DATE_FORMAT(f.created_at,'%Y-%m-%d %H:%i:%s') AS created_at,

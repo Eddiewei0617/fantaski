@@ -149,8 +149,8 @@ function Navbar(props) {
               <Link className="navbar-brand" to="/">
                 <img
                   src={`${IMAGE_SHARE_URL}/fantaski_logo_white.svg`}
-                  width="70"
-                  height="70"
+                  width="65"
+                  height="65"
                   alt="FantaskiLogo"
                   className={`logo-img ${
                     colorButton === "FANTASKI" && "active"
