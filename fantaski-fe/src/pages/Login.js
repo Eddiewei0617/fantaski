@@ -63,6 +63,7 @@ function Login(props) {
             isContainerActive ? "right-panel-active" : ""
           }`}
         >
+          {/* 登入 */}
           <div
             className={`form-container ${
               isContainerActive ? "sign-in-container" : "sign-up-container"
@@ -110,7 +111,6 @@ function Login(props) {
               </button>
             </div>
           </div>
-          {/* 登入 */}
 
           {/* form-container sign-up-container end */}
           {/* 註冊 */}
