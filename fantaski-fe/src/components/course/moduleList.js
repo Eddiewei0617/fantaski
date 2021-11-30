@@ -9,7 +9,7 @@ export const courseIdName = {
   },
   技能班: { id: 2, eng: "skill" },
   雪橇車: { id: 3, eng: "sled" },
-  建冰屋: { id: 4, eng: "igloo" },
+  建冰屋: { id: 5, eng: "igloo" },
 };
 
 //https://openweathermap.org/weather-conditions 對照表
@@ -119,7 +119,7 @@ export async function getDailyCourseLeft(
   let dailyLeftObj = {};
   let leftArray = dailyCourseLeft["dailyLeft"];
   for (let i = 0; i < leftArray.length; i++) {
-    let date = moment.utc(leftArray[i]["booking_date"]).format("YYYY-MM-DD");
+    let date = moment(leftArray[i]["booking_date"]).format("YYYY-MM-DD");
     dailyLeftObj[date] = leftArray[i]["totalAmount"];
   }
   if (setDailyCourseLeft !== null) {
@@ -135,6 +135,7 @@ export async function getWeatherInfo(setWeatherInfo) {
   let res = await axios.get(`${API_URL}/weather`);
   let resWeather = res.data.data;
   setWeatherInfo(resWeather);
+  console.log(resWeather);
 }
 
 // 抓到storage裡面有幾樣商品的字串後，用split將字串轉成陣列就能顯示出有幾個了

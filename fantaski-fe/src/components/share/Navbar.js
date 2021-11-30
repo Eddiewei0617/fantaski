@@ -120,9 +120,8 @@ function Navbar(props) {
       let res = await axios.get(`${API_URL}/auth/logout`, {
         withCredentials: true,
       });
-      if (res.data.code === 1201) {
+      if (res.data.code == 1201) {
         setUserInfo(res.data);
-        console.log(res.data);
       }
     } catch (e) {
       console.log(e);
@@ -149,8 +148,8 @@ function Navbar(props) {
               <Link className="navbar-brand" to="/">
                 <img
                   src={`${IMAGE_SHARE_URL}/fantaski_logo_white.svg`}
-                  width="70"
-                  height="70"
+                  width="65"
+                  height="65"
                   alt="FantaskiLogo"
                   className={`logo-img ${
                     colorButton === "FANTASKI" && "active"

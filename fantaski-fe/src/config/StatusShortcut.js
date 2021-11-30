@@ -38,3 +38,10 @@ export const FORUM_CATEGORY = {
   2: "課程分享",
   3: "裝備經驗",
 };
+
+// 首頁文章類別
+export const FORUM_STATUS_WORD = {
+  1: "滑雪經驗",
+  2: "課程分享",
+  3: "裝備體驗",
+};
