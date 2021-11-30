@@ -1,9 +1,17 @@
 const express = require("express");
+const session = require("express-session");
 const path = require("path");
 require("dotenv").config();
 const cors = require("cors");
+const passport = require("passport");
+require("../fantaski-be/routers/auth-google");
+const connection = require("./utils/db");
 
+// google登入需要的
 let app = express();
+app.use(session({ secret: "cats" }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 //開放前端權限
 app.use(
@@ -12,6 +20,12 @@ app.use(
     credentials: true,
   })
 );
+
+// google登入 - 判斷有沒有登入成功中間鍵
+function isLoggedIn(req, res, next) {
+  req.user ? next() : res.sendStatus(401);
+  // console.log("req.user", req.user);
+}
 
 // 設定session存取
 const expressSession = require("express-session");
@@ -33,12 +47,48 @@ app.use("/public", express.static("public"));
 //追朔訪問紀錄
 app.use((req, res, next) => {
   let current = new Date();
-  console.log(`有人來訪問at ${current.toISOString()}`);
+  // console.log(`有人來訪問at ${current.toISOString()}`);
   next();
 });
 app.get("/", (req, res) => {
-  res.send("這裡是server你好");
+  res.send('<a href="/auth/google">這裡是server你好</a>');
 });
+
+// google登入--------------------------------------------------
+app.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["email", "profile"] })
+);
+// 點下google帳號登入時會呼叫的頁面
+app.get(
+  "/api/auth/callback",
+  // "http://localhost:3000",
+  passport.authenticate("google", {
+    // successRedirect: "http://localhost:3000",
+    successRedirect: "/auth/protected",
+    failureRedirect: "/auth/failure",
+  })
+);
+// 成功的話...
+app.get("/auth/protected", isLoggedIn, async (req, res) => {
+  try {
+    let googleInsert = await connection.queryAsync(
+      "INSERT INTO member (name, email,image, level_id, valid) VALUES (?,?,?,?,?)",
+      [req.user.given_name, req.user.email, req.user.photos[0].value, 1, 1]
+    );
+    res.location("http://localhost:3000"); // 登入後跳轉回首頁
+    res.statusCode = 301; // 配合跳轉頁面一定要加的
+    res.json({ membername: req.user.given_name });
+    // console.log("req.user", req.user.given_name);
+  } catch (e) {
+    res.json({ code: 9999, message: "資料庫讀取錯誤" });
+  }
+});
+// 失敗的話...
+app.get("/auth/failure", (req, res) => {
+  res.send("something went wrong...");
+});
+// google登入--------------------------------------------------
 
 //取得前端傳回json body的資料 (必寫，且須寫在前面，由上到下的順序很重要)
 app.use(express.urlencoded({ extended: true }));

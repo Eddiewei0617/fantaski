@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import { withRouter } from "react-router-dom";
 // 組件
 import ThreePartyLink from "../components/login/ThreePartyLink";
 import OverImg from "../components/login/OverImg";
@@ -203,4 +203,4 @@ function Login(props) {
   );
 }
 
-export default Login;
+export default withRouter(Login);

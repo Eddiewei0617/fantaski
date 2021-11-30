@@ -7,7 +7,7 @@ import { CATEGORY_WORD } from "../../config/StatusShortcut";
 import { Button } from "react-bootstrap";
 
 import MemberList from "../../components/member/MemberList";
-function MemberCollect({ setItemNumber, memberInfo }) {
+function MemberCollect({ setItemNumber, memberInfo, userInfo }) {
   let storage = localStorage;
   // 抓到storage裡面有幾樣商品的字串後，用split將字串轉成陣列就能顯示出有幾個了
   function handleAddNumber() {
@@ -30,20 +30,22 @@ function MemberCollect({ setItemNumber, memberInfo }) {
   // 請後端拿資料庫product JOIN produtc_collection的資料
   const [memberCollectList, setMemberCollectList] = useState([]);
   useEffect(async () => {
-    let res = await axios.post(`${API_URL}/member/membercollection`, {
-      memberId: 1,
+    let res = await axios.get(`${API_URL}/member/membercollection`, {
+      withCredentials: true,
     });
     setMemberCollectList(res.data);
-    // console.log("mem", res);
   }, [forRefresh]);
 
   // 點擊取消收藏後，傳回後端刪除資料表資料
   async function handleCancelCollection(v) {
     try {
-      let res = await axios.post(`${API_URL}/products/cancelcollection`, {
-        memberId: memberInfo[0].id,
-        productId: v.id,
-      });
+      let res = await axios.post(
+        `${API_URL}/products/cancelcollection`,
+        {
+          productId: v.id,
+        },
+        { withCredentials: true }
+      );
       // console.log("product", v.id);
     } catch (err) {
       console.error("資料傳送錯誤", err);
@@ -129,14 +131,6 @@ function MemberCollect({ setItemNumber, memberInfo }) {
       </table>
     </>
   );
-  {
-    /* <div>
-      <MemberList />
-      <div className="text-center">
-        <h1>我的收藏</h1>
-      </div>
-    </div> */
-  }
 }
 
 export default MemberCollect;

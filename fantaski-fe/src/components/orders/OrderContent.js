@@ -1,15 +1,14 @@
-import { useState, useEffect, useRef } from "react";
-import { CART_CATEGORY } from "../../config/StatusShortcut";
-import axios from "axios";
+import { useState, useEffect } from "react";
+
 function OrderContent({
   customerChoose,
-  setCustomerChoose,
   step,
   memberPoints,
-  setMemberPoints,
   pointUsed,
   setPointUsed,
   itemNumber,
+  setMemberNumber,
+  userInfo,
 }) {
   const [points, setPoints] = useState("---");
 
@@ -22,32 +21,57 @@ function OrderContent({
   const [coursePrice, setCoursePrice] = useState(0);
 
   useEffect(() => {
-    let courseTotal = 0;
-    for (let i = 0; i < items.length; i++) {
-      let singlePrice = storage[items[i]].split("|")[3];
-      let singleNumber = storage[items[i]].split("|")[5];
-      if (storage[items[i]].split("|")[1] === "A") {
-        courseTotal += singlePrice * singleNumber;
+    if (itemNumber !== 0) {
+      let courseTotal = 0;
+      for (let i = 0; i < items.length; i++) {
+        let singlePrice = storage[items[i]].split("|")[3];
+        let singleNumber = storage[items[i]].split("|")[5];
+        if (storage[items[i]].split("|")[1] === "A") {
+          courseTotal += singlePrice * singleNumber;
+        }
       }
-    }
-    setCoursePrice(courseTotal);
+      setCoursePrice(courseTotal);
 
-    let productTotal = 0;
-    for (let j = 0; j < items.length; j++) {
-      let singlePrice = storage[items[j]].split("|")[3];
-      let singleNumber = storage[items[j]].split("|")[5];
-      if (storage[items[j]].split("|")[1] === "B") {
-        productTotal += singlePrice * singleNumber;
+      let productTotal = 0;
+      for (let j = 0; j < items.length; j++) {
+        let singlePrice = storage[items[j]].split("|")[3];
+        let singleNumber = storage[items[j]].split("|")[5];
+        if (storage[items[j]].split("|")[1] === "B") {
+          productTotal += singlePrice * singleNumber;
+        }
       }
+      setProductPrice(productTotal);
     }
-    setProductPrice(productTotal);
   }, [customerChoose, itemNumber]);
 
+  // 希望換到不同階段時，下方使用點數還繼續顯示著
   useEffect(() => {
-    if (memberPoints !== null) {
+    if (memberPoints === null || !!storage[`${memberPoints}`]) {
+      setPointUsed(0);
+    } else {
       setPointUsed(storage[`${memberPoints[0].name}`]);
     }
   }, [step]);
+  // console.log("564", !!storage[`${memberPoints}`]);
+
+  // 非會員進入購物車時，不能顯示會員點數，也不能使用點數
+  useEffect(() => {
+    if (memberPoints === null) {
+      setPoints(`---`);
+      // console.log("test", memberPoints);
+    }
+  }, []);
+
+  // 因為非同步的關係，第一次接收到的memberPoints是null，所以要設一個判斷式，判斷現在是不是null
+  // 且如果這兩個條件同時符合才會進到這個判斷式裡面 (因為userInfo 和 memberpoints 會抓兩次，第一次是null 第二次是{code:1201, xxxx})
+  useEffect(() => {
+    if (memberPoints !== null && userInfo.code !== 1201) {
+      points === "---"
+        ? setPoints(memberPoints ? memberPoints[0].point : "---")
+        : setPoints(`---`);
+      // console.log("test2", memberPoints);
+    }
+  }, [memberPoints]);
 
   return (
     <>
@@ -69,9 +93,7 @@ function OrderContent({
                     <button
                       className="btn btn-primary"
                       onClick={() => {
-                        `${points}` === "---"
-                          ? setPoints(`${memberPoints[0].point}`)
-                          : setPoints(`---`);
+                        setMemberNumber(Math.random());
                       }}
                     >
                       顯示會員點數
@@ -91,8 +113,15 @@ function OrderContent({
                       placeholder={`${0}  點`}
                       value={pointUsed}
                       onChange={(e) => {
-                        storage.setItem(memberPoints[0].name, e.target.value);
-                        setPointUsed(e.target.value);
+                        if (memberPoints !== null) {
+                          storage.setItem(
+                            memberPoints ? memberPoints[0].name : 0,
+                            e.target.value
+                          );
+                          setPointUsed(e.target.value);
+                        } else {
+                          setPointUsed(0);
+                        }
                       }}
                       className="p-0"
                       min="0"

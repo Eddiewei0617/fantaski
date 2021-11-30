@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { ORDERIMAGE_URL } from "../../config/url";
 import { AiFillPicture } from "react-icons/ai";
 import { BsFillPencilFill } from "react-icons/bs";
@@ -67,7 +68,13 @@ function MemberContent({
   // if (memberContent === null) {
   //   return <></>;
   // }
-  console.log(memberContent.memberbirthday);
+  // console.log(memberContent.memberbirthday);
+
+  // google登入
+  async function loginByGoogle() {
+    let res = await axios.get(`http://localhost:3001/auth/google`);
+    console.log("google", res);
+  }
   return (
     <>
       <div>
@@ -149,7 +156,9 @@ function MemberContent({
                   </div>
                   <div className="col-3 d-flex align-items-center">
                     {" "}
-                    <a href="">前往連結帳號</a>
+                    <a href="http://localhost:3001/auth/google">
+                      <button onClick={loginByGoogle}>前往連結帳號</button>
+                    </a>
                   </div>
                   <div className="memberContentBorderBotton"></div>
                 </div>

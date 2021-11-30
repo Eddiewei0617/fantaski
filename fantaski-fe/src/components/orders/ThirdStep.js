@@ -8,6 +8,7 @@ function ThirdStep({
   setStep,
   scrollToTop,
   progressAnimation,
+  userInfo,
 }) {
   return (
     <>
@@ -19,6 +20,7 @@ function ThirdStep({
         setStep={setStep}
         scrollToTop={scrollToTop}
         progressAnimation={progressAnimation}
+        userInfo={userInfo}
       />
     </>
   );
