@@ -14,11 +14,12 @@ function Member() {
 
   // console.log(details && details.member[0].name);
   useEffect(async () => {
-    let res = await axios.get(`${API_URL}/member/memberInfo`);
+    let res = await axios.get(`${API_URL}/member/memberInfo`, {
+      withCredentials: true,
+    });
     console.log(res.data);
-    if (res.data.length > 0) {
-      setMember(res.data);
-    }
+
+    setMember(res.data);
   }, []);
   function toggleModal() {
     setshowmodal(!showmodal);
