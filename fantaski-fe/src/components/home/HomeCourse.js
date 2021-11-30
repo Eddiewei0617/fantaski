@@ -1,29 +1,56 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import HomeCourseMore from "./homeCourse/HomeCourseMore";
 import HomeTitle from "./HomeTitle";
-// import { IMAGE_HOME_URL } from "../../config/url";
-import { HomeCourseList } from "./asCoruseDB";
-
-import axios from "axios";
-import { API_URL } from "../../config/url";
+import { IMAGE_HOME_URL } from "../../config/url";
+const homeCourseFromServer = [
+  {
+    id: 1,
+    image: `${IMAGE_HOME_URL}/home_course01.jpg`,
+    title: "初級課程",
+    details: [
+      "基本滑雪動作(落葉飄1)",
+      "滑雪相關知識",
+      "冰屋體驗(適合年齡：8歲以上)",
+    ],
+    routeCate: "綠線",
+    routeColor: "#559360",
+    price: 2000,
+    replyNum: 30,
+    stu_limit: 4,
+    href: "beginner",
+  },
+  {
+    id: 2,
+    image: `${IMAGE_HOME_URL}/home_course03.jpg`,
+    title: "技能課程",
+    details: [
+      "滑雪進階動作",
+      "carving 、 J-turn 、 S-turn、 平地花式 、 Park(箱⼦ 、 管⼦)",
+    ],
+    routeCate: "紅線",
+    routeColor: "#F50505",
+    price: 4000,
+    replyNum: 10,
+    stu_limit: 14,
+    href: "skill",
+  },
+  {
+    id: 3,
+    image: `${IMAGE_HOME_URL}/home_course02.jpg`,
+    title: "體驗課程",
+    details: ["聖誕⽼⼈與⿅", "雪地摩托⾞"],
+    routeCate: "黑線",
+    routeColor: "#000",
+    price: 6000,
+    replyNum: 20,
+    stu_limit: 6,
+    href: "sled",
+  },
+];
 
 function HomeCourse(props) {
-  // 接後端資料顯示於頁面上
-  const [indexCourseDetail, setIndexCourseDetail] = useState([]);
-  const [indexCourseList, setIndexCoureList] = useState(HomeCourseList);
-
-  useEffect(async () => {
-    let res = await axios.get(`${API_URL}/home/idxcoursepricerateremain`);
-    setIndexCourseDetail(res.data);
-    for (let i = 0; i < res.data.length; i++) {
-      indexCourseList[i]["name"] = res.data[i]["name"];
-      indexCourseList[i]["price"] = res.data[i]["price"];
-      indexCourseList[i]["averageRate"] = res.data[i]["averageRate"];
-      indexCourseList[i]["signupRemainToday"] =
-        res.data[i]["signupRemainToday"];
-    }
-  }, []);
+  const [indexCourse, setIndexCourse] = useState(homeCourseFromServer);
 
   const mainTitle = {
     title: "多元課程",
@@ -38,7 +65,7 @@ function HomeCourse(props) {
 
           {/* {courseDetail} */}
           <div className="home-course-area">
-            {indexCourseList.map((v, i) => {
+            {indexCourse.map((v, i) => {
               return (
                 <>
                   <div className="home-course-bg" key={v.i}>
@@ -47,7 +74,7 @@ function HomeCourse(props) {
                     </div>
                     {/* home-course-img end */}
                     <div className="home-course-name">
-                      <h3>{v.name}</h3>
+                      <h3>{v.title}</h3>
                     </div>
                     <div className="home-course-detail-area">
                       <div className="home-course-list">
@@ -68,8 +95,8 @@ function HomeCourse(props) {
                       {/* home-area-price end */}
                       <hr />
                       <HomeCourseMore
-                        averageRate={v.averageRate}
-                        signupRemainToday={v.signupRemainToday}
+                        replyNum={v.replyNum}
+                        stu_limit={v.stu_limit}
                         href={v.href}
                       />
                     </div>
