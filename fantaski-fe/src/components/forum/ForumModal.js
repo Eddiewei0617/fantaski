@@ -15,6 +15,7 @@ import {
 } from "./moduleList";
 import moment from "moment";
 import { post } from "jquery";
+import Swal from "sweetalert2";
 
 // 需做登入狀態判斷，是該帳號登入時，會顯示 threeDot
 
@@ -47,7 +48,8 @@ function ForumModal({
 
   function handleHeartToggle() {
     if (userInfo.code === 1201) {
-      alert("請先登入");
+      // alert("請先登入");
+      Swal.fire("請先登入");
     } else {
       //讓post的愛心數re-render
       whichPostToShow[0].heart = ifLike

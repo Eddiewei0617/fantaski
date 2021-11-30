@@ -1,5 +1,5 @@
 import React from "react";
-import { IMAGE_ROUTER_URL } from "../../config/url";
+// import { IMAGE_ROUTER_URL } from "../../config/url";
 import { PRODUCTIMAGE_URL } from "../../config/url";
 function ProductRent() {
   return (
@@ -15,40 +15,40 @@ function ProductRent() {
                 <div className="image_title text-white">
                   <a>超流行滑雪外套</a>
                 </div>
-                <a>
-                  <img src={`${PRODUCTIMAGE_URL}/snowJacket.jpg`} />{" "}
-                </a>
+                <div>
+                  <img src={`${PRODUCTIMAGE_URL}/skifamily.png`} alt="" />{" "}
+                </div>
               </li>
               <li>
                 <div className="image_title text-white">
                   <a>時尚酷雪板</a>
                 </div>
-                <a>
-                  <img src={`${PRODUCTIMAGE_URL}/pexels-pixabay-257961.jpg`} />{" "}
-                </a>
+                <div>
+                  <img src={`${PRODUCTIMAGE_URL}/products.jpg`} alt="" />{" "}
+                </div>
               </li>
               <li>
                 <div className="image_title text-white">
                   <a>托米諾黃蜂極地摩托車</a>
                 </div>
-                <a>
-                  <img src={`${PRODUCTIMAGE_URL}/snowmobile2.jpg`} />{" "}
-                </a>
+                <div>
+                  <img src={`${PRODUCTIMAGE_URL}/snowmobile2.jpg`} alt="" />{" "}
+                </div>
               </li>
               <li>
                 <div className="image_title text-white">
                   <a>超防滑舒適雪鞋</a>
                 </div>
-                <a>
-                  <img src={`${PRODUCTIMAGE_URL}/snowShoes1.jpg`} />{" "}
+                <a href="/#">
+                  <img src={`${PRODUCTIMAGE_URL}/snowShoes1.jpg`} alt="" />{" "}
                 </a>
               </li>
               <li>
                 <div className="image_title text-white">
                   <a>炫彩護目鏡</a>
                 </div>
-                <a>
-                  <img src={`${PRODUCTIMAGE_URL}/smooth.jpg`} />
+                <a href="/#">
+                  <img src={`${PRODUCTIMAGE_URL}/smooth.jpg`} alt="" />
                 </a>
               </li>
             </ul>

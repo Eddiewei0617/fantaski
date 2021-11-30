@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { ParallaxProvider } from "react-scroll-parallax";
 import axios from "axios";
 import { getWeatherInfo } from "../course/moduleList";
-
 // icon
 import {
   BsFillCartFill,
@@ -15,9 +14,17 @@ import {
   BsSnow2,
   BsWind,
 } from "react-icons/bs";
-import { FaUserAlt, FaCloudSunRain } from "react-icons/fa";
-
+import { FaUserAlt, FaCloudSunRain, FaSignOutAlt } from "react-icons/fa";
 import $ from "jquery";
+
+import Swal from "sweetalert2";
+const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: "btn btn-success",
+    cancelButton: "btn btn-danger",
+  },
+  buttonsStyling: false,
+});
 
 function Navbar(props) {
   const {
@@ -69,7 +76,7 @@ function Navbar(props) {
     // getWeatherInfo(setWeatherInfo);
     //用哪個天氣小圖
     decideWeatherIcon();
-  }, []);
+  }, [weatherInfo]);
   // 決定要用哪個天氣小圖
   function decideWeatherIcon() {
     let weatherIconTag;
@@ -150,8 +157,8 @@ function Navbar(props) {
               <Link className="navbar-brand" to="/">
                 <img
                   src={`${IMAGE_SHARE_URL}/fantaski_logo_white.svg`}
-                  width="70"
-                  height="70"
+                  width="65"
+                  height="65"
                   alt="FantaskiLogo"
                   className={`logo-img ${
                     colorButton === "FANTASKI" && "active"
@@ -294,9 +301,29 @@ function Navbar(props) {
                       handleClick(e);
                       if (userInfo && userInfo.code !== 1201) {
                         e.preventDefault();
-                        if (window.confirm("要登出嗎？")) {
-                          handleLogout();
-                        }
+                        swalWithBootstrapButtons
+                          .fire({
+                            title: "執行登出",
+                            text: "是否確定登出？",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonText: "刪除",
+                            cancelButtonText: "取消",
+                            reverseButtons: true,
+                          })
+                          .then(async (result) => {
+                            if (result.isConfirmed) {
+                              await handleLogout();
+                              swalWithBootstrapButtons.fire(
+                                "Logout!",
+                                "登出成功！",
+                                "success"
+                              );
+                            }
+                          });
+                        // if (window.confirm("要登出嗎？")) {
+                        //   handleLogout();
+                        // }
                       }
                     }}
                   >
@@ -305,8 +332,15 @@ function Navbar(props) {
                       {userInfo && userInfo.code === 1201
                         ? "登入/註冊"
                         : userInfo &&
-                          userInfo.code !== 1201 &&
-                          `Hi ${userInfo.name}`}
+                          userInfo.code !== 1201 && (
+                            <>
+                              <span>{`Hi ${userInfo.name}`}</span>
+                              <FaSignOutAlt
+                                className="all-icon-nav m-1"
+                                size={20}
+                              />
+                            </>
+                          )}
                     </span>
                   </Link>
                 </li>

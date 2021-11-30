@@ -47,6 +47,7 @@ router.post("/register", registerRules, async (req, res) => {
 
 //登入api
 router.post("/login", async (req, res) => {
+  console.log("有人來登入");
   try {
     let member = await connection.queryAsync(
       "SELECT * FROM member WHERE email = ?;",
@@ -70,6 +71,7 @@ router.post("/login", async (req, res) => {
     req.session.member = returnMember;
     res.json({ code: 0, message: "登入成功", member: returnMember });
   } catch (e) {
+    console.log(e);
     res.json({ code: 1109, message: "登入失敗" });
   }
 });

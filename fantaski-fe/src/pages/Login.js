@@ -1,134 +1,253 @@
-import React, { useState, useEffect } from "react";
-// import "../App.css";
-import { useSpring, animated } from "react-spring";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
+// 組件
+import ThreePartyLink from "../components/login/ThreePartyLink";
+import OverImg from "../components/login/OverImg";
+
+// icon
+import { FaUser, FaLock } from "react-icons/fa";
+import { HiMail } from "react-icons/hi";
+
+// 後端
 import axios from "axios";
 import { API_URL } from "../config/url";
 import { withRouter } from "react-router-dom";
-// import FBLogin from "../components/login/FBLogin";
 
 function Login(props) {
   const { setUserInfo } = props;
-  const [registrationFormStatus, setRegistartionFormStatus] = useState(false);
+
+  // 頁面切換程式
+  const [isContainerActive, setIsContainerActive] = useState(false);
+  const signUpBtn = () => {
+    setIsContainerActive(false);
+  };
+  const signInBtn = () => {
+    setIsContainerActive(true);
+  };
+
+  // 後端程式
   const [registerInfo, setRegisterInfo] = useState({
-    name: "jessie",
-    email: "jessie@fantaski.com",
-    password: "11241114",
-    confirmPassword: "11241114",
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
 
   const [loginInfo, setLoginInfo] = useState({
-    email: "jessie@fantaski.com",
-    password: "11241114",
+    email: "",
+    password: "",
   });
-
-  const loginProps = useSpring({
-    left: registrationFormStatus ? -500 : 0,
-    // Login form sliding positions
-  });
-  const registerProps = useSpring({
-    left: registrationFormStatus ? 0 : 500,
-    // Register form sliding positions
-  });
-
-  const loginBtnProps = useSpring({
-    borderBottom: registrationFormStatus
-      ? "solid 0px transparent"
-      : "solid 2px #1059FF", //Animate bottom border of login button
-  });
-  const registerBtnProps = useSpring({
-    borderBottom: registrationFormStatus
-      ? "solid 2px #1059FF"
-      : "solid 0px transparent", //Animate bottom border of register button
-  });
-
-  function registerClicked() {
-    setRegistartionFormStatus(true);
-  }
-  function loginClicked() {
-    setRegistartionFormStatus(false);
-  }
 
   //註冊呼叫api
-  async function handleRegSubmit() {
-    let res = await axios.post(`${API_URL}/auth/register`, registerInfo);
-  }
-  //登入呼叫api
-  async function handleLoginSubmit() {
+  async function handleRegSubmit(e) {
+    e.preventDefault();
     try {
-      let res = await axios.post(`${API_URL}/auth/login`, loginInfo, {
+      let resReg = await axios.post(`${API_URL}/auth/register`, registerInfo);
+      if (resReg.data.code == 0) {
+        alert("註冊成功");
+      }
+      let resLog = await axios.post(`${API_URL}/auth/login`, registerInfo, {
         withCredentials: true,
       });
-      setUserInfo(res.data.member);
+      setUserInfo(resLog.data.member);
       props.history.goBack();
     } catch (e) {
       console.log(e);
     }
   }
+  //登入呼叫api
+
+  async function handleLoginSubmit(e) {
+    e.preventDefault();
+    console.log("login");
+    try {
+      let res = await axios.post(`${API_URL}/auth/login`, loginInfo, {
+        withCredentials: true,
+      });
+      if (res.data.code == 1102) {
+        alert("帳號或密碼錯誤，請重新登入");
+      } else {
+        setUserInfo(res.data.member);
+        props.history.goBack();
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  //input輸入值onchange事件
+  //login
+  function handleLoginChange(e) {
+    let name = e.target.name;
+    let value = e.target.value;
+    setLoginInfo((cur) => {
+      return { ...cur, [name]: value };
+    });
+  }
+  //register
+  function handleRegisterChange(e) {
+    let name = e.target.name;
+    let value = e.target.value;
+    setRegisterInfo((cur) => {
+      return { ...cur, [name]: value };
+    });
+  }
 
   return (
-    <div className="login-register-wrapper">
-      <div className="nav-buttons">
-        <animated.button
-          className="login-button"
-          onClick={loginClicked}
-          id="loginBtn"
-          style={loginBtnProps}
+    <>
+      <main className="login-main">
+        <div
+          id="container"
+          className={`container login-container ${
+            isContainerActive ? "right-panel-active" : ""
+          }`}
         >
-          登入
-        </animated.button>
-        <animated.button
-          className="login-button"
-          onClick={registerClicked}
-          id="registerBtn"
-          style={registerBtnProps}
-        >
-          註冊
-        </animated.button>
-      </div>
-      {/* <FBLogin /> */}
-      <div onClick={handleRegSubmit}>註冊</div>
-      <div onClick={handleLoginSubmit}>登入</div>
+          {/* 登入 */}
+          <div
+            className={`form-container ${
+              isContainerActive ? "sign-in-container" : "sign-up-container"
+            }`}
+          >
+            <h2>登入</h2>
+            <div className="form-center-area">
+              {/* 第三方連結(fb & google) */}
+              <ThreePartyLink />
+              {/* three-party end */}
+              <div className="login-or">
+                <span>或</span>
+              </div>
+              <form className="form-sign-up" onSubmit={handleLoginSubmit}>
+                <div className="form-info">
+                  <FaUser className="form-info-icon" />
+                  <input
+                    type="mail"
+                    name="email"
+                    placeholder="帳號:"
+                    value={loginInfo.email}
+                    onChange={handleLoginChange}
+                    required
+                  />
+                </div>
+                <div className="form-info">
+                  <FaLock className="form-info-icon" />
+                  {/* 密碼長度最多 20 最少 8  可自行調整但登入/註冊要統一*/}
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="密碼:"
+                    value={loginInfo.password}
+                    onChange={handleLoginChange}
+                    maxlength="20"
+                    required
+                  />
+                </div>
+                <p className="login-small-text">
+                  當你使用FANTASKI | 代表你已同意<span>服務條款</span>與
+                  <span>隱私權政策</span>
+                </p>
+                <div className="im-hr"></div>
+                <div className="login-btn-area">
+                  <button type="submit" className="btn-sumbit">
+                    登入
+                  </button>
+                </div>
+              </form>
+            </div>
+            {/* form-center-area end */}
+          </div>
 
-      <div className="form-group">
-        <animated.form action="" id="loginform" style={loginProps}>
-          <LoginForm />
-        </animated.form>
-        <animated.form action="" id="registerform" style={registerProps}>
-          <RegisterForm />
-        </animated.form>
-      </div>
-      <animated.div className="forgot-panel" style={loginProps}>
-        {/* <a herf="#">忘記密碼了嗎?</a> */}
-      </animated.div>
-    </div>
-  );
-}
-
-function LoginForm() {
-  return (
-    <React.Fragment>
-      {/* <label for="username"></label> */}
-      <input type="text" value="帳號:" id="username" />
-      {/* <label for="password"></label> */}
-      <input type="text" value="密碼" id="password" />
-      <input type="submit" value="登入" className="submit" />
-    </React.Fragment>
-  );
-}
-
-function RegisterForm() {
-  return (
-    <React.Fragment>
-      {/* <label for="fullname"></label> */}
-      <input type="text" value="帳號:限(4-21碼小寫英文數字):" id="fullname" />
-      {/* <label for="email"></label> */}
-      <input type="text" value="信箱:" id="email" />
-      {/* <label for="password"></label> */}
-      <input type="text" value="密碼: 限(8-24碼英文數字符號):" id="password" />
-      {/* <label for="confirmpassword"></label> */}
-      <input type="text" value="再次輸入密碼: " id="confirmpassword" />
-      <input type="submit" value="註冊" class="submit" />
-    </React.Fragment>
+          {/* form-container sign-up-container end */}
+          {/* 註冊 */}
+          <div
+            className={`form-container ${
+              isContainerActive ? "log-in-container" : "log-up-container"
+            }`}
+          >
+            <h2>註冊</h2>
+            <div className="form-center-area">
+              {/* 第三方連結(fb & google) */}
+              <ThreePartyLink />
+              {/* three-party end */}
+              <div className="login-or">
+                <span>或</span>
+              </div>
+              <form className="form-sign-up" onSubmit={handleRegSubmit}>
+                <div className="form-info">
+                  <FaUser className="form-info-icon" />
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="帳號(限4-20碼小寫英文數字):"
+                    value={registerInfo.name}
+                    onChange={handleRegisterChange}
+                    minlength="4"
+                    maxlength="20"
+                    required
+                  />
+                </div>
+                <div className="form-info">
+                  <HiMail className="form-info-icon" />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="信箱:"
+                    value={registerInfo.email}
+                    onChange={handleRegisterChange}
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                    required
+                  />
+                </div>
+                <div className="form-info">
+                  <FaLock className="form-info-icon" />
+                  {/* 密碼長度最多 20 最少 8 可自行調整但登入/註冊要統一*/}
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="密碼(限8-20碼小寫英文數字符號):"
+                    value={registerInfo.password}
+                    onChange={handleRegisterChange}
+                    pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$"
+                    maxlength="20"
+                    required
+                  />
+                </div>
+                <div className="form-info">
+                  <FaLock className="form-info-icon" />
+                  {/* 密碼長度最多 20 最少 8 可自行調整但登入/註冊要統一*/}
+                  <input
+                    type="password"
+                    name="confirmPassword"
+                    placeholder="再次輸入密碼:"
+                    value={registerInfo.confirmPassword}
+                    onChange={handleRegisterChange}
+                    pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$"
+                    minlength="8"
+                    maxlength="20"
+                    required
+                  />
+                  {/*  */}
+                </div>
+                <Link className="sendmail-link">未收到驗證信</Link>
+                <p className="login-small-text">
+                  註冊即同意 | <span>服務條款</span>與<span>隱私權政策</span>
+                </p>
+                <div className="im-hr"></div>
+                <div className="login-btn-area">
+                  <button type="submit" className="btn-sumbit">
+                    註冊
+                  </button>
+                </div>
+              </form>
+            </div>
+            {/* form-center-area end */}
+          </div>
+          {/* form-container log-up-container end */}
+          {/* 頁面切換  */}
+          <OverImg signUpBtn={signUpBtn} signInBtn={signInBtn} />
+        </div>
+        {/* container login-container end */}
+      </main>
+    </>
   );
 }
 

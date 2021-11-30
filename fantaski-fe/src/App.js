@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { getUserInfo } from "./config/StatusShortcut";
 
 // 引入各分頁(後續寫程式可更動) 頁面用元件
@@ -91,6 +91,20 @@ function App() {
         {/* 匹配路由表(路徑單一匹配) */}
         {/* 切換顯示的元件畫面放在這下面 */}
         {/* ScrollToTop是為了讓連到另一頁內容時，頁面回到最上方 */}
+        {/* 暫時代替navbar <br /> */}
+        {/* <Link to="/Products">到產品</Link>&nbsp;
+        <Link to="/Orders">到訂單</Link>&nbsp;
+        <Link to="/course/commentsinmemer">我的點評</Link>&nbsp;
+        <Link
+          to="/course/beginner"
+          onClick={() => {
+            setShowCourse(courses[0]);
+          }}
+        >
+          到課程-初體驗
+        </Link> */}
+        &nbsp;
+        <Link to="/Member">到會員</Link>
         <ScrollToTop>
           <Switch>
             <Route path="/course/beginner">

@@ -58,7 +58,7 @@ function HomeRentCarousel({ active, productList }) {
       loopAdditionalSlides: 30,
       grabCursor: true, // 游標為手掌
       autoplay: {
-        delay: 2000,
+        delay: 1000,
         disableOnInteraction: false,
       },
     });
