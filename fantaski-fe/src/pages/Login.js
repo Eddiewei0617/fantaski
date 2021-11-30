@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import "../App.css";
 import { useSpring, animated } from "react-spring";
 import axios from "axios";
 import { API_URL } from "../config/url";
 import { withRouter } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+import { Link } from "react-router-dom";
 
 function Login(props) {
   const { setUserInfo } = props;
@@ -62,6 +64,21 @@ function Login(props) {
     }
   }
 
+  // google登入
+  useEffect(async () => {
+    try {
+      let res = await axios.get(`http://localhost:3001/auth/protected`, {
+        withCredentials: true,
+      });
+      console.log("google", res);
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
+  // async function loginByGoogle() {
+
+  // }
+
   return (
     <div className="login-register-wrapper">
       <div className="nav-buttons">
@@ -84,6 +101,13 @@ function Login(props) {
       </div>
       <div onClick={handleRegSubmit}>註冊</div>
       <div onClick={handleLoginSubmit}>登入</div>
+      {/* <div className="memberContentIcon border border-dark"> */}
+      <a href="http://localhost:3001/auth/google">
+        {/* <button onClick={loginByGoogle}> */} <FcGoogle />
+        {/* </button> */}
+      </a>
+      {/* </div> */}
+
       <div className="form-group">
         <animated.form action="" id="loginform" style={loginProps}>
           <LoginForm />

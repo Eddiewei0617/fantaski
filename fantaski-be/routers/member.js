@@ -9,11 +9,13 @@ router.get("/", (res, req) => {
   res.send("這邊是會員頁面");
 });
 
-router.get("/memberInfo", async (req, res) => {
+router.get("/memberInfo", loginCheckMiddleware, async (req, res) => {
   try {
     let memberInfo = await connection.queryAsync(
-      "SELECT * FROM member where id=3"
+      "SELECT * FROM member where id=?",
+      [req.session.member.id]
     );
+    console.log("memberInfo", memberInfo);
     if (res) {
       memberInfo[0].birthday = moment(memberInfo[0].birthday).format(
         "YYYY-MM-DD"
