@@ -48,3 +48,9 @@ export const MOUNTAIN_STATUS = {
   1: "開放",
   2: "關閉",
 };
+// 首頁文章類別
+export const FORUM_STATUS_WORD = {
+  1: "滑雪經驗",
+  2: "課程分享",
+  3: "裝備體驗",
+};

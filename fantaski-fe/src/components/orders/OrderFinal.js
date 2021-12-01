@@ -14,11 +14,11 @@ const moment = require("moment");
 function OrderFinal({
   memberPoints,
   pointUsed,
-  setPointUsed,
   step,
   setStep,
   scrollToTop,
   progressAnimation,
+  userInfo,
 }) {
   // 代入localStorage裡面存的資料
   var storage = localStorage;
@@ -72,11 +72,6 @@ function OrderFinal({
 
   // 訂購時間(用moment套件)
   let orderTime = moment().format("YYYY-MM-DD hh:mm:ss a");
-  // let times = document.querySelector("#time");
-  // function clock() {
-  //   times.innerText = orderTime;
-  // }
-  // setInterval(clock, 1000);
 
   async function handleSubmit(e) {
     // e.preventDefault();
@@ -85,6 +80,7 @@ function OrderFinal({
       let res = await axios.post(`${API_URL}/order/orderconfirm`, {
         orderList,
         orderNumber: orderNo,
+        memberId: userInfo.id,
         total: total - pointUsed,
         pointUsed: pointUsed,
       });
@@ -92,11 +88,13 @@ function OrderFinal({
       // 傳剩餘點數給後端
       let res2 = await axios.post(`${API_URL}/order/pointleft`, {
         pointLeft: memberPoints[0].point - pointUsed,
+        memberId: userInfo.id,
       });
     } catch (e) {
       console.log("handleSubmit", e);
     }
   }
+
   // 表單出後清空localStorage資料並自動跳轉頁面回商品頁
   let history = useHistory();
   async function handleJupmto() {
@@ -110,7 +108,8 @@ function OrderFinal({
       timer: 3000,
     });
   }
-
+  // console.log("memberlist", memberPoints[0].point);
+  console.log("pointUsed", pointUsed);
   return (
     <>
       <div
@@ -149,9 +148,16 @@ function OrderFinal({
                 <div>剩餘點數</div>
               </div>
               <div className="col-9 final_word">
-                {pointUsed === undefined
+                {pointUsed === 0
+                  ? 0
+                  : pointUsed === undefined
                   ? memberPoints[0].point
                   : memberPoints[0].point - pointUsed}
+                {/* {pointUsed === undefined
+                  ? memberPoints
+                    ? userInfo.point
+                    : userInfo.point - pointUsed
+                  : userInfo.point - pointUsed} */}
                 點
               </div>
             </div>

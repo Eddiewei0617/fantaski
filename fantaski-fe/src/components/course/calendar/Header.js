@@ -26,7 +26,7 @@ function Header(props) {
 
   //左右箭頭點選後函式
   const selectOnLeftChange = () => {
-    if (selectedMonth === 1) {
+    if (selectedMonth == 1) {
       setSelectedYear(Number(selectedYear) - 1);
       setSelectedMonth(12);
     } else {
@@ -34,8 +34,7 @@ function Header(props) {
     }
   };
   const selectOnRightChange = () => {
-    console.log(selectedMonth);
-    if (selectedMonth === 12) {
+    if (selectedMonth == 12) {
       setSelectedYear(Number(selectedYear) + 1);
       setSelectedMonth(1);
     } else {

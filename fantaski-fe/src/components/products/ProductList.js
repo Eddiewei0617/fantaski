@@ -1,6 +1,6 @@
 // 內建通用元件
 import { useState, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
 import { CATEGORY_WORD } from "../../config/StatusShortcut";
 import { API_URL } from "../../config/url";
@@ -11,12 +11,9 @@ import { PRODUCTIMAGE_URL } from "../../config/url";
 import { Button } from "react-bootstrap";
 import { BsTagsFill } from "react-icons/bs";
 
+const moment = require("moment");
 function ProductList({
-  clickToChangeToggle,
-  setToggleState,
-  toggleState,
   setItemNumber,
-  itemNumber,
   onClick,
   categoryId,
   memberInfo,
@@ -46,9 +43,10 @@ function ProductList({
   const [products, setProducts] = useState([]);
   const [pageNow, setPageNow] = useState(1); // 為了偵測在哪一頁，然後切換頁面會顯示不同商品
   useEffect(async () => {
-    let res = await axios.post(`${API_URL}/products/productsInfoList`, {
-      category: categoryId,
-    });
+    let res = await axios.get(
+      `${API_URL}/products/productsInfoList/${categoryId}`
+    );
+
     // 先假設一個productList空[]放單頁商品的；totalProductList空[]是放全部商品的
     // 判斷式 : 如果一頁商品數量除以5的餘數是0，那就把這些商品push進總陣列，然後把小陣列歸零，繼續跑迴圈
     let productList = [];
@@ -63,6 +61,11 @@ function ProductList({
     totalProductList.push(productList);
     setProducts(totalProductList[pageNow - 1]);
   }, [pageNow, categoryId]);
+
+  // 為了讓商品被加入購物車有動畫效果
+  const [flyCart, setFlyCart] = useState(0);
+  // 讓一開始的訂購日期顯示在當天
+  let orderDate = moment().format("YYYY-MM-DD");
 
   const display = (
     <ul className="all_image_l ">
@@ -85,7 +88,8 @@ function ProductList({
                 className={`
                   ${collected.map((collections) => {
                     if (
-                      collections.member_id === 1 &&
+                      memberInfo &&
+                      collections.member_id === memberInfo[0].id &&
                       collections.product_id === v.id
                     ) {
                       return " collect_tagged "; // " "裡前後的空格不可以少，不然和其他被選到收藏的商品className黏在一起就抓不到了
@@ -93,11 +97,11 @@ function ProductList({
                   })} 
                    collect_tag`}
                 onClick={(e) => {
-                  //clickToChangeToggle(e);
                   handleCollect(v);
                   e.currentTarget.className.includes("collect_tagged")
                     ? handleCollect(v)
                     : handleChecked();
+                  setCollectUpdate(Math.random());
                 }}
               >
                 <BsTagsFill title="加入收藏" />
@@ -105,13 +109,12 @@ function ProductList({
               <img
                 src={`${PRODUCTIMAGE_URL}/${v.image}`}
                 alt=""
-                className="size"
+                className={`${flyCart == v.id && "scale-out-tr"}   size `}
               />
             </div>
             <div className="product_description">
               <p>{v.name}</p>
               <p>{v.content}</p>
-              {/* <p>適合對象 : {v.suitable}</p> */}
               <p>租購價 : NT$ {v.price}</p>
 
               <Button
@@ -130,12 +133,13 @@ function ProductList({
                     storage["addItemList"] += `${itemId}, `;
                   }
                   handleAddNumber();
+                  setFlyCart(Number(`${v.id}`));
                 }}
               >
                 加入購物車
                 <input
                   type="hidden"
-                  value={`${PRODUCTIMAGE_URL}/${v.image}|B|${v.name}|${v.price}|2021-11-15|1`}
+                  value={`${PRODUCTIMAGE_URL}/${v.image}|B|${v.name}|${v.price}|${orderDate}|1`}
                 />
               </Button>
             </div>
@@ -144,6 +148,8 @@ function ProductList({
       })}
     </ul>
   );
+
+  // 下方頁碼切換
   const [pageButton, setPageButton] = useState(0);
   function handlePageButton(e) {
     let pageId = Number(e.target.id);

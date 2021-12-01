@@ -1,0 +1,271 @@
+.login-main {
+  margin-top: 7.5%;
+}
+.login-container {
+  background-color: $assist-white;
+  border-radius: 20px;
+  box-shadow: 0 14px 28px rgba(19, 72, 101, 0.25),
+    0 10px 10px rgba(19, 72, 101, 0.22);
+  position: relative;
+  overflow: hidden;
+  width: 1000px;
+  min-height: 700px;
+  max-width: 100%;
+}
+
+.form-container {
+  padding: 4%;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+  h2 {
+    color: $main-text-darkblue;
+    font-weight: 600;
+    margin: 3% 0;
+    &::after {
+      content: "";
+      border-bottom: 5px solid $main-blue;
+      width: 450px;
+      position: absolute;
+      left: 5.3%;
+      top: 13%;
+      transform: translateY(16%);
+    }
+  }
+}
+.sign-in-container {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+  opacity: 0;
+}
+.sign-up-container {
+  left: 0;
+  width: 50%;
+  z-index: 1;
+  opacity: 1;
+}
+
+.log-in-container {
+  left: 50%;
+  width: 50%;
+  z-index: 1;
+  opacity: 1;
+}
+.log-up-container {
+  left: 50%;
+  width: 50%;
+  z-index: 2;
+  opacity: 0;
+}
+
+.form-center-area {
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  // margin: 5% auto 1%;
+  height: 480px;
+}
+
+.three-party-link {
+  width: 250px;
+  height: 40px;
+
+  .link-btn {
+    width: 100%;
+    border-radius: 10px;
+    border: 2px solid $main-text-darkblue;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    span {
+      margin: 0 10px;
+      width: 150px;
+      text-align: initial;
+      font-size: 14px;
+      letter-spacing: 2px;
+    }
+  }
+  .googlebtn {
+    color: #888888;
+    background-color: $assist-white;
+    &:hover {
+      background-color: #f5f5f5;
+    }
+  }
+  .facebookbtn {
+    background: rgb(66, 102, 178);
+    color: $assist-white;
+    &:hover {
+      background: rgb(52, 82, 142);
+    }
+  }
+}
+
+.login-or {
+  justify-content: center;
+  display: flex;
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 50%;
+    height: 1px;
+    transform: translate(0px, -50%);
+    background: rgba(0, 0, 0, 0.15);
+  }
+  span {
+    color: rgba(0, 0, 0, 0.35);
+    padding: 0px 16px;
+    background: rgb(255, 255, 255);
+    position: relative;
+  }
+}
+
+.form-sign-up {
+  margin-top: 5%;
+  height: 350px;
+}
+.form-info {
+  position: relative;
+  display: flex;
+  margin-bottom: 20px;
+  .form-info-icon {
+    position: absolute;
+    left: 5.5%;
+    top: calc(50% - 0.5em);
+    color: $assist-white;
+  }
+  input {
+    width: 100%;
+    height: 40px;
+    text-indent: 52px;
+    // font-size: 20px;
+    background: linear-gradient(to right, #134865 14%, white 14% 80%);
+    border-radius: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+}
+.login-small-text {
+  font-size: 10px;
+  color: #888888;
+  text-align: center;
+  margin-bottom: 5px;
+  span {
+    color: $main-text-darkblue;
+    font-weight: bold;
+  }
+}
+
+.sendmail-link {
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+.im-hr {
+  width: 400px;
+  height: 5px;
+  background: $main-blue;
+}
+.login-btn-area {
+  width: 70%;
+  margin: 6% auto 0;
+  .btn-sumbit {
+    width: 100%;
+    background: $assist-white;
+    border: 3px solid $main-red;
+    color: $main-red;
+    font-size: 22px;
+    border-radius: 15px;
+    padding: 3%;
+    letter-spacing: 20px;
+    text-indent: 1em;
+    &:hover {
+      background: $main-red;
+      color: $assist-white;
+    }
+  }
+}
+
+// =========================
+// Overimg
+.overlay-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
+  z-index: 100;
+}
+
+.overlay {
+  //   background: #ff416c;
+  //   background: linear-gradient(to right, #ff4b2b, #ff416c);
+  //   background-repeat: no-repeat;
+  //   background-size: cover;
+  background: url("../../src/components/login/ski_resort.jpg") top center
+    no-repeat;
+  background-size: cover;
+  background-position: 0px -135px;
+  height: 100%;
+  width: 200%;
+  color: #fff;
+  position: relative;
+  left: -100%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+
+.overlay-left {
+  transform: translateX(-20%);
+}
+
+.overlay-right {
+  right: 0;
+  transform: translateX(0);
+}
+
+.overlay-panel {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  text-align: center;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+
+.right-panel-active .overlay-container {
+  transform: translateX(-100%);
+}
+
+.right-panel-active .overlay {
+  transform: translateX(50%);
+}
+
+.ghost {
+  background: $main-blue;
+  border: none;
+  border-radius: 15px;
+  color: $assist-white;
+  padding: 2% 5%;
+  font-size: 20px;
+  letter-spacing: 5px;
+  text-align: center;
+  margin-top: 15%;
+  width: 40%;
+  filter: drop-shadow(0px 0px 6px #333);
+}

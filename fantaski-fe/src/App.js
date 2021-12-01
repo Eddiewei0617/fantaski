@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getUserInfo } from "./config/StatusShortcut";
-
 // 引入各分頁(後續寫程式可更動) 頁面用元件
 
 // 課程
@@ -54,6 +53,7 @@ function App() {
   // navbar上購物車的數字
   const [itemNumber, setItemNumber] = useState(0);
 
+  // 抓現在登入的使用者是誰(member資訊)
   const [userInfo, setUserInfo] = useState(null);
   useEffect(() => {
     getUserInfo(setUserInfo);
@@ -63,8 +63,10 @@ function App() {
   const [memberInfo, setMemberInfo] = useState(null);
 
   useEffect(() => {
-    getMemberPoints(setMemberInfo);
-  }, []);
+    if (userInfo) {
+      getMemberPoints(setMemberInfo);
+    }
+  }, [userInfo]);
 
   const [cartPositionState, setCartPositionState] = useState(null);
   //forum 種類
@@ -72,6 +74,13 @@ function App() {
     forumCategory: 0,
     isHot: true,
   });
+
+  // 抓到storage裡面有幾樣商品的字串後，用split將字串轉成陣列就能顯示出有幾個了
+  function handleAddNumber() {
+    let itemString = localStorage["addItemList"];
+    let items = itemString.substr(0, itemString.length - 2).split(", ");
+    setItemNumber(Number(items.length));
+  }
 
   return (
     <>
@@ -83,6 +92,7 @@ function App() {
           setForumCategory={setForumCategory}
           itemNumber={itemNumber}
           setCartPositionState={setCartPositionState}
+          handleAddNumber={handleAddNumber}
           userInfo={userInfo}
           setUserInfo={setUserInfo}
         />
@@ -145,10 +155,16 @@ function App() {
                 itemNumber={itemNumber}
                 memberInfo={memberInfo}
                 cartPositionState={cartPositionState}
+                handleAddNumber={handleAddNumber}
+                userInfo={userInfo}
               />
             </Route>
             <Route path="/Orders">
-              <Orders setItemNumber={setItemNumber} itemNumber={itemNumber} />
+              <Orders
+                setItemNumber={setItemNumber}
+                itemNumber={itemNumber}
+                userInfo={userInfo}
+              />
             </Route>
             <Route path="/login">
               <Login setUserInfo={setUserInfo} />
@@ -173,6 +189,7 @@ function App() {
               <MemberCollect
                 setItemNumber={setItemNumber}
                 memberInfo={memberInfo}
+                userInfo={userInfo}
               />
             </Route>
             <Route path="/memberComment">

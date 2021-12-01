@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { ParallaxProvider } from "react-scroll-parallax";
 import axios from "axios";
 import { getWeatherInfo } from "../course/moduleList";
+import Swal from "sweetalert2";
 
 // icon
 import {
@@ -27,6 +28,7 @@ function Navbar(props) {
     itemNumber,
     setCartPositionState,
     setForumCategory,
+    handleAddNumber,
     userInfo,
     setUserInfo,
   } = props;
@@ -120,9 +122,8 @@ function Navbar(props) {
       let res = await axios.get(`${API_URL}/auth/logout`, {
         withCredentials: true,
       });
-      if (res.data.code === 1201) {
+      if (res.data.code == 1201) {
         setUserInfo(res.data);
-        console.log(res.data);
       }
     } catch (e) {
       console.log(e);
@@ -131,6 +132,26 @@ function Navbar(props) {
   const cartPosition = useRef(null);
   setCartPositionState(cartPosition);
   // console.log("cartPosition", cartPosition);
+
+  // 進到任何頁面 Navbar就先抓產品數量的數字
+  useEffect(() => {
+    if (localStorage["addItemList"] === "") {
+      setItemNumber(0);
+    } else {
+      handleAddNumber();
+    }
+  }, [itemNumber]);
+
+  // 在非會員的狀態下點選購物車的彈跳視窗
+  function loginPlease() {
+    Swal.fire({
+      position: "center",
+      icon: "error",
+      title: "請先登入會員",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
   return (
     <>
       {/* scroll 初始化 */}
@@ -149,8 +170,8 @@ function Navbar(props) {
               <Link className="navbar-brand" to="/">
                 <img
                   src={`${IMAGE_SHARE_URL}/fantaski_logo_white.svg`}
-                  width="70"
-                  height="70"
+                  width="65"
+                  height="65"
                   alt="FantaskiLogo"
                   className={`logo-img ${
                     colorButton === "FANTASKI" && "active"
@@ -256,7 +277,11 @@ function Navbar(props) {
                 <li className="left-line"></li>
                 <li className="nav-item" ref={cartPosition}>
                   {localStorage["addItemList"] === "" ? (
-                    <Link className="nav-link position-relative" to="/products">
+                    <Link
+                      className="nav-link position-relative"
+                      to="/products"
+                      // onClick={loginPlease}
+                    >
                       <BsFillCartFill className="all-icon-nav" size={25} />
                       <p className="shopping-cart-circle" id="itemNumber">
                         {itemNumber}

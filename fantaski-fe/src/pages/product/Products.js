@@ -1,16 +1,17 @@
 // 頁面通用元件
 import { useState, useEffect, useRef } from "react";
-
+import { useHistory } from "react-router-dom";
 import "animate.css";
-import { getMemberPoints } from "../../components/orders/ModuleDb";
 import axios from "axios";
-import { API_URL } from "../../config/url";
 import Swal from "sweetalert2";
+
+// 網址整合元件
+import { API_URL } from "../../config/url";
+import { PRODUCTIMAGE_URL } from "../../config/url";
 
 // 渲染兩種不同版面元件
 import ProductSquare from "../../components/products/ProductSquare";
 import ProductList from "../../components/products/ProductList";
-// import AllProducts from "../../components/products/AllProducts";
 
 // 組合用元件
 import CarouselP from "../../components/products/CarouselP";
@@ -23,22 +24,16 @@ function Products({
   itemNumber,
   memberInfo,
   cartPositionState,
+  handleAddNumber,
+  userInfo,
 }) {
-  let storage = localStorage;
+  // 想要傳參數給後端新增或找資料 :
+  // axios.post(“url”, params, {withCredential:true})
+  // params就是{categoryId: category_id} 之類的參數
+  // ----------------------------------------------------------------------------
   const [square, setSquare] = useState(true);
 
-  // 做收藏標籤的點擊變換 start------------------------------
-  const [toggleState, setToggleState] = useState({});
-  //點擊後切換目標id的狀態false <-> true
-  // const clickToChangeToggle = (e) => {
-  //   console.log("e", e.currentTarget.id);
-  //   let targetId = e.currentTarget.id;
-  //   let oppositeState = !toggleState[targetId];
-  //   let newState = { ...toggleState, [targetId]: oppositeState };
-  //   setToggleState(newState);
-  // };
-  // 做收藏標籤的點擊變換 end------------------------------
-
+  // console.log("userInfo", userInfo);
   // 用一個ref抓到要跳轉到的位置區塊，再寫一個function scrollTo
   // 點小手指跳到商品主頁
   const productSection = useRef(null);
@@ -51,70 +46,99 @@ function Products({
   // 商品種類狀態，有1~8，預設為1(單板)
   const [categoryId, setCategoryId] = useState(1);
 
-  // 抓到storage裡面有幾樣商品的字串後，用split將字串轉成陣列就能顯示出有幾個了
-  function handleAddNumber() {
-    let itemString = storage["addItemList"];
-    let items = itemString.substr(0, itemString.length - 2).split(", ");
-    setItemNumber(Number(items.length));
-  }
-
   // 接收後端傳來的 product_collection 資料
   const [collected, setCollected] = useState([]);
   const [collectUpdate, setCollectUpdate] = useState(0); // 此狀態是為了讓之後商品點收藏後每次都會重抓一次
+
+  // 抓資料庫該會員的收藏資料，就可以顯示在他登入後的商品頁面上了
   useEffect(async () => {
     try {
-      let res = await axios.post(`${API_URL}/products/collectinfo`, {
-        memberID: 1,
+      let res = await axios.get(`${API_URL}/products/collectinfo`, {
+        withCredentials: true,
       });
+
       setCollected(res.data);
+      // try {
+      //   let res = await axios.post(`${API_URL}/products/collectinfo`, {
+      //     memberId: userInfo.id,
+      //   });
+      //   setCollected(res.data);
     } catch (e) {
       console.error("collectinfo", e);
     }
-  }, [collectUpdate]);
-  // console.log("collected", collected);
+  }, [collectUpdate, userInfo]);
 
   // 傳點到想收藏的資料給後端  // 註: 給一個v變數是因為丟到下面map迴圈裡也需要用到v，所以先在這邊加
   // 因為傳給後端後同時有刪除也有insert，所以要一個判斷是判斷我點的這個商品是不是已經在product_collection裡面出現過了
   async function handleCollect(v) {
-    let isDelete = false;
-    collected.forEach((item, index) => {
-      if (v.id === item.product_id) {
-        isDelete = true;
-      }
-    });
-    setCollectUpdate(Math.random());
-    try {
-      let res = await axios.post(`${API_URL}/products/collection`, {
-        isDelete: isDelete,
-        memberId: memberInfo[0].id,
-        productId: v.id,
+    if (userInfo.code !== 1201) {
+      let isDelete = false;
+      collected.forEach((item, index) => {
+        if (v.id === item.product_id) {
+          isDelete = true;
+        }
       });
-    } catch (err) {
-      console.error("handleCollect", err);
+      setCollectUpdate(Math.random());
+      try {
+        let res = await axios.post(
+          `${API_URL}/products/collection`,
+          {
+            isDelete: isDelete,
+            // memberId: userInfo.id,
+            productId: v.id,
+          },
+          { withCredentials: true }
+        );
+      } catch (err) {
+        console.error("handleCollect", err);
+      }
     }
   }
 
+  let history = useHistory();
   // 點擊加入收藏後會有彈跳視窗
-  function handleChecked() {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: "center",
-      showConfirmButton: false,
-      timer: 1500,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        // toast.addEventListener("mouseenter", Swal.stopTimer);
-        toast.addEventListener("mouseleave", Swal.resumeTimer);
-      },
-    });
+  async function handleChecked() {
+    if (userInfo.code !== 1201) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "center",
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          // toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+      });
 
-    Toast.fire({
-      icon: "success",
-      title: "已加入收藏",
-    });
+      Toast.fire({
+        icon: "success",
+        title: "已加入收藏",
+      });
+    } else {
+      await Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "請先登入會員",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      let toLogin = history.push("/login");
+    }
   }
 
-  // const [allState, setAllState] = useState(false);
+  // 已加入購物車之彈跳視窗
+  function alreadyinCart() {
+    Swal.fire({
+      // title: "Sweet!",
+      text: "您已將此商品加入購物車",
+      imageUrl: `${PRODUCTIMAGE_URL}/jerry_mouse.jpg`,
+      imageWidth: 220,
+      imageHeight: 300,
+      imageAlt: "已加入購物車圖",
+      icon: "error",
+    });
+  }
 
   return (
     <>
@@ -138,9 +162,6 @@ function Products({
         />
         {square ? (
           <ProductSquare
-            // clickToChangeToggle={clickToChangeToggle}
-            setToggleState={setToggleState}
-            toggleState={toggleState}
             setItemNumber={setItemNumber}
             itemNumber={itemNumber}
             categoryId={categoryId}
@@ -151,12 +172,11 @@ function Products({
             handleCollect={handleCollect}
             handleChecked={handleChecked}
             handleAddNumber={handleAddNumber}
+            userInfo={userInfo}
+            alreadyinCart={alreadyinCart}
           />
         ) : (
           <ProductList
-            // clickToChangeToggle={clickToChangeToggle}
-            setToggleState={setToggleState}
-            toggleState={toggleState}
             setItemNumber={setItemNumber}
             itemNumber={itemNumber}
             onClick={() => {
@@ -171,24 +191,6 @@ function Products({
             handleAddNumber={handleAddNumber}
           />
         )}
-        {/* {allState === true && (
-          <AllProducts
-            allState={allState}
-            setAllState={setAllState}
-            setToggleState={setToggleState}
-            toggleState={toggleState}
-            setItemNumber={setItemNumber}
-            itemNumber={itemNumber}
-            categoryId={categoryId}
-            memberInfo={memberInfo}
-            collected={collected}
-            setCollectUpdate={setCollectUpdate}
-            cartPositionState={cartPositionState}
-            handleCollect={handleCollect}
-            handleChecked={handleChecked}
-            handleAddNumber={handleAddNumber}
-          />
-        )} */}
       </div>
     </>
   );
