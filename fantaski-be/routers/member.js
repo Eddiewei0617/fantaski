@@ -2,17 +2,12 @@ express = require("express");
 const router = express.Router();
 const connection = require("../utils/db");
 const moment = require("moment");
-<<<<<<< HEAD
 const bcrypt = require("bcrypt");
-=======
 const { loginCheckMiddleware } = require("../middlewares/auth");
-
->>>>>>> main
 router.get("/", (res, req) => {
   console.log("您好歡迎光臨");
   res.send("這邊是會員頁面");
 });
-<<<<<<< HEAD
 const { body, validationResult } = require("express-validator");
 const registerRules = [
   // body("email").isEmail().withMessage("Email欄位請正確填寫"),
@@ -23,11 +18,7 @@ const registerRules = [
     })
     .withMessage("密碼不一致"),
 ];
-router.get("/memberInfo", async (req, res) => {
-=======
-
 router.get("/memberInfo", loginCheckMiddleware, async (req, res) => {
->>>>>>> main
   try {
     let memberInfo = await connection.queryAsync(
       "SELECT * FROM member where id=?",
@@ -125,7 +116,8 @@ router.get("/memberRecord", async (req, res) => {
     for (i = 0; i < memberOrder.length; i++) {
       orderCourse[memberOrder[i].id] = [];
       let orderItems = await connection.queryAsync(
-        "SELECT * FROM  order_course WHERE order_id=?",
+        "SELECT order_course.*,course.img AS image ,course.price FROM  order_course JOIN course  ON order_course.course_id = course.id  WHERE order_id=?",
+
         [memberOrder[i].id]
       );
       // orderItems.push(orderCourse[0]);
@@ -137,7 +129,7 @@ router.get("/memberRecord", async (req, res) => {
     for (i = 0; i < memberOrder.length; i++) {
       orderProduct[memberOrder[i].id] = [];
       let orderItems = await connection.queryAsync(
-        "SELECT order_product.* , product.name AS product_name FROM  order_product JOIN product ON order_product.product_id = product.id WHERE order_id=?",
+        "SELECT order_product.* , product.name AS product_name , product.image AS image ,product.price AS price  FROM  order_product JOIN product ON order_product.product_id = product.id WHERE order_id=?",
         [memberOrder[i].id]
       );
       // orderItems.push(orderCourse[0]);
