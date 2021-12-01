@@ -66,7 +66,7 @@ function PageButton({
 
         <div
           onClick={() => {
-            if (pageButton < pageNumber.length) {
+            if (pageButton < pageNumber.length || !products) {
               setPageButton(pageButton + 1);
               setPageNow(pageNow + 1);
               onClick();

@@ -25,7 +25,6 @@ function ProductInfo({
     let res = await axios.get(
       `${API_URL}/products/productsInfoList/${categoryId}`
     );
-
     setSnowboards(res.data);
   }, [categoryId]);
   // useEffect(async () => {

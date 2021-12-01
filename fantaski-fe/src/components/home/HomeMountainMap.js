@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import HomeTitle from "./HomeTitle";
 import { IMAGE_ROUTER_URL } from "../../config/url";
 
-function HomeMountainMap() {
+function HomeMountainMap({ setColorButton }) {
   const mainTitle = {
     title: "雪道地圖",
     subTitle: "有三種不同路線等著你去闖關",
@@ -33,9 +34,16 @@ function HomeMountainMap() {
                   <hr id="greenRoute" />
                   <p>推薦課程:初級課程</p>
                 </div>
-                <button type="button" className="home-route-btn">
-                  查看更多
-                </button>
+                <Link
+                  to="/mountainroute"
+                  onClick={() => {
+                    setColorButton("山的一切");
+                  }}
+                >
+                  <button type="button" className="home-route-btn">
+                    查看更多
+                  </button>
+                </Link>
               </div>
 
               <svg

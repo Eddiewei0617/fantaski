@@ -42,25 +42,41 @@ function ProductList({
   // 讓商品顯示在頁面上
   const [products, setProducts] = useState([]);
   const [pageNow, setPageNow] = useState(1); // 為了偵測在哪一頁，然後切換頁面會顯示不同商品
+  const [allRes, setAllRes] = useState();
   useEffect(async () => {
-    let res = await axios.get(
-      `${API_URL}/products/productsInfoList/${categoryId}`
-    );
-
-    // 先假設一個productList空[]放單頁商品的；totalProductList空[]是放全部商品的
-    // 判斷式 : 如果一頁商品數量除以5的餘數是0，那就把這些商品push進總陣列，然後把小陣列歸零，繼續跑迴圈
-    let productList = [];
-    let totalProductList = [];
-    for (let i = 0; i < res.data.length; i++) {
-      productList.push(res.data[i]);
-      if ((i + 1) % 5 === 0) {
-        totalProductList.push(productList);
-        productList = [];
-      }
+    try {
+      let res = await axios.get(
+        `${API_URL}/products/productsInfoList/${categoryId}`
+      );
+      setAllRes(res.data);
+      setPageNow(1);
+      setPageButton(1);
+    } catch (e) {
+      console.error(e);
     }
-    totalProductList.push(productList);
-    setProducts(totalProductList[pageNow - 1]);
-  }, [pageNow, categoryId]);
+  }, [categoryId]);
+
+  useEffect(() => {
+    try {
+      // 先假設一個productList空[]放單頁商品的；totalProductList空[]是放全部商品的
+      // 判斷式 : 如果一頁商品數量除以5的餘數是0，那就把這些商品push進總陣列，然後把小陣列歸零，繼續跑迴圈
+      let productList = [];
+      let totalProductList = [];
+      if (allRes) {
+        for (let i = 0; i < allRes.length; i++) {
+          productList.push(allRes[i]);
+          if ((i + 1) % 5 === 0) {
+            totalProductList.push(productList);
+            productList = [];
+          }
+        }
+        totalProductList.push(productList);
+        setProducts(totalProductList[pageNow - 1]);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, [pageNow, allRes]);
 
   // 為了讓商品被加入購物車有動畫效果
   const [flyCart, setFlyCart] = useState(0);

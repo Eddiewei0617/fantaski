@@ -1,3 +1,6 @@
+// require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
 // 圖片全共用區域網址
 // navbar 前面的網址
 export const IMAGE_SHARE_URL =
@@ -51,3 +54,10 @@ export const UPLOAD_URL =
 export const PUBLIC_URL =
   process.env.REACT_APP_PUBLIC_URL || "http://localhost:3001/public";
 
+//google登入
+// export const GOOGLE_CLIENT_ID =
+//   process.env.REACT_APP_GOOGLE_CLIENT_ID || "please check it";
+
+// export const GOOGLE_CLIENT_ID =
+//   process.env.REACT_APP_PRODUCTIMAGE_URL ||
+//   "http://localhost:3000/assets/images_product";

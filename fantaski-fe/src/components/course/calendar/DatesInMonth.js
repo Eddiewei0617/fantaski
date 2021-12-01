@@ -58,7 +58,7 @@ const daysInThisMonth = (year, month) => {
 const daysInNextMonth = (daysThisLastMonth, month, year) => {
   let yearForNextMonth = Number(year);
   let nextMonth = Number(month) + 1;
-  if (month === 12) {
+  if (nextMonth >= 13) {
     yearForNextMonth += 1;
     nextMonth = 1;
   }

@@ -50,7 +50,7 @@ import moment from "moment";
 //   },
 // ];
 
-function HomeForum() {
+function HomeForum({ setColorButton }) {
   const mainTitle = {
     title: "滑雪論壇",
     subTitle: "奇聞軼事 | 天⾺⾏空",
@@ -114,7 +114,13 @@ function HomeForum() {
                             留言數:<span>{item.replyNum}</span>則
                           </div>
                           {/* home-commit-num end */}
-                          <Link to="/forum" className="goto-check">
+                          <Link
+                            to="/forum"
+                            className="goto-check"
+                            onClick={() => {
+                              setColorButton("滑雪論壇");
+                            }}
+                          >
                             <div className="home-arrow-1">前往觀看</div>
                           </Link>
                           {/* home-arrow-1 end */}

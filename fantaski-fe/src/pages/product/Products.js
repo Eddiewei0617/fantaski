@@ -26,6 +26,8 @@ function Products({
   cartPositionState,
   handleAddNumber,
   userInfo,
+  categoryId,
+  setCategoryId,
 }) {
   // 想要傳參數給後端新增或找資料 :
   // axios.post(“url”, params, {withCredential:true})
@@ -42,9 +44,6 @@ function Products({
       top: Number(`${productSection.current.offsetTop}`) - 150,
       behavior: "smooth",
     });
-
-  // 商品種類狀態，有1~8，預設為1(單板)
-  const [categoryId, setCategoryId] = useState(1);
 
   // 接收後端傳來的 product_collection 資料
   const [collected, setCollected] = useState([]);

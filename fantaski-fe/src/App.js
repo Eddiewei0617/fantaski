@@ -47,6 +47,9 @@ import { getMemberPoints } from "../src/components/orders/ModuleDb";
 const courses = ["初體驗", "技能班", "雪橇車", "建冰屋"];
 
 function App() {
+  // Navbar的字顏色切換
+  let [colorButton, setColorButton] = useState("FANTASKI");
+
   //傳入course狀態(使用者要看哪個course)
   const [showCourse, setShowCourse] = useState();
 
@@ -84,6 +87,9 @@ function App() {
     }
   }
 
+  // 商品種類狀態，有1~8，預設為1(單板)
+  const [categoryId, setCategoryId] = useState(1);
+
   return (
     <>
       <Router>
@@ -97,6 +103,8 @@ function App() {
           handleAddNumber={handleAddNumber}
           userInfo={userInfo}
           setUserInfo={setUserInfo}
+          colorButton={colorButton}
+          setColorButton={setColorButton}
         />
         {/* LOGO+標題+導覽列+上方選單 */}
         {/* 主內容區 */}
@@ -126,6 +134,7 @@ function App() {
                 setShowCourse={setShowCourse}
                 setItemNumber={setItemNumber}
                 cartPositionState={cartPositionState}
+                setColorButton={setColorButton}
               />
             </Route>
             <Route path="/course/skill">
@@ -135,6 +144,7 @@ function App() {
                 setShowCourse={setShowCourse}
                 setItemNumber={setItemNumber}
                 cartPositionState={cartPositionState}
+                setColorButton={setColorButton}
               />
             </Route>
             <Route path="/course/sled">
@@ -144,6 +154,7 @@ function App() {
                 setShowCourse={setShowCourse}
                 setItemNumber={setItemNumber}
                 cartPositionState={cartPositionState}
+                setColorButton={setColorButton}
               />
             </Route>
             <Route path="/course/igloo">
@@ -153,6 +164,7 @@ function App() {
                 setShowCourse={setShowCourse}
                 setItemNumber={setItemNumber}
                 cartPositionState={cartPositionState}
+                setColorButton={setColorButton}
               />
             </Route>
             <Route path="/products">
@@ -163,6 +175,8 @@ function App() {
                 cartPositionState={cartPositionState}
                 handleAddNumber={handleAddNumber}
                 userInfo={userInfo}
+                categoryId={categoryId}
+                setCategoryId={setCategoryId}
               />
             </Route>
             <Route path="/Orders">
@@ -213,10 +227,10 @@ function App() {
               />
             </Route>
             <Route path="/mountainroute">
-              <MountainRoute />
+              <MountainRoute setColorButton={setColorButton} />
             </Route>
             <Route path="/">
-              <Home />
+              <Home setColorButton={setColorButton} />
             </Route>
 
             {/* footer有時間再處理 勿刪!!*/}

@@ -55,39 +55,39 @@ app.get("/", (req, res) => {
 });
 
 // google登入--------------------------------------------------
-app.get(
-  "/auth/google",
-  passport.authenticate("google", { scope: ["email", "profile"] })
-);
-// 點下google帳號登入時會呼叫的頁面
-app.get(
-  "/api/auth/callback",
-  // "http://localhost:3000",
-  passport.authenticate("google", {
-    // successRedirect: "http://localhost:3000",
-    successRedirect: "/auth/protected",
-    failureRedirect: "/auth/failure",
-  })
-);
-// 成功的話...
-app.get("/auth/protected", isLoggedIn, async (req, res) => {
-  try {
-    let googleInsert = await connection.queryAsync(
-      "INSERT INTO member (name, email,image, level_id, valid) VALUES (?,?,?,?,?)",
-      [req.user.given_name, req.user.email, req.user.photos[0].value, 1, 1]
-    );
-    res.location("http://localhost:3000"); // 登入後跳轉回首頁
-    res.statusCode = 301; // 配合跳轉頁面一定要加的
-    res.json({ membername: req.user.given_name });
-    // console.log("req.user", req.user.given_name);
-  } catch (e) {
-    res.json({ code: 9999, message: "資料庫讀取錯誤" });
-  }
-});
-// 失敗的話...
-app.get("/auth/failure", (req, res) => {
-  res.send("something went wrong...");
-});
+// app.get(
+//   "/auth/google",
+//   passport.authenticate("google", { scope: ["email", "profile"] })
+// );
+// // 點下google帳號登入時會呼叫的頁面
+// app.get(
+//   "/api/auth/callback",
+//   // "http://localhost:3000",
+//   passport.authenticate("google", {
+//     // successRedirect: "http://localhost:3000",
+//     successRedirect: "/auth/protected",
+//     failureRedirect: "/auth/failure",
+//   })
+// );
+// // 成功的話...
+// app.get("/auth/protected", isLoggedIn, async (req, res) => {
+//   try {
+//     let googleInsert = await connection.queryAsync(
+//       "INSERT INTO member (name, email,image, level_id, valid) VALUES (?,?,?,?,?)",
+//       [req.user.given_name, req.user.email, req.user.photos[0].value, 1, 1]
+//     );
+//     res.location("http://localhost:3000"); // 登入後跳轉回首頁
+//     res.statusCode = 301; // 配合跳轉頁面一定要加的
+//     res.json({ membername: req.user.given_name });
+//     // console.log("req.user", req.user.given_name);
+//   } catch (e) {
+//     res.json({ code: 9999, message: "資料庫讀取錯誤" });
+//   }
+// });
+// // 失敗的話...
+// app.get("/auth/failure", (req, res) => {
+//   res.send("something went wrong...");
+// });
 // google登入--------------------------------------------------
 
 //取得前端傳回json body的資料 (必寫，且須寫在前面，由上到下的順序很重要)

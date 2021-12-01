@@ -43,7 +43,7 @@ import { Link } from "react-router-dom";
 //   },
 // ];
 
-function HomeRentCarousel({ active, productList }) {
+function HomeRentCarousel({ active, productList, setColorButton }) {
   // console.log(active);
   useEffect(() => {
     const swiper = new Swiper(".home-swiper-container", {
@@ -75,7 +75,12 @@ function HomeRentCarousel({ active, productList }) {
             return (
               <>
                 <div className="swiper-slide">
-                  <Link to="/products">
+                  <Link
+                    to="/products"
+                    onClick={() => {
+                      setColorButton("租點裝備");
+                    }}
+                  >
                     <div className="home-swiper-area" key={v.i}>
                       <img src={`${PRODUCTIMAGE_URL}/${v.image}`} alt="" />
                       <div className="home-slider-text">

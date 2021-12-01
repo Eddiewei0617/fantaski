@@ -3,7 +3,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BsStarFill, BsStar } from "react-icons/bs";
 
-function HomeCourseMore({ averageRate, signupRemainToday, href }) {
+function HomeCourseMore({
+  averageRate,
+  signupRemainToday,
+  href,
+  setColorButton,
+}) {
   let starDefault = [<BsStar />, <BsStarFill />];
   let stars = [];
   for (let i = 0; i < 5; i++) {
@@ -32,7 +37,12 @@ function HomeCourseMore({ averageRate, signupRemainToday, href }) {
         </div>
         {/* course-right end */}
         <div>
-          <Link to={`/course/${href}`}>
+          <Link
+            to={`/course/${href}`}
+            onClick={() => {
+              setColorButton("多元課程");
+            }}
+          >
             <button type="button" className="home-course-btn">
               瞭解課程內容
             </button>

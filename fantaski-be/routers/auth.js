@@ -99,31 +99,35 @@ router.get("/userInfo", async (req, res) => {
 });
 
 // google登入
-function isLoggedIn(req, res, next) {
-  req.user ? next() : res.sendStatus(401);
-  //   console.log("req.user", req.user);
-}
-// router.get(
-//   "/google",
-//   passport.authenticate("google", { scope: ["email", "profile"] }),
-//   async (req, res) => {
-//     console.log("connect to backend");
-//     console.log("req.user", req.user);
-//     res.json(req.user);
-//   }
-// );
-// router.get(
-//   "/callback",
-//   passport.authenticate("google", {
-//     successRedirect: "/api/auth/protected",
-//     failureRedirect: "/api/auth/failure",
-//   })
-// );
-// router.get("/failure", (req, res) => {
-//   res.send("something went wrong...");
-// });
-// router.get("/protected", isLoggedIn, (req, res) => {
-//   res.send("Hello!");
-// });
+router.post("/google", async (req, res) => {
+  let { email, name, imageUrl, googleId } = req.body.profileObj;
+
+  try {
+    let memberInDb = await connection.queryAsync(
+      "SELECT * from member WHERE email=?",
+      [email]
+    );
+    console.log("memberInDb", memberInDb[0].email);
+
+    if (memberInDb.length !== 0) {
+      if (memberInDb[0].google_id === googleId) {
+        // 做登入的事;
+        return;
+      }
+      res.json({ result: "該帳號已使用其他方式註冊過" });
+    }
+    // REGISTER;
+
+    if (memberInDb.length === 0) {
+      let googleInsert = await connection.queryAsync(
+        "INSERT INTO member (name, email,image, level_id, google_id, valid) VALUES (?,?,?,?,?,?)",
+        [name, email, imageUrl, 1, googleId, 1]
+      );
+      res.json({ result: "google會員匯入成功" });
+    }
+  } catch (e) {
+    console.error(e);
+  }
+});
 
 module.exports = router;

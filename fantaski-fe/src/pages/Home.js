@@ -8,18 +8,18 @@ import HomeForum from "../components/home/HomeForum";
 
 import HomeParallax from "../components/home/HomeParallax";
 
-function Home() {
+function Home({ setColorButton }) {
   return (
     <>
       <main className="home-main">
         <HomeParallax />
 
-        <HomeCourse />
+        <HomeCourse setColorButton={setColorButton} />
         <HomeCourseShare />
-        <HomeMountainMap />
+        <HomeMountainMap setColorButton={setColorButton} />
         <HomeBanner />
-        <HomeRent />
-        <HomeForum />
+        <HomeRent setColorButton={setColorButton} />
+        <HomeForum setColorButton={setColorButton} />
       </main>
     </>
   );

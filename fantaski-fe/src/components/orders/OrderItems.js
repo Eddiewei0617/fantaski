@@ -43,6 +43,7 @@ function OrderItems({
     );
   }
   // -------------------------------------------------------------------------------
+
   return (
     <>
       {orderList.map((v, i) => {
@@ -70,9 +71,6 @@ function OrderItems({
                   newDateArray.splice(4, 1, productDate);
                   // 最後再將改好的陣列轉回字串放回localStorage
                   storage[`${v.id}`] = newDateArray.join("|");
-                  if (v.date < "2021-11-26") {
-                    alert("545646");
-                  }
                 }}
               />
             </div>

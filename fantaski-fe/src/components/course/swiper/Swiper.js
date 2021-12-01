@@ -13,6 +13,7 @@ function Swiper({
   customerChoose,
   setItemNumber,
   cartPositionState,
+  setColorButton,
 }) {
   //後端依據 showCourse抓資料回來
   const [selectedAdvice, setSelectedAdvice] = useState(0);
@@ -116,6 +117,7 @@ function Swiper({
                   customerChoose={customerChoose}
                   setItemNumber={setItemNumber}
                   cartPositionState={cartPositionState}
+                  setColorButton={setColorButton}
                 />
               );
             })}

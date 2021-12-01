@@ -384,9 +384,11 @@ $forum-box-shadow: 0 0 30px rgba(19, 72, 101, 0.4);
 }
 .heart-count {
   color: #9c9c9c;
+  cursor: pointer;
 }
 .heart-like {
   color: $main-red;
+  cursor: pointer;
 }
 
 // 留言區
