@@ -35,7 +35,8 @@
     "react-spring": "^9.3.0",
     "reactjs-credit-card": "^1.0.6",
     "sass": "^1.43.4",
-    "sweetalert2": "^11.1.10",
+    "sweetalert2": "^11.2.1",
+    "sweetalert2-react-content": "^4.2.0",
     "swiper": "^6.8.4",
     "use-state-promise": "^0.1.1",
     "web-vitals": "^1.0.1"
