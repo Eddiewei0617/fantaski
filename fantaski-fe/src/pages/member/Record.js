@@ -90,9 +90,9 @@ function Record() {
                       <div className=" row text-center align-items-center ">
                         <div className="col-2">照片</div>
                         <div className="col-sm">商品類別</div>
-                        <div className="col-sm">商品名稱</div>
-                        <div className="col-2">租賃開始</div>
-                        <div className="col-2">租賃結束</div>
+                        <div className="col-2">商品名稱</div>
+                        <div className="col-3">租賃開始</div>
+                        {/* <div className="col-2">租賃結束</div> */}
                         <div className="col-sm">單價</div>
                         <div className="col-sm">數量</div>
                         <div className="col-sm">小計</div>
@@ -111,17 +111,17 @@ function Record() {
                               </div>
                             </div>
                             <div className="col-sm">課程體驗</div>
-                            <div className="col-sm">
+                            <div className="col-2">
                               {COURSE_NAME[course.course_id]}
                             </div>
-                            <div className="col-2">
+                            <div className="col-3">
                               {moment(course.booking_date).format("YYYY-MM-DD")}
                             </div>
-                            <div className="col-2">
+                            {/* <div className="col-2">
                               {moment(course.comment_last_update).format(
                                 "YYYY-MM-DD"
                               )}
-                            </div>
+                            </div> */}
                             <div className="col-sm">{course.price}</div>
                             <div className="col-sm">{course.amount}</div>
                             <div className="col-sm">
@@ -144,17 +144,17 @@ function Record() {
                               </div>
                             </div>
                             <div className="col-sm">商品租賃</div>
-                            <div className="col-sm">{product.product_name}</div>
-                            <div className="col-2">
+                            <div className="col-2">{product.product_name}</div>
+                            <div className="col-3">
                               {moment(product.booking_date).format(
                                 "YYYY-MM-DD"
                               )}
                             </div>
-                            <div className="col-2">
+                            {/* <div className="col-2">
                               {moment(product.booking_date).format(
                                 "YYYY-MM-DD"
                               )}
-                            </div>
+                            </div> */}
                             <div className="col-sm">${product.price}</div>
                             <div className="col-sm">{product.amount}</div>
                             <div className="col-sm">
