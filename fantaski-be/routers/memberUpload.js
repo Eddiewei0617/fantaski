@@ -36,9 +36,9 @@ router.post("/", uploader.single("image"), async (req, res) => {
     let filename = req.file ? "uploads/" + req.file.filename : "";
     let result = await connection.queryAsync(
       "UPDATE  member SET image= ? WHERE id=?",
-      [filename, 3]
+      [filename, req.session.member.id]
     );
-    res.json({ code: "0", message: "已建立" });
+    res.json({ code: "0", message: "已建立", id: req.session.member.id });
   } catch (e) {
     console.log(e);
     res.json({ code: "9999", message: "請洽系統管理員" });

@@ -12,7 +12,8 @@ router.get("/", (req, res) => {
 router.get("/recordlist", async (req, res) => {
   try {
     let recordlist = await connection.queryAsync(
-      "SELECT * FROM ordered WHERE member_id = 1 "
+      "SELECT * FROM ordered WHERE member_id = ? ",
+      [req.session.member.id]
     );
     if (res) {
       for (let i = 0; i < recordlist.length; i++) {

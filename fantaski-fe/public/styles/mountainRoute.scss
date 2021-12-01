@@ -31,23 +31,32 @@
 .routeAnimation path:nth-child(1) {
   stroke-dasharray: 2548.03px;
   stroke-dashoffset: 2548.03px;
-  animation: line-anim 3s linear forwards;
+  animation: line-anim 4.4s linear forwards 0.6s;
 }
 /* 綠線動畫 */
 .routeAnimation path:nth-child(2) {
   stroke-dasharray: 703px;
   stroke-dashoffset: 703px;
-  animation: line-anim 3s linear forwards;
+  animation: line-anim 4.8s linear forwards 0.2s;
 }
 /* 黑線動畫 */
 .routeAnimation path:nth-child(3) {
   stroke-dasharray: 1116.354px;
   stroke-dashoffset: 1116.354px;
-  animation: line-anim 3s linear forwards;
+  animation: line-anim 4.6s linear forwards 0.4s;
 }
 // 雪屋
 .mapIglooBorder {
   //   transition: 4s;
+  cursor: pointer;
+}
+// 人數少於五人的時候變紅色
+.courseLimit {
+  color: red;
+  font-weight: 700;
+}
+// 每個圖片中可以有pointer效果
+.pointer {
   cursor: pointer;
 }
 // .mapIglooBg {
@@ -62,9 +71,10 @@
   left: 5%;
   z-index: 1;
   &:hover {
-    filter: blur(2px) invert(62%) sepia(88%) saturate(4449%) hue-rotate(87deg)
-      brightness(119%) contrast(118%);
-    opacity: 0.1;
+    // filter: blur(2px) invert(62%) sepia(88%) saturate(4449%) hue-rotate(87deg)
+    //   brightness(119%) contrast(118%);
+    filter: drop-shadow(2px 2px 10px #a1da83);
+    // opacity: 1;
     background-image: url(../../src/components/route/igloo.png);
   }
 }
