@@ -19,7 +19,6 @@ const registerRules = [
     })
     .withMessage("密碼不一致"),
 ];
-
 router.get("/memberInfo", loginCheckMiddleware, async (req, res) => {
   try {
     let memberInfo = await connection.queryAsync(

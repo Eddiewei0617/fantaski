@@ -23,7 +23,7 @@ router.post("/register", registerRules, async (req, res) => {
   const validateResult = validationResult(req);
   if (!validateResult.isEmpty()) {
     let error = validateResult.array();
-    return res.status(400).json({ code: 99, message: error });
+    return res.json({ code: 99, message: error });
   }
   try {
     let member = await connection.queryAsync(
@@ -48,6 +48,7 @@ router.post("/register", registerRules, async (req, res) => {
 
 //登入api
 router.post("/login", async (req, res) => {
+  console.log("有人來登入");
   try {
     let member = await connection.queryAsync(
       "SELECT * FROM member WHERE email = ?;",
