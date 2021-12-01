@@ -2,17 +2,13 @@ express = require("express");
 const router = express.Router();
 const connection = require("../utils/db");
 const moment = require("moment");
-<<<<<<< HEAD
 const bcrypt = require("bcrypt");
-=======
 const { loginCheckMiddleware } = require("../middlewares/auth");
 
->>>>>>> main
 router.get("/", (res, req) => {
   console.log("您好歡迎光臨");
   res.send("這邊是會員頁面");
 });
-<<<<<<< HEAD
 const { body, validationResult } = require("express-validator");
 const registerRules = [
   // body("email").isEmail().withMessage("Email欄位請正確填寫"),
@@ -23,17 +19,14 @@ const registerRules = [
     })
     .withMessage("密碼不一致"),
 ];
-router.get("/memberInfo", async (req, res) => {
-=======
 
 router.get("/memberInfo", loginCheckMiddleware, async (req, res) => {
->>>>>>> main
   try {
     let memberInfo = await connection.queryAsync(
       "SELECT * FROM member where id=?",
       [req.session.member.id]
     );
-    console.log("memberInfo", memberInfo);
+    // console.log("memberInfo", memberInfo);
     if (res) {
       memberInfo[0].birthday = moment(memberInfo[0].birthday).format(
         "YYYY-MM-DD"
