@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useHistory } from "react-router-dom";
 import { IMAGE_SHARE_URL, API_URL } from "../../config/url";
 import { Link } from "react-router-dom";
 import { ParallaxProvider } from "react-scroll-parallax";
@@ -158,6 +159,11 @@ function Navbar(props) {
       showConfirmButton: false,
       timer: 1500,
     });
+  }
+
+  let history = useHistory();
+  async function toHome() {
+    let tohome = await history.push("/");
   }
   return (
     <>
@@ -343,6 +349,8 @@ function Navbar(props) {
                                 "登出成功！",
                                 "success"
                               );
+                              localStorage.clear();
+                              toHome();
                             }
                           });
                         // if (window.confirm("要登出嗎？")) {

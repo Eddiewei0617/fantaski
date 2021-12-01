@@ -36,8 +36,8 @@ router.post("/register", registerRules, async (req, res) => {
     let hashPassword = await bcrypt.hash(req.body.password, 10);
     let now = new Date();
     let result = await connection.queryAsync(
-      "INSERT INTO member (name, email, password, level_id, created_at, valid) VALUES (?);",
-      [[req.body.name, req.body.email, hashPassword, 2, now, 1]]
+      "INSERT INTO member (name, email, password, point,level_id, created_at, valid) VALUES (?);",
+      [[req.body.name, req.body.email, hashPassword, 300, 2, now, 1]]
     );
     res.json({ code: 0, message: "已建立帳號" });
   } catch (e) {

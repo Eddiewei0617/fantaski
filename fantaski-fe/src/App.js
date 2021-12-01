@@ -77,9 +77,11 @@ function App() {
 
   // 抓到storage裡面有幾樣商品的字串後，用split將字串轉成陣列就能顯示出有幾個了
   function handleAddNumber() {
-    let itemString = localStorage["addItemList"];
-    let items = itemString.substr(0, itemString.length - 2).split(", ");
-    setItemNumber(Number(items.length));
+    if (localStorage["addItemList"]) {
+      let itemString = localStorage["addItemList"];
+      let items = itemString.substr(0, itemString.length - 2).split(", ");
+      setItemNumber(Number(items.length));
+    }
   }
 
   return (
