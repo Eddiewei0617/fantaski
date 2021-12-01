@@ -9,10 +9,10 @@ function MemberComment(props) {
   if (userInfo === null) {
     return <div></div>;
   }
-  if (userInfo.code === 1201) {
-    alert("請先登入");
-    props.history.push("/login");
-  }
+  // if (userInfo.code === 1201) {
+  //   alert("請先登入");
+  //   props.history.push("/login");
+  // }
   return (
     <div>
       <MemberList page={5} />

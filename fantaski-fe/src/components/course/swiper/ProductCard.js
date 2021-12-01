@@ -1,10 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { COURSE_IMG_URL, PRODUCTIMAGE_URL } from "../../../config/url";
 import { handleAddNumber } from "../moduleList";
 
 function ProductCard(props) {
-  const { product, i, selectedAdvice, customerChoose, setItemNumber } = props;
+  const {
+    product,
+    i,
+    selectedAdvice,
+    customerChoose,
+    setItemNumber,
+    cartPositionState,
+  } = props;
   const [ifAddCart, setIfAddCart] = useState(false);
+  const FlyToCart = useRef();
 
   let storage = localStorage;
   // 為了不要讓addItemList在null的時候寫undefined
@@ -17,8 +25,31 @@ function ProductCard(props) {
     }
   }, [product]);
 
+  // function handleFlyToCart(e) {
+  //   FlyToCart.current.style.top = `${
+  //     e.clientY - FlyToCart.current.clientHeight / 2
+  //   }px`;
+  //   FlyToCart.current.style.left = `${
+  //     e.clientX - FlyToCart.current.clientWidth / 2
+  //   }px`;
+  //   let cartX =
+  //     cartPositionState.current.offsetLeft +
+  //     cartPositionState.current.clientWidth / 2;
+  //   let cartY =
+  //     cartPositionState.current.offsetTop +
+  //     cartPositionState.current.clientHeight / 2;
+  //   setTimeout(() => {
+  //     FlyToCart.current.style.top = `${cartY}px`;
+  //     FlyToCart.current.style.left = `${cartX}px`;
+  //     FlyToCart.current.style.width = "10px";
+  //     FlyToCart.current.style.height = "10px";
+  //     FlyToCart.current.style.opacity = "0";
+  //   }, 0);
+  // }
+
   return (
     <>
+      {/* <div className="fly-to-cart" ref={FlyToCart}></div> */}
       <div
         className={`${
           selectedAdvice === i
@@ -64,6 +95,7 @@ function ProductCard(props) {
                 if (storage[itemId]) {
                   alert("您已將此物品加入購物車");
                 } else {
+                  // handleFlyToCart(e);
                   storage.setItem(itemId, productInfo);
                   storage["addItemList"] += `${itemId}, `;
                   handleAddNumber(storage, setItemNumber);

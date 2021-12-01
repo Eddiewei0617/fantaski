@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import Calendar from "../calendar/Calendar";
 import { COURSE_IMG_URL } from "../../../config/url";
 import { getCourseInfo, handleAddNumber } from "../moduleList";
+import Swal from "sweetalert2";
 
 function AddCartFix({
   showCourse,
@@ -12,9 +13,12 @@ function AddCartFix({
   ifAddCart,
   setIfAddCart,
   setItemNumber,
+  cartPositionState,
 }) {
   const [showCalendar, setShowCalendar] = useState(false);
   const [courseInfo, setCourseInfo] = useState(null);
+  const FlyToCart = useRef();
+
   //檢查日期用
   var regDate = /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
   var regExp = new RegExp(regDate);
@@ -23,10 +27,12 @@ function AddCartFix({
     let name = e.target.name;
     let newValue = e.target.value;
     if (name === "number" && newValue > customerChoose.courseLeft) {
-      alert("超過人數上限");
+      // alert("超過人數上限");
+      Swal.fire("超過人數上限");
       return;
     } else if (name === "number" && newValue <= 0) {
-      alert("人數不可少於1");
+      // alert("人數不可少於1");
+      Swal.fire("人數不可少於1");
       return;
     }
     setCustomerChoose((cur) => {
@@ -46,7 +52,6 @@ function AddCartFix({
       //如果課程已加入購物車，萬年曆人數要減相應人數
       let addCartDate = storage[`c-${courseInfo[0].id}`].split("|")[4];
       let addCartAmount = storage[`c-${courseInfo[0].id}`].split("|")[5];
-      console.log(addCartDate, addCartAmount);
       setCustomerChoose((cur) => {
         return {
           ...cur,
@@ -63,6 +68,28 @@ function AddCartFix({
     storage["addItemList"] = "";
   }
 
+  function handleFlyToCart(e) {
+    FlyToCart.current.style.top = `${
+      e.clientY - FlyToCart.current.clientHeight / 2
+    }px`;
+    FlyToCart.current.style.left = `${
+      e.clientX - FlyToCart.current.clientWidth / 2
+    }px`;
+    let cartX =
+      cartPositionState.current.offsetLeft +
+      cartPositionState.current.clientWidth / 2;
+    let cartY =
+      cartPositionState.current.offsetTop +
+      cartPositionState.current.clientHeight / 2;
+    setTimeout(() => {
+      FlyToCart.current.style.top = `${cartY}px`;
+      FlyToCart.current.style.left = `${cartX}px`;
+      FlyToCart.current.style.width = "10px";
+      FlyToCart.current.style.height = "10px";
+      FlyToCart.current.style.opacity = "0";
+    }, 0);
+  }
+
   if (courseInfo === null) {
     return (
       <>
@@ -73,6 +100,7 @@ function AddCartFix({
 
   return (
     <>
+      <div className="fly-to-cart" ref={FlyToCart}></div>
       <div className="add-cart-fix-wrapper">
         <div className="decoration-skill">
           <img
@@ -153,15 +181,20 @@ function AddCartFix({
               onClick={(e) => {
                 let itemId = `c-${courseInfo[0].id}`;
                 if (storage[itemId]) {
-                  alert("您已將此物品加入購物車");
+                  // alert("您已將此物品加入購物車");
+                  Swal.fire("您已將此物品加入購物車");
                 } else if (customerChoose.date === "") {
-                  alert("請填寫日期！");
+                  // alert("請填寫日期！");
+                  Swal.fire("請填寫日期！");
                 } else if (customerChoose.number > customerChoose.courseLeft) {
-                  alert("人數超過上限");
+                  // alert("人數超過上限");
+                  Swal.fire("人數超過上限");
                 } else if (!regExp.test(customerChoose.date)) {
-                  alert("日期格式不正確，正確格式為：YYYY-MM-DD");
+                  // alert("日期格式不正確，正確格式為：YYYY-MM-DD");
+                  Swal.fire("日期格式不正確，正確格式為：YYYY-MM-DD");
                   return;
                 } else {
+                  handleFlyToCart(e);
                   setIfAddCart(true);
                   let productInfo = e.currentTarget.children[0].value;
                   // console.log("value", productInfo); //http://localhost:3000/assets/images_product/allblack.jfif|雪板類|暗黑滿點單板|1200

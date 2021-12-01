@@ -123,6 +123,7 @@ function App() {
                 showCourse={showCourse}
                 setShowCourse={setShowCourse}
                 setItemNumber={setItemNumber}
+                cartPositionState={cartPositionState}
               />
             </Route>
             <Route path="/course/skill">
@@ -131,6 +132,7 @@ function App() {
                 showCourse={showCourse}
                 setShowCourse={setShowCourse}
                 setItemNumber={setItemNumber}
+                cartPositionState={cartPositionState}
               />
             </Route>
             <Route path="/course/sled">
@@ -139,6 +141,7 @@ function App() {
                 showCourse={showCourse}
                 setShowCourse={setShowCourse}
                 setItemNumber={setItemNumber}
+                cartPositionState={cartPositionState}
               />
             </Route>
             <Route path="/course/igloo">
@@ -147,6 +150,7 @@ function App() {
                 showCourse={showCourse}
                 setShowCourse={setShowCourse}
                 setItemNumber={setItemNumber}
+                cartPositionState={cartPositionState}
               />
             </Route>
             <Route path="/products">
