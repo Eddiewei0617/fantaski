@@ -2,7 +2,11 @@ import React from "react";
 import MapMask from "./MapMask";
 import { IMAGE_ROUTER_URL } from "../../config/url";
 import { PRODUCTIMAGE_URL } from "../../config/url";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { API_URL } from "../../config/url";
+import { COURSE_NAME, MOUNTAIN_STATUS } from "../../config/StatusShortcut";
 const logo = document.querySelectorAll(".routeAnimation path");
 
 // for (let i = 0; i < logo.length; i++) {
@@ -36,10 +40,29 @@ function Map() {
       setWhiteMapView("");
     }
   }
-  const [routeImg, setRouteImg] = useState("pexels-photo-3969999.jpeg");
-  const [routeRedImg, setRouteRedImg] = useState("red5.jpg");
+  const [routeImg, setRouteImg] = useState("skiing.jpg");
+  const [routeRedImg, setRouteRedImg] = useState("red4.jpg");
   const [routeBlackImg, setRouteBlackImg] = useState("snowmobile2.jpg");
-  const [routeWhiteImg, setRouteWhiteImg] = useState("red5.jpg");
+  const [routeWhiteImg, setRouteWhiteImg] = useState("igloo5.jpg");
+
+  const [line, setLine] = useState();
+  useEffect(async () => {
+    let res = await axios.get(`${API_URL}/routeline/route`, {
+      withCredentials: true,
+    });
+    // if (res) {
+    //   for (let i = 0; i < res.length; i++) {
+    //     res = moment(res).format("YYYY-MM-DD");
+    //   }
+    // }
+    setLine(res.data);
+  }, []);
+  console.log(line);
+
+  if (!line) {
+    return <></>;
+  }
+
   return (
     <div>
       {/* 地圖及路線 */}
@@ -57,7 +80,8 @@ function Map() {
             <div className="modal-content shadow-lg">
               <div className="modal-header">
                 <h3 className="modal-title greenLine">
-                  {/* {item.color} */}綠線
+                  {/* {item.color} */}
+                  {COURSE_NAME[line[0].difficulty_id]}
                 </h3>
                 <button
                   type="button"
@@ -95,19 +119,19 @@ function Map() {
                     }}
                   >
                     <img
-                      className="shadow-sm bg-white border border-dark"
+                      className="shadow-sm bg-white border border-dark pointer"
                       src={`${IMAGE_ROUTER_URL}/skiing.jpg`}
                       alt=""
                     ></img>
                   </div>
                   <div
-                    className="col-6 imageBoxRight imageBoxImg"
+                    className="col-6 imageBoxRight imageBoxImg "
                     onClick={() => {
                       setRouteImg("5781362573_3a6e7f5066_o.jpg");
                     }}
                   >
                     <img
-                      className="shadow-sm bg-white border border-dark"
+                      className="shadow-sm bg-white border border-dark pointer"
                       src={`${IMAGE_ROUTER_URL}/5781362573_3a6e7f5066_o.jpg`}
                       alt=""
                     ></img>
@@ -123,11 +147,11 @@ function Map() {
                       <h6>課程人數 :</h6>
                     </div>
                     <div className="col-6">
-                      <h6>開放</h6>
-                      <h6>滑雪初體驗</h6>
-                      <h6>雙版/護目鏡/護臂</h6>
+                      <h6>{MOUNTAIN_STATUS[line[0].valid]}</h6>
+                      <h6>{line[0].name}</h6>
+                      <h6>單雙版/雪杖</h6>
                       <h6>Chuan Jun</h6>
-                      <h6>10位</h6>
+                      <h6>{line[0].stu_limit}</h6>
                     </div>
                   </div>
                 </div>
@@ -140,9 +164,14 @@ function Map() {
               >
                 Close
               </button> */}
-                <button type="button" className="popBtn ">
-                  立即報名
-                </button>
+                <div className="p-4">
+                  <Link
+                    to="/course/beginner"
+                    className="popBtn text-decoration-none p-3"
+                  >
+                    前往報名
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -160,7 +189,8 @@ function Map() {
                   className="modal-title redLine {
 "
                 >
-                  {/* {item.color} */}紅線
+                  {/* {item.color} */}
+                  {COURSE_NAME[line[1].difficulty_id]}
                 </h3>
                 <button
                   type="button"
@@ -195,7 +225,7 @@ function Map() {
                     }}
                   >
                     <img
-                      className="shadow-sm bg-white border border-dark"
+                      className="shadow-sm bg-white border border-dark pointer"
                       src={`${IMAGE_ROUTER_URL}/red4.jpg`}
                       alt=""
                     ></img>
@@ -207,7 +237,7 @@ function Map() {
                     }}
                   >
                     <img
-                      className="shadow-sm bg-white border border-dark"
+                      className="shadow-sm bg-white border border-dark pointer"
                       src={`${IMAGE_ROUTER_URL}/red3.jpg`}
                       alt=""
                     ></img>
@@ -223,11 +253,11 @@ function Map() {
                       <h6>課程人數 :</h6>
                     </div>
                     <div className="col-6">
-                      <h6>開放</h6>
-                      <h6>滑雪初體驗</h6>
-                      <h6>雙版/護目鏡/護臂</h6>
-                      <h6>Eddie Wei</h6>
-                      <h6>10位</h6>
+                      <h6>{MOUNTAIN_STATUS[line[1].valid]}</h6>
+                      <h6>{line[1].name}</h6>
+                      <h6>單雙版//雪鞋/護目鏡</h6>
+                      <h6>Chuan Jun</h6>
+                      <h6>{line[1].stu_limit}</h6>
                     </div>
                   </div>
                 </div>
@@ -240,9 +270,14 @@ function Map() {
               >
                 Close
               </button> */}
-                <button type="button" className="popBtn ">
-                  立即報名
-                </button>
+                <div className="p-4">
+                  <Link
+                    to="/course/skill"
+                    className="popBtn text-decoration-none p-3"
+                  >
+                    前往報名
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -257,7 +292,8 @@ function Map() {
             <div className="modal-content shadow-lg">
               <div className="modal-header">
                 <h3 className="modal-title blackLine">
-                  {/* {item.color} */}黑線
+                  {/* {item.color} */}
+                  {COURSE_NAME[line[2].difficulty_id]}
                 </h3>
                 <button
                   type="button"
@@ -292,7 +328,7 @@ function Map() {
                     }}
                   >
                     <img
-                      className="shadow-sm bg-white border border-dark"
+                      className="shadow-sm bg-white border border-dark pointer"
                       src={`${PRODUCTIMAGE_URL}/snowmobile2.jpg`}
                       alt=""
                     ></img>
@@ -304,7 +340,7 @@ function Map() {
                     }}
                   >
                     <img
-                      className="shadow-sm bg-white border border-dark"
+                      className="shadow-sm bg-white border border-dark pointer"
                       src={`${PRODUCTIMAGE_URL}/snowmobile9.jpg`}
                       alt=""
                     ></img>
@@ -320,11 +356,11 @@ function Map() {
                       <h6>課程人數 :</h6>
                     </div>
                     <div className="col-6">
-                      <h6>開放</h6>
-                      <h6>滑雪初體驗</h6>
-                      <h6>雙版/護目鏡/護臂</h6>
-                      <h6>Jessica</h6>
-                      <h6>10位</h6>
+                      <h6>{MOUNTAIN_STATUS[line[2].valid]}</h6>
+                      <h6>{line[2].name}</h6>
+                      <h6>雪地摩托車/聖誕老人裝</h6>
+                      <h6>Chuan Jun</h6>
+                      <h6>{line[2].stu_limit}</h6>
                     </div>
                   </div>
                 </div>
@@ -337,9 +373,14 @@ function Map() {
               >
                 Close
               </button> */}
-                <button type="button" className="popBtn ">
-                  立即報名
-                </button>
+                <div className="p-4">
+                  <Link
+                    to="/course/sled"
+                    className="popBtn text-decoration-none p-3"
+                  >
+                    前往報名
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -353,8 +394,9 @@ function Map() {
           <div className="modal-dialog modal-lg modal-dialog-centered ">
             <div className="modal-content shadow-lg">
               <div className="modal-header">
-                <h3 className="modal-title greenline">
-                  {/* {item.color} */}冰屋
+                <h3 className="modal-title greenLine">
+                  {/* {item.color} */}
+                  {COURSE_NAME[line[3].difficulty_id]}
                 </h3>
                 <button
                   type="button"
@@ -378,21 +420,31 @@ function Map() {
                   ></img> */}
                     <img
                       className="shadow-sm bg-white  border border-dark"
-                      src={`${IMAGE_ROUTER_URL}/igloo2.jpeg`}
+                      src={`${IMAGE_ROUTER_URL}/${routeWhiteImg}`}
                       alt=""
                     />
                   </div>
-                  <div className="col-6 imageBoxLeft imageBoxImg">
+                  <div
+                    className="col-6 imageBoxLeft imageBoxImg pointer"
+                    onClick={() => {
+                      setRouteWhiteImg("igloo5.jpg");
+                    }}
+                  >
                     <img
                       className="shadow-sm bg-white border border-dark"
-                      src={`${IMAGE_ROUTER_URL}/igloo2.jpeg`}
+                      src={`${IMAGE_ROUTER_URL}/igloo5.jpg`}
                       alt=""
                     ></img>
                   </div>
-                  <div className="col-6 imageBoxRight imageBoxImg">
+                  <div
+                    className="col-6 imageBoxRight imageBoxImg pointer"
+                    onClick={() => {
+                      setRouteWhiteImg("igloo3.jpg");
+                    }}
+                  >
                     <img
                       className="shadow-sm bg-white border border-dark"
-                      src={`${IMAGE_ROUTER_URL}/igloo2.jpeg`}
+                      src={`${IMAGE_ROUTER_URL}/igloo3.jpg`}
                       alt=""
                     ></img>
                   </div>
@@ -407,11 +459,11 @@ function Map() {
                       <h6>課程人數 :</h6>
                     </div>
                     <div className="col-6">
-                      <h6>開放</h6>
-                      <h6>滑雪初體驗</h6>
-                      <h6>雙版/護目鏡/護臂</h6>
-                      <h6>Jessica</h6>
-                      <h6>10位</h6>
+                      <h6>{MOUNTAIN_STATUS[line[3].valid]}</h6>
+                      <h6>{line[3].name}</h6>
+                      <h6>雙版//雪鏟</h6>
+                      <h6>Chuan Jun</h6>
+                      <h6>{line[3].stu_limit}</h6>
                     </div>
                   </div>
                 </div>
@@ -424,9 +476,14 @@ function Map() {
               >
                 Close
               </button> */}
-                <button type="button" className="popBtn ">
-                  立即報名
-                </button>
+                <div className="p-4">
+                  <Link
+                    to="/course/igloo"
+                    className="popBtn text-decoration-none p-3"
+                  >
+                    前往報名
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

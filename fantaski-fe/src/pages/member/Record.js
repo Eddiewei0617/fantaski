@@ -2,9 +2,10 @@ import React from "react";
 import { useState, useEffect } from "react";
 import MemberList from "../../components/member/MemberList";
 import $ from "jquery";
-import { PRODUCTIMAGE_URL, API_URL } from "../../config/url";
+import { PRODUCTIMAGE_URL, API_URL, COURSE_IMG_URL } from "../../config/url";
 import axios from "axios";
-
+import { COURSE_NAME } from "../../config/StatusShortcut";
+const moment = require("moment");
 function Record() {
   // collapse.collapse();
   function buttonToggle(e) {
@@ -21,6 +22,7 @@ function Record() {
     let res = await axios.get(`${API_URL}/member/memberRecord`, {
       withCredentials: true,
     });
+
     setRecord(res.data);
   }, []);
   console.log(record);
@@ -61,11 +63,11 @@ function Record() {
                         aria-controls="collapseOne"
                         onClick={buttonToggle}
                       >
-                        {/* {orders.map((orderNo) => {
-                          return ( */}
                         <div className=" row text-center font-weight-bold">
                           <div className="col-2">{order.order_no}</div>
-                          <div className="col-2">{order.created_at}</div>
+                          <div className="col-2">
+                            {moment(order.created_at).format("YYYY-MM-DD")}
+                          </div>
                           <div className="col-2">
                             {record.orderCourse[order.id].length}
                           </div>
@@ -75,8 +77,6 @@ function Record() {
                           <div className="col-2">{order.point_used} 點</div>
                           <div className="col-2">$ {order.consumption}</div>
                         </div>
-                        {/* );
-                        })} */}
                       </button>
                     </h2>
                   </div>
@@ -97,20 +97,72 @@ function Record() {
                         <div className="col-sm">數量</div>
                         <div className="col-sm">小計</div>
                       </div>
-                      <div className=" row text-center mt-2 align-items-center">
-                        <div className="col-2">
-                          <div className="imgBox m-auto">
-                            <img src={`${PRODUCTIMAGE_URL}/snowmobile2.jpg`} />
+                      {record.orderCourse[order.id].map((course) => {
+                        return (
+                          <div
+                            className=" row text-center mt-2 align-items-center"
+                            key={course.id}
+                          >
+                            <div className="col-2">
+                              <div className="imgBox m-auto">
+                                <img
+                                  src={`${COURSE_IMG_URL}/${course.image}`}
+                                />
+                              </div>
+                            </div>
+                            <div className="col-sm">課程體驗</div>
+                            <div className="col-sm">
+                              {COURSE_NAME[course.course_id]}
+                            </div>
+                            <div className="col-2">
+                              {moment(course.booking_date).format("YYYY-MM-DD")}
+                            </div>
+                            <div className="col-2">
+                              {moment(course.comment_last_update).format(
+                                "YYYY-MM-DD"
+                              )}
+                            </div>
+                            <div className="col-sm">{course.price}</div>
+                            <div className="col-sm">{course.amount}</div>
+                            <div className="col-sm">
+                              ${`${course.price * course.amount}`}
+                            </div>
                           </div>
-                        </div>
-                        <div className="col-sm">課程體驗</div>
-                        <div className="col-sm">滑雪初體驗</div>
-                        <div className="col-2">2021-08-05-18:15</div>
-                        <div className="col-2">2021-08-08-18:15</div>
-                        <div className="col-sm">$1500</div>
-                        <div className="col-sm">1</div>
-                        <div className="col-sm">$1500</div>
-                      </div>
+                        );
+                      })}
+                      {record.orderProduct[order.id].map((product) => {
+                        return (
+                          <div
+                            className=" row text-center mt-2 align-items-center"
+                            key={product.id}
+                          >
+                            <div className="col-2">
+                              <div className="imgBox m-auto">
+                                <img
+                                  src={`${PRODUCTIMAGE_URL}/${product.image}`}
+                                />
+                              </div>
+                            </div>
+                            <div className="col-sm">商品租賃</div>
+                            <div className="col-sm">{product.product_name}</div>
+                            <div className="col-2">
+                              {moment(product.booking_date).format(
+                                "YYYY-MM-DD"
+                              )}
+                            </div>
+                            <div className="col-2">
+                              {moment(product.booking_date).format(
+                                "YYYY-MM-DD"
+                              )}
+                            </div>
+                            <div className="col-sm">${product.price}</div>
+                            <div className="col-sm">{product.amount}</div>
+                            <div className="col-sm">
+                              ${`${product.price * product.amount}`}
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>

@@ -7,7 +7,8 @@ import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
 import { FaUserCircle } from "react-icons/fa";
 import { API_URL, UPLOAD_URL } from "../../config/url";
-
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 // import "./MemberContent.css";
 import { useState } from "react";
 import { STATUS_LEVEL } from "../../config/StatusShortcut";
@@ -25,21 +26,45 @@ function MemberContent({
   // const STATUS_ = {};
   // const [gender, setgender] = useState(`${sex}`);
   // const [memberbirthday, setmemberbirthday] = useState("");
+  const MySwal = withReactContent(Swal);
   const [memberContent, setmemberContent] = useState({
     gender: `${sex}`,
     memberbirthday: `${birthday}`,
     image: `${img}`,
   });
   const [uploadfile, setUploadfile] = useState(`${img}`);
-
+  const [password, setPassword] = useState({
+    password: "",
+    confirmPassword: "",
+  });
+  // 儲存所有的欄位錯誤訊息
+  const [fieldErrors, setFieldErrors] = useState({
+    password: "",
+    confirmPassword: "",
+  });
+  const [showmodaltwo, setshowmodaltwo] = useState("false");
+  function toggleModaltwo() {
+    setshowmodaltwo(!showmodaltwo);
+  }
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      let res = await axios.post(`${API_URL}/member/membersave`, memberContent);
+      let res = await axios.post(
+        `${API_URL}/member/membersave`,
+        memberContent,
+        {
+          withCredentials: true,
+        }
+      );
+      MySwal.fire({
+        title: "儲存成功",
+        icon: "success",
+      });
       console.log(res);
     } catch (e) {
       console.log("handleSubmit", e);
     }
+    // window.location.reload();
   }
   const handleChange = (e) => {
     let newMemberContent = {
@@ -48,6 +73,14 @@ function MemberContent({
     };
     console.log(newMemberContent);
     setmemberContent(newMemberContent);
+  };
+  const handlePasswordChange = (e) => {
+    let newMemberPassword = {
+      ...password,
+      [e.target.name]: e.target.value,
+    };
+    console.log(newMemberPassword);
+    setPassword(newMemberPassword);
   };
   async function handleUpload(e) {
     // let newMemberUpload = { ...memberContent };
@@ -58,25 +91,108 @@ function MemberContent({
     try {
       let formData = new FormData();
       formData.append("image", e.target.files[0]);
-      formData.append("id", 3);
-      let res = await axios.post(`${API_URL}/memberUpload/`, formData);
+      // formData.append("id", 3);
+      let res = await axios.post(`${API_URL}/memberUpload/`, formData, {
+        withCredentials: true,
+      });
       console.log(e.target.files[0]);
     } catch (e) {
       console.log("handleUpload錯啦", e);
     }
+    window.location.reload();
   }
   // if (memberContent === null) {
   //   return <></>;
   // }
-  // console.log(memberContent.memberbirthday);
-
-  // google登入
-  async function loginByGoogle() {
-    let res = await axios.get(`http://localhost:3001/auth/google`);
-    console.log("google", res);
+  console.log(memberContent.memberbirthday);
+  async function handlePasswordSubmit(e) {
+    e.preventDefault();
+    try {
+      let res = await axios.post(`${API_URL}/member/memberPassword`, password, {
+        withCredentials: true,
+      });
+      MySwal.fire({
+        title: "密碼修改成功",
+        icon: "success",
+      });
+      console.log(res);
+    } catch (e) {
+      console.log("handlePasswordSubmit", e);
+    }
+    // window.location.reload();
   }
   return (
     <>
+      {/* 隱藏彈跳視窗 */}
+      <form onSubmit={handlePasswordSubmit}>
+        <div
+          class={`memberpop ${showmodaltwo ? "modal" : ""}`}
+          id="exampleModaltwo"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabeltwo"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5
+                  class="modal-title memberpopTitle"
+                  id="exampleModalLabeltwo"
+                >
+                  修改密碼
+                </h5>
+              </div>
+              <div class="modal-body m-4 row align-items-center">
+                <div className="col-5 text-center my-3">新密碼: </div>
+                <div className="col-7 my-3">
+                  <div>
+                    <input
+                      type="password"
+                      name="password"
+                      className="w-100 border border-dark"
+                      value={password.password}
+                      onChange={handlePasswordChange}
+                      required
+                      minLength="6"
+                    />
+                  </div>
+                </div>
+                <div className="col-5 text-center my-3">確認密碼: </div>
+                <div className="col-7 my-3">
+                  <div>
+                    <input
+                      type="password"
+                      name="confirmPassword"
+                      className="w-100 border border-dark"
+                      value={password.confirmPassword}
+                      onChange={handlePasswordChange}
+                      required
+                      minLength="6"
+                    />
+                    {/* {fieldErrors.confirmPassword !== "" && (
+                    <div className="error">{fieldErrors.confirmPassword}</div>
+                  )} */}
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                  onClick={toggleModaltwo}
+                >
+                  取消
+                </button>
+                <button type="submit" class="btn btn-danger">
+                  儲存
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      {/* 隱藏彈跳視窗結束 */}
       <div>
         <div className="row memberContent text-center">
           <div className="col-4 memberContentHigh  container">
@@ -135,10 +251,17 @@ function MemberContent({
                     </div>
                   </div>
                   <div className="col-6  d-flex align-items-center ">
-                    已建立帳號Eddie
+                    已建立帳號 {name}
                   </div>
                   <div className="col-3  d-flex align-items-center">
-                    <a className="text-right" href="">
+                    <a
+                      type="button"
+                      className="text-right text-decoration-none"
+                      href="#"
+                      data-toggle="modal"
+                      data-target="#exampleModaltwo"
+                      onClick={toggleModaltwo}
+                    >
                       修改密碼
                     </a>
                   </div>
@@ -156,8 +279,8 @@ function MemberContent({
                   </div>
                   <div className="col-3 d-flex align-items-center">
                     {" "}
-                    <a href="http://localhost:3001/auth/google">
-                      <button onClick={loginByGoogle}>前往連結帳號</button>
+                    <a href="#" type="button" className="text-decoration-none">
+                      前往連結帳號
                     </a>
                   </div>
                   <div className="memberContentBorderBotton"></div>
@@ -174,7 +297,9 @@ function MemberContent({
                   </div>
                   <div className="col-3 d-flex align-items-center">
                     {" "}
-                    <a href="">前往連結帳號</a>
+                    <a href="#" type="button" className="text-decoration-none">
+                      前往連結帳號
+                    </a>
                   </div>
                   <div className="memberContentBorderBotton"></div>
                 </div>

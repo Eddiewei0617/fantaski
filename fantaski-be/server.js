@@ -137,6 +137,9 @@ app.use("/api/memberUpload", memberUploadRouter);
 let recordRouter = require("./routers/record");
 app.use("/api/record", recordRouter);
 
+let routeRouter = require("./routers/routeline");
+app.use("/api/routeline", routeRouter);
+
 //404中間件
 app.use((req, res, next) => {
   console.log("找不到網頁");
