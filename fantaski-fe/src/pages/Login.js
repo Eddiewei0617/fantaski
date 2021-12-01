@@ -12,6 +12,7 @@ import { HiMail } from "react-icons/hi";
 import axios from "axios";
 import { API_URL } from "../config/url";
 import { withRouter } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function Login(props) {
   const { setUserInfo } = props;
@@ -43,16 +44,23 @@ function Login(props) {
     e.preventDefault();
     try {
       let resReg = await axios.post(`${API_URL}/auth/register`, registerInfo);
-      if (resReg.data.code == 0) {
-        alert("註冊成功");
+      console.log(resReg);
+      if (resReg.data.code == 1101) {
+        Swal.fire("錯誤", "該email已被註冊", "error");
+      } else if (resReg.data.code == 99) {
+        console.log(resReg.data.message[0].msg);
+        Swal.fire("錯誤", resReg.data.message[0].msg, "error");
+      } else if (resReg.data.code == 0) {
+        Swal.fire("Register", "註冊成功", "success");
+        let resLog = await axios.post(`${API_URL}/auth/login`, registerInfo, {
+          withCredentials: true,
+        });
+        await setUserInfo(resLog.data.member);
+        props.history.goBack();
       }
-      let resLog = await axios.post(`${API_URL}/auth/login`, registerInfo, {
-        withCredentials: true,
-      });
-      setUserInfo(resLog.data.member);
-      props.history.goBack();
     } catch (e) {
       console.log(e);
+      Swal.fire("錯誤", "請洽系統管理員", "error");
     }
   }
   //登入呼叫api
@@ -65,9 +73,10 @@ function Login(props) {
         withCredentials: true,
       });
       if (res.data.code == 1102) {
-        alert("帳號或密碼錯誤，請重新登入");
+        Swal.fire("錯誤", "帳號或密碼錯誤，請重新登入", "error");
       } else {
         setUserInfo(res.data.member);
+        Swal.fire("Login", "登入成功", "success");
         props.history.goBack();
       }
     } catch (e) {

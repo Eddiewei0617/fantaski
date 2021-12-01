@@ -331,7 +331,7 @@ function Navbar(props) {
                             text: "是否確定登出？",
                             icon: "warning",
                             showCancelButton: true,
-                            confirmButtonText: "刪除",
+                            confirmButtonText: "登出",
                             cancelButtonText: "取消",
                             reverseButtons: true,
                           })
