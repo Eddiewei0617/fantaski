@@ -60,6 +60,9 @@ function NewPost({ forumCategory, setForumCategory, userInfo }) {
         if (forumCategory.nowaForumInfo && forumCategory.nowaForumInfo !== "") {
           formData.append("forum_id", forumCategory.nowaForumInfo[0].id);
           await updatePostInfo(formData);
+          setForumCategory((cur) => {
+            return { ...cur, nowaForumInfo: "" };
+          });
         } else {
           //新增文章
           await insertPostInfo(formData);

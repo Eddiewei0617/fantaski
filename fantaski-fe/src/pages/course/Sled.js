@@ -13,7 +13,13 @@ import AddCartFloat from "../../components/course/addCartFloat/AddCartFloat";
 import { toShowAddCartFloat } from "../../components/course/moduleList";
 
 function Sled(props) {
-  const { courses, showCourse, setShowCourse, setItemNumber } = props;
+  const {
+    courses,
+    showCourse,
+    setShowCourse,
+    setItemNumber,
+    cartPositionState,
+  } = props;
   //courses ["初體驗", "技能班", "雪橇車", "建冰屋"]
   //showCourse courses[1]
   const [customerChoose, setCustomerChoose] = useState({
@@ -67,6 +73,7 @@ function Sled(props) {
         customerChoose={customerChoose}
         setCustomerChoose={setCustomerChoose}
         setItemNumber={setItemNumber}
+        cartPositionState={cartPositionState}
       />
       <Title titleName="推薦裝備" />
       <Swiper
