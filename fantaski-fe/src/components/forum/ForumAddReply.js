@@ -33,6 +33,9 @@ function ForumAddReply({
       replyList[forum_id] = replyCount + 1;
     }
   }
+  if (userInfo === null) {
+    return <></>;
+  }
   if (userInfo.code === 1201 || userFromDb === null) {
     return <div>請先登入後才能回覆哦</div>;
   }
