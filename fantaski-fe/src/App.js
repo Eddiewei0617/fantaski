@@ -139,6 +139,7 @@ function App() {
                 setItemNumber={setItemNumber}
                 cartPositionState={cartPositionState}
                 setColorButton={setColorButton}
+                setCategoryId={setCategoryId}
               />
             </Route>
             <Route path="/course/skill">
@@ -149,6 +150,7 @@ function App() {
                 setItemNumber={setItemNumber}
                 cartPositionState={cartPositionState}
                 setColorButton={setColorButton}
+                setCategoryId={setCategoryId}
               />
             </Route>
             <Route path="/course/sled">
@@ -159,6 +161,7 @@ function App() {
                 setItemNumber={setItemNumber}
                 cartPositionState={cartPositionState}
                 setColorButton={setColorButton}
+                setCategoryId={setCategoryId}
               />
             </Route>
             <Route path="/course/igloo">
@@ -169,6 +172,7 @@ function App() {
                 setItemNumber={setItemNumber}
                 cartPositionState={cartPositionState}
                 setColorButton={setColorButton}
+                setCategoryId={setCategoryId}
               />
             </Route>
             <Route path="/products">
