@@ -126,4 +126,61 @@ function isLoggedIn(req, res, next) {
 //   res.send("Hello!");
 // });
 
+//fb登入api
+router.post("/fblogin", async (req, res) => {
+  console.log("有人來用FB登入");
+  try {
+    let member = await connection.queryAsync(
+      "SELECT * FROM member WHERE facebook_id = ?;",
+      [req.body.id]
+    );
+    if (member.length === 0) {
+      let now = new Date();
+      console.log("new coming");
+      try {
+        let result = await connection.queryAsync(
+          "INSERT INTO member (name, email, password, image, level_id, facebook_id, created_at, valid) VALUES (?);",
+          [
+            [
+              req.body.name,
+              "facebook",
+              "facebook",
+              req.body.picture.data.url,
+              2,
+              req.body.id,
+              now,
+              1,
+            ],
+          ]
+        );
+        let returnMember = {
+          id: "",
+          email: req.body.email,
+          name: req.body.name,
+          image: req.body.picture.data.url,
+          point: "",
+        };
+        req.session.member = returnMember;
+        res.json({ code: 0, message: "已建立帳號", member: returnMember });
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      console.log("old coming");
+      member = member[0];
+      let returnMember = {
+        id: member.id,
+        email: member.email,
+        name: member.name,
+        image: member.image,
+        point: member.point,
+      };
+      req.session.member = returnMember;
+      res.json({ code: 0, message: "登入成功", member: returnMember });
+    }
+  } catch (e) {
+    res.json({ code: 1109, message: "登入失敗" });
+  }
+});
+
 module.exports = router;

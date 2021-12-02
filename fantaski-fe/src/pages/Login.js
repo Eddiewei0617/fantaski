@@ -75,6 +75,16 @@ function Login(props) {
       } else {
         setUserInfo(res.data.member);
         Swal.fire("Login", "登入成功", "success");
+        //抓看看seesion有沒有登入資料
+        try {
+          let resInfo = await axios.get(`${API_URL}/auth/userInfo`, {
+            withCredentials: true,
+          });
+          console.log(resInfo.data);
+        } catch (e) {
+          console.log(e);
+        }
+
         props.history.goBack();
       }
     } catch (e) {

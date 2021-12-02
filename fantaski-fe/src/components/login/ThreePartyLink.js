@@ -11,16 +11,16 @@ import { FaFacebookF } from "react-icons/fa";
 function ThreePartyLink({ setUserInfo }) {
   const [clickOnFbLogin, setClickOnFbLogin] = useState(false);
   // google登入
-  useEffect(async () => {
-    try {
-      let res = await axios.get(`http://localhost:3001/auth/protected`, {
-        withCredentials: true,
-      });
-      console.log("google", res);
-    } catch (e) {
-      console.error(e);
-    }
-  }, []);
+  // useEffect(async () => {
+  //   try {
+  //     let res = await axios.get(`http://localhost:3001/auth/protected`, {
+  //       withCredentials: true,
+  //     });
+  //     console.log("google", res);
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // }, []);
   // async function loginByGoogle() {
 
   // }

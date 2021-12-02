@@ -41,7 +41,7 @@ router.post("/getadviceinfo", async (req, res) => {
   console.log("request for getAdviceinfo");
   try {
     let adviceInfoList = await connection.queryAsync(
-      "SELECT p.id, p.name, p.image, p.price, p.content FROM advice a, product p WHERE a.course_id = ? AND a.product_id = p.id ;",
+      "SELECT p.id, p.name, p.image, p.price, p.content FROM advice a, product p WHERE a.course_id = ? AND a.product_id = p.id ORDER BY p.category_id;",
       req.body.course_id
     );
     res.json(adviceInfoList);
