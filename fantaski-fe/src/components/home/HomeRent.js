@@ -9,7 +9,7 @@ import axios from "axios";
 import { API_URL } from "../../config/url";
 
 const types = ["雪板類", "服飾類", "裝備類"];
-function HomeRent() {
+function HomeRent({ setColorButton }) {
   const mainTitle = {
     title: "租點裝備",
     subTitle: "你想不到的裝備這裡通通有",
@@ -53,6 +53,7 @@ function HomeRent() {
             <HomeRentCarousel
               active={active}
               productList={productList[types.indexOf(active)]}
+              setColorButton={setColorButton}
             />
           </div>
         </div>

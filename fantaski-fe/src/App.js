@@ -47,6 +47,9 @@ import { getMemberPoints } from "../src/components/orders/ModuleDb";
 const courses = ["初體驗", "技能班", "雪橇車", "建冰屋"];
 
 function App() {
+  // Navbar的字顏色切換
+  let [colorButton, setColorButton] = useState("FANTASKI");
+
   //傳入course狀態(使用者要看哪個course)
   const [showCourse, setShowCourse] = useState();
 
@@ -58,6 +61,9 @@ function App() {
   useEffect(() => {
     getUserInfo(setUserInfo);
   }, []);
+
+  //fb登入狀態
+  const [fBloginState, setFbLoginState] = useState(false);
 
   // 引入moduleDb.js檔抓取後端member資料庫的資料來顯示會員剩餘點數
   const [memberInfo, setMemberInfo] = useState(null);
@@ -77,10 +83,15 @@ function App() {
 
   // 抓到storage裡面有幾樣商品的字串後，用split將字串轉成陣列就能顯示出有幾個了
   function handleAddNumber() {
-    let itemString = localStorage["addItemList"];
-    let items = itemString.substr(0, itemString.length - 2).split(", ");
-    setItemNumber(Number(items.length));
+    if (localStorage["addItemList"]) {
+      let itemString = localStorage["addItemList"];
+      let items = itemString.substr(0, itemString.length - 2).split(", ");
+      setItemNumber(Number(items.length));
+    }
   }
+
+  // 商品種類狀態，有1~8，預設為1(單板)
+  const [categoryId, setCategoryId] = useState(1);
 
   return (
     <>
@@ -95,6 +106,9 @@ function App() {
           handleAddNumber={handleAddNumber}
           userInfo={userInfo}
           setUserInfo={setUserInfo}
+          colorButton={colorButton}
+          setColorButton={setColorButton}
+          setFbLoginState={setFbLoginState}
         />
         {/* LOGO+標題+導覽列+上方選單 */}
         {/* 主內容區 */}
@@ -124,6 +138,7 @@ function App() {
                 setShowCourse={setShowCourse}
                 setItemNumber={setItemNumber}
                 cartPositionState={cartPositionState}
+                setColorButton={setColorButton}
               />
             </Route>
             <Route path="/course/skill">
@@ -133,6 +148,7 @@ function App() {
                 setShowCourse={setShowCourse}
                 setItemNumber={setItemNumber}
                 cartPositionState={cartPositionState}
+                setColorButton={setColorButton}
               />
             </Route>
             <Route path="/course/sled">
@@ -142,6 +158,7 @@ function App() {
                 setShowCourse={setShowCourse}
                 setItemNumber={setItemNumber}
                 cartPositionState={cartPositionState}
+                setColorButton={setColorButton}
               />
             </Route>
             <Route path="/course/igloo">
@@ -151,6 +168,7 @@ function App() {
                 setShowCourse={setShowCourse}
                 setItemNumber={setItemNumber}
                 cartPositionState={cartPositionState}
+                setColorButton={setColorButton}
               />
             </Route>
             <Route path="/products">
@@ -161,6 +179,8 @@ function App() {
                 cartPositionState={cartPositionState}
                 handleAddNumber={handleAddNumber}
                 userInfo={userInfo}
+                categoryId={categoryId}
+                setCategoryId={setCategoryId}
               />
             </Route>
             <Route path="/Orders">
@@ -171,10 +191,15 @@ function App() {
               />
             </Route>
             <Route path="/login">
-              <Login setUserInfo={setUserInfo} />
+              <Login
+                userInfo={userInfo}
+                setUserInfo={setUserInfo}
+                fBloginState={fBloginState}
+                setFbLoginState={setFbLoginState}
+              />
             </Route>
             <Route path="/member">
-              <Member />
+              <Member userInfo={userInfo} />
             </Route>
             <Route path="/forum/new-post">
               <NewPost
@@ -211,10 +236,10 @@ function App() {
               />
             </Route>
             <Route path="/mountainroute">
-              <MountainRoute />
+              <MountainRoute setColorButton={setColorButton} />
             </Route>
             <Route path="/">
-              <Home />
+              <Home setColorButton={setColorButton} />
             </Route>
 
             {/* footer有時間再處理 勿刪!!*/}

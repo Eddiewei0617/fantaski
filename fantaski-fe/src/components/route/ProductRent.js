@@ -2,7 +2,7 @@ import React from "react";
 // import { IMAGE_ROUTER_URL } from "../../config/url";
 import { PRODUCTIMAGE_URL } from "../../config/url";
 import { Link } from "react-router-dom";
-function ProductRent() {
+function ProductRent({ setColorButton }) {
   return (
     <div>
       <div className="productSectionTitle">
@@ -79,7 +79,13 @@ function ProductRent() {
             <div className="col-6 text-left p-0 pl-2  ">雪橇車/摩托車</div>
           </div>
           {/* <button className="btn btn-primary mt-3 w-50 mx-auto">更多</button> */}
-          <Link to="/products" className="btn btn-primary mt-3 w-50 mx-auto">
+          <Link
+            to="/products"
+            className="btn btn-primary mt-3 w-50 mx-auto"
+            onClick={() => {
+              setColorButton("租點裝備");
+            }}
+          >
             更多
           </Link>
         </div>

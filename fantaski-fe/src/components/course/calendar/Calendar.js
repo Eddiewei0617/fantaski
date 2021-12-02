@@ -7,7 +7,6 @@ const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 const year = moment().format("YYYY");
 const month = moment().format("MM");
 const day = moment().format("DD");
-
 function Calendar(props) {
   const [selectedYear, setSelectedYear] = useState(year);
   const [selectedMonth, setSelectedMonth] = useState(month);
@@ -18,6 +17,7 @@ function Calendar(props) {
     setShowCalendar,
     setShowCalendarFloat,
     showCourse,
+    ifAddCart,
   } = props;
   return (
     <>
@@ -39,6 +39,7 @@ function Calendar(props) {
           setCustomerChoose={setCustomerChoose}
           setShowCalendar={setShowCalendar}
           setShowCalendarFloat={setShowCalendarFloat}
+          ifAddCart={ifAddCart}
         />
       </div>
     </>

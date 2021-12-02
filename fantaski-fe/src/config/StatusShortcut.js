@@ -42,7 +42,7 @@ export const COURSE_NAME = {
   1: "初體驗",
   2: "技能班",
   3: "雪橇車",
-  4: "冰屋建造",
+  4: "建冰屋",
 };
 export const MOUNTAIN_STATUS = {
   1: "開放",

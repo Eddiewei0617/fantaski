@@ -28,9 +28,12 @@ function FourmUserName({ forum_id, userInfo }) {
               src={`${
                 poster && poster.image === null
                   ? `${IMAGE_FORUM_URL}/snowman.svg`
+                  : poster.image.includes("https")
+                  ? `${poster.image}`
                   : `${PUBLIC_URL}/${poster.image}`
               }`}
               alt="snowman-defult"
+              className="object-fit"
             />
           </div>
           {/* user 帳號名 */}
@@ -43,9 +46,12 @@ function FourmUserName({ forum_id, userInfo }) {
             <div className="forum-user-img">
               {/* 需規範上傳圖片的限制檔名與K數 */}
               <img
+                className="object-fit"
                 src={`${
                   userInfo.image === null
                     ? `${IMAGE_FORUM_URL}/snowman.svg`
+                    : userInfo.loginMethod === "thirdParty"
+                    ? `${userInfo.image}`
                     : `${PUBLIC_URL}/${userInfo.image}`
                 }`}
                 alt="snowman-defult"

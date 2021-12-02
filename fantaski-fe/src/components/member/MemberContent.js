@@ -6,7 +6,12 @@ import { BsFillPencilFill } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
 import { FaUserCircle } from "react-icons/fa";
-import { API_URL, UPLOAD_URL } from "../../config/url";
+import {
+  API_URL,
+  UPLOAD_URL,
+  IMAGE_FORUM_URL,
+  PUBLIC_URL,
+} from "../../config/url";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 // import "./MemberContent.css";
@@ -23,6 +28,7 @@ function MemberContent({
   birthday,
   img,
   email,
+  userInfo,
 }) {
   // const STATUS_ = {};
   // const [gender, setgender] = useState(`${sex}`);
@@ -130,6 +136,12 @@ function MemberContent({
     }
     // window.location.reload();
   }
+
+  if (userInfo === null) {
+    return <></>;
+  }
+  console.log("userInfo.image", userInfo.image);
+
   return (
     <>
       {/* 隱藏彈跳視窗 */}
@@ -222,7 +234,17 @@ function MemberContent({
             <div className="memberContentLeft shadow  d-flex flex-column justify-content-around">
               <div className="memberPhotoRealtive">
                 <div className="memberPhoto mt-4 ">
-                  <img src={`${UPLOAD_URL}/${uploadfile}`} />
+                  {/* <img src={`${UPLOAD_URL}/${uploadfile}`} /> */}
+                  <img
+                    src={`${
+                      userInfo && uploadfile === null
+                        ? `${IMAGE_FORUM_URL}/snowman.svg`
+                        : userInfo && uploadfile.includes("https")
+                        ? `${uploadfile}`
+                        : `${PUBLIC_URL}/${uploadfile}`
+                    }`}
+                    alt=""
+                  />
                 </div>
                 <div className="memberFile shadow-sm ">
                   <AiFillPicture />{" "}

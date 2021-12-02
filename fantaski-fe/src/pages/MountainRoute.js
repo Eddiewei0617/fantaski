@@ -7,18 +7,18 @@ import Map from "../components/route/Map";
 import Place from "../components/route/Place";
 import Cablecar from "../components/route/Cablecar";
 import ProductRent from "../components/route/ProductRent";
-function MountainRoute() {
+function MountainRoute({ setColorButton }) {
   return (
     <div>
       {/* <Navbar /> */}
-      <Map />
+      <Map setColorButton={setColorButton} />
       {/* <MapMask /> */}
 
       <Place />
       {/* <SnowInformation /> */}
       {/* <SnowOpen /> */}
       <Cablecar />
-      <ProductRent />
+      <ProductRent setColorButton={setColorButton} />
     </div>
   );
 }

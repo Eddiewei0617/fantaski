@@ -36,8 +36,8 @@ router.post("/register", registerRules, async (req, res) => {
     let hashPassword = await bcrypt.hash(req.body.password, 10);
     let now = new Date();
     let result = await connection.queryAsync(
-      "INSERT INTO member (name, email, password, level_id, created_at, valid) VALUES (?);",
-      [[req.body.name, req.body.email, hashPassword, 2, now, 1]]
+      "INSERT INTO member (name, email, password, point,level_id, created_at, valid) VALUES (?);",
+      [[req.body.name, req.body.email, hashPassword, 300, 2, now, 1]]
     );
     res.json({ code: 0, message: "已建立帳號" });
   } catch (e) {
@@ -69,6 +69,7 @@ router.post("/login", async (req, res) => {
       name: member.name,
       image: member.image,
       point: member.point,
+      loginMethod: "traditional",
     };
     req.session.member = returnMember;
     res.json({ code: 0, message: "登入成功", member: returnMember });
@@ -98,32 +99,136 @@ router.get("/userInfo", async (req, res) => {
   }
 });
 
-// google登入
-function isLoggedIn(req, res, next) {
-  req.user ? next() : res.sendStatus(401);
-  //   console.log("req.user", req.user);
-}
-// router.get(
-//   "/google",
-//   passport.authenticate("google", { scope: ["email", "profile"] }),
-//   async (req, res) => {
-//     console.log("connect to backend");
-//     console.log("req.user", req.user);
-//     res.json(req.user);
-//   }
-// );
-// router.get(
-//   "/callback",
-//   passport.authenticate("google", {
-//     successRedirect: "/api/auth/protected",
-//     failureRedirect: "/api/auth/failure",
-//   })
-// );
-// router.get("/failure", (req, res) => {
-//   res.send("something went wrong...");
-// });
-// router.get("/protected", isLoggedIn, (req, res) => {
-//   res.send("Hello!");
-// });
+// google註冊登入
+router.post("/google", async (req, res) => {
+  let { email, name, imageUrl, googleId } = req.body.profileObj;
+  console.log("req.body", req.body);
+  try {
+    let memberInDb = await connection.queryAsync(
+      "SELECT * from member WHERE email=?",
+      [email]
+    );
+    console.log("memberInDb", memberInDb);
+    // 如果資料庫有這個email就登入 :
+    if (memberInDb.length !== 0) {
+      if (memberInDb[0].google_id === googleId) {
+        console.log("已用google註冊過");
+        memberInDb = memberInDb[0];
+        let returnMember = {
+          id: memberInDb.id,
+          email: memberInDb.email,
+          name: memberInDb.name,
+          image: imageUrl,
+          point: memberInDb.point,
+          loginMethod: "thirdParty",
+        };
+        req.session.member = returnMember;
+        console.log("已使用google登入成功");
+        res.json({ code: 0, message: "登入成功", member: returnMember });
+      } else {
+        console.log("已有email，但未註冊google");
+        let googleIdInsert = await connection.queryAsync(
+          "INSERT INTO member (image, google_id) VALUES (?,?)",
+          [imageUrl, googleId]
+        );
+        let returnMember = {
+          id: memberInDb.id,
+          email: memberInDb.email,
+          name: memberInDb.name,
+          image: memberInDb.image,
+          point: memberInDb.point,
+          loginMethod: "thirdParty",
+        };
+        req.session.member = returnMember;
+        res.json({ result: "Google帳號連結成功", member: returnMember });
+      }
+    }
+
+    // 如果資料庫沒有這個email就註冊 :
+    if (memberInDb.length === 0) {
+      console.log("未註冊過");
+      let googleInsert = await connection.queryAsync(
+        "INSERT INTO member (name, email,image,point, level_id, google_id, valid) VALUES (?,?,?,?,?,?,?)",
+        [name, email, imageUrl, 300, 1, googleId, 1]
+      );
+      let returnMember = {
+        id: googleInsert.insertId,
+        email: email,
+        name: name,
+        image: imageUrl,
+        point: 300,
+        loginMethod: "thirdParty",
+      };
+      req.session.member = returnMember;
+      res.json({
+        code: 0,
+        message: "已建立帳號",
+        member: returnMember,
+      });
+    }
+  } catch (e) {
+    console.error(e);
+  }
+});
+
+//fb登入api
+router.post("/fblogin", async (req, res) => {
+  console.log("有人來用FB登入");
+  try {
+    let member = await connection.queryAsync(
+      "SELECT * FROM member WHERE facebook_id = ?;",
+      [req.body.id]
+    );
+    if (member.length === 0) {
+      let now = new Date();
+      console.log("new coming");
+      try {
+        let result = await connection.queryAsync(
+          "INSERT INTO member (name, email, password, image, level_id, facebook_id, point, created_at, valid) VALUES (?);",
+          [
+            [
+              req.body.name,
+              "facebook",
+              "facebook",
+              req.body.picture.data.url,
+              2,
+              req.body.id,
+              300,
+              now,
+              1,
+            ],
+          ]
+        );
+        let returnMember = {
+          id: result.insertId,
+          email: req.body.email,
+          name: req.body.name,
+          image: req.body.picture.data.url,
+          point: "",
+          loginMethod: "facebook",
+        };
+        req.session.member = returnMember;
+        res.json({ code: 0, message: "已建立帳號", member: returnMember });
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      console.log("old coming");
+      member = member[0];
+      let returnMember = {
+        id: member.id,
+        email: member.email,
+        name: member.name,
+        image: member.image,
+        point: member.point,
+        loginMethod: "thirdParty",
+      };
+      req.session.member = returnMember;
+      res.json({ code: 0, message: "登入成功", member: returnMember });
+    }
+  } catch (e) {
+    res.json({ code: 1109, message: "登入失敗" });
+  }
+});
 
 module.exports = router;
