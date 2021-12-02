@@ -75,25 +75,25 @@ router.post("/memberupdate", async (req, res) => {
     "SELECT * FROM member WHERE email=?",
     [req.body.email]
   );
-  console.log(confirmEmail.length);
-  if (confirmEmail.length > 0) {
-    res.json({ message: "有相同的電子信箱囉", result: "false" });
-  } else {
-    try {
-      let data = await connection.queryAsync(
-        "UPDATE member SET name=?, birthday=?,gender=?, email=? WHERE id=?",
-        [
-          req.body.name,
-          req.body.birthday,
-          req.body.gender,
-          req.body.email,
-          req.session.member.id,
-        ]
-      );
-      res.json({ message: "修改成功", result: "true" });
-    } catch (e) {
-      console.log("沒有抓到會員修改的東西", e);
-    }
+  // console.log(confirmEmail.length);
+  // console.log("confirmEmail", confirmEmail[0].email);
+  // if (confirmEmail.length > 0) {
+  //   res.json({ message: "有相同的電子信箱囉", result: "false" });
+  // } else {
+  try {
+    let data = await connection.queryAsync(
+      "UPDATE member SET name=?, birthday=?,gender=?, email=? WHERE id=?",
+      [
+        req.body.name,
+        req.body.birthday,
+        req.body.gender,
+        req.body.email,
+        req.session.member.id,
+      ]
+    );
+    res.json({ message: "修改成功", result: "true" });
+  } catch (e) {
+    console.log("沒有抓到會員修改的東西", e);
   }
 });
 
