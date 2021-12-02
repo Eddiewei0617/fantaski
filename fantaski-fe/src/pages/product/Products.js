@@ -26,6 +26,8 @@ function Products({
   cartPositionState,
   handleAddNumber,
   userInfo,
+  categoryId,
+  setCategoryId,
 }) {
   // 想要傳參數給後端新增或找資料 :
   // axios.post(“url”, params, {withCredential:true})
@@ -43,9 +45,6 @@ function Products({
       behavior: "smooth",
     });
 
-  // 商品種類狀態，有1~8，預設為1(單板)
-  const [categoryId, setCategoryId] = useState(1);
-
   // 接收後端傳來的 product_collection 資料
   const [collected, setCollected] = useState([]);
   const [collectUpdate, setCollectUpdate] = useState(0); // 此狀態是為了讓之後商品點收藏後每次都會重抓一次
@@ -56,13 +55,8 @@ function Products({
       let res = await axios.get(`${API_URL}/products/collectinfo`, {
         withCredentials: true,
       });
-
       setCollected(res.data);
-      // try {
-      //   let res = await axios.post(`${API_URL}/products/collectinfo`, {
-      //     memberId: userInfo.id,
-      //   });
-      //   setCollected(res.data);
+      console.log("collected", collected);
     } catch (e) {
       console.error("collectinfo", e);
     }

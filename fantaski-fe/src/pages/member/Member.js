@@ -10,7 +10,7 @@ import { Link, useHistory, Redirect } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-function Member({ setShowCourse }) {
+function Member({ setShowCourse, userInfo }) {
   const MySwal = withReactContent(Swal);
   const [showmodal, setshowmodal] = useState("false");
   const [member, setMember] = useState(null);
@@ -222,6 +222,7 @@ function Member({ setShowCourse }) {
           sex={member.gender}
           birthday={member.birthday}
           img={member.image}
+          userInfo={userInfo}
         />
         {/* <CommentsInMember setShowCourse={setShowCourse} /> */}
       </div>

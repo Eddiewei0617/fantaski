@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useHistory } from "react-router-dom";
 import { IMAGE_SHARE_URL, API_URL } from "../../config/url";
 import { Link } from "react-router-dom";
 import { ParallaxProvider } from "react-scroll-parallax";
@@ -38,11 +39,12 @@ function Navbar(props) {
     handleAddNumber,
     userInfo,
     setUserInfo,
+    colorButton,
+    setColorButton,
     setFbLoginState,
   } = props;
   // 設定該項目被點選時的狀態
 
-  let [colorButton, setColorButton] = useState("FANTASKI");
   const [weatherInfo, setWeatherInfo] = useState(null);
   const [weatherIcon, setWeatherIcon] = useState();
 
@@ -79,7 +81,7 @@ function Navbar(props) {
     // getWeatherInfo(setWeatherInfo);
     //用哪個天氣小圖
     decideWeatherIcon();
-  }, [weatherInfo]);
+  }, []);
   // 決定要用哪個天氣小圖
   function decideWeatherIcon() {
     let weatherIconTag;
@@ -160,6 +162,13 @@ function Navbar(props) {
       timer: 1500,
     });
   }
+
+  let history = useHistory();
+  async function toHome() {
+    let tohome = await history.push("/");
+  }
+
+  // console.log("userInfo.code", userInfo.code);
   return (
     <>
       {/* scroll 初始化 */}
@@ -311,7 +320,14 @@ function Navbar(props) {
                       colorButton === "會員中心" && "active"
                     }`}
                     to="/member"
-                    onClick={handleClick}
+                    onClick={async (e) => {
+                      if (userInfo.code === 1201) {
+                        e.preventDefault();
+                        let toLogin = await history.push("/login");
+                      } else {
+                        handleClick(e);
+                      }
+                    }}
                   >
                     <FaUserAlt className="all-icon-nav" size={25} />
                   </Link>
@@ -345,6 +361,8 @@ function Navbar(props) {
                                 "登出成功！",
                                 "success"
                               );
+                              localStorage.clear();
+                              toHome();
                             }
                           });
                         // if (window.confirm("要登出嗎？")) {

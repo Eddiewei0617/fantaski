@@ -25,7 +25,7 @@ function Record() {
 
     setRecord(res.data);
   }, []);
-  console.log(record);
+  console.log("record", record);
 
   if (!record) {
     return <></>;

@@ -19,6 +19,7 @@ function Skill(props) {
     setShowCourse,
     setItemNumber,
     cartPositionState,
+    setColorButton,
   } = props;
   //courses ["初體驗", "技能班", "雪橇車", "建冰屋"]
   //showCourse courses[1]
@@ -31,10 +32,11 @@ function Skill(props) {
 
   useEffect(() => {
     toShowAddCartFloat(setScrollTop);
+    setShowCourse(courses[3]);
   }, []);
 
   if (showCourse === undefined) {
-    setShowCourse(courses[4]);
+    setShowCourse(courses[3]);
     return <div></div>;
   }
 
@@ -80,6 +82,7 @@ function Skill(props) {
         showCourse={showCourse}
         customerChoose={customerChoose}
         setItemNumber={setItemNumber}
+        setColorButton={setColorButton}
       />
       <Title titleName="其他課程" />
       <CourseLink setShowCourse={setShowCourse} courses={courses} />

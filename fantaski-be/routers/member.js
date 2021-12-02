@@ -24,7 +24,7 @@ router.get("/memberInfo", loginCheckMiddleware, async (req, res) => {
       "SELECT * FROM member where id=?",
       [req.session.member.id]
     );
-    console.log("memberInfo", memberInfo);
+    // console.log("memberInfo", memberInfo);
     if (res) {
       memberInfo[0].birthday = moment(memberInfo[0].birthday).format(
         "YYYY-MM-DD"

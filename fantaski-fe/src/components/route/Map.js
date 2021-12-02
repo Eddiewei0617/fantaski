@@ -7,13 +7,14 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../config/url";
 import { COURSE_NAME, MOUNTAIN_STATUS } from "../../config/StatusShortcut";
+import { coachesInfo } from "../course/asCouchDB";
 const logo = document.querySelectorAll(".routeAnimation path");
 
 // for (let i = 0; i < logo.length; i++) {
 //   console.log(`Letter ${i} is ${logo[i].getTotalLength()}`);
 // }
 
-function Map() {
+function Map({ setColorButton }) {
   // let line = [{ id: 1, color: "紅線", img: "src", 人數: "" }];
   const [greenMapView, setGreenMapView] = useState("modal");
   function mapGreen() {
@@ -150,7 +151,7 @@ function Map() {
                       <h6>{MOUNTAIN_STATUS[line[0].valid]}</h6>
                       <h6>{line[0].name}</h6>
                       <h6>單雙版/雪杖</h6>
-                      <h6>Chuan Jun</h6>
+                      <h6>{coachesInfo[0].name}</h6>
                       <h6>{line[0].stu_limit}</h6>
                     </div>
                   </div>
@@ -168,6 +169,9 @@ function Map() {
                   <Link
                     to="/course/beginner"
                     className="popBtn text-decoration-none p-3"
+                    onClick={() => {
+                      setColorButton("多元課程");
+                    }}
                   >
                     前往報名
                   </Link>
@@ -256,7 +260,7 @@ function Map() {
                       <h6>{MOUNTAIN_STATUS[line[1].valid]}</h6>
                       <h6>{line[1].name}</h6>
                       <h6>單雙版//雪鞋/護目鏡</h6>
-                      <h6>Chuan Jun</h6>
+                      <h6>{coachesInfo[2].name}</h6>
                       <h6>{line[1].stu_limit}</h6>
                     </div>
                   </div>
@@ -274,6 +278,9 @@ function Map() {
                   <Link
                     to="/course/skill"
                     className="popBtn text-decoration-none p-3"
+                    onClick={() => {
+                      setColorButton("多元課程");
+                    }}
                   >
                     前往報名
                   </Link>
@@ -359,7 +366,7 @@ function Map() {
                       <h6>{MOUNTAIN_STATUS[line[2].valid]}</h6>
                       <h6>{line[2].name}</h6>
                       <h6>雪地摩托車/聖誕老人裝</h6>
-                      <h6>Chuan Jun</h6>
+                      <h6>{coachesInfo[4].name}</h6>
                       <h6>{line[2].stu_limit}</h6>
                     </div>
                   </div>
@@ -377,6 +384,9 @@ function Map() {
                   <Link
                     to="/course/sled"
                     className="popBtn text-decoration-none p-3"
+                    onClick={() => {
+                      setColorButton("多元課程");
+                    }}
                   >
                     前往報名
                   </Link>
@@ -396,7 +406,7 @@ function Map() {
               <div className="modal-header">
                 <h3 className="modal-title greenLine">
                   {/* {item.color} */}
-                  {COURSE_NAME[line[3].difficulty_id]}
+                  {COURSE_NAME[line[4].difficulty_id]}
                 </h3>
                 <button
                   type="button"
@@ -459,11 +469,11 @@ function Map() {
                       <h6>課程人數 :</h6>
                     </div>
                     <div className="col-6">
-                      <h6>{MOUNTAIN_STATUS[line[3].valid]}</h6>
-                      <h6>{line[3].name}</h6>
-                      <h6>雙版//雪鏟</h6>
-                      <h6>Chuan Jun</h6>
-                      <h6>{line[3].stu_limit}</h6>
+                      <h6>{MOUNTAIN_STATUS[line[4].valid]}</h6>
+                      <h6>{line[4].name}</h6>
+                      <h6>雙板/雪鏟</h6>
+                      <h6>{coachesInfo[6].name}</h6>
+                      <h6>{line[4].stu_limit}</h6>
                     </div>
                   </div>
                 </div>
@@ -480,6 +490,9 @@ function Map() {
                   <Link
                     to="/course/igloo"
                     className="popBtn text-decoration-none p-3"
+                    onClick={() => {
+                      setColorButton("多元課程");
+                    }}
                   >
                     前往報名
                   </Link>

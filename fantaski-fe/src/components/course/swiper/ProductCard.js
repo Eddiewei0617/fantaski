@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { COURSE_IMG_URL, PRODUCTIMAGE_URL } from "../../../config/url";
 import { handleAddNumber } from "../moduleList";
 
@@ -10,6 +11,7 @@ function ProductCard(props) {
     customerChoose,
     setItemNumber,
     cartPositionState,
+    setColorButton,
   } = props;
   const [ifAddCart, setIfAddCart] = useState(false);
   const FlyToCart = useRef();
@@ -102,19 +104,26 @@ function ProductCard(props) {
                 }
               }}
             >
-              {ifAddCart ? "已加入購物車" : "立即購買"}
+              {ifAddCart ? "已加入" : "立即購買"}
               <input
                 type="hidden"
                 value={`${PRODUCTIMAGE_URL}/${product.image}|B|${product.name}|${product.price}|${customerChoose.date}|${customerChoose.number}`}
               />
             </button>
-            <button
-              className={`moreBtn ${
-                selectedAdvice === i ? "button-selected" : "button-normal"
-              } `}
+            <Link
+              to="/products"
+              onClick={() => {
+                setColorButton("租點裝備");
+              }}
             >
-              更多款式
-            </button>
+              <button
+                className={`moreBtn ${
+                  selectedAdvice === i ? "button-selected" : "button-normal"
+                } `}
+              >
+                更多款式
+              </button>
+            </Link>
           </div>
         </div>
       </div>

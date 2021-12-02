@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import Swal from "sweetalert2";
 function OrderContent({
   customerChoose,
   step,
@@ -73,6 +73,8 @@ function OrderContent({
     }
   }, [memberPoints]);
 
+  console.log("userInfo", userInfo);
+
   return (
     <>
       <div className="order_content_bg">
@@ -93,7 +95,11 @@ function OrderContent({
                     <button
                       className="btn btn-primary"
                       onClick={() => {
-                        setMemberNumber(Math.random());
+                        if (userInfo && userInfo.code === 1201) {
+                          setPoints("請先登入");
+                        } else {
+                          setMemberNumber(Math.random());
+                        }
                       }}
                     >
                       顯示會員點數
@@ -111,8 +117,16 @@ function OrderContent({
                     <input
                       type="number"
                       placeholder={`${0}  點`}
-                      value={pointUsed}
+                      value={
+                        userInfo && userInfo.code === 1201
+                          ? "請先登入"
+                          : pointUsed
+                      }
                       onChange={(e) => {
+                        if (e.target.value > userInfo.point) {
+                          Swal.fire("超過人數上限");
+                          return;
+                        }
                         if (memberPoints !== null) {
                           storage.setItem(
                             memberPoints ? memberPoints[0].name : 0,
@@ -125,6 +139,11 @@ function OrderContent({
                       }}
                       className="p-0"
                       min="0"
+                      max={
+                        userInfo === null || userInfo.code === 1201
+                          ? 0
+                          : userInfo.point
+                      }
                     />
                   </div>
                 </div>

@@ -8,7 +8,7 @@ import { HomeCourseList } from "./asCoruseDB";
 import axios from "axios";
 import { API_URL } from "../../config/url";
 
-function HomeCourse(props) {
+function HomeCourse({ setColorButton }) {
   // 接後端資料顯示於頁面上
   const [indexCourseDetail, setIndexCourseDetail] = useState([]);
   const [indexCourseList, setIndexCoureList] = useState(HomeCourseList);
@@ -71,6 +71,7 @@ function HomeCourse(props) {
                         averageRate={v.averageRate}
                         signupRemainToday={v.signupRemainToday}
                         href={v.href}
+                        setColorButton={setColorButton}
                       />
                     </div>
                     {/* home-course-detail-area end */}

@@ -1,4 +1,4 @@
-const coachesInfo = [
+export const coachesInfo = [
   {
     course_id: 1,
     course: "初體驗",
