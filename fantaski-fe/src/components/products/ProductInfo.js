@@ -18,7 +18,7 @@ function ProductInfo({
   alreadyinCart,
 }) {
   let storage = localStorage;
-
+  // console.log("memberInfo", memberInfo);
   // 傳參數(categoryId)給後端(記得用Post!!!)，跟後端說要哪個id的商品資料，請後端去資料庫撈
   const [snowboards, setSnowboards] = useState([]);
   useEffect(async () => {

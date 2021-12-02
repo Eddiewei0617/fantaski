@@ -187,7 +187,7 @@ function App() {
               />
             </Route>
             <Route path="/login">
-              <Login setUserInfo={setUserInfo} />
+              <Login setUserInfo={setUserInfo} userInfo={userInfo} />
             </Route>
             <Route path="/member">
               <Member />

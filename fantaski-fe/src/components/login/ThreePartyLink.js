@@ -1,53 +1,52 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useEffect, useState } from "react";
+
 import axios from "axios";
 import { GoogleLogin } from "react-google-login";
-// import { GOOGLE_CLIENT_ID } from "../../config/url";
+import { GOOGLE_CLIENT_ID } from "../../config/url";
 import { API_URL } from "../../config/url";
+import Swal from "sweetalert2";
 
 // icon
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
 
-function ThreePartyLink() {
+function ThreePartyLink(props) {
+  const { setUserInfo, userInfo } = props;
+  let history = useHistory();
   // google登入
-  // useEffect(async () => {
-  //   try {
-  //     let res = await axios.get(`http://localhost:3001/auth/protected`, {
-  //       withCredentials: true,
-  //     });
-  //     console.log("google", res);
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // }, []);
-  // async function loginByGoogle() {
-  //   try {
-  //     let res = await axios.get(`http://localhost:3001/auth/google`, {
-  //       withCredentials: true,
-  //     });
-  //     console.log("google", res);
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // }
-
-  // function responseGoogle(response) {
-  //   console.log("response", response);
-  // }
-
+  const [data, setData] = useState(null);
   const responseGoogle = async (response) => {
-    console.log(response);
-    try {
-      let { profileObj } = response;
-      let res = await axios.post(`${API_URL}/auth/google`, {
-        profileObj,
-      });
-    } catch (e) {
-      console.error(e);
-    }
+    console.log("response,", response);
+    setData(response);
   };
+  useEffect(async () => {
+    if (data !== null) {
+      try {
+        // let { profileObj } = response;
+        let res = await axios.post(
+          `${API_URL}/auth/google`,
+          {
+            profileObj: data.profileObj,
+          },
+          { withCredentials: true }
+        );
+        history.push("/");
+        Swal.fire("Login", "登入成功", "success");
+        // console.log("res.data.member", res.data.member);
+        setUserInfo(res.data.member);
+        console.log("userInfo", userInfo);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  }, [data]);
+
+  // useEffect(async () => {
+  //   console.log("userInfo", userInfo);
+  //   // let returns = await history.push("/");
+  // }, [userInfo]);
 
   return (
     <>
@@ -56,23 +55,25 @@ function ThreePartyLink() {
           href="http://localhost:3001/auth/google"
           className="three-party-link"
         > */}
-        <GoogleLogin
-          clientId="560182662288-n0636314scmffmi33c6dkc4o5453cd25.apps.googleusercontent.com"
-          buttonText="使用 Google 帳戶繼續"
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-          cookiePolicy={"single_host_origin"}
-          render={(renderProps) => (
-            <button
-              className="three-party-link"
-              onClick={renderProps.onClick}
-              //disabled={renderProps.disabled}
-            >
-              <FcGoogle size={20} />
-              <span>使用Google繼續</span>
-            </button>
-          )}
-        />
+        <div className="three-party-link">
+          <GoogleLogin
+            clientId={GOOGLE_CLIENT_ID}
+            buttonText="使用 Google 帳戶繼續"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={"single_host_origin"}
+            render={(renderProps) => (
+              <button
+                className="googlebtn link-btn"
+                onClick={renderProps.onClick}
+                //disabled={renderProps.disabled}
+              >
+                <FcGoogle size={20} />
+                <span>使用Google繼續</span>
+              </button>
+            )}
+          />
+        </div>
         {/* <Link to="" className="three-party-link"> */}
         {/* <button className="googlebtn link-btn three-party-link">
           <FcGoogle size={20} />

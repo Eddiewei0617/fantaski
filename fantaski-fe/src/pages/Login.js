@@ -15,7 +15,7 @@ import { withRouter } from "react-router-dom";
 import Swal from "sweetalert2";
 
 function Login(props) {
-  const { setUserInfo } = props;
+  const { setUserInfo, userInfo } = props;
 
   // 頁面切換程式
   const [isContainerActive, setIsContainerActive] = useState(false);
@@ -44,7 +44,7 @@ function Login(props) {
     e.preventDefault();
     try {
       let resReg = await axios.post(`${API_URL}/auth/register`, registerInfo);
-      console.log(resReg);
+      console.log("resReg", resReg);
       if (resReg.data.code == 1101) {
         Swal.fire("錯誤", "該email已被註冊", "error");
       } else if (resReg.data.code == 99) {
@@ -119,7 +119,7 @@ function Login(props) {
             <h2>登入</h2>
             <div className="form-center-area">
               {/* 第三方連結(fb & google) */}
-              <ThreePartyLink />
+              <ThreePartyLink setUserInfo={setUserInfo} userInfo={userInfo} />
               {/* three-party end */}
               <div className="login-or">
                 <span>或</span>

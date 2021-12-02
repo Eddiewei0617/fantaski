@@ -121,6 +121,7 @@ function MemberContent({
     }
     // window.location.reload();
   }
+
   return (
     <>
       {/* 隱藏彈跳視窗 */}
@@ -278,10 +279,13 @@ function MemberContent({
                     尚未連結Google帳號
                   </div>
                   <div className="col-3 d-flex align-items-center">
-                    {" "}
-                    <a href="#" type="button" className="text-decoration-none">
+                    <button
+                      href="#"
+                      type="button"
+                      className="text-decoration-none"
+                    >
                       前往連結帳號
-                    </a>
+                    </button>
                   </div>
                   <div className="memberContentBorderBotton"></div>
                 </div>

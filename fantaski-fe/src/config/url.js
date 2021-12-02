@@ -54,9 +54,9 @@ export const UPLOAD_URL =
 export const PUBLIC_URL =
   process.env.REACT_APP_PUBLIC_URL || "http://localhost:3001/public";
 
-//google登入
-// export const GOOGLE_CLIENT_ID =
-//   process.env.REACT_APP_GOOGLE_CLIENT_ID || "please check it";
+// google登入
+export const GOOGLE_CLIENT_ID =
+  process.env.REACT_APP_GOOGLE_CLIENT_ID || "please check it";
 
 // export const GOOGLE_CLIENT_ID =
 //   process.env.REACT_APP_PRODUCTIMAGE_URL ||

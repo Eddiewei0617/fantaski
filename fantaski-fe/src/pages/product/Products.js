@@ -55,13 +55,8 @@ function Products({
       let res = await axios.get(`${API_URL}/products/collectinfo`, {
         withCredentials: true,
       });
-
       setCollected(res.data);
-      // try {
-      //   let res = await axios.post(`${API_URL}/products/collectinfo`, {
-      //     memberId: userInfo.id,
-      //   });
-      //   setCollected(res.data);
+      console.log("collected", collected);
     } catch (e) {
       console.error("collectinfo", e);
     }
