@@ -20,6 +20,7 @@ function Sled(props) {
     setItemNumber,
     cartPositionState,
     setColorButton,
+    setCategoryId,
   } = props;
   //courses ["初體驗", "技能班", "雪橇車", "建冰屋"]
   //showCourse courses[1]
@@ -83,6 +84,7 @@ function Sled(props) {
         customerChoose={customerChoose}
         setItemNumber={setItemNumber}
         setColorButton={setColorButton}
+        setCategoryId={setCategoryId}
       />
       <Title titleName="其他課程" />
       <CourseLink setShowCourse={setShowCourse} courses={courses} />

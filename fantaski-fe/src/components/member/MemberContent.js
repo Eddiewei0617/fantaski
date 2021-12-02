@@ -37,9 +37,9 @@ function MemberContent({
   const [memberContent, setmemberContent] = useState({
     gender: `${sex}`,
     memberbirthday: `${birthday}`,
-    image: `${img}`,
+    image: img,
   });
-  const [uploadfile, setUploadfile] = useState(`${img}`);
+  const [uploadfile, setUploadfile] = useState(img);
   const [password, setPassword] = useState({
     oldpassword: "",
     password: "",
@@ -140,8 +140,9 @@ function MemberContent({
   if (userInfo === null) {
     return <></>;
   }
-  console.log("userInfo.image", userInfo.image);
-
+  console.log("userInfo.image:", userInfo.image, "uploadfile", uploadfile);
+  console.log(typeof userInfo.image);
+  console.log(typeof uploadfile);
   return (
     <>
       {/* 隱藏彈跳視窗 */}
@@ -237,7 +238,7 @@ function MemberContent({
                   {/* <img src={`${UPLOAD_URL}/${uploadfile}`} /> */}
                   <img
                     src={`${
-                      userInfo && uploadfile === null
+                      userInfo && uploadfile == null
                         ? `${IMAGE_FORUM_URL}/snowman.svg`
                         : userInfo && uploadfile.includes("https")
                         ? `${uploadfile}`

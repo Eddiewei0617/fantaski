@@ -5,7 +5,7 @@ const { loginCheckMiddleware } = require("../middlewares/auth");
 
 // 使用moment套件自動生成匯入資料庫的時間
 const moment = require("moment");
-let created_at = moment().format("YYYY-MM-DD hh:mm:ss a");
+let created_at = moment().format("YYYY-MM-DD hh:mm:ss");
 
 router.get("/", (res, req) => {
   res.send("歡迎來到購物車後台");
