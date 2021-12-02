@@ -336,6 +336,35 @@
       }
     }
   }
+  //  ============
+  //  路線點擊效果
+  .igloo-popup .show,
+  .red-popup .show,
+  .green-popup .show,
+  .black-popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+  }
+
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  //  ============
 
   .map-igloo {
     position: absolute;
@@ -367,6 +396,7 @@
   border: 3px solid $main-red;
   color: $main-red;
   border-radius: 5px;
+  width: 100%;
   &:hover {
     background: $main-red;
     color: $assist-white;
@@ -525,36 +555,6 @@
     }
   }
 }
-
-//  ============
-//  路線點擊效果
-.igloo-popup .show,
-.red-popup .show,
-.green-popup .show,
-.black-popup .show {
-  visibility: visible;
-  -webkit-animation: fadeIn 1s;
-  animation: fadeIn 1s;
-}
-
-@-webkit-keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-//  ============
 
 // =====================================
 // home-banner

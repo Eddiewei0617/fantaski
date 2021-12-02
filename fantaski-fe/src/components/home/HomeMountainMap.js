@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import HomeTitle from "./HomeTitle";
 import { IMAGE_ROUTER_URL } from "../../config/url";
-import { Link } from "react-router-dom";
 
 function iglooRoute() {
   let popup = document.getElementById("iglooRoute");
