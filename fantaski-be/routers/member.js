@@ -64,7 +64,22 @@ router.post("/membersave", async (req, res) => {
 
   res.json({ result: "okok" });
 });
+
+router.get("/aaa", async (req, res) => {
+  let confirmEmail = await connection.queryAsync("SELECT * FROM member");
+  res.json(confirmEmail);
+});
+
 router.post("/memberupdate", async (req, res) => {
+  let confirmEmail = await connection.queryAsync(
+    "SELECT * FROM member WHERE email=?",
+    [req.body.email]
+  );
+  // console.log(confirmEmail.length);
+  // console.log("confirmEmail", confirmEmail[0].email);
+  // if (confirmEmail.length > 0) {
+  //   res.json({ message: "有相同的電子信箱囉", result: "false" });
+  // } else {
   try {
     let data = await connection.queryAsync(
       "UPDATE member SET name=?, birthday=?,gender=?, email=? WHERE id=?",
@@ -76,31 +91,35 @@ router.post("/memberupdate", async (req, res) => {
         req.session.member.id,
       ]
     );
-    res.json({ result: "123OK" });
+    res.json({ message: "修改成功", result: "true" });
   } catch (e) {
     console.log("沒有抓到會員修改的東西", e);
   }
 });
 
-router.post("/memberPassword", registerRules, async (req, res) => {
+router.post("/memberPassword", async (req, res) => {
   // 東西驗證
-  const validateResult = validationResult(req);
-  if (!validateResult.isEmpty()) {
-    // validateResult 不是空的，那表示有欄位沒有通過驗證
-    let error = validateResult.array();
-    return res.status(400).json({ code: 99, message: error });
-  }
+
   try {
-    let hashPassword = await bcrypt.hash(req.body.password, 10);
-    let data = await connection.queryAsync(
-      "UPDATE member SET password=? WHERE id=?",
-      // [req.body.password, req.session.member.id]
-      [hashPassword, req.session.member.id]
+    let check = await connection.queryAsync(
+      "SELECT password FROM member WHERE email=?",
+      [req.session.member.email]
     );
+    let result = await bcrypt.compare(req.body.oldpassword, check[0].password);
+    if (result) {
+      let hashPassword = await bcrypt.hash(req.body.password, 10);
+      let data = await connection.queryAsync(
+        "UPDATE member SET password=? WHERE id=?",
+        // [req.body.password, req.session.member.id]
+        [hashPassword, req.session.member.id]
+      );
+      res.json({ message: "密碼修改成功OK", result: true });
+    } else {
+      res.json({ message: "密碼輸入錯誤", result: false });
+    }
   } catch (e) {
-    console.log("沒有抓到會員修改的東西");
+    console.log("沒有抓到會員修改的東西", e);
   }
-  res.json({ result: "密碼修改成功OK" });
 });
 // 購買紀錄
 

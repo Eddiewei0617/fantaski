@@ -27,6 +27,7 @@ function MemberContent({
   level,
   birthday,
   img,
+  email,
   userInfo,
 }) {
   // const STATUS_ = {};
@@ -40,6 +41,7 @@ function MemberContent({
   });
   const [uploadfile, setUploadfile] = useState(`${img}`);
   const [password, setPassword] = useState({
+    oldpassword: "",
     password: "",
     confirmPassword: "",
   });
@@ -117,10 +119,17 @@ function MemberContent({
       let res = await axios.post(`${API_URL}/member/memberPassword`, password, {
         withCredentials: true,
       });
-      MySwal.fire({
-        title: "密碼修改成功",
-        icon: "success",
-      });
+      if (res.data.result) {
+        MySwal.fire({
+          title: res.data.message,
+          icon: "success",
+        });
+      } else {
+        MySwal.fire({
+          title: res.data.message,
+          icon: "error",
+        });
+      }
       console.log(res);
     } catch (e) {
       console.log("handlePasswordSubmit", e);
@@ -155,6 +164,20 @@ function MemberContent({
                 </h5>
               </div>
               <div class="modal-body m-4 row align-items-center">
+                <div className="col-5 text-center my-3">舊密碼: </div>
+                <div className="col-7 my-3">
+                  <div>
+                    <input
+                      type="password"
+                      name="oldpassword"
+                      className="w-100 border border-dark"
+                      // value={password.password}
+                      onChange={handlePasswordChange}
+                      required
+                      minLength="6"
+                    />
+                  </div>
+                </div>
                 <div className="col-5 text-center my-3">新密碼: </div>
                 <div className="col-7 my-3">
                   <div>
@@ -261,9 +284,7 @@ function MemberContent({
 
           <div className="col-8 MemberContentHigh ">
             <div className="memberContentRight shadow p-3">
-              <div className=" text-left memberContentRightText mb-3">
-                登入方式
-              </div>
+              <div className=" text-left memberContentText mb-3">個人資料</div>
               <div className="row memberContentOutside ">
                 <div className="col-12 row text-left ">
                   <div className="col-3 d-flex align-items-center">
@@ -272,10 +293,10 @@ function MemberContent({
                       <FaUserCircle />
                     </div>
                   </div>
-                  <div className="col-6  d-flex align-items-center ">
-                    已建立帳號 {name}
+                  <div className="col-6  d-flex align-items-center memberContentBottomText">
+                    會員帳號名稱 : {name}
                   </div>
-                  <div className="col-3  d-flex align-items-center">
+                  <div className="col-3  d-flex align-items-center memberContentBottomText">
                     <a
                       type="button"
                       className="text-right text-decoration-none"
@@ -289,48 +310,11 @@ function MemberContent({
                   </div>
                   <div className="memberContentBorderBotton"></div>
                 </div>
-                <div className="col-12 row text-left">
-                  <div className="col-3 ">
-                    <div className="memberContentIcon border border-dark">
-                      {" "}
-                      <FcGoogle />
-                    </div>
-                  </div>
-                  <div className="col-6 d-flex align-items-center">
-                    尚未連結Google帳號
-                  </div>
-                  <div className="col-3 d-flex align-items-center">
-                    <button
-                      href="#"
-                      type="button"
-                      className="text-decoration-none"
-                    >
-                      前往連結帳號
-                    </button>
-                  </div>
-                  <div className="memberContentBorderBotton"></div>
-                </div>
-                <div className="col-12 row text-left ">
-                  <div className="col-3 ">
-                    <div className="memberContentIcon">
-                      {" "}
-                      <BsFacebook />
-                    </div>
-                  </div>
-                  <div className="col-6 d-flex align-items-center">
-                    尚未連結Facebook帳號
-                  </div>
-                  <div className="col-3 d-flex align-items-center">
-                    {" "}
-                    <a href="#" type="button" className="text-decoration-none">
-                      前往連結帳號
-                    </a>
-                  </div>
-                  <div className="memberContentBorderBotton"></div>
-                </div>
               </div>
-              <form onSubmit={handleSubmit}>
-                <div className="text-left">
+              <form className="memberContentBottomText" onSubmit={handleSubmit}>
+                <div className="text-left ">
+                  <div className="mt-4 ml-3"> 電子信箱:</div>
+                  <div className="text-center pr-5 ">{email}</div>
                   <div className=" pb-2 m-3">性別</div>
                   <div class="form-check form-check-inline ml-5">
                     <input
@@ -381,11 +365,11 @@ function MemberContent({
                   </div>
                 </div>
                 {/* --生日-- */}
-                <div className="text-left">
-                  <div className="memberEmailText pb-2 m-3">生日</div>
+                <div className="text-left m-3">
+                  <div className="memberEmailText pb-2 mt-3">生日</div>
                   <div>
                     <input
-                      className="ml-5"
+                      className="ml-5 mt-2"
                       type="date"
                       name="memberbirthday"
                       // value={memberbirthday ? memberbirthday : birthday}

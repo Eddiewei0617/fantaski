@@ -21,6 +21,7 @@ function ThreePartyLink(props) {
   const [data, setData] = useState(null);
   const responseGoogle = async (response) => {
     console.log("response,", response);
+    console.log("GOOGLE_CLIENT_ID", GOOGLE_CLIENT_ID);
     setData(response);
   };
   useEffect(async () => {
@@ -68,7 +69,7 @@ function ThreePartyLink(props) {
               <button
                 className="googlebtn link-btn"
                 onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
+                // disabled={renderProps.disabled}
               >
                 <FcGoogle size={20} />
                 <span>使用Google繼續</span>

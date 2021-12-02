@@ -104,7 +104,7 @@
   color: $main-text-darkblue;
 }
 .memberContentHigh {
-  height: 730px;
+  height: 650px;
   display: flex;
   justify-content: center;
 }
@@ -117,7 +117,7 @@
 }
 
 .memberContentRight {
-  height: 730px;
+  height: 650px;
   background-color: white;
   border-radius: 15px;
   width: 100%;
@@ -190,16 +190,20 @@
   font-size: $font-l;
   padding: 5px;
 }
+.memberContentBottomText {
+  font-size: $font-l;
+  color: $main-text-darkblue;
+}
 .memberbtn:hover {
   background-color: #0c3144;
 }
-.memberContentRightText {
+.memberContentText {
   font-size: 500;
   color: $main-text-darkblue;
-  font-size: $font-l;
+  font-size: $font-xl;
 }
 .memberContentOutside {
-  height: 385px;
+  height: 100px;
   justify-content: center;
   align-items: center;
 }
@@ -212,6 +216,7 @@
   margin: 0 auto;
   // border: 1px solid rgba(0, 0, 0, 0.2);
 }
+
 .memberContentIcon svg {
   width: 100%;
   height: 100%;
