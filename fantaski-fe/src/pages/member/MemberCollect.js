@@ -5,9 +5,10 @@ import { API_URL } from "../../config/url";
 import { PRODUCTIMAGE_URL } from "../../config/url";
 import { CATEGORY_WORD } from "../../config/StatusShortcut";
 import { Button } from "react-bootstrap";
+import Swal from "sweetalert2";
 
 import MemberList from "../../components/member/MemberList";
-function MemberCollect({ setItemNumber, memberInfo }) {
+function MemberCollect({ setItemNumber, memberInfo, userInfo }) {
   let storage = localStorage;
   // 抓到storage裡面有幾樣商品的字串後，用split將字串轉成陣列就能顯示出有幾個了
   function handleAddNumber() {
@@ -30,20 +31,22 @@ function MemberCollect({ setItemNumber, memberInfo }) {
   // 請後端拿資料庫product JOIN produtc_collection的資料
   const [memberCollectList, setMemberCollectList] = useState([]);
   useEffect(async () => {
-    let res = await axios.post(`${API_URL}/member/membercollection`, {
-      memberId: 1,
+    let res = await axios.get(`${API_URL}/member/membercollection`, {
+      withCredentials: true,
     });
     setMemberCollectList(res.data);
-    // console.log("mem", res);
   }, [forRefresh]);
 
   // 點擊取消收藏後，傳回後端刪除資料表資料
   async function handleCancelCollection(v) {
     try {
-      let res = await axios.post(`${API_URL}/products/cancelcollection`, {
-        memberId: memberInfo[0].id,
-        productId: v.id,
-      });
+      let res = await axios.post(
+        `${API_URL}/products/cancelcollection`,
+        {
+          productId: v.id,
+        },
+        { withCredentials: true }
+      );
       // console.log("product", v.id);
     } catch (err) {
       console.error("資料傳送錯誤", err);
@@ -56,6 +59,19 @@ function MemberCollect({ setItemNumber, memberInfo }) {
         return v.id !== itemToRemove;
       })
     );
+  }
+
+  // 已加入購物車之彈跳視窗
+  function alreadyinCart() {
+    Swal.fire({
+      // title: "Sweet!",
+      text: "您已將此商品加入購物車",
+      imageUrl: `${PRODUCTIMAGE_URL}/jerry_mouse.jpg`,
+      imageWidth: 220,
+      imageHeight: 300,
+      imageAlt: "已加入購物車圖",
+      icon: "error",
+    });
   }
 
   return (
@@ -105,7 +121,7 @@ function MemberCollect({ setItemNumber, memberInfo }) {
                         let productInfo = e.currentTarget.children[0].value;
                         // 開始把點"加到購物車"的商品存入storage
                         if (storage[itemId]) {
-                          alert("您已將此物品加入購物車");
+                          alreadyinCart();
                         } else {
                           storage.setItem(itemId, productInfo);
                           storage["addItemList"] += `${itemId}, `;
@@ -129,14 +145,6 @@ function MemberCollect({ setItemNumber, memberInfo }) {
       </table>
     </>
   );
-  {
-    /* <div>
-      <MemberList />
-      <div className="text-center">
-        <h1>我的收藏</h1>
-      </div>
-    </div> */
-  }
 }
 
 export default MemberCollect;

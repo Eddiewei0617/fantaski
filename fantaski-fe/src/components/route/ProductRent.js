@@ -1,7 +1,8 @@
 import React from "react";
 // import { IMAGE_ROUTER_URL } from "../../config/url";
 import { PRODUCTIMAGE_URL } from "../../config/url";
-function ProductRent() {
+import { Link } from "react-router-dom";
+function ProductRent({ setColorButton }) {
   return (
     <div>
       <div className="productSectionTitle">
@@ -15,39 +16,39 @@ function ProductRent() {
                 <div className="image_title text-white">
                   <a>超流行滑雪外套</a>
                 </div>
-                <div>
+                <a>
                   <img src={`${PRODUCTIMAGE_URL}/skifamily.png`} alt="" />{" "}
-                </div>
+                </a>
               </li>
               <li>
                 <div className="image_title text-white">
                   <a>時尚酷雪板</a>
                 </div>
-                <div>
+                <a>
                   <img src={`${PRODUCTIMAGE_URL}/products.jpg`} alt="" />{" "}
-                </div>
+                </a>
               </li>
               <li>
                 <div className="image_title text-white">
                   <a>托米諾黃蜂極地摩托車</a>
                 </div>
-                <div>
+                <a>
                   <img src={`${PRODUCTIMAGE_URL}/snowmobile2.jpg`} alt="" />{" "}
-                </div>
+                </a>
               </li>
               <li>
                 <div className="image_title text-white">
                   <a>超防滑舒適雪鞋</a>
                 </div>
-                <a href="/#">
-                  <img src={`${PRODUCTIMAGE_URL}/snowShoes1.jpg`} alt="" />{" "}
+                <a>
+                  <img src={`${PRODUCTIMAGE_URL}/snowboots.jpg`} alt="" />{" "}
                 </a>
               </li>
               <li>
                 <div className="image_title text-white">
                   <a>炫彩護目鏡</a>
                 </div>
-                <a href="/#">
+                <a>
                   <img src={`${PRODUCTIMAGE_URL}/smooth.jpg`} alt="" />
                 </a>
               </li>
@@ -65,15 +66,28 @@ function ProductRent() {
           </div>
           <div className="productLeftContent row mt-3 ">
             <div className="col-6 text-right p-0">雪板類 :</div>
-            <div className="col-6 text-left p-0">單板/雙版</div>
+            <div className="col-6 text-left p-0 pl-2">單板/雙版</div>
             <div className="col-6 text-right p-0">男女裝 :</div>
-            <div className="col-6 text-left p-0">外套/雪鞋</div>
-            <div className="col-6 text-right p-0">配件 :</div>
-            <div className="col-6 text-left p-0">護目鏡/護膝</div>
-            <div className="col-6 text-right p-0">器材 :</div>
-            <div className="col-6 text-left p-0">雪橇車/摩托車</div>
+            <div className="col-6 text-left p-0 pl-2">外套/雪鞋</div>
+            <div className="col-6 text-right p-0">
+              配 &nbsp;&nbsp;&nbsp;件 :
+            </div>
+            <div className="col-6 text-left p-0 pl-2">護目鏡/護膝</div>
+            <div className="col-6 text-right p-0">
+              器&nbsp;&nbsp;&nbsp;&nbsp;材 :
+            </div>
+            <div className="col-6 text-left p-0 pl-2  ">雪橇車/摩托車</div>
           </div>
-          <button className="btn btn-primary mt-3 w-50 mx-auto">更多</button>
+          {/* <button className="btn btn-primary mt-3 w-50 mx-auto">更多</button> */}
+          <Link
+            to="/products"
+            className="btn btn-primary mt-3 w-50 mx-auto"
+            onClick={() => {
+              setColorButton("租點裝備");
+            }}
+          >
+            更多
+          </Link>
         </div>
       </div>
     </div>

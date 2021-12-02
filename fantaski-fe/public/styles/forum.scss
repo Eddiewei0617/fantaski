@@ -306,12 +306,16 @@ $forum-box-shadow: 0 0 30px rgba(19, 72, 101, 0.4);
   border-radius: 50%;
   border: 1px solid rgba(19, 72, 101, 0.4);
   overflow: hidden;
-  object-fit: cover;
   margin-right: 8px;
   //   user 上傳圖檔不為svg時須做這設定
   //   display: inline-flex;
   //   align-items: inherit;
   //   justify-content: center;
+  img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
 }
 
 .forum-pop-threedot {
@@ -384,9 +388,11 @@ $forum-box-shadow: 0 0 30px rgba(19, 72, 101, 0.4);
 }
 .heart-count {
   color: #9c9c9c;
+  cursor: pointer;
 }
 .heart-like {
   color: $main-red;
+  cursor: pointer;
 }
 
 // 留言區
@@ -425,6 +431,7 @@ $forum-box-shadow: 0 0 30px rgba(19, 72, 101, 0.4);
   height: 40px;
   img {
     width: 100%;
+    border-radius: 50%;
   }
 }
 

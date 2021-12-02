@@ -96,3 +96,10 @@ export async function updateForumLike(forum_id, ifAlreadyLike) {
     }
   );
 }
+//從資料庫取得使用者資料
+export async function getDbUserInfo(setState) {
+  let res = await axios.get(`${API_URL}/forum/getdbuserinfo`, {
+    withCredentials: true,
+  });
+  setState(res.data);
+}

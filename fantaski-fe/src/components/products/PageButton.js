@@ -25,6 +25,8 @@ function PageButton({
     setPageButton(1);
   }, []);
 
+  console.log("pro", products);
+
   return (
     <>
       <div className="page_button ">
@@ -47,9 +49,13 @@ function PageButton({
                 id={v.id}
                 className={`${pageButton === v.id ? "page_active" : ""} `}
                 onClick={(e) => {
-                  handlePageButton(e);
-                  setPageNow(`${v.id}`);
-                  onClick();
+                  if (products === []) {
+                    setPageNow(1);
+                  } else {
+                    handlePageButton(e);
+                    setPageNow(`${v.id}`);
+                    onClick();
+                  }
                 }}
               >
                 {v.name}
@@ -60,7 +66,7 @@ function PageButton({
 
         <div
           onClick={() => {
-            if (pageButton < pageNumber.length) {
+            if (pageButton < pageNumber.length || !products) {
               setPageButton(pageButton + 1);
               setPageNow(pageNow + 1);
               onClick();

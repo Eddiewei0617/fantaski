@@ -277,4 +277,19 @@ router.post("/updateforumlike", loginCheckMiddleware, async (req, res) => {
   }
 });
 
+//取得資料庫使用者資料
+router.get("/getdbuserinfo", loginCheckMiddleware, async (req, res) => {
+  console.log("update for dbuserinfo");
+  try {
+    let resSql = await connection.queryAsync(
+      "SELECT * FROM member WHERE id = ?;",
+      [req.session.member.id]
+    );
+    res.json(resSql[0]);
+  } catch (e) {
+    console.log("query for dbuserinfo failed:", e);
+    res.json({ code: 9999, message: "資料庫讀取錯誤" });
+  }
+});
+
 module.exports = router;

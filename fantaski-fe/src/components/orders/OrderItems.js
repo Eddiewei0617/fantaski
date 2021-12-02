@@ -13,7 +13,7 @@ function OrderItems({
   var storage = localStorage;
   let itemString = storage["addItemList"];
   let items = itemString.substr(0, itemString.length - 2).split(", ");
-  console.log("items", items);
+  // console.log("items", items);
 
   // 將在購物車要呈現的資料push進一個空陣列，並且當customerChoose(date或number)有變動時，再重新渲染一次 ---------------------
   const [orderList, setOrderList] = useState([]);
@@ -43,6 +43,7 @@ function OrderItems({
     );
   }
   // -------------------------------------------------------------------------------
+
   return (
     <>
       {orderList.map((v, i) => {
@@ -59,7 +60,6 @@ function OrderItems({
                 name="date"
                 value={v.date}
                 onChange={(e) => {
-                  // console.log("e", e);
                   setCustomerChoose((cur) => {
                     return { ...cur, [e.target.name]: productDate };
                   });
@@ -82,14 +82,12 @@ function OrderItems({
                 name="number"
                 value={v.number === "" ? 1 : v.number}
                 onChange={(e) => {
-                  // console.log("e", e);
                   setCustomerChoose((cur) => {
                     return { ...cur, [e.target.name]: e.target.value };
                   });
                   let productNumber = e.target.value;
                   let newNumberArray = storage[`${v.id}`].split("|");
                   newNumberArray.splice(5, 1, productNumber);
-                  // console.log("newNumber", newNumberArray);
                   storage[`${v.id}`] = newNumberArray.join("|");
                 }}
                 min="1"

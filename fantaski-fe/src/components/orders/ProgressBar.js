@@ -112,11 +112,26 @@ function ProgressBar({ step, setStep, scrollToTop, setProgressAnimation }) {
             <button
               className="progress_button2"
               onClick={() => {
-                setStep(2);
-                progressMoving();
-                progressMovingBack3();
-                scrollToTop();
-                setProgressAnimation(2);
+                let itemString = storage["addItemList"];
+                let items = itemString
+                  .substr(0, itemString.length - 2)
+                  .split(", ");
+                for (let i = 0; i < items.length; i++) {
+                  if (storage[items[i]].split("|")[4] === "") {
+                    Swal.fire({
+                      icon: "error",
+                      title: "Oops...",
+                      text: "請選取欲購買/租賃日期",
+                    });
+                    return;
+                  } else {
+                    setStep(2);
+                    progressMoving();
+                    progressMovingBack3();
+                    scrollToTop();
+                    setProgressAnimation(2);
+                  }
+                }
               }}
             >
               <div className="material-icons md-50 md-grey number_icon">

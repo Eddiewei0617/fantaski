@@ -8,7 +8,6 @@ function SwitchIcon({ setSquare, square }) {
   // 用useRef來獲取目標的屬性(ex. id、樣式、...)
   const squareId = useRef();
   const listId = useRef();
-  // console.log(squareId);
 
   // 讓一進來頁面就先渲染方格button的預設顏色
   useEffect(() => {
@@ -37,7 +36,6 @@ function SwitchIcon({ setSquare, square }) {
             squareId.current.style.backgroundColor = "";
             listId.current.style.backgroundColor = "#ec6855";
             setSquare(false);
-            // console.log("555", listId.current.style);
           }}
         >
           <FaListUl size="1.6rem" />

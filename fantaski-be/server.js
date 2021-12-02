@@ -2,13 +2,16 @@ const express = require("express");
 const path = require("path");
 require("dotenv").config();
 const cors = require("cors");
+const passport = require("passport");
+require("../fantaski-be/routers/auth-google");
+const connection = require("./utils/db");
 
 let app = express();
 
 //開放前端權限
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ["http://localhost:3000", "https://localhost:3000"],
     credentials: true,
   })
 );
@@ -18,10 +21,13 @@ const expressSession = require("express-session");
 let FileStore = require("session-file-store")(expressSession);
 app.use(
   expressSession({
+    // 路徑位置通常是從[執行程式]的路徑看，而不是程式碼的位置
+    // __dirname ==> 程式碼本身所在的位置
     store: new FileStore({ path: path.join(__dirname, "..", "sessions") }),
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    // cookie: { httpOnly: false },
   })
 );
 
@@ -33,11 +39,11 @@ app.use("/public", express.static("public"));
 //追朔訪問紀錄
 app.use((req, res, next) => {
   let current = new Date();
-  console.log(`有人來訪問at ${current.toISOString()}`);
+  // console.log(`有人來訪問at ${current.toISOString()}`);
   next();
 });
 app.get("/", (req, res) => {
-  res.send("這裡是server你好");
+  res.send('<a href="/auth/google">這裡是server你好</a>');
 });
 
 //取得前端傳回json body的資料 (必寫，且須寫在前面，由上到下的順序很重要)
@@ -86,6 +92,9 @@ app.use("/api/memberUpload", memberUploadRouter);
 //購買紀錄
 let recordRouter = require("./routers/record");
 app.use("/api/record", recordRouter);
+
+let routeRouter = require("./routers/routeline");
+app.use("/api/routeline", routeRouter);
 
 //404中間件
 app.use((req, res, next) => {

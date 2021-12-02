@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { IMAGE_FORUM_URL, PUBLIC_URL } from "../../config/url";
-import { getPosterInfo } from "./moduleList";
-import { getUserInfo } from "../../config/StatusShortcut";
+import { getPosterInfo, getDbUserInfo } from "./moduleList";
 
 function FourmUserName({ forum_id, userInfo }) {
   const [poster, setPoster] = useState(null);
+  const [userFromDb, setUserFromDb] = useState(null);
   useEffect(() => {
     //點進去別人文章用
     if (forum_id) {
       getPosterInfo(forum_id, setPoster);
     }
+    getDbUserInfo(setUserFromDb);
   }, [forum_id]);
 
-  if (userInfo === null) {
+  if (userInfo === null || userFromDb === null) {
     return <div></div>;
   } else if (forum_id && poster === null) {
     return <div></div>;
   }
   return (
     <>
-      {/* 編輯文章的使用者名稱 */}
+      {/* 誰在編輯、誰發的文 */}
       {forum_id ? (
         <>
           <div className="forum-user-img">
@@ -28,6 +29,8 @@ function FourmUserName({ forum_id, userInfo }) {
               src={`${
                 poster && poster.image === null
                   ? `${IMAGE_FORUM_URL}/snowman.svg`
+                  : poster.image.includes("https")
+                  ? `${poster.image}`
                   : `${PUBLIC_URL}/${poster.image}`
               }`}
               alt="snowman-defult"
@@ -39,14 +42,17 @@ function FourmUserName({ forum_id, userInfo }) {
       ) : (
         userInfo && (
           <>
-            {/* 查看文章的發文者名稱 */}
+            {/* 誰要發文 */}
             <div className="forum-user-img">
               {/* 需規範上傳圖片的限制檔名與K數 */}
               <img
+                className="object-fit"
                 src={`${
-                  userInfo.image === null
+                  userFromDb.image === null
                     ? `${IMAGE_FORUM_URL}/snowman.svg`
-                    : `${PUBLIC_URL}/${userInfo.image}`
+                    : userFromDb.image.includes("https")
+                    ? `${userFromDb.image}`
+                    : `${PUBLIC_URL}/${userFromDb.image}`
                 }`}
                 alt="snowman-defult"
               />

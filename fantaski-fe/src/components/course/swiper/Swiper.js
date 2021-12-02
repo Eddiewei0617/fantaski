@@ -8,7 +8,14 @@ import {
 import { COURSE_IMG_URL } from "../../../config/url";
 import { getAdviceInfo } from "../moduleList";
 
-function Swiper({ showCourse, customerChoose, setItemNumber }) {
+function Swiper({
+  showCourse,
+  customerChoose,
+  setItemNumber,
+  cartPositionState,
+  setColorButton,
+  setCategoryId,
+}) {
   //後端依據 showCourse抓資料回來
   const [selectedAdvice, setSelectedAdvice] = useState(0);
   const [ifArrowUnavailable, setIfArrowUnavailable] = useState({
@@ -58,7 +65,6 @@ function Swiper({ showCourse, customerChoose, setItemNumber }) {
   const changePicToR = () => {
     let newIndex = selectedAdvice + 1;
     if (newIndex >= adviceInfo.length) {
-      console.log("stopped");
       return;
     } else {
       if (newIndex === 1) {
@@ -67,7 +73,6 @@ function Swiper({ showCourse, customerChoose, setItemNumber }) {
           return { ...cur, left: !cur["left"] };
         });
       }
-      console.log("intoAnimate");
       setSelectedAdvice(newIndex);
       let oriTranslateX = allProducts.current.style.transform;
       //用正規表達式把translateX(350px)轉換為350
@@ -110,6 +115,9 @@ function Swiper({ showCourse, customerChoose, setItemNumber }) {
                   selectedAdvice={selectedAdvice}
                   customerChoose={customerChoose}
                   setItemNumber={setItemNumber}
+                  cartPositionState={cartPositionState}
+                  setColorButton={setColorButton}
+                  setCategoryId={setCategoryId}
                 />
               );
             })}

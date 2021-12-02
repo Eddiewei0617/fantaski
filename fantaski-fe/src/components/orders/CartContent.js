@@ -1,4 +1,3 @@
-import { PRODUCTIMAGE_URL } from "../../config/url";
 import OrderItems from "./OrderItems";
 
 function CartContent({

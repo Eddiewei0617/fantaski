@@ -35,6 +35,7 @@ function ForumReplyDetail({ singleReply, sequence }) {
                   : `${PUBLIC_URL}/${singleReply.image}`
               }`}
               alt="snowman-defult"
+              className="object-fit"
             />
           </div>
         </div>

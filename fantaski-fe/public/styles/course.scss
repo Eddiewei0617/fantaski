@@ -210,12 +210,15 @@
   height: 200px;
   position: absolute;
   left: 0;
+  cursor: pointer;
 }
 .click-area1 {
   top: 0;
+  cursor: pointer;
 }
 .click-area2 {
   bottom: 0;
+  cursor: pointer;
 }
 .coach-avatar {
   height: 120px;
@@ -289,11 +292,19 @@
   letter-spacing: 3px;
 }
 .add-cart-fix-wrapper .button-clicked {
-  transition: 0.4s;
+  transition: 0.8s;
   background: rgb(190, 190, 190);
   color: white;
 }
-
+.fly-to-cart {
+  transition: 0.6s;
+  position: fixed;
+  height: 25px;
+  width: 45px;
+  background: $main-red;
+  border-radius: 10px;
+  z-index: 9999;
+}
 .day-choose-box,
 .number-choose-box {
   position: relative;
@@ -304,11 +315,11 @@
   text-align: center;
   font-size: 22px;
 }
-/* 把原本input[type=number]的上下箭頭拿掉 */
-.add-cart-fix-wrapper input[type="number"]::-webkit-inner-spin-button {
-  // display:none;
-  opacity: 1;
-}
+// /* 把原本input[type=number]的上下箭頭拿掉 */
+// .add-cart-fix-wrapper input[type="number"]::-webkit-inner-spin-button {
+//   // display:none;
+//   opacity: 1;
+// }
 
 .add-cart-fix-wrapper .icons {
   color: rgb(122, 122, 122);
@@ -330,7 +341,7 @@
   position: absolute;
   top: 100%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-55%);
   z-index: 999;
   box-shadow: 1px 1px 3px gray;
 }
@@ -459,6 +470,7 @@
 .calendar-wrapper table td {
   vertical-align: middle;
   height: 35px;
+  width: 50px;
   padding: 1px;
 }
 .calendar-dates-box-last {
@@ -664,8 +676,8 @@
   opacity: 100;
 }
 .swiper-wrapper .buttons button {
-  margin-right: 5px;
-  width: 85px;
+  margin-right: 3px;
+  width: 78px;
   font-size: 14px;
   height: 30px;
   border: none;

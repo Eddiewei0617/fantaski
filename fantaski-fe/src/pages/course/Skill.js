@@ -13,7 +13,15 @@ import AddCartFloat from "../../components/course/addCartFloat/AddCartFloat";
 import { toShowAddCartFloat } from "../../components/course/moduleList";
 
 function Skill(props) {
-  const { courses, showCourse, setShowCourse, setItemNumber } = props;
+  const {
+    courses,
+    showCourse,
+    setShowCourse,
+    setItemNumber,
+    cartPositionState,
+    setColorButton,
+    setCategoryId,
+  } = props;
   //courses ["初體驗", "技能班", "雪橇車", "建冰屋"]
   //showCourse courses[1]
   const [customerChoose, setCustomerChoose] = useState({
@@ -25,10 +33,11 @@ function Skill(props) {
 
   useEffect(() => {
     toShowAddCartFloat(setScrollTop);
+    setShowCourse(courses[1]);
   }, []);
 
   if (showCourse === undefined) {
-    setShowCourse(courses[2]);
+    setShowCourse(courses[1]);
     return <div></div>;
   }
 
@@ -67,12 +76,15 @@ function Skill(props) {
         customerChoose={customerChoose}
         setCustomerChoose={setCustomerChoose}
         setItemNumber={setItemNumber}
+        cartPositionState={cartPositionState}
       />
       <Title titleName="推薦裝備" />
       <Swiper
         showCourse={showCourse}
         customerChoose={customerChoose}
         setItemNumber={setItemNumber}
+        setColorButton={setColorButton}
+        setCategoryId={setCategoryId}
       />
       <Title titleName="其他課程" />
       <CourseLink setShowCourse={setShowCourse} courses={courses} />

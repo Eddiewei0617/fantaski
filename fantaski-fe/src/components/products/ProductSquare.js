@@ -1,5 +1,5 @@
 // 內建通用型元件
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 // 手風琴不同種類商品的components切換
 import ProductInfo from "./ProductInfo";
@@ -16,8 +16,9 @@ function ProductSquare({
   handleCollect,
   handleChecked,
   handleAddNumber,
+  alreadyinCart,
 }) {
-  // 點加入購物車後從到locaStorage
+  // 點加入購物車後加到locaStorage
   let storage = localStorage;
   // 為了不要讓addItemList在null的時候寫undefined
   if (storage["addItemList"] == null) {
@@ -49,6 +50,7 @@ function ProductSquare({
           cartPositionState={cartPositionState}
           handleCollect={handleCollect}
           handleChecked={handleChecked}
+          alreadyinCart={alreadyinCart}
         />
       </div>
     </>

@@ -14,7 +14,15 @@ import "animate.css";
 import { toShowAddCartFloat } from "../../components/course/moduleList";
 
 function Beginner(props) {
-  const { courses, showCourse, setShowCourse, setItemNumber } = props;
+  const {
+    courses,
+    showCourse,
+    setShowCourse,
+    setItemNumber,
+    cartPositionState,
+    setColorButton,
+    setCategoryId,
+  } = props;
   //courses ["初體驗", "技能班", "雪橇車", "建冰屋"]
   //showCourse courses[1]
   const [customerChoose, setCustomerChoose] = useState({
@@ -26,13 +34,13 @@ function Beginner(props) {
 
   useEffect(() => {
     toShowAddCartFloat(setScrollTop);
+    setShowCourse(courses[0]);
   }, []);
 
   if (showCourse === undefined) {
-    setShowCourse(courses[1]);
+    setShowCourse(courses[0]);
     return <div></div>;
   }
-
   return (
     <>
       <Video showCourse={showCourse} />
@@ -66,12 +74,16 @@ function Beginner(props) {
         customerChoose={customerChoose}
         setCustomerChoose={setCustomerChoose}
         setItemNumber={setItemNumber}
+        cartPositionState={cartPositionState}
       />
       <Title titleName="推薦裝備" />
       <Swiper
         showCourse={showCourse}
         customerChoose={customerChoose}
         setItemNumber={setItemNumber}
+        cartPositionState={cartPositionState}
+        setColorButton={setColorButton}
+        setCategoryId={setCategoryId}
       />
       <Title titleName="其他課程" />
       <CourseLink setShowCourse={setShowCourse} courses={courses} />

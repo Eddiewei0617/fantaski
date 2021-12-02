@@ -38,7 +38,16 @@ export const FORUM_CATEGORY = {
   2: "課程分享",
   3: "裝備經驗",
 };
-
+export const COURSE_NAME = {
+  1: "初體驗",
+  2: "技能班",
+  3: "雪橇車",
+  4: "建冰屋",
+};
+export const MOUNTAIN_STATUS = {
+  1: "開放",
+  2: "關閉",
+};
 // 首頁文章類別
 export const FORUM_STATUS_WORD = {
   1: "滑雪經驗",

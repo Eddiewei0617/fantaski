@@ -8,6 +8,7 @@ import {
 import Calendar from "../calendar/Calendar";
 import { COURSE_IMG_URL } from "../../../config/url";
 import { getCourseInfo, handleAddNumber } from "../moduleList";
+import Swal from "sweetalert2";
 
 function AddCartFloat({
   customerChoose,
@@ -54,10 +55,10 @@ function AddCartFloat({
     let name = e.target.name;
     let newValue = e.target.value;
     if (name === "number" && newValue > customerChoose.courseLeft) {
-      alert("超過人數上限");
+      Swal.fire("超過人數上限");
       return;
     } else if (name === "number" && newValue <= 0) {
-      alert("人數不可少於1");
+      Swal.fire("人數不可少於1");
       return;
     }
     setCustomerChoose((cur) => {
@@ -113,8 +114,14 @@ function AddCartFloat({
                     ? storage[`c-${courseInfo[0].id}`].split("|")[4]
                     : "選擇日期"
                 }
-                className="date-input pl-3"
-                onChange={handleChange}
+                className={`date-input pl-3 ${ifAddCart && "text-secondary"}`}
+                onChange={(e) => {
+                  if (ifAddCart) {
+                    Swal.fire("已加入購物車，請至購物車修改");
+                  } else {
+                    handleChange(e);
+                  }
+                }}
               ></input>
               {showCalendarFloat && (
                 <div className="custom-calendar">
@@ -124,6 +131,7 @@ function AddCartFloat({
                     setCustomerChoose={setCustomerChoose}
                     showCalendarFloat={showCalendarFloat}
                     setShowCalendarFloat={setShowCalendarFloat}
+                    ifAddCart={ifAddCart}
                   />
                 </div>
               )}
@@ -145,8 +153,14 @@ function AddCartFloat({
                     ? customerChoose.courseLimit
                     : customerChoose.courseLeft
                 }
-                className="number-input"
-                onChange={handleChange}
+                className={`number-input ${ifAddCart && "text-secondary"}`}
+                onChange={(e) => {
+                  if (ifAddCart) {
+                    Swal.fire("已加入購物車，請至購物車修改");
+                  } else {
+                    handleChange(e);
+                  }
+                }}
               ></input>
             </div>
             <div>課程價錢：$ {courseInfo[0].price * customerChoose.number}</div>
@@ -155,13 +169,17 @@ function AddCartFloat({
             onClick={(e) => {
               let itemId = `c-${courseInfo[0].id}`;
               if (storage[itemId]) {
-                alert("您已將此物品加入購物車");
+                // alert("您已將此物品加入購物車");
+                Swal.fire("您已將此物品加入購物車");
               } else if (customerChoose.date === "") {
-                alert("請填寫日期！");
+                // alert("請填寫日期！");
+                Swal.fire("請填寫日期！");
               } else if (customerChoose.number > customerChoose.courseLeft) {
-                alert("人數超過上限");
+                // alert("人數超過上限");
+                Swal.fire("人數超過上限");
               } else if (!regExp.test(customerChoose.date)) {
-                alert("日期格式不正確，正確格式為：YYYY-MM-DD");
+                // alert("日期格式不正確，正確格式為：YYYY-MM-DD");
+                Swal.fire("日期格式不正確，正確格式為：YYYY-MM-DD");
                 return;
               } else {
                 setIfAddCart(true);
