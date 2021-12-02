@@ -64,10 +64,8 @@ function Login(props) {
     }
   }
   //登入呼叫api
-
   async function handleLoginSubmit(e) {
     e.preventDefault();
-    console.log("login");
     try {
       let res = await axios.post(`${API_URL}/auth/login`, loginInfo, {
         withCredentials: true,
@@ -119,7 +117,7 @@ function Login(props) {
             <h2>登入</h2>
             <div className="form-center-area">
               {/* 第三方連結(fb & google) */}
-              <ThreePartyLink />
+              <ThreePartyLink setUserInfo={setUserInfo} />
               {/* three-party end */}
               <div className="login-or">
                 <span>或</span>
@@ -185,7 +183,7 @@ function Login(props) {
                   <input
                     type="text"
                     name="name"
-                    placeholder="帳號(限4-20碼小寫英文數字):"
+                    placeholder="姓名:"
                     value={registerInfo.name}
                     onChange={handleRegisterChange}
                     minlength="4"
@@ -202,6 +200,7 @@ function Login(props) {
                     value={registerInfo.email}
                     onChange={handleRegisterChange}
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                    title="信箱不符合格式"
                     required
                   />
                 </div>
@@ -215,6 +214,7 @@ function Login(props) {
                     value={registerInfo.password}
                     onChange={handleRegisterChange}
                     pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$"
+                    title="請輸入最少一個英文字母"
                     maxlength="20"
                     required
                   />
