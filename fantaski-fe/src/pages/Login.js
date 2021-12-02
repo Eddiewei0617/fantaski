@@ -187,7 +187,12 @@ function Login(props) {
             <h2>註冊</h2>
             <div className="form-center-area">
               {/* 第三方連結(fb & google) */}
-              <ThreePartyLink />
+              <ThreePartyLink
+                userInfo={userInfo}
+                setUserInfo={setUserInfo}
+                fBloginState={fBloginState}
+                setFbLoginState={setFbLoginState}
+              />
               {/* three-party end */}
               <div className="login-or">
                 <span>或</span>

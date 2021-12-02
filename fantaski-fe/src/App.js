@@ -199,7 +199,7 @@ function App() {
               />
             </Route>
             <Route path="/member">
-              <Member />
+              <Member userInfo={userInfo} />
             </Route>
             <Route path="/forum/new-post">
               <NewPost

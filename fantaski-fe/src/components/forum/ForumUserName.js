@@ -28,9 +28,12 @@ function FourmUserName({ forum_id, userInfo }) {
               src={`${
                 poster && poster.image === null
                   ? `${IMAGE_FORUM_URL}/snowman.svg`
+                  : poster.image.includes("https")
+                  ? `${poster.image}`
                   : `${PUBLIC_URL}/${poster.image}`
               }`}
               alt="snowman-defult"
+              className="object-fit"
             />
           </div>
           {/* user 帳號名 */}

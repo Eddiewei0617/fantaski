@@ -39,9 +39,12 @@ function ForumAddReply({
             src={`${
               userInfo.image === null
                 ? `${IMAGE_FORUM_URL}/snowman.svg`
+                : userInfo.loginMethod === "thirdParty"
+                ? `${userInfo.image}`
                 : `${PUBLIC_URL}/${userInfo.image}`
             }`}
             alt="snowman-defult"
+            className="object-fit"
           />
         </label>
         <input

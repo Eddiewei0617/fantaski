@@ -5,6 +5,7 @@ import { API_URL } from "../../config/url";
 import { PRODUCTIMAGE_URL } from "../../config/url";
 import { CATEGORY_WORD } from "../../config/StatusShortcut";
 import { Button } from "react-bootstrap";
+import Swal from "sweetalert2";
 
 import MemberList from "../../components/member/MemberList";
 function MemberCollect({ setItemNumber, memberInfo, userInfo }) {
@@ -60,6 +61,19 @@ function MemberCollect({ setItemNumber, memberInfo, userInfo }) {
     );
   }
 
+  // 已加入購物車之彈跳視窗
+  function alreadyinCart() {
+    Swal.fire({
+      // title: "Sweet!",
+      text: "您已將此商品加入購物車",
+      imageUrl: `${PRODUCTIMAGE_URL}/jerry_mouse.jpg`,
+      imageWidth: 220,
+      imageHeight: 300,
+      imageAlt: "已加入購物車圖",
+      icon: "error",
+    });
+  }
+
   return (
     <>
       <div>
@@ -107,7 +121,7 @@ function MemberCollect({ setItemNumber, memberInfo, userInfo }) {
                         let productInfo = e.currentTarget.children[0].value;
                         // 開始把點"加到購物車"的商品存入storage
                         if (storage[itemId]) {
-                          alert("您已將此物品加入購物車");
+                          alreadyinCart();
                         } else {
                           storage.setItem(itemId, productInfo);
                           storage["addItemList"] += `${itemId}, `;

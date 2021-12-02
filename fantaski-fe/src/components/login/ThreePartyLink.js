@@ -68,7 +68,7 @@ function ThreePartyLink(props) {
               <button
                 className="googlebtn link-btn"
                 onClick={renderProps.onClick}
-                //disabled={renderProps.disabled}
+                disabled={renderProps.disabled}
               >
                 <FcGoogle size={20} />
                 <span>使用Google繼續</span>

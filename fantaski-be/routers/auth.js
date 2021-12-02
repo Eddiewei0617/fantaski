@@ -118,7 +118,7 @@ router.post("/google", async (req, res) => {
           id: memberInDb.id,
           email: memberInDb.email,
           name: memberInDb.name,
-          image: memberInDb.image,
+          image: imageUrl,
           point: memberInDb.point,
           loginMethod: "thirdParty",
         };
