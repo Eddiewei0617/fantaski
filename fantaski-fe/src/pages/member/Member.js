@@ -44,15 +44,23 @@ function Member({ setShowCourse }) {
       let res = await axios.post(`${API_URL}/member/memberupdate`, member, {
         withCredentials: true,
       });
-      MySwal.fire({
-        title: "完成修改",
-        icon: "success",
-      });
+
+      if (res.data.result === "true") {
+        MySwal.fire({
+          title: res.data.message,
+          icon: "success",
+        });
+      } else {
+        MySwal.fire({
+          title: res.data.message,
+          icon: "error",
+        });
+      }
     } catch (e) {
       console.log("會員資料修改錯誤唷", e);
     }
     setshowmodal(!showmodal);
-    window.location.reload();
+    //window.location.reload();
     //console.log("member", member);
   }
   // console.log(member);
@@ -222,6 +230,7 @@ function Member({ setShowCourse }) {
           sex={member.gender}
           birthday={member.birthday}
           img={member.image}
+          email={member.email}
         />
         {/* <CommentsInMember setShowCourse={setShowCourse} /> */}
       </div>
