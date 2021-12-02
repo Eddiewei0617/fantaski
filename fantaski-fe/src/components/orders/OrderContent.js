@@ -114,6 +114,7 @@ function OrderContent({
                   </div>
                   <div className="col d-flex">
                     <label className="m-0">使用點數 </label>
+
                     <input
                       type="number"
                       placeholder={`${0}  點`}
@@ -137,7 +138,7 @@ function OrderContent({
                           setPointUsed(0);
                         }
                       }}
-                      className="p-0"
+                      className="p-0 point_used"
                       min="0"
                       max={
                         userInfo === null || userInfo.code === 1201

@@ -56,7 +56,7 @@ router.get("/indexforumconent", async (req, res) => {
     FROM forum f
     JOIN member m
     ON f.member_id = m.id
-    WHERE f.category_id = 2 
+    WHERE f.category_id = 2 AND f.valid =1
     ORDER BY f.created_at DESC
     LIMIT 3
       `);
