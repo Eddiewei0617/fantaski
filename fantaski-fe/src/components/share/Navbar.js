@@ -41,6 +41,7 @@ function Navbar(props) {
     setUserInfo,
     colorButton,
     setColorButton,
+    setFbLoginState,
   } = props;
   // 設定該項目被點選時的狀態
 
@@ -354,6 +355,7 @@ function Navbar(props) {
                           .then(async (result) => {
                             if (result.isConfirmed) {
                               await handleLogout();
+                              setFbLoginState(false);
                               swalWithBootstrapButtons.fire(
                                 "Logout!",
                                 "登出成功！",

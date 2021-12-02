@@ -11,7 +11,7 @@ let app = express();
 //開放前端權限
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ["http://localhost:3000", "https://localhost:3000"],
     credentials: true,
   })
 );
@@ -27,6 +27,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    // cookie: { httpOnly: false },
   })
 );
 

@@ -315,11 +315,11 @@
   text-align: center;
   font-size: 22px;
 }
-/* 把原本input[type=number]的上下箭頭拿掉 */
-.add-cart-fix-wrapper input[type="number"]::-webkit-inner-spin-button {
-  // display:none;
-  opacity: 1;
-}
+// /* 把原本input[type=number]的上下箭頭拿掉 */
+// .add-cart-fix-wrapper input[type="number"]::-webkit-inner-spin-button {
+//   // display:none;
+//   opacity: 1;
+// }
 
 .add-cart-fix-wrapper .icons {
   color: rgb(122, 122, 122);

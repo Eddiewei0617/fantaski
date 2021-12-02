@@ -122,9 +122,13 @@ function AddCartFix({
                   ? storage[`c-${courseInfo[0].id}`].split("|")[4]
                   : "選擇日期"
               }
-              className="date pl-4"
+              className={`date pl-4 ${ifAddCart && "text-secondary"}`}
               onChange={(e) => {
-                handleChange(e);
+                if (ifAddCart) {
+                  Swal.fire("已加入購物車，請至購物車修改");
+                } else {
+                  handleChange(e);
+                }
               }}
             ></input>
             <FontAwesomeIcon
@@ -142,6 +146,7 @@ function AddCartFix({
                   customerChoose={customerChoose}
                   setCustomerChoose={setCustomerChoose}
                   setShowCalendar={setShowCalendar}
+                  ifAddCart={ifAddCart}
                 />
               </div>
             )}
@@ -163,8 +168,14 @@ function AddCartFix({
                   ? customerChoose.courseLimit
                   : customerChoose.courseLeft
               }
-              className="number"
-              onChange={handleChange}
+              className={`number ${ifAddCart && "text-secondary"}`}
+              onChange={(e) => {
+                if (ifAddCart) {
+                  Swal.fire("已加入購物車，請至購物車修改");
+                } else {
+                  handleChange(e);
+                }
+              }}
             ></input>
           </div>
           <div className="col-2">

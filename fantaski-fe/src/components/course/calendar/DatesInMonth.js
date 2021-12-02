@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { getDailyCourseLeft, courseIdName } from "../moduleList";
+import Swal from "sweetalert2";
+
 const today = moment().format("YYYY-MM-DD");
 
 //某年是否為閏年(400可整除-1600;100不可整除;4可整除)
@@ -80,6 +82,7 @@ function DatesInMonth(props) {
     setCustomerChoose,
     setShowCalendar,
     setShowCalendarFloat,
+    ifAddCart,
   } = props;
   const [dailyCourseLeft, setDailyCourseLeft] = useState(null);
   const [stuLimit, setStuLimit] = useState(0);
@@ -120,40 +123,44 @@ function DatesInMonth(props) {
   }
   //使用者點選課程日期
   const handleChange = (y, m, d) => {
-    if (d < 10) d = `0${d}`;
-    if (m < 10) m = `0${m}`;
-    let Columntoday = `${y}-${m}-${d}`;
-    if (Columntoday >= today) {
-      if (dailyCourseLeft[Columntoday] !== undefined) {
-        let left = Number(stuLimit) - Number(dailyCourseLeft[Columntoday]);
-        if (left <= 0) left = 0;
-        if (left <= 0) {
-          alert("該課程人數已滿，請選擇其他日期");
-          return;
-        } else if (left > 0) {
+    if (ifAddCart) {
+      Swal.fire("已加入購物車，請至購物車修改");
+    } else {
+      if (d < 10) d = `0${d}`;
+      if (m < 10) m = `0${m}`;
+      let Columntoday = `${y}-${m}-${d}`;
+      if (Columntoday >= today) {
+        if (dailyCourseLeft[Columntoday] !== undefined) {
+          let left = Number(stuLimit) - Number(dailyCourseLeft[Columntoday]);
+          if (left <= 0) left = 0;
+          if (left <= 0) {
+            alert("該課程人數已滿，請選擇其他日期");
+            return;
+          } else if (left > 0) {
+            setCustomerChoose((cur) => {
+              return {
+                ...cur,
+                date: Columntoday,
+                courseLeft: left,
+                courseLimit: stuLimit,
+              };
+            });
+          }
+        } else {
           setCustomerChoose((cur) => {
             return {
               ...cur,
               date: Columntoday,
-              courseLeft: left,
+              courseLeft: stuLimit,
               courseLimit: stuLimit,
             };
           });
         }
-      } else {
-        setCustomerChoose((cur) => {
-          return {
-            ...cur,
-            date: Columntoday,
-            courseLeft: stuLimit,
-            courseLimit: stuLimit,
-          };
-        });
-      }
-      if (setShowCalendarFloat === undefined) {
-        setShowCalendar(false);
-      } else if (setShowCalendar === undefined) {
-        setShowCalendarFloat(false);
+        if (setShowCalendarFloat === undefined) {
+          setShowCalendar(false);
+        } else if (setShowCalendar === undefined) {
+          setShowCalendarFloat(false);
+        }
       }
     }
   };

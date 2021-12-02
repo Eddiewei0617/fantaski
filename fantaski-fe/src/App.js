@@ -62,6 +62,9 @@ function App() {
     getUserInfo(setUserInfo);
   }, []);
 
+  //fb登入狀態
+  const [fBloginState, setFbLoginState] = useState(false);
+
   // 引入moduleDb.js檔抓取後端member資料庫的資料來顯示會員剩餘點數
   const [memberInfo, setMemberInfo] = useState(null);
 
@@ -105,6 +108,7 @@ function App() {
           setUserInfo={setUserInfo}
           colorButton={colorButton}
           setColorButton={setColorButton}
+          setFbLoginState={setFbLoginState}
         />
         {/* LOGO+標題+導覽列+上方選單 */}
         {/* 主內容區 */}
@@ -187,7 +191,12 @@ function App() {
               />
             </Route>
             <Route path="/login">
-              <Login setUserInfo={setUserInfo} userInfo={userInfo} />
+              <Login
+                userInfo={userInfo}
+                setUserInfo={setUserInfo}
+                fBloginState={fBloginState}
+                setFbLoginState={setFbLoginState}
+              />
             </Route>
             <Route path="/member">
               <Member />

@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import axios from "axios";
+import FBlogin from "../login/FBLogin";
 import { GoogleLogin } from "react-google-login";
 import { GOOGLE_CLIENT_ID } from "../../config/url";
 import { API_URL } from "../../config/url";
@@ -13,7 +14,8 @@ import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
 
 function ThreePartyLink(props) {
-  const { setUserInfo, userInfo } = props;
+  const { setUserInfo, userInfo, fBloginState, setFbLoginState } = props;
+  const [clickOnFbLogin, setClickOnFbLogin] = useState(false);
   let history = useHistory();
   // google登入
   const [data, setData] = useState(null);
@@ -54,7 +56,7 @@ function ThreePartyLink(props) {
         {/* <a
           href="http://localhost:3001/auth/google"
           className="three-party-link"
-        > */}
+> */}
         <div className="three-party-link">
           <GoogleLogin
             clientId={GOOGLE_CLIENT_ID}
@@ -81,12 +83,26 @@ function ThreePartyLink(props) {
         </button> */}
         {/* </Link> */}
         {/* </a> */}
-        <Link to="" className="three-party-link">
+
+        <span
+          className="three-party-link"
+          onClick={() => {
+            setClickOnFbLogin(true);
+          }}
+        >
           <button className="facebookbtn link-btn">
-            <FaFacebookF size={20} />
+            {/* <FaFacebookF size={20} /> */}
             <span>使用Facebook繼續</span>
           </button>
-        </Link>
+        </span>
+        {clickOnFbLogin && (
+          <FBlogin
+            setUserInfo={setUserInfo}
+            fBloginState={fBloginState}
+            setFbLoginState={setFbLoginState}
+            setClickOnFbLogin={setClickOnFbLogin}
+          />
+        )}
       </div>
     </>
   );

@@ -13,6 +13,7 @@ function Dates(props) {
     setCustomerChoose,
     setShowCalendar,
     setShowCalendarFloat,
+    ifAddCart,
   } = props;
 
   return (
@@ -39,6 +40,7 @@ function Dates(props) {
             setCustomerChoose={setCustomerChoose}
             setShowCalendar={setShowCalendar}
             setShowCalendarFloat={setShowCalendarFloat}
+            ifAddCart={ifAddCart}
           />
         </tbody>
       </table>
