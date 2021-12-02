@@ -3,36 +3,36 @@ import FacebookLogin from "react-facebook-login";
 import { Card, Image } from "react-bootstrap";
 import { API_URL } from "../../config/url";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
-function FBLogin({ setUserInfo }) {
-  const [login, setLogin] = useState(false);
+function FBLogin({
+  setUserInfo,
+  fBloginState,
+  setFbLoginState,
+  setClickOnFbLogin,
+}) {
   const [picture, setPicture] = useState("");
   const [data, setData] = useState({});
-
+  let history = useHistory();
   const responseFacebook = async (response) => {
     console.log(response);
     setData(response);
     setPicture(response.picture.data.url);
     if (response.accessToken) {
-      setLogin(true);
+      setFbLoginState(true);
     } else {
-      setLogin(false);
+      setFbLoginState(false);
     }
   };
   useEffect(async () => {
     if (data !== {}) {
       try {
-        let res = await axios.post(`${API_URL}/auth/fblogin`, data);
+        let res = await axios.post(`${API_URL}/auth/fblogin`, data, {
+          withCredentials: true,
+        });
         setUserInfo(res.data.member);
-        //抓看看seesion有沒有登入資料
-        try {
-          let resInfo = await axios.get(`${API_URL}/auth/userInfo`, {
-            withCredentials: true,
-          });
-          console.log(resInfo.data);
-        } catch (e) {
-          console.log(e);
-        }
+        history.push("/");
+        setClickOnFbLogin(false);
       } catch (e) {
         console.log(e);
       }
@@ -44,7 +44,7 @@ function FBLogin({ setUserInfo }) {
       <div class="container" className="d-none">
         <Card style={{ width: "600px" }}>
           <Card.Header>
-            {!login && (
+            {!fBloginState && (
               <FacebookLogin
                 appId="184724843853590"
                 autoLoad={true}
@@ -54,9 +54,9 @@ function FBLogin({ setUserInfo }) {
                 icon="fa-facebook"
               />
             )}
-            {login && <Image src={picture} roundedCircle />}
+            {fBloginState && <Image src={picture} roundedCircle />}
           </Card.Header>
-          {login && (
+          {fBloginState && (
             <Card.Body>
               <Card.Title>{data.name}</Card.Title>
               <Card.Text>{data.email}</Card.Text>

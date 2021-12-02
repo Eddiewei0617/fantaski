@@ -69,6 +69,7 @@ router.post("/login", async (req, res) => {
       name: member.name,
       image: member.image,
       point: member.point,
+      loginMethod: "traditional",
     };
     req.session.member = returnMember;
     res.json({ code: 0, message: "登入成功", member: returnMember });
@@ -139,7 +140,7 @@ router.post("/fblogin", async (req, res) => {
       console.log("new coming");
       try {
         let result = await connection.queryAsync(
-          "INSERT INTO member (name, email, password, image, level_id, facebook_id, created_at, valid) VALUES (?);",
+          "INSERT INTO member (name, email, password, image, level_id, facebook_id, point, created_at, valid) VALUES (?);",
           [
             [
               req.body.name,
@@ -148,17 +149,19 @@ router.post("/fblogin", async (req, res) => {
               req.body.picture.data.url,
               2,
               req.body.id,
+              300,
               now,
               1,
             ],
           ]
         );
         let returnMember = {
-          id: "",
+          id: result.insertId,
           email: req.body.email,
           name: req.body.name,
           image: req.body.picture.data.url,
           point: "",
+          loginMethod: "facebook",
         };
         req.session.member = returnMember;
         res.json({ code: 0, message: "已建立帳號", member: returnMember });
@@ -174,6 +177,7 @@ router.post("/fblogin", async (req, res) => {
         name: member.name,
         image: member.image,
         point: member.point,
+        loginMethod: "thirdParty",
       };
       req.session.member = returnMember;
       res.json({ code: 0, message: "登入成功", member: returnMember });

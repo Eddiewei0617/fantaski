@@ -15,7 +15,7 @@ import { withRouter } from "react-router-dom";
 import Swal from "sweetalert2";
 
 function Login(props) {
-  const { setUserInfo } = props;
+  const { setUserInfo, fBloginState, setFbLoginState } = props;
 
   // 頁面切換程式
   const [isContainerActive, setIsContainerActive] = useState(false);
@@ -127,7 +127,11 @@ function Login(props) {
             <h2>登入</h2>
             <div className="form-center-area">
               {/* 第三方連結(fb & google) */}
-              <ThreePartyLink setUserInfo={setUserInfo} />
+              <ThreePartyLink
+                setUserInfo={setUserInfo}
+                fBloginState={fBloginState}
+                setFbLoginState={setFbLoginState}
+              />
               {/* three-party end */}
               <div className="login-or">
                 <span>或</span>

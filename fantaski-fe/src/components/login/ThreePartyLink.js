@@ -8,19 +8,19 @@ import FBlogin from "../login/FBLogin";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
 
-function ThreePartyLink({ setUserInfo }) {
+function ThreePartyLink({ setUserInfo, fBloginState, setFbLoginState }) {
   const [clickOnFbLogin, setClickOnFbLogin] = useState(false);
-  // google登入
-  // useEffect(async () => {
-  //   try {
-  //     let res = await axios.get(`http://localhost:3001/auth/protected`, {
-  //       withCredentials: true,
-  //     });
-  //     console.log("google", res);
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // }, []);
+  // google登入;
+  useEffect(async () => {
+    try {
+      let res = await axios.get(`http://localhost:3001/auth/protected`, {
+        withCredentials: true,
+      });
+      console.log("google", res);
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
   // async function loginByGoogle() {
 
   // }
@@ -49,7 +49,14 @@ function ThreePartyLink({ setUserInfo }) {
             <span>使用Facebook繼續</span>
           </button>
         </span>
-        {clickOnFbLogin && <FBlogin setUserInfo={setUserInfo} />}
+        {clickOnFbLogin && (
+          <FBlogin
+            setUserInfo={setUserInfo}
+            fBloginState={fBloginState}
+            setFbLoginState={setFbLoginState}
+            setClickOnFbLogin={setClickOnFbLogin}
+          />
+        )}
       </div>
     </>
   );
