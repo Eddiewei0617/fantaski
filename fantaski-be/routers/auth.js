@@ -102,13 +102,12 @@ router.get("/userInfo", async (req, res) => {
 // google註冊登入
 router.post("/google", async (req, res) => {
   let { email, name, imageUrl, googleId } = req.body.profileObj;
-  console.log("req.body", req.body);
   try {
     let memberInDb = await connection.queryAsync(
       "SELECT * from member WHERE email=?",
       [email]
     );
-    console.log("memberInDb", memberInDb);
+    // console.log("memberInDb", memberInDb);
     // 如果資料庫有這個email就登入 :
     if (memberInDb.length !== 0) {
       if (memberInDb[0].google_id === googleId) {
