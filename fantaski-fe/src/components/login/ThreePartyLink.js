@@ -1,14 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import FBlogin from "../login/FBLogin";
 
 // icon
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
 
-function ThreePartyLink() {
-  // google登入
+function ThreePartyLink({ setUserInfo, fBloginState, setFbLoginState }) {
+  const [clickOnFbLogin, setClickOnFbLogin] = useState(false);
+  // google登入;
   useEffect(async () => {
     try {
       let res = await axios.get(`http://localhost:3001/auth/protected`, {
@@ -36,12 +38,25 @@ function ThreePartyLink() {
           </button>
           {/* </Link> */}
         </a>
-        <Link to="" className="three-party-link">
+        <span
+          className="three-party-link"
+          onClick={() => {
+            setClickOnFbLogin(true);
+          }}
+        >
           <button className="facebookbtn link-btn">
-            <FaFacebookF size={20} />
+            {/* <FaFacebookF size={20} /> */}
             <span>使用Facebook繼續</span>
           </button>
-        </Link>
+        </span>
+        {clickOnFbLogin && (
+          <FBlogin
+            setUserInfo={setUserInfo}
+            fBloginState={fBloginState}
+            setFbLoginState={setFbLoginState}
+            setClickOnFbLogin={setClickOnFbLogin}
+          />
+        )}
       </div>
     </>
   );

@@ -114,8 +114,14 @@ function AddCartFloat({
                     ? storage[`c-${courseInfo[0].id}`].split("|")[4]
                     : "選擇日期"
                 }
-                className="date-input pl-3"
-                onChange={handleChange}
+                className={`date-input pl-3 ${ifAddCart && "text-secondary"}`}
+                onChange={(e) => {
+                  if (ifAddCart) {
+                    Swal.fire("已加入購物車，請至購物車修改");
+                  } else {
+                    handleChange(e);
+                  }
+                }}
               ></input>
               {showCalendarFloat && (
                 <div className="custom-calendar">
@@ -125,6 +131,7 @@ function AddCartFloat({
                     setCustomerChoose={setCustomerChoose}
                     showCalendarFloat={showCalendarFloat}
                     setShowCalendarFloat={setShowCalendarFloat}
+                    ifAddCart={ifAddCart}
                   />
                 </div>
               )}
@@ -146,8 +153,14 @@ function AddCartFloat({
                     ? customerChoose.courseLimit
                     : customerChoose.courseLeft
                 }
-                className="number-input"
-                onChange={handleChange}
+                className={`number-input ${ifAddCart && "text-secondary"}`}
+                onChange={(e) => {
+                  if (ifAddCart) {
+                    Swal.fire("已加入購物車，請至購物車修改");
+                  } else {
+                    handleChange(e);
+                  }
+                }}
               ></input>
             </div>
             <div>課程價錢：$ {courseInfo[0].price * customerChoose.number}</div>
