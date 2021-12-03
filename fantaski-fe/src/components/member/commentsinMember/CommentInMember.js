@@ -10,6 +10,7 @@ import {
   postCourseComment,
 } from "../../course/moduleList";
 import moment from "moment";
+import Swal from "sweetalert2";
 
 function CommentInMember({ orderCourse, setShowCourse }) {
   const [isStarsClick, setIsStarsClick] = useState(orderCourse.star);
@@ -101,7 +102,15 @@ function CommentInMember({ orderCourse, setShowCourse }) {
               onChange={handleTextChange}
             ></textarea>
             <div className="col-4 course-comment-buttons">
-              <button>
+              <button
+                className="course-comment-send-button"
+                onClick={() => {
+                  Swal.fire("已更新評價，可以到課程頁看到您的評價哦！");
+                }}
+              >
+                送出評價
+              </button>
+              <button className="course-comment-link-button">
                 <Link
                   to={`/course/${courseIdName[orderCourse.name]["eng"]}`}
                   onClick={() => {
@@ -111,7 +120,6 @@ function CommentInMember({ orderCourse, setShowCourse }) {
                   課程詳情
                 </Link>
               </button>
-              <button>訂單詳情</button>
             </div>
           </div>
         </div>

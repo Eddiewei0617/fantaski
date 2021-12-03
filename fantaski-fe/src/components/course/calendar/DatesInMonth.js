@@ -134,7 +134,7 @@ function DatesInMonth(props) {
           let left = Number(stuLimit) - Number(dailyCourseLeft[Columntoday]);
           if (left <= 0) left = 0;
           if (left <= 0) {
-            alert("該課程人數已滿，請選擇其他日期");
+            Swal.fire("該課程人數已滿，請選擇其他日期");
             return;
           } else if (left > 0) {
             setCustomerChoose((cur) => {
