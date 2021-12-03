@@ -4,7 +4,7 @@ const connection = require("../utils/db");
 const path = require("path");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
-require("./auth-google");
+
 //驗證註冊資料
 const { body, validationResult } = require("express-validator");
 const registerRules = [

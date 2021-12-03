@@ -3,7 +3,6 @@ const path = require("path");
 require("dotenv").config();
 const cors = require("cors");
 const passport = require("passport");
-require("../fantaski-be/routers/auth-google");
 const connection = require("./utils/db");
 
 let app = express();

@@ -72,8 +72,7 @@ function OrderContent({
       // console.log("test2", memberPoints);
     }
   }, [memberPoints]);
-
-  console.log("userInfo", userInfo);
+  // console.log("pointUsed", pointUsed); // 一進來，沒有onChange會是 undefined
 
   return (
     <>
@@ -121,11 +120,13 @@ function OrderContent({
                       value={
                         userInfo && userInfo.code === 1201
                           ? "請先登入"
+                          : pointUsed === undefined
+                          ? 0
                           : pointUsed
                       }
                       onChange={(e) => {
                         if (e.target.value > userInfo.point) {
-                          Swal.fire("超過人數上限");
+                          Swal.fire("不可使用超過擁有點數");
                           return;
                         }
                         if (memberPoints !== null) {

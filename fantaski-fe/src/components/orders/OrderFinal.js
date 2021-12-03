@@ -82,6 +82,7 @@ function OrderFinal({
         orderNumber: orderNo,
         memberId: userInfo.id,
         total: total - pointUsed,
+        totalWithoutPoint: total,
         pointUsed: pointUsed,
       });
 
@@ -89,12 +90,14 @@ function OrderFinal({
       let res2 = await axios.post(`${API_URL}/order/pointleft`, {
         pointLeft: memberPoints[0].point - pointUsed,
         memberId: userInfo.id,
+        pointUsed,
+        membersPoint: memberPoints[0].point,
       });
     } catch (e) {
       console.log("handleSubmit", e);
     }
   }
-
+  console.log("memberPoints[0].point", memberPoints[0].point);
   // 表單出後清空localStorage資料並自動跳轉頁面回商品頁
   let history = useHistory();
   async function handleJupmto() {
