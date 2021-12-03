@@ -32,6 +32,8 @@ function ForumReplyDetail({ singleReply, sequence }) {
               src={`${
                 singleReply.image === null
                   ? `${IMAGE_FORUM_URL}/snowman.svg`
+                  : singleReply.image.includes("https")
+                  ? `${singleReply.image}`
                   : `${PUBLIC_URL}/${singleReply.image}`
               }`}
               alt="snowman-defult"
