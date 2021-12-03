@@ -12,6 +12,7 @@ function ProductCard(props) {
     setItemNumber,
     cartPositionState,
     setColorButton,
+    setCategoryId,
   } = props;
   const [ifAddCart, setIfAddCart] = useState(false);
   const FlyToCart = useRef();
@@ -114,6 +115,7 @@ function ProductCard(props) {
               to="/products"
               onClick={() => {
                 setColorButton("租點裝備");
+                setCategoryId(product.category_id);
               }}
             >
               <button

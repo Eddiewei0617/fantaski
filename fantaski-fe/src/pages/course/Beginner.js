@@ -21,6 +21,7 @@ function Beginner(props) {
     setItemNumber,
     cartPositionState,
     setColorButton,
+    setCategoryId,
   } = props;
   //courses ["初體驗", "技能班", "雪橇車", "建冰屋"]
   //showCourse courses[1]
@@ -82,6 +83,7 @@ function Beginner(props) {
         setItemNumber={setItemNumber}
         cartPositionState={cartPositionState}
         setColorButton={setColorButton}
+        setCategoryId={setCategoryId}
       />
       <Title titleName="其他課程" />
       <CourseLink setShowCourse={setShowCourse} courses={courses} />

@@ -72,7 +72,6 @@ function OrderFinal({
 
   // 訂購時間(用moment套件)
   let orderTime = moment().format("YYYY-MM-DD hh:mm:ss a");
-
   async function handleSubmit(e) {
     // e.preventDefault();
     try {
@@ -97,7 +96,6 @@ function OrderFinal({
       console.log("handleSubmit", e);
     }
   }
-  console.log("memberPoints[0].point", memberPoints[0].point);
   // 表單出後清空localStorage資料並自動跳轉頁面回商品頁
   let history = useHistory();
   async function handleJupmto() {

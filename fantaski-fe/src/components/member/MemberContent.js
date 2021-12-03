@@ -131,8 +131,11 @@ function MemberContent({
   if (userInfo === null) {
     return <></>;
   }
-  console.log("userInfo", userInfo);
-  console.log("uploadfile", uploadfile);
+  // console.log("userInfo", userInfo);
+  // console.log("uploadfile", uploadfile);
+  // console.log("userInfo.image:", userInfo.image, "uploadfile", uploadfile);
+  // console.log(typeof userInfo.image);
+  // console.log(typeof uploadfile);
   return (
     <>
       {/* 隱藏彈跳視窗 */}
@@ -227,8 +230,13 @@ function MemberContent({
                 <div className="memberPhoto mt-4 ">
                   {/* <img src={`${UPLOAD_URL}/${uploadfile}`} /> */}
                   <img
+<<<<<<< HEAD
                     src={
                       userInfo && uploadfile === null
+=======
+                    src={`${
+                      userInfo && uploadfile == null
+>>>>>>> main
                         ? `${IMAGE_FORUM_URL}/snowman.svg`
                         : userInfo && uploadfile.includes("https")
                         ? `${uploadfile}`

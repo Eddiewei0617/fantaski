@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { IMAGE_FORUM_URL, PUBLIC_URL } from "../../config/url";
 import { getUserInfo } from "../../config/StatusShortcut";
-import { insertReplyInfo } from "./moduleList";
+import { insertReplyInfo, getDbUserInfo } from "./moduleList";
 
 function ForumAddReply({
   forum_id,
@@ -12,6 +12,11 @@ function ForumAddReply({
   userInfo,
 }) {
   const [replyContent, setReplyContent] = useState("");
+  const [userFromDb, setUserFromDb] = useState(null);
+
+  useEffect(() => {
+    getDbUserInfo(setUserFromDb);
+  }, []);
 
   function handleChange(e) {
     setReplyContent(e.target.value);
@@ -28,7 +33,10 @@ function ForumAddReply({
       replyList[forum_id] = replyCount + 1;
     }
   }
-  if (userInfo.code === 1201) {
+  if (userInfo === null) {
+    return <></>;
+  }
+  if (userInfo.code === 1201 || userFromDb === null) {
     return <div>請先登入後才能回覆哦</div>;
   }
   return (
@@ -37,11 +45,11 @@ function ForumAddReply({
         <label className="m-3 forum-reply-img">
           <img
             src={`${
-              userInfo.image === null
+              userFromDb.image === null
                 ? `${IMAGE_FORUM_URL}/snowman.svg`
-                : userInfo.loginMethod === "thirdParty"
-                ? `${userInfo.image}`
-                : `${PUBLIC_URL}/${userInfo.image}`
+                : userFromDb.image.includes("https")
+                ? `${userFromDb.image}`
+                : `${PUBLIC_URL}/${userFromDb.image}`
             }`}
             alt="snowman-defult"
             className="object-fit"

@@ -234,7 +234,8 @@ function Login(props) {
                     value={registerInfo.password}
                     onChange={handleRegisterChange}
                     pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$"
-                    title="請輸入最少一個英文字母"
+                    title="請輸入最少一個英文字母，且總長度8~20碼"
+                    minlength="8"
                     maxlength="20"
                     required
                   />
