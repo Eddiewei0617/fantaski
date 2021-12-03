@@ -21,6 +21,7 @@ function ForumReplyDetail({ singleReply, sequence }) {
         ? minutes + "分鐘前"
         : "剛回覆";
   }
+  console.log("singleReply", singleReply);
 
   return (
     <>

@@ -21,19 +21,20 @@ router.get("/idxcoursepricerateremain", async (req, res) => {
            c.price,
            IFNULL(ROUND(SUM(oc2.star)/COUNT(oc2.id)),0) averageRate,
            IFNULL(oc1.SignUp, 0) signupTotalToday,
-           c.stu_limit - IFNULL(oc1.SignUp, 0) signupRemainToday
+           IF(c.stu_limit - IFNULL(oc1.SignUp, 0) < 0, 0, c.stu_limit - IFNULL(oc1.SignUp, 0)) signupRemainToday
     FROM course c
     LEFT JOIN (
         SELECT course_id,
                SUM(amount) SignUp
         FROM order_course
         WHERE DATE_FORMAT(booking_date, '%Y-%m-%d') = DATE_FORMAT(CURRENT_DATE, '%Y-%m-%d') AND valid = 1
+        GROUP BY course_id
         ) oc1
     ON oc1.course_id = c.id
     LEFT JOIN order_course oc2
     ON oc2.course_id = c.id
     WHERE c.valid = 1 and c.id != 5
-    GROUP BY c.id
+    GROUP BY c.id;
     `);
 
     res.json(idxCoursePriceRateRemain);
@@ -56,9 +57,9 @@ router.get("/indexforumconent", async (req, res) => {
     FROM forum f
     JOIN member m
     ON f.member_id = m.id
-    WHERE f.category_id = 2 
+    WHERE f.category_id = 2 AND f.valid =1
     ORDER BY f.created_at DESC
-    LIMIT 3
+    LIMIT 3;
       `);
 
     const color = ["#559360", "#F50505", "#000000"];
@@ -86,7 +87,7 @@ router.get("/indexrent", async (req, res) => {
                   WHEN p.category_id BETWEEN 7 AND 8 THEN '裝備類' END) AS 'type'
     FROM product p
     JOIN category_product cp
-    ON p.category_id = cp.id
+    ON p.category_id = cp.id;
       `);
     res.json(indexRent);
   } catch (err) {
@@ -98,7 +99,8 @@ router.get("/indexrent", async (req, res) => {
 //  s4 首頁論壇最新文章 --> 取得 forum & reply 資料庫 api
 router.get("/indexforumnews", async (req, res) => {
   try {
-    let indexForumNews = await connection.queryAsync(`
+    let indexForumNews = await connection.queryAsync(
+      `
     SELECT  f.id,
             f.category_id,
             f.subject,
@@ -110,8 +112,9 @@ router.get("/indexforumnews", async (req, res) => {
     ON f.id = r.forum_id
     GROUP BY f.id
     ORDER BY f.created_at DESC
-    LIMIT 2
-    `);
+    LIMIT 2;
+    `
+    );
     res.json(indexForumNews);
   } catch (err) {
     console.error("query for indexForumNews failed:", err);
@@ -135,7 +138,7 @@ router.get("/indexforumhot", async (req, res) => {
     ON f.id = r.forum_id
     GROUP BY f.id
     ORDER BY f.heart DESC
-    LIMIT 2
+    LIMIT 2;
       `);
     res.json(indexForumHot);
   } catch (err) {

@@ -68,12 +68,14 @@ function MemberForum() {
                   </div>
                 )} */}
 
-                          <div className="post-img">
-                            <img
-                              src={`${PUBLIC_URL}${item.image}`}
-                              alt="postimg"
-                            />
-                          </div>
+                          {item.image !== "" && (
+                            <div className="post-img">
+                              <img
+                                src={`${PUBLIC_URL}${item.image}`}
+                                alt="postimg"
+                              />
+                            </div>
+                          )}
                         </div>
                       </article>
                     </div>
