@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { CART_CATEGORY } from "../../config/StatusShortcut";
-
+import moment from "moment";
 function OrderItems({
   customerChoose,
   setCustomerChoose,
@@ -43,6 +43,7 @@ function OrderItems({
     );
   }
   // -------------------------------------------------------------------------------
+  const today = moment().format("YYYY-MM-DD");
 
   return (
     <>
@@ -72,6 +73,7 @@ function OrderItems({
                   // 最後再將改好的陣列轉回字串放回localStorage
                   storage[`${v.id}`] = newDateArray.join("|");
                 }}
+                min={today}
               />
             </div>
             <div className="col">$ {v.price}</div>

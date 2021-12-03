@@ -21,6 +21,7 @@ function ForumReplyDetail({ singleReply, sequence }) {
         ? minutes + "分鐘前"
         : "剛回覆";
   }
+  console.log("singleReply", singleReply);
 
   return (
     <>
@@ -32,6 +33,8 @@ function ForumReplyDetail({ singleReply, sequence }) {
               src={`${
                 singleReply.image === null
                   ? `${IMAGE_FORUM_URL}/snowman.svg`
+                  : singleReply.image.includes("https")
+                  ? `${singleReply.image}`
                   : `${PUBLIC_URL}/${singleReply.image}`
               }`}
               alt="snowman-defult"

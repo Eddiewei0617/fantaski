@@ -230,13 +230,8 @@ function MemberContent({
                 <div className="memberPhoto mt-4 ">
                   {/* <img src={`${UPLOAD_URL}/${uploadfile}`} /> */}
                   <img
-<<<<<<< HEAD
                     src={
                       userInfo && uploadfile === null
-=======
-                    src={`${
-                      userInfo && uploadfile == null
->>>>>>> main
                         ? `${IMAGE_FORUM_URL}/snowman.svg`
                         : userInfo && uploadfile.includes("https")
                         ? `${uploadfile}`
