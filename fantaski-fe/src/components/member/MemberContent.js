@@ -1,20 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { ORDERIMAGE_URL } from "../../config/url";
+
 import { AiFillPicture } from "react-icons/ai";
-import { BsFillPencilFill } from "react-icons/bs";
-import { FcGoogle } from "react-icons/fc";
-import { BsFacebook } from "react-icons/bs";
+
 import { FaUserCircle } from "react-icons/fa";
-import {
-  API_URL,
-  UPLOAD_URL,
-  IMAGE_FORUM_URL,
-  PUBLIC_URL,
-} from "../../config/url";
+import { API_URL, IMAGE_FORUM_URL, PUBLIC_URL } from "../../config/url";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-// import "./MemberContent.css";
 import { useState } from "react";
 import { STATUS_LEVEL } from "../../config/StatusShortcut";
 import Member from "../../pages/member/Member";
@@ -79,7 +70,7 @@ function MemberContent({
       ...memberContent,
       [e.target.name]: e.target.value,
     };
-    console.log(newMemberContent);
+    // console.log(newMemberContent);
     setmemberContent(newMemberContent);
   };
   const handlePasswordChange = (e) => {
@@ -87,7 +78,7 @@ function MemberContent({
       ...password,
       [e.target.name]: e.target.value,
     };
-    console.log(newMemberPassword);
+    // console.log(newMemberPassword);
     setPassword(newMemberPassword);
   };
   async function handleUpload(e) {
@@ -103,7 +94,7 @@ function MemberContent({
       let res = await axios.post(`${API_URL}/memberUpload/`, formData, {
         withCredentials: true,
       });
-      console.log(e.target.files[0]);
+      // console.log(e.target.files[0]);
     } catch (e) {
       console.log("handleUpload錯啦", e);
     }
@@ -112,7 +103,7 @@ function MemberContent({
   // if (memberContent === null) {
   //   return <></>;
   // }
-  console.log(memberContent.memberbirthday);
+  // console.log(memberContent.memberbirthday);
   async function handlePasswordSubmit(e) {
     e.preventDefault();
     try {
@@ -130,7 +121,7 @@ function MemberContent({
           icon: "error",
         });
       }
-      console.log(res);
+      // console.log(res);
     } catch (e) {
       console.log("handlePasswordSubmit", e);
     }
@@ -140,9 +131,11 @@ function MemberContent({
   if (userInfo === null) {
     return <></>;
   }
-  console.log("userInfo.image:", userInfo.image, "uploadfile", uploadfile);
-  console.log(typeof userInfo.image);
-  console.log(typeof uploadfile);
+  // console.log("userInfo", userInfo);
+  // console.log("uploadfile", uploadfile);
+  // console.log("userInfo.image:", userInfo.image, "uploadfile", uploadfile);
+  // console.log(typeof userInfo.image);
+  // console.log(typeof uploadfile);
   return (
     <>
       {/* 隱藏彈跳視窗 */}
@@ -237,13 +230,13 @@ function MemberContent({
                 <div className="memberPhoto mt-4 ">
                   {/* <img src={`${UPLOAD_URL}/${uploadfile}`} /> */}
                   <img
-                    src={`${
-                      userInfo && uploadfile == null
+                    src={
+                      userInfo && uploadfile === null
                         ? `${IMAGE_FORUM_URL}/snowman.svg`
                         : userInfo && uploadfile.includes("https")
                         ? `${uploadfile}`
                         : `${PUBLIC_URL}/${uploadfile}`
-                    }`}
+                    }
                     alt=""
                   />
                 </div>

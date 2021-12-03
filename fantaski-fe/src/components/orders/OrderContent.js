@@ -72,8 +72,7 @@ function OrderContent({
       // console.log("test2", memberPoints);
     }
   }, [memberPoints]);
-
-  console.log("userInfo", userInfo);
+  // console.log("pointUsed", pointUsed); // 一進來，沒有onChange會是 undefined
 
   return (
     <>
@@ -114,17 +113,20 @@ function OrderContent({
                   </div>
                   <div className="col d-flex">
                     <label className="m-0">使用點數 </label>
+
                     <input
                       type="number"
                       placeholder={`${0}  點`}
                       value={
                         userInfo && userInfo.code === 1201
                           ? "請先登入"
+                          : pointUsed === undefined
+                          ? 0
                           : pointUsed
                       }
                       onChange={(e) => {
                         if (e.target.value > userInfo.point) {
-                          Swal.fire("超過人數上限");
+                          Swal.fire("不可使用超過擁有點數");
                           return;
                         }
                         if (memberPoints !== null) {
@@ -137,7 +139,7 @@ function OrderContent({
                           setPointUsed(0);
                         }
                       }}
-                      className="p-0"
+                      className="p-0 point_used"
                       min="0"
                       max={
                         userInfo === null || userInfo.code === 1201

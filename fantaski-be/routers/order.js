@@ -35,8 +35,10 @@ router.post("/orderconfirm", async (req, res) => {
         [
           req.body.orderNumber,
           0,
-          req.body.total,
-          req.body.pointUsed,
+          req.body.pointUsed === undefined
+            ? req.body.totalWithoutPoint
+            : req.body.total,
+          req.body.pointUsed === undefined ? 0 : req.body.pointUsed,
           created_at,
         ]
       );
@@ -107,13 +109,16 @@ router.post("/orderconfirm", async (req, res) => {
       // }
 
       // 寫進ordered資料表 // 註!!! 訂單編號req.body.orderNumber 出來是字串，所以資料庫記得要用varchar ***
+      // 沒有onChange在使用點數上，到最後送出表單pointUsed會是undefined，所以要設判斷式讓傳回資料庫的資料不至於是null
       let orderConfirm = await connection.queryAsync(
         "INSERT INTO ordered (order_no,member_id, consumption,point_used, created_at) VALUES(?,?,?,?,?) ",
         [
           req.body.orderNumber,
           req.body.memberId,
-          req.body.total,
-          req.body.pointUsed,
+          req.body.pointUsed === undefined
+            ? req.body.totalWithoutPoint
+            : req.body.total,
+          req.body.pointUsed === undefined ? 0 : req.body.pointUsed,
           created_at,
         ]
       );
@@ -160,10 +165,11 @@ router.post("/orderconfirm", async (req, res) => {
 
 // 接前端的剩餘點數再丟到資料庫
 router.post("/pointleft", async (req, res) => {
+  let { pointUsed, membersPoint, pointLeft, memberId } = req.body;
   try {
     let memberPointLeft = await connection.queryAsync(
       "UPDATE member SET point=? WHERE id=?",
-      [req.body.pointLeft, req.body.memberId]
+      [pointUsed === undefined ? membersPoint : pointLeft, memberId]
     );
     res.json({ memberPointLeft });
   } catch (e) {

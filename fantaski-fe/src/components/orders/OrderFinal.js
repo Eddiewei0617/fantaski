@@ -81,6 +81,7 @@ function OrderFinal({
         orderNumber: orderNo,
         memberId: userInfo.id,
         total: total - pointUsed,
+        totalWithoutPoint: total,
         pointUsed: pointUsed,
       });
 
@@ -88,6 +89,8 @@ function OrderFinal({
       let res2 = await axios.post(`${API_URL}/order/pointleft`, {
         pointLeft: memberPoints[0].point - pointUsed,
         memberId: userInfo.id,
+        pointUsed,
+        membersPoint: memberPoints[0].point,
       });
     } catch (e) {
       console.log("handleSubmit", e);
