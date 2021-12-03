@@ -9,7 +9,7 @@ function FourmUserName({ forum_id, userInfo }) {
     //點進去別人文章用
     if (forum_id) {
       getPosterInfo(forum_id, setPoster);
-    } else if (userInfo.code !== 1201) {
+    } else if (userInfo && userInfo.code !== 1201) {
       getDbUserInfo(setUserFromDb);
     }
   }, [forum_id]);
@@ -18,6 +18,8 @@ function FourmUserName({ forum_id, userInfo }) {
     return <div>userInfo資料還沒載入</div>;
   } else if (forum_id && poster === null) {
     return <div>poster資料還沒載入</div>;
+  } else if (!forum_id && userInfo.code !== 1201 && userFromDb === null) {
+    return <div>userFromDb資料還沒載入</div>;
   }
   return (
     <>
