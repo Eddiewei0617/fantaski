@@ -131,7 +131,9 @@ function ProductList({
             <div className="product_description">
               <p>{v.name}</p>
               <p>{v.content}</p>
-              <p>租購價 : NT$ {v.price}</p>
+              <p>
+                租購價 : <span> NT$ {v.price}</span>
+              </p>
 
               <Button
                 id={v.id}
@@ -174,7 +176,7 @@ function ProductList({
 
   return (
     <>
-      <div>
+      <div className="product-area">
         <h3 className="product_title pl-1">{CATEGORY_WORD[categoryId]}</h3>
         {display}
         <PageButton

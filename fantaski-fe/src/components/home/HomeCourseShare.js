@@ -2,7 +2,7 @@ import React from "react";
 
 import HomeSharePost from "./homeShare/HomeSharePost";
 
-function HomeCourseShare(props) {
+function HomeCourseShare() {
   return (
     <>
       <section className="home-course-share home-section">

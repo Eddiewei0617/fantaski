@@ -1,12 +1,21 @@
+// =====================================s
+.home-main {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
 // =====================================
 // home section1 parallax
+// .home-parallax {
+// }
 .zoom {
   width: 100%;
   height: 800px;
   position: relative;
+  overflow: hidden;
   // top: 0;
   z-index: 1000;
-  overflow: hidden;
   background: url("../../src/components/home/home_mountain_bg.png") top center
     no-repeat;
   background-size: cover;
@@ -21,21 +30,24 @@
     bottom: 0;
   }
 }
+
 #img1 {
   position: absolute;
-  transform: translateX(-110%) scaleX(-1);
+  transform: translateX(-100%) scaleX(-0.8);
   left: 60%;
   top: 50%;
-  z-index: 100;
+  z-index: 50;
   filter: drop-shadow(4px 4px 10px rgba(24, 76, 104, 0.8));
 }
+
 #img2 {
   position: absolute;
-  z-index: 100;
+  z-index: 50;
   transform: translateX(40%);
   filter: drop-shadow(2px 2px 6px rgba(24, 76, 104, 0.8));
   top: 60%;
 }
+
 #logoimg {
   position: absolute;
   transform: translateY(180%);
@@ -200,6 +212,7 @@
 // HomeCourseShare s2
 .home-course-share {
   background: $main-blue;
+  height: 900px;
 }
 .home-share-title {
   color: $assist-white;
@@ -266,6 +279,7 @@
           .home-share-user {
             display: flex;
             align-items: flex-end;
+            color: $main-text-darkblue;
             .forum-user-img {
               width: 60px;
               height: 60px;
@@ -286,15 +300,18 @@
   box-shadow: 0px 0px 10px $main-text-darkblue;
   position: relative;
   .skiMap {
-    left: -8%;
+    // left: -8%;
+    // height: auto;
+    width: 100%;
+    background-position-x: 10%;
   }
 
   .igloo-popup {
-    position: relative;
+    position: absolute;
     display: inline-block;
     cursor: pointer;
     user-select: none;
-    top: 18%;
+    top: 25%;
     left: 9%;
     z-index: 4;
     .igloo-route-popup {
@@ -381,9 +398,9 @@
   .green-route-animation,
   .black-route-animation {
     position: absolute;
-    left: 11.5%;
-    padding: 1%;
-    top: -0.5%;
+    left: 12.5%;
+    padding: 2%;
+    top: 99%;
     path:hover {
       cursor: pointer;
       filter: blur(2px);
@@ -429,7 +446,7 @@
     display: flex;
     flex-direction: column;
     visibility: hidden;
-    transform: translate(1030px, 200px);
+    transform: translate(970px, 400px);
 
     &::after {
       content: "";
@@ -478,7 +495,7 @@
     display: flex;
     flex-direction: column;
     visibility: hidden;
-    transform: translate(500px, 140px);
+    transform: translate(500px, 250px);
 
     &::after {
       content: "";
@@ -527,7 +544,7 @@
     display: flex;
     flex-direction: column;
     visibility: hidden;
-    transform: translate(550px, 300px);
+    transform: translate(520px, 500px);
 
     &::after {
       content: "";
@@ -703,9 +720,12 @@
 // home-forum
 .home-forum {
   background-color: $main-text-darkblue;
+  // height: 250vh;
+  // border-radius: 0 0 50% 50%; // homedotted .two-bg要記得一起改
 }
+
 .home-forum-title {
-  padding-top: 1%;
+  // padding-top: 1%;
   .home-title-area {
     .home-title {
       color: $assist-white;
@@ -768,6 +788,7 @@
   }
   .home-post-content h2 {
     border-bottom: 3px solid #6b6b6b;
+    padding-bottom: 1%;
   }
   .home-post-p-area {
     overflow: hidden;
@@ -791,6 +812,17 @@
   .home-commit-num {
     span {
       margin: 0 5px;
+    }
+  }
+}
+.home-commit {
+  display: flex;
+  width: 50%;
+  .home-heart-num {
+    color: $main-red;
+    margin-left: 5%;
+    span {
+      margin-left: 5px;
     }
   }
 }
