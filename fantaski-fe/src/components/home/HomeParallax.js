@@ -1,14 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IMAGE_HOME_URL } from "../../config/url";
 import { IMAGE_SHARE_URL } from "../../config/url";
 
-function HomeParallax() {
-  const [homeOffset, setHomeOffset] = useState();
-  const handleScroll = () => {
-    setHomeOffset(window.pageYOffset);
-  };
-  window.addEventListener("scroll", handleScroll);
-
+function HomeParallax({ homeOffset }) {
   return (
     <>
       <div className="home-parallax">
@@ -18,7 +12,7 @@ function HomeParallax() {
             alt="mountain"
             id="img1"
             style={{
-              width: 100 + homeOffset * 0.3 + "%",
+              width: 100 + homeOffset * 0.5 + "%",
             }}
           />
           <img
@@ -27,6 +21,7 @@ function HomeParallax() {
             id="img2"
             style={{ width: 100 + homeOffset * 0.3 + "%" }}
           />
+          ㄋ
           <img
             src={`${IMAGE_SHARE_URL}/fantaski_logo.svg`}
             alt="LOGO"
@@ -34,6 +29,7 @@ function HomeParallax() {
             style={{ top: `-${5 + homeOffset * 0.3 + "%"}` }}
           />
         </div>
+
         {/* zoom end */}
       </div>
     </>

@@ -55,7 +55,8 @@ function ProductRent({ setColorButton }) {
             </ul>
           </div>
         </div>
-        <div className="col-4 productLeft d-flex align-items-center flex-column mt-5 pt-1">
+        {/*  mt-5 pt-1 */}
+        <div className="col-4 productLeft d-flex align-items-center flex-column">
           <div className="productLeftTitle">
             歡迎各位來到FANTA SKI出租站 <br />
             我們擁有各式各樣的裝備
@@ -81,7 +82,7 @@ function ProductRent({ setColorButton }) {
           {/* <button className="btn btn-primary mt-3 w-50 mx-auto">更多</button> */}
           <Link
             to="/products"
-            className="btn btn-primary mt-3 w-50 mx-auto"
+            className="btn btn-primary mt-3 w-50 mx-auto route-product-link"
             onClick={() => {
               setColorButton("租點裝備");
             }}

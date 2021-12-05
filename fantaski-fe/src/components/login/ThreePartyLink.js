@@ -85,17 +85,17 @@ function ThreePartyLink(props) {
         {/* </Link> */}
         {/* </a> */}
 
-        <span
+        <div
           className="three-party-link"
           onClick={() => {
             setClickOnFbLogin(true);
           }}
         >
           <button className="facebookbtn link-btn">
-            {/* <FaFacebookF size={20} /> */}
+            <FaFacebookF size={20} />
             <span>使用Facebook繼續</span>
           </button>
-        </span>
+        </div>
         {clickOnFbLogin && (
           <FBlogin
             setUserInfo={setUserInfo}
