@@ -31,14 +31,14 @@ function CourseMapSkill() {
           />
         </div>
         <div className="row justify-content-center align-items-center">
-          <h5 className="col-1 total-hour-box">總時數6小時</h5>
-          <div className="col-10">
+          <h5 className="col-md-1 col-sm-11 total-hour-box">總時數6小時</h5>
+          <div className="col-md-10 col-sm-11">
             <div className="row">
               {/* 0.5個小時＝2 */}
               <div
                 className={`${
                   toggleState["warmup"] && "rotate-effect"
-                } col col-5`}
+                } col col-md-5`}
                 onClick={clickToChangeToggle}
                 id="warmup"
               >
@@ -54,7 +54,7 @@ function CourseMapSkill() {
               <div
                 className={`${
                   toggleState["sTurn"] && "rotate-effect"
-                } col col-2`}
+                } col col-md-2`}
                 onClick={clickToChangeToggle}
                 id="sTurn"
               >
@@ -70,7 +70,7 @@ function CourseMapSkill() {
               <div
                 className={`${
                   toggleState["jTurn"] && "rotate-effect"
-                } col col-4`}
+                } col col-md-4`}
                 onClick={clickToChangeToggle}
                 id="jTurn"
               >
@@ -86,7 +86,7 @@ function CourseMapSkill() {
               <div
                 className={`${
                   toggleState["carving"] && "rotate-effect"
-                } col col-2`}
+                } col col-md-2`}
                 onClick={clickToChangeToggle}
                 id="carving"
               >
@@ -102,7 +102,7 @@ function CourseMapSkill() {
               <div
                 className={`${
                   toggleState["ollie"] && "rotate-effect"
-                } col col-4`}
+                } col col-md-4`}
                 onClick={clickToChangeToggle}
                 id="ollie"
               >
@@ -118,7 +118,7 @@ function CourseMapSkill() {
               <div
                 className={`${
                   toggleState["park"] && "rotate-effect"
-                } col col-5`}
+                } col col-md-5`}
                 onClick={clickToChangeToggle}
                 id="park"
               >

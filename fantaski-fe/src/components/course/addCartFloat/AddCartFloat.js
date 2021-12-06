@@ -82,7 +82,7 @@ function AddCartFloat({
           ) : (
             <FontAwesomeIcon className="my-2" icon={faChevronLeft} />
           )}
-          立即報名
+          <span className="d-md-inline d-sm-none">立即報名</span>
         </div>
         <div className="add-cart-box">
           <div className="add-cart-box-img">

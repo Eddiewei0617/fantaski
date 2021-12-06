@@ -110,8 +110,8 @@ function AddCartFix({
           />
         </div>
         <div className="row text-center content">
-          <div className="col-2"></div>
-          <div className="col-2 day-choose-box justify-content-end ">
+          <div className="col-md-2 d-sm-none"></div>
+          <div className="col-md-2 col-sm-4 day-choose-box justify-content-end ">
             <h5>請選擇日期</h5>
             <input
               type="text"
@@ -151,7 +151,7 @@ function AddCartFix({
               </div>
             )}
           </div>
-          <div className="col-2 number-choose-box">
+          <div className="col-md-2 col-sm-3 number-choose-box">
             <h5>報名人數</h5>
             <input
               type="number"
@@ -178,7 +178,7 @@ function AddCartFix({
               }}
             ></input>
           </div>
-          <div className="col-2">
+          <div className="col-md-2 col-sm-3 ">
             <h5>價格</h5>
             <h4>
               {courseInfo === null
@@ -186,7 +186,7 @@ function AddCartFix({
                 : `$${courseInfo[0].price * customerChoose.number}`}
             </h4>
           </div>
-          <div className="col-2">
+          <div className="col-md-2">
             <button
               className={ifAddCart ? "button-clicked" : ""}
               onClick={(e) => {
@@ -237,7 +237,7 @@ function AddCartFix({
               />
             </button>
           </div>
-          <div className="col-2"></div>
+          <div className="col-md-2 d-sm-none"></div>
         </div>
       </div>
     </>

@@ -13,7 +13,7 @@ function SingleCourseLink(props) {
   const { course, courseDescription, imgSrc, setShowCourse } = props;
   return (
     <>
-      <div className="single-course-wrap col-5 p-0 m-1">
+      <div className="single-course-wrap col-md-5 p-0 m-md-1 m-sm-0">
         <Link
           to={`/course/${coursesinEng[course]}`}
           onClick={() => {

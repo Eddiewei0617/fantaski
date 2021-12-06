@@ -40,13 +40,13 @@ function SingleComment(props) {
             alt=""
           />
         </div>
-        <div className="col-3">{comment.name}</div>
-        <div className="col-6">
+        <div className="col-4">{comment.name}</div>
+        <div className="col-md-5 col-sm-4">
           {comment.comment_last_update === null
             ? ""
             : moment(comment.comment_last_update).format("YYYY-MM-DD HH:mm")}
         </div>
-        <div className="col-2 text-right">
+        <div className="col-md-2 col-sm-3 text-right">
           {starMapping[comment.star].map((item, i) => {
             return (
               <>

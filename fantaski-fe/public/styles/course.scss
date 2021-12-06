@@ -8,6 +8,12 @@
   justify-content: center;
   margin: 0 auto;
 }
+@media screen and (max-width: 768px) {
+  .video-wrap {
+    height: 60vh;
+  }
+}
+
 //-----------------------------課程通用按鈕-----------------------------//
 .course-buttons {
   margin-top: 30px;
@@ -57,6 +63,20 @@
 .course-buttons span {
   font-size: 22px;
   color: #134865;
+}
+
+@media screen and (max-width: 768px) {
+  .course-buttons span {
+    font-size: 20px;
+  }
+  .course-buttons img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .course-buttons a {
+    margin: 20px;
+  }
 }
 //------------------------------內文標題------------------------------//
 .course-title {
@@ -164,8 +184,26 @@
   height: 154px;
   letter-spacing: 3px;
 }
+@media screen and (max-width: 768px) {
+  .course-map-wrapper .decoration-skill,
+  .course-map-wrapper .decoration-skill-deer,
+  .course-map-wrapper .decoration-skill-igloo {
+    display: none;
+  }
+  .course-map-wrapper .total-hour-box {
+    writing-mode: horizontal-tb;
+    text-orientation: inherit;
+    height: 50px;
+    line-height: 50px;
+  }
+  .course-map-wrapper .col {
+    line-height: 75px;
+  }
+}
+
 //------------------------------教練專區------------------------------//
 .coach-wrapper {
+  margin: 0 auto;
   height: 400px;
 }
 .coach-wrapper {
@@ -266,6 +304,23 @@
   top: 5%;
   right: 0;
 }
+@media screen and (max-width: 768px) {
+  .coach {
+    width: 99%;
+    height: auto;
+  }
+  .coach-avatar {
+    width: 100px;
+    height: 100px;
+  }
+  .coach-file {
+    line-height: 22px;
+  }
+  .click-area {
+    width: 170px;
+    height: 170px;
+  }
+}
 //------------------------------加入購物車------------------------------//
 .add-cart-fix-wrapper {
   width: 100%;
@@ -360,6 +415,15 @@
   justify-content: center;
   align-items: center;
 }
+@media screen and (max-width: 768px) {
+  .add-cart-fix-wrapper .decoration-skill {
+    display: none;
+  }
+  .add-cart-fix-wrapper button {
+    width: 80%;
+    height: 40px;
+  }
+}
 
 //---------------------------(浮動)加入購物車--------------------------//
 .add-cart-float-wrapper {
@@ -448,6 +512,14 @@
   top: 8px;
   left: 83px;
 }
+@media screen and (max-width: 768px) {
+  .hover-to-show {
+    height: 50px;
+    width: 30px;
+    line-height: 40px;
+  }
+}
+
 //-------------------------------日曆-------------------------------//
 .calendar-wrapper {
   line-height: 13px;
@@ -567,6 +639,12 @@
   line-height: 16px;
   cursor: pointer;
   color: blue;
+}
+@media screen and (max-width: 768px) {
+  .comments-wrapper {
+    width: 99%;
+    height: 300px;
+  }
 }
 
 //------------------------------建議裝備------------------------------//
@@ -711,6 +789,14 @@
   width: 90%;
   height: 70%;
 }
+@media screen and (max-width: 768px) {
+  .swiper-wrapper .decoration-skill {
+    display: none;
+  }
+  .swiper-wrapper {
+    width: 100%;
+  }
+}
 
 //------------------------------課程連結------------------------------//
 .courselink-wrapper {
@@ -720,7 +806,6 @@
 .single-course-wrap {
   border-radius: 10px;
   height: 15rem;
-  width: 40%;
   overflow: hidden;
   position: relative;
 }
@@ -755,6 +840,32 @@
 .single-course-wrap:hover .single-course-description {
   display: block;
 }
+@media screen and (max-width: 768px) {
+  .courselink-wrapper {
+    width: 100%;
+  }
+  .single-course-wrap {
+    border-radius: 0;
+    height: 10rem;
+    overflow: hidden;
+    position: relative;
+  }
+  .single-course-mask {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    color: #ffffff;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 //------------------------------課程訂單評價------------------------------//
 .order-comments-wrapper {
   width: 70%;

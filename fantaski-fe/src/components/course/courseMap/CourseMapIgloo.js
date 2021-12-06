@@ -28,8 +28,10 @@ function CourseMapIgloo() {
           />
         </div>
         <div className="row justify-content-center align-items-center">
-          <h6 className="col-1 total-hour-box three-hour-box">總時數3小時</h6>
-          <div className="col-10">
+          <h6 className="col-md-1 total-hour-box three-hour-box">
+            總時數3小時
+          </h6>
+          <div className="col-md-10">
             <div className="row">
               {/* 0.5個小時＝2 */}
               <div
