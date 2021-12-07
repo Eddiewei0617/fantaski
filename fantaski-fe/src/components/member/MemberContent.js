@@ -207,13 +207,13 @@ function MemberContent({
               <div class="modal-footer">
                 <button
                   type="button"
-                  class="btn btn-secondary"
+                  class="btn member-cancel"
                   data-dismiss="modal"
                   onClick={toggleModaltwo}
                 >
                   取消
                 </button>
-                <button type="submit" class="btn btn-danger">
+                <button type="submit" class="btn member-confrim">
                   儲存
                 </button>
               </div>
@@ -250,7 +250,9 @@ function MemberContent({
                 </div>
               </div>
               <div className="m-2 font-weight-bold">
-                <h5>會員等級:{STATUS_LEVEL[level]}</h5>
+                <p className="member-level">
+                  會員等級:<span>{STATUS_LEVEL[level]}</span>
+                </p>
               </div>
 
               <div className="p-3 memberName">
@@ -263,7 +265,9 @@ function MemberContent({
               </div>
               <div className="memberContenBorderBotton"></div>
               <div>
-                <h5 className="pb-3">點數 :{point}點</h5>
+                <p className="pb-3 member-level">
+                  點數 :<span>{point}點</span>
+                </p>
               </div>
               <button
                 className="memberbtn mx-auto mb-5"
@@ -277,7 +281,7 @@ function MemberContent({
           </div>
 
           <div className="col-8 MemberContentHigh ">
-            <div className="memberContentRight shadow p-3">
+            <div className="memberContentRight shadow p-5">
               <div className=" text-left memberContentText mb-3">個人資料</div>
               <div className="row memberContentOutside ">
                 <div className="col-12 row text-left ">
@@ -375,10 +379,7 @@ function MemberContent({
                     ></input>
                   </div>
                   <div>
-                    <button
-                      type="submit"
-                      className="btn btn-danger memberEmailSubmit"
-                    >
+                    <button type="submit" className="btn memberEmailSubmit">
                       儲存
                     </button>
                   </div>

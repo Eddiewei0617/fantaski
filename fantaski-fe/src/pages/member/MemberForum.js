@@ -26,11 +26,9 @@ function MemberForum() {
   return (
     <div>
       <MemberList page={3} />
-      <div className="container memberForumContent mt-5 ">
-        <div className="container p-3  px-3  memberForumContentTitle">
-          我的文章
-        </div>
-        <div className="memberForumContentBorder mx-auto "></div>
+      <div className="container memberForumContentTitle mt-4 ">我的文章</div>
+      <div className="container memberForumContent ">
+        {/* <div className="memberForumContentBorder mx-auto "></div>  */}
         <div className="articleWrapper">
           {article ? (
             <>
