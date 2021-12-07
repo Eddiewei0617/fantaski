@@ -87,7 +87,7 @@ router.get("/indexrent", async (req, res) => {
                   WHEN p.category_id BETWEEN 7 AND 8 THEN '裝備類' END) AS 'type'
     FROM product p
     JOIN category_product cp
-    ON p.category_id = cp.id;
+    ON p.category_id = cp.id
       `);
     res.json(indexRent);
   } catch (err) {
@@ -110,10 +110,12 @@ router.get("/indexforumnews", async (req, res) => {
     FROM forum f
     LEFT JOIN reply r
     ON f.id = r.forum_id
+    WHERE f.valid = 1
     GROUP BY f.id
-    ORDER BY f.created_at DESC
+    ORDER BY f.created_at DESC, COUNT(r.reply) DESC
     LIMIT 2;
-    `
+    `,
+      [req.params.forumId]
     );
     res.json(indexForumNews);
   } catch (err) {
@@ -136,8 +138,9 @@ router.get("/indexforumhot", async (req, res) => {
     FROM forum f
     JOIN reply r
     ON f.id = r.forum_id
+    WHERE f.valid = 1
     GROUP BY f.id
-    ORDER BY f.heart DESC
+    ORDER BY f.heart DESC, COUNT(r.reply) DESC
     LIMIT 2;
       `);
     res.json(indexForumHot);

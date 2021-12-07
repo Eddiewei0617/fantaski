@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import HomeCourseMore from "./homeCourse/HomeCourseMore";
 import HomeTitle from "./HomeTitle";
-// import { IMAGE_HOME_URL } from "../../config/url";
+import { IMAGE_HOME_URL } from "../../config/url";
+
 import { HomeCourseList } from "./asCoruseDB";
 
 import axios from "axios";
@@ -29,12 +30,38 @@ function HomeCourse({ setColorButton }) {
     title: "多元課程",
     subTitle: "有專屬教練及體驗當愛斯基摩⼈",
   };
+
   return (
     <>
       <section className="home-course home-section">
         <div className="container">
           <HomeTitle title={mainTitle.title} subTitle={mainTitle.subTitle} />
           {/* home-title-area end */}
+
+          <div className="course-dotted" data-aos={"fade-left"}>
+            <img
+              src={`${IMAGE_HOME_URL}/white_tree.png`}
+              alt="white_tree"
+              id="courseWT"
+            />
+          </div>
+          <div
+            className="course-dotted"
+            data-aos={"fade-up-left"}
+            data-aos-easing={"linear"}
+            data-aos-duration={"1500"}
+          >
+            <img
+              src={`${IMAGE_HOME_URL}/green_tree.png`}
+              alt="green_tree"
+              id="courseGT"
+            />
+            <img
+              src={`${IMAGE_HOME_URL}/green_tree.png`}
+              alt="green_tree"
+              id="courseGTL"
+            />
+          </div>
 
           {/* {courseDetail} */}
           <div className="home-course-area">
@@ -81,7 +108,6 @@ function HomeCourse({ setColorButton }) {
               );
             })}
           </div>
-
           {/* home-course-area end */}
         </div>
       </section>

@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import HomeTitle from "./HomeTitle";
 import { Link } from "react-router-dom";
 
+import { BsHeartFill } from "react-icons/bs";
+
 import axios from "axios";
 import { API_URL } from "../../config/url";
 import { FORUM_STATUS_WORD } from "../../config/StatusShortcut";
@@ -50,11 +52,13 @@ import moment from "moment";
 //   },
 // ];
 
-function HomeForum({ setColorButton }) {
+function HomeForum({ setColorButton, homeOffset }) {
   const mainTitle = {
     title: "滑雪論壇",
     subTitle: "奇聞軼事 | 天⾺⾏空",
   };
+
+  console.log(homeOffset);
 
   // 接後端資料顯示於頁面上
   const [indexForumNews, setIndexForumNews] = useState([]);
@@ -166,9 +170,16 @@ function HomeForum({ setColorButton }) {
                         </div>
                         {/* home-post-p end */}
                         <div className="home-reply-more">
-                          <div className="home-commit-num">
-                            留言數:<span>{item.replyNum}</span>則
+                          <div className="home-commit">
+                            <div className="home-commit-num">
+                              留言數:<span>{item.replyNum}</span>則
+                            </div>
+                            <div className="home-heart-num">
+                              <BsHeartFill className="heart-num" />
+                              <span>{item.heart}</span>
+                            </div>
                           </div>
+
                           {/* home-commit-num end */}
                           <Link to="/forum" className="goto-check">
                             <div className="home-arrow-1">前往觀看</div>

@@ -72,7 +72,7 @@ function ProductCard(props) {
           ></img>
         </div>
         <div className="advice-product-intro p-1 d-flex flex-column justify-content-between">
-          <div className="text-center">{product.name}</div>
+          <div className="text-center course-product-title">{product.name}</div>
           <p className={`${selectedAdvice === i ? "p-selected" : "p-normal"} `}>
             {product.content}
           </p>

@@ -45,8 +45,11 @@ import { Link } from "react-router-dom";
 
 function HomeRentCarousel({ active, productList, setColorButton }) {
   // console.log(active);
+
+  const [mySwiper, setMySwiper] = useState(null);
   useEffect(() => {
-    const swiper = new Swiper(".home-swiper-container", {
+    let swiper = new Swiper(".home-swiper-container", {
+      // initialSlide: active > 0 ? active + 1 : 0,
       observer: true, //修改swiper自己或子元素時，自動初始化swiper
       observeParents: true, //修改swiper的父元素時，自動初始化swiper
       direction: "horizontal", // 方向
@@ -54,18 +57,21 @@ function HomeRentCarousel({ active, productList, setColorButton }) {
       spaceBetween: 100,
       slidesPerView: 3,
       centeredSlides: true,
-      roundLengths: true,
-      loopAdditionalSlides: 30,
+      // roundLengths: true,
+      // loopAdditionalSlides: 30,
       grabCursor: true, // 游標為手掌
       autoplay: {
         delay: 1000,
         disableOnInteraction: false,
       },
     });
+    setMySwiper(mySwiper);
   }, []);
 
   // 自動輪播
-  Swiper.use([Autoplay]);
+  // Swiper.use([Autoplay]);
+
+  // console.log(productList.filter((e) => e.type === types[1]));
 
   return (
     <>
