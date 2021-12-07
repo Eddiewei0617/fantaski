@@ -178,18 +178,18 @@
 }
 /* 彈跳視窗的立即報名按鈕 */
 .popBtn {
-  width: 200px;
+  width: 145px;
   height: 60px;
-  border: 5px solid #ec6855;
+  border: 4px solid #ec6855;
   color: #ec6855;
   background: white;
   font-size: $font-l;
   font-weight: 900;
   border-radius: 15px;
-  margin: 0 auto;
+  // margin: 0 auto;
 }
 .popBtn:hover {
-  width: 200px;
+  width: 145px;
   height: 60px;
   border: 5px solid #ec6855;
   color: white;
@@ -197,7 +197,7 @@
   font-size: $font-l;
   font-weight: 900;
   border-radius: 10px;
-  margin: 0 auto;
+  // margin: 0 auto;
 }
 
 /* 雪場資訊 */

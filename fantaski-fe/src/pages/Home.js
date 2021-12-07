@@ -49,6 +49,7 @@ function Home({ setColorButton }) {
           <div
             className="courseShare-imgDotted"
             data-aos={"fade-down"}
+            data-aos-duration={"1000"}
             // data-aos-delay={"100"}
           >
             <img
@@ -61,6 +62,7 @@ function Home({ setColorButton }) {
             className="courseShare-imgDotted mountain-img"
             data-aos={"fade-up"}
             data-aos-delay={"200"}
+            data-aos-duration={"1000"}
           >
             <img
               src={`${IMAGE_HOME_URL}/home_mountain_01.png`}
@@ -81,43 +83,39 @@ function Home({ setColorButton }) {
         <div className="two-bg">
           <HomeRent setColorButton={setColorButton} />
           <HomeForum setColorButton={setColorButton} homeOffset={homeOffset} />
-        </div>
-        <div className="monster-area">
-          <div className="snow-area">
+
+          <div className="monster-area">
             <div
-              className="monster"
-              data-aos={"fade-up"}
-              data-aos-easing={"linear"}
-              data-aos-delay={"300"}
-              data-aos-duration={"1000"}
-              // data-aos-duration={"1500"}
+              data-aos={"fade-down"}
+              data-aos-delay={"1000"}
+              data-aos-duration={"3000"}
             >
-              <img src={`${IMAGE_HOME_URL}/monster.png`} alt="monster" />
+              <div className="cirlce-dialog-box">
+                <img
+                  src={`${IMAGE_HOME_URL}/dialog-box.png`}
+                  alt="dialog-box"
+                  id="circle01"
+                />
+              </div>
+              <div className="cirlce-dialog-box">
+                <img
+                  src={`${IMAGE_HOME_URL}/dialog-box.png`}
+                  alt="dialog-box"
+                  id="circle02"
+                />
+              </div>
             </div>
-          </div>
-          <div
-            className="cirlce-dialog-box"
-            data-aos={"fade-left"}
-            data-aos-easing={"ease-in-sine"}
-            data-aos-duration={"1500"}
-          >
-            <img
-              src={`${IMAGE_HOME_URL}/dialog-box.png`}
-              alt="dialog-box"
-              id="circle01"
-            />
-          </div>
-          <div
-            className="cirlce-dialog-box"
-            data-aos={"fade-right"}
-            data-aos-easing={"ease-in-sine"}
-            data-aos-duration={"2500"}
-          >
-            <img
-              src={`${IMAGE_HOME_URL}/dialog-box.png`}
-              alt="dialog-box"
-              id="circle02"
-            />
+            <div className="snow-area">
+              <div
+                className="monster"
+                data-aos={"fade-up"}
+                data-aos-easing={"linear"}
+                data-aos-delay={"800"}
+                // data-aos-duration={"1500"}
+              >
+                <img src={`${IMAGE_HOME_URL}/monster.png`} alt="monster" />
+              </div>
+            </div>
           </div>
         </div>
       </main>

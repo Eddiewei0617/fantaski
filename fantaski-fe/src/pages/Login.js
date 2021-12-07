@@ -256,7 +256,7 @@ function Login(props) {
                   />
                   {/*  */}
                 </div>
-                <Link className="sendmail-link">未收到驗證信</Link>
+                {/* <Link className="sendmail-link">未收到驗證信</Link> */}
                 <p className="login-small-text">
                   註冊即同意 | <span>服務條款</span>與<span>隱私權政策</span>
                 </p>

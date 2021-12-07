@@ -36,7 +36,7 @@ function SingleComment(props) {
         <div className="comment-avatar-box col-1">
           <img
             className="object-fit-height"
-            src={`${COURSE_IMG_URL}/avatar-default.png`}
+            src={`${COURSE_IMG_URL}/snowman.svg`}
             alt=""
           />
         </div>

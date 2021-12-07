@@ -185,7 +185,7 @@ router.post("/updataImg", async (req, res) => {
 router.get("/memberArticle", async (req, res) => {
   try {
     let data = await connection.queryAsync(
-      "SELECT * FROM forum WHERE member_id=? AND valid=1",
+      "SELECT * FROM forum WHERE member_id=? AND valid=1 ORDER BY created_at DESC",
       // [3]
       [req.session.member.id]
     );

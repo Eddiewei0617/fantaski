@@ -305,7 +305,13 @@ function Navbar(props) {
                       </p>
                     </Link>
                   ) : (
-                    <Link className="nav-link position-relative" to="/orders">
+                    <Link
+                      className="nav-link position-relative"
+                      to="/orders"
+                      onClick={(e) => {
+                        handleClick(e);
+                      }}
+                    >
                       <BsFillCartFill className="all-icon-nav" size={25} />
                       <p className="shopping-cart-circle" id="itemNumber">
                         {itemNumber}

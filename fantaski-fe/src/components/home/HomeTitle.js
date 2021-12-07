@@ -15,7 +15,7 @@ function HomeTitle(props) {
       <div
         className="home-title-area"
         data-aos={"zoom-in-up"}
-        data-aos-delay={"300"}
+        data-aos-delay={"1000"}
         data-aos-easing={"linear"}
       >
         <img
