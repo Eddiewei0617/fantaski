@@ -107,6 +107,7 @@ function MemberContent({
   async function handlePasswordSubmit(e) {
     e.preventDefault();
     try {
+      console.log("password", password);
       let res = await axios.post(`${API_URL}/member/memberPassword`, password, {
         withCredentials: true,
       });
@@ -168,7 +169,7 @@ function MemberContent({
                       // value={password.password}
                       onChange={handlePasswordChange}
                       required
-                      minLength="6"
+                      minLength="8"
                     />
                   </div>
                 </div>
@@ -182,7 +183,7 @@ function MemberContent({
                       value={password.password}
                       onChange={handlePasswordChange}
                       required
-                      minLength="6"
+                      minLength="8"
                     />
                   </div>
                 </div>
