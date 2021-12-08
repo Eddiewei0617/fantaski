@@ -35,8 +35,8 @@ function Record() {
       <div>
         <MemberList page={2} />
 
-        <div className="w-75 mx-auto">
-          <div className=" row mt-3 recordTitle p-3 ">
+        <div className="w-75 mx-auto record-bg">
+          <div className=" row mt-4 recordTitle p-3 ">
             <div className="col-2">訂單標號</div>
             <div className="col-2">訂單成立時間</div>
             <div className="col-2">課程數量</div>

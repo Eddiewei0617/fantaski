@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { IMAGE_FORUM_URL, PUBLIC_URL } from "../../config/url";
 import { getUserInfo } from "../../config/StatusShortcut";
 import { insertReplyInfo, getDbUserInfo } from "./moduleList";
+import Swal from "sweetalert2";
 
 function ForumAddReply({
   forum_id,
@@ -23,7 +24,8 @@ function ForumAddReply({
   }
   async function handleSubmit() {
     if (replyContent === "") {
-      alert("回覆內容不可空白哦！");
+      Swal.fire("回覆內容不可空白哦！");
+
       return;
     } else {
       setIfScrollDown(true);

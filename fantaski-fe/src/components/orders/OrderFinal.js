@@ -122,7 +122,7 @@ function OrderFinal({
         <div className="order_final_bg2">
           {/* 上方欄位 */}
           <div className="container">
-            <div className="row mt-5 border-bottoms">
+            <div className="row mt-3 border-bottoms">
               <div className="col-3 final_title">
                 <div>訂單編號</div>
               </div>
@@ -227,7 +227,7 @@ function OrderFinal({
                 value={pointUsed === undefined ? total : total - pointUsed}
               />
             </div>
-            <div className="box3 d-flex justify-content-end m-5 final_prev">
+            <div className="box3 d-flex justify-content-end m-4 final_prev">
               <PrevStepIcon
                 step={step}
                 setStep={setStep}

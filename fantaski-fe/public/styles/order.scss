@@ -191,20 +191,36 @@
 }
 .cart_content {
   // width: 1400px;
-  max-width: 1280px;
+  max-width: 100%;
   height: 500px;
   background-color: #fff;
   position: absolute;
   top: 100px;
   border-radius: 0, 0, 20px, 20px;
-  overflow: auto;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  //scroll background
+  &::-webkit-scrollbar-track {
+    // background: $assist-white;
+    background: transparent;
+  }
+  //滑桿本身
+  &::-webkit-scrollbar-thumb {
+    background: $main-text-darkblue;
+    border-radius: 100px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: $main-blue;
+  }
 }
 .header {
   text-align: center;
   padding: 30px 0;
   color: #fff;
   font-weight: 600;
-  font-size: $font-l;
+  font-size: 20px;
 }
 
 // 購物車內容
@@ -223,7 +239,7 @@
 .cart_content .col {
   width: 200px;
   // text-align: center;
-  font-size: $font-l;
+  font-size: 20px;
   color: $main-text-darkblue;
   padding: 80px 5px;
 }
@@ -238,9 +254,10 @@
   height: 100%;
 }
 .cart_content input {
-  width: 200px;
-  border-radius: 20px;
-  border: 4px solid $main-text-darkblue;
+  // width: 200px;
+  width: 180px;
+  border-radius: 15px;
+  border: 3px solid $main-text-darkblue;
 }
 .cart_number {
   text-align: center;
@@ -248,8 +265,8 @@
 
 // 總訂單底色
 .order_content_bg {
-  width: 1400px;
-  // max-width: 1280px;
+  // width: 1400px;
+  max-width: 1280px;
   height: 300px;
   background-color: $main-blue;
   margin: 30px auto;
@@ -258,8 +275,9 @@
   position: relative;
 }
 .order_content {
-  width: 1400px;
+  // width: 1400px;
   // max-width: 1280px;
+  width: 100%;
   height: 200px;
   background-color: #fff;
   position: absolute;
@@ -322,7 +340,8 @@
 // ***第二階段
 // 信用卡區域設定
 .credit_content_bg {
-  width: 1100px;
+  // width: 1100px;
+  width: 1280px;
   height: 500px;
   background-color: $main-blue;
   margin: 30px auto;
@@ -338,7 +357,8 @@
   font-weight: 600;
 }
 .credit_content {
-  width: 1100px;
+  // width: 1100px;
+  width: 100%;
   height: 400px;
   background-color: #fff;
   position: absolute;
@@ -387,8 +407,8 @@
 // ***第三階段
 // ***最後訂單明細背景設定
 .order_final_bg {
-  width: 1200px;
-  height: 1000px;
+  width: 1280px;
+  height: 900px;
   background-color: $main-blue;
   margin: 30px auto;
   border-radius: 20px;
@@ -397,13 +417,13 @@
   margin-top: 20%;
 }
 .order_final_bg2 {
-  width: 1200px;
+  width: 100%;
   height: 95%;
   background-color: #fff;
   position: absolute;
   top: 100px;
   border-radius: 0, 0, 20px, 20px;
-  overflow: auto;
+  // overflow: auto;
 }
 .order_final_bg h2 {
   text-align: center;
@@ -452,7 +472,27 @@
 // 下方最終購買明細
 .final_form {
   border: 3px solid $main-text-darkblue;
-  margin: -15px 30px;
+  // margin: -15px 30px;
+  width: 90%;
+  margin: 0 auto;
+  height: 350px;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  //scroll background
+  &::-webkit-scrollbar-track {
+    // background: $assist-white;
+    background: transparent;
+  }
+  //滑桿本身
+  &::-webkit-scrollbar-thumb {
+    background: $main-text-darkblue;
+    border-radius: 100px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: $main-blue;
+  }
 }
 .final_table {
   width: 1135px;
@@ -514,7 +554,7 @@
   font-size: 20px;
   font-weight: 600;
   background-color: $background-color;
-  color: $main-text-darkblue;
+  color: $main-blue;
   border: 4px solid $main-blue;
 }
 .prevstep:hover,
@@ -529,18 +569,19 @@
   font-size: 20px;
   font-weight: 600;
   background-color: white;
-  color: $main-text-darkblue;
+  color: $main-blue;
   border: 4px solid $main-blue;
 }
 
 .nextstep {
-  margin-right: 20rem;
+  // margin-right: 20rem;
+  margin-right: 4rem;
   width: 8%;
   border-radius: 20px;
   font-size: 20px;
   font-weight: 600;
   background-color: $background-color;
-  color: $main-text-darkblue;
+  color: $main-red;
   border: 4px solid $main-red;
 }
 .order_submit_icon {
@@ -550,7 +591,7 @@
   font-size: 20px;
   font-weight: 600;
   background-color: white;
-  color: $main-text-darkblue;
+  color: $main-red;
   border: 4px solid $main-red;
 }
 .nextstep:hover,

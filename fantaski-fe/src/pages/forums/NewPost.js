@@ -4,6 +4,9 @@ import ForumEdit from "../../components/forum/ForumEdit";
 import { Button } from "react-bootstrap";
 import { BsCardImage } from "react-icons/bs";
 import { Link } from "react-router-dom";
+
+import Swal from "sweetalert2";
+
 import {
   insertPostInfo,
   updatePostInfo,
@@ -42,13 +45,13 @@ function NewPost({ forumCategory, setForumCategory, userInfo }) {
   async function handleSubmit(e) {
     if (editContent.category === "") {
       e.preventDefault();
-      alert("請選擇文章類別");
+      Swal.fire("請選擇文章類別");
     } else if (editContent.subject === "") {
       e.preventDefault();
-      alert("請輸入文章標題");
+      Swal.fire("請輸入文章標題");
     } else if (editContent.content === "") {
       e.preventDefault();
-      alert("請輸入文章內容");
+      Swal.fire("請輸入文章內容");
     } else {
       try {
         let formData = new FormData();
