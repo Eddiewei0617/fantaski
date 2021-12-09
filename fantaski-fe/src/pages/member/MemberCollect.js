@@ -79,15 +79,15 @@ function MemberCollect({ setItemNumber, memberInfo, userInfo }) {
       <div>
         <MemberList setItemNumber={setItemNumber} page={4} />
       </div>
-      <table className="member_collect_bg">
+      <table className="member_collect_bg mt-4">
         <thead className="collect_header">
           <tr>
-            <th className="">商品圖片</th>
-            <th className="">商品種類</th>
-            <th className="">商品名稱</th>
-            <th className="">商品描述</th>
-            <th className="">商品價格</th>
-            <th className=""></th>
+            <th className="col-2">商品圖片</th>
+            <th className="col-2">商品種類</th>
+            <th className="col-2">商品名稱</th>
+            <th className="col-2">商品描述</th>
+            <th className="col-2">商品價格</th>
+            <th className="col-2"></th>
           </tr>
         </thead>
         <tbody className="member_collect">

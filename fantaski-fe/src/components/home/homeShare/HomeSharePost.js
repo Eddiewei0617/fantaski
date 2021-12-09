@@ -48,7 +48,14 @@ function HomeSharePost() {
         {indexShare.map((item) => {
           return (
             <>
-              <div className="home-share-bg" key={item.id}>
+              <div
+                className="home-share-bg"
+                key={item.id}
+                data-aos={"zoom-in-up"}
+                data-aos-delay={"300"}
+                data-aos-duration={"1000"}
+                data-aos-easing={"linear"}
+              >
                 <div className="home-share-post">
                   <FaQuoteLeft className="quote-color" />
                   <div className="home-share-content">

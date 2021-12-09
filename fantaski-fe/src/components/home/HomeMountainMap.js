@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import HomeTitle from "./HomeTitle";
-import { IMAGE_ROUTER_URL } from "../../config/url";
+import { IMAGE_ROUTER_URL, IMAGE_HOME_URL } from "../../config/url";
 
 function iglooRoute() {
   let popup = document.getElementById("iglooRoute");
@@ -31,11 +31,54 @@ function HomeMountainMap({ setColorButton }) {
 
   return (
     <>
+      <div className="router-dotted">
+        <img
+          src={`${IMAGE_HOME_URL}/green_tree.png`}
+          alt="white_tree"
+          id="routerGT"
+        />
+        <img
+          src={`${IMAGE_HOME_URL}/green_tree.png`}
+          alt="white_tree"
+          id="routerGT01"
+        />
+      </div>
+
       <section className="home-mountain-map home-section">
-        <div className="container">
+        <div className="clouds-area">
+          <div className="clouds">
+            <img
+              src={`${IMAGE_HOME_URL}/cloud1.png`}
+              alt="clouds"
+              style={{ "--i": 1 }}
+            />
+            <img
+              src={`${IMAGE_HOME_URL}/cloud2.png`}
+              alt="clouds"
+              style={{ "--i": 2 }}
+            />
+            <img
+              src={`${IMAGE_HOME_URL}/cloud3.png`}
+              alt="clouds"
+              style={{ "--i": 3 }}
+            />
+            <img
+              src={`${IMAGE_HOME_URL}/cloud4.png`}
+              alt="clouds"
+              style={{ "--i": 4 }}
+            />
+            <img
+              src={`${IMAGE_HOME_URL}/cloud5.png`}
+              alt="clouds"
+              style={{ "--i": 5 }}
+            />
+          </div>
           <HomeTitle title={mainTitle.title} subTitle={mainTitle.subTitle} />
           {/* home-title-area end */}
+        </div>
+        {/* clouds end */}
 
+        <div className="container">
           <div className="home-map">
             <div className="skiMap mt-0">
               <div className="igloo-popup" onClick={iglooRoute}>
@@ -196,6 +239,45 @@ function HomeMountainMap({ setColorButton }) {
           {/* home-map end */}
         </div>
         {/* container end */}
+
+        <div className="router-dotted">
+          <img
+            src={`${IMAGE_HOME_URL}/white_tree.png`}
+            alt="white_tree"
+            id="routerWT01"
+          />
+        </div>
+
+        <div className="clouds-area">
+          <div className="clouds">
+            <img
+              src={`${IMAGE_HOME_URL}/cloud1.png`}
+              alt="clouds"
+              style={{ "--i": 1 }}
+            />
+            <img
+              src={`${IMAGE_HOME_URL}/cloud2.png`}
+              alt="clouds"
+              style={{ "--i": 2 }}
+            />
+            <img
+              src={`${IMAGE_HOME_URL}/cloud3.png`}
+              alt="clouds"
+              style={{ "--i": 3 }}
+            />
+            <img
+              src={`${IMAGE_HOME_URL}/cloud4.png`}
+              alt="clouds"
+              style={{ "--i": 4 }}
+            />
+            <img
+              src={`${IMAGE_HOME_URL}/cloud5.png`}
+              alt="clouds"
+              style={{ "--i": 5 }}
+            />
+          </div>
+        </div>
+        {/* clouds-area end */}
       </section>
     </>
   );

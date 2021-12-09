@@ -12,7 +12,7 @@ function NavSide({ setCategoryId, setCollectUpdate }) {
       <span className="separate"></span>
       <Accordion className="side_bar">
         <Card>
-          <Card.Header>租點裝備</Card.Header>
+          <Card.Header className="accordion-head">租點裝備</Card.Header>
         </Card>
         <Card>
           <Card.Header className="product_area">
@@ -153,7 +153,7 @@ function NavSide({ setCategoryId, setCollectUpdate }) {
       </Accordion>
 
       {/* 為了隔開與商品圖們的距離 */}
-      <div className="col-1"></div>
+      {/* <div className="col-1"></div> */}
     </>
   );
 }

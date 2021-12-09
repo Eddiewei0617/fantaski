@@ -78,7 +78,7 @@ function Navbar(props) {
   // 天氣小圖api;
   useEffect(() => {
     //天氣資訊api--因為免費版有使用次數上限，先把他註解掉
-    // getWeatherInfo(setWeatherInfo);
+    getWeatherInfo(setWeatherInfo);
     //用哪個天氣小圖
     decideWeatherIcon();
   }, []);
@@ -305,7 +305,13 @@ function Navbar(props) {
                       </p>
                     </Link>
                   ) : (
-                    <Link className="nav-link position-relative" to="/orders">
+                    <Link
+                      className="nav-link position-relative"
+                      to="/orders"
+                      onClick={(e) => {
+                        handleClick(e);
+                      }}
+                    >
                       <BsFillCartFill className="all-icon-nav" size={25} />
                       <p className="shopping-cart-circle" id="itemNumber">
                         {itemNumber}

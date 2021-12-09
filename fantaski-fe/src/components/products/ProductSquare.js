@@ -38,7 +38,7 @@ function ProductSquare({
 
   return (
     <>
-      <div>
+      <div className="product-area">
         <ProductInfo
           toggleState={toggleState}
           clickToChangeToggle={clickToChangeToggle}

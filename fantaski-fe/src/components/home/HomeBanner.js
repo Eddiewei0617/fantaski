@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 
 import { IMAGE_HOME_URL } from "../../config/url";
 
-function HomeBanner() {
+function HomeBanner({ setColorButton }) {
   return (
     <>
-      <section className="home-banner home-section">
+      {/*  home-section */}
+      <section className="home-banner">
         <div className="home-banner-area">
           <div className="container">
             <div className="banner-text">
@@ -19,7 +20,12 @@ function HomeBanner() {
             </div>
 
             <div className="home-banner-img">
-              <Link to="/products">
+              <Link
+                to="/products"
+                onClick={() => {
+                  setColorButton("租點裝備");
+                }}
+              >
                 <img src={`${IMAGE_HOME_URL}/sled_car.jpg`} alt="sled_car" />
               </Link>
             </div>

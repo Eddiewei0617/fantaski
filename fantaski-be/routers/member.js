@@ -101,12 +101,25 @@ router.post("/memberPassword", async (req, res) => {
   // 東西驗證
 
   try {
-    let check = await connection.queryAsync(
-      "SELECT password FROM member WHERE email=?",
-      [req.session.member.email]
-    );
-    let result = await bcrypt.compare(req.body.oldpassword, check[0].password);
-    if (result) {
+    console.log("req.body.oldpassword", req.body.oldpassword);
+    // console.log("check[0].password", req.body.check[0]);
+    console.log("password", req.body.password);
+    console.log("req.body.confirmPassword", req.body.confirmPassword);
+    // let check = await connection.queryAsync(
+    //   "SELECT password FROM member WHERE email=?",
+    //   [req.session.member.email]
+    // );
+    // if (req.body.password === req.body.confirmPassword) {
+    //   console.log("true");
+    // } else {
+    //   console.log("false");
+    // }
+    // let result = await bcrypt.compare(
+    //   req.body.password,
+    //   req.body.confirmPassword
+    // );
+    // console.log("result", result);
+    if (req.body.password === req.body.confirmPassword) {
       let hashPassword = await bcrypt.hash(req.body.password, 10);
       let data = await connection.queryAsync(
         "UPDATE member SET password=? WHERE id=?",
@@ -185,7 +198,7 @@ router.post("/updataImg", async (req, res) => {
 router.get("/memberArticle", async (req, res) => {
   try {
     let data = await connection.queryAsync(
-      "SELECT * FROM forum WHERE member_id=? AND valid=1",
+      "SELECT * FROM forum WHERE member_id=? AND valid=1 ORDER BY created_at DESC",
       // [3]
       [req.session.member.id]
     );
