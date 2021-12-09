@@ -123,7 +123,7 @@ function Swiper({
             })}
           </div>
         </div>
-        <div className="d-flex d-sm-none justify-content-between">
+        <div className="d-md-flex d-sm-none justify-content-between">
           <button
             className={`swiper-arrow-box swiper-arrow-left ${
               ifArrowUnavailable["left"] && "swiper-arrow-box-unavailable"
