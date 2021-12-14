@@ -144,3 +144,53 @@ export function handleAddNumber(storage, setItemNumber) {
   let items = itemString.substr(0, itemString.length - 2).split(", ");
   setItemNumber(Number(items.length));
 }
+
+//抓mongoDB的課程in購物車資料
+export async function getCourseInCarts(
+  courseId,
+  memberId,
+  setIfAddCart,
+  setCustomerChoose
+) {
+  let res = await axios.get(`${API_URL}/course/getcartitems`, {
+    params: {
+      courseId: courseId,
+    },
+  });
+  let result = res.data;
+  let resultObj = {};
+  for (let i = 0; i < result.length; i++) {
+    //if memeber have this course in cart
+    if (memberId !== 0 && result[i].memberId === memberId) {
+      setIfAddCart(true);
+      setCustomerChoose((cur) => {
+        return {
+          ...cur,
+          addCartDate: result[i].items.courseDate,
+          addCartAmount: result[i].items.courseAmount,
+        };
+      });
+    } else {
+      resultObj[result[i].items.courseDate] = result[i].items.courseAmount;
+      setIfAddCart(false);
+      setCustomerChoose((cur) => {
+        return {
+          ...cur,
+          addCartDate: "",
+          addCartAmount: "",
+          othersCart: resultObj,
+        };
+      });
+    }
+  }
+}
+
+//存取購物車資料到mongoDB
+export async function insertCartItems(memberId, courseId, itemArray) {
+  let res = await axios.post(`${API_URL}/course/insertcartitems`, {
+    memberId: memberId,
+    courseId: courseId,
+    itemArray: itemArray,
+  });
+  console.log(res.data);
+}

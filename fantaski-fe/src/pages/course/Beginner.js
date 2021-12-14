@@ -22,6 +22,7 @@ function Beginner(props) {
     cartPositionState,
     setColorButton,
     setCategoryId,
+    userInfo,
   } = props;
   //courses ["初體驗", "技能班", "雪橇車", "建冰屋"]
   //showCourse courses[1]
@@ -75,6 +76,7 @@ function Beginner(props) {
         setCustomerChoose={setCustomerChoose}
         setItemNumber={setItemNumber}
         cartPositionState={cartPositionState}
+        userInfo={userInfo}
       />
       <Title titleName="推薦裝備" />
       <Swiper

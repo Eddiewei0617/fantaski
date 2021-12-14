@@ -3,7 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import Calendar from "../calendar/Calendar";
 import { COURSE_IMG_URL } from "../../../config/url";
-import { getCourseInfo, handleAddNumber } from "../moduleList";
+import {
+  getCourseInfo,
+  handleAddNumber,
+  getCourseInCarts,
+  insertCartItems,
+} from "../moduleList";
 import Swal from "sweetalert2";
 
 function AddCartFix({
@@ -14,6 +19,7 @@ function AddCartFix({
   setIfAddCart,
   setItemNumber,
   cartPositionState,
+  userInfo,
 }) {
   const [showCalendar, setShowCalendar] = useState(false);
   const [courseInfo, setCourseInfo] = useState(null);
@@ -47,20 +53,32 @@ function AddCartFix({
   }, []);
 
   useEffect(() => {
-    if (courseInfo !== null && storage[`c-${courseInfo[0].id}`]) {
-      setIfAddCart(true);
-      //如果課程已加入購物車，萬年曆人數要減相應人數
-      let addCartDate = storage[`c-${courseInfo[0].id}`].split("|")[4];
-      let addCartAmount = storage[`c-${courseInfo[0].id}`].split("|")[5];
-      setCustomerChoose((cur) => {
-        return {
-          ...cur,
-          addCartDate: addCartDate,
-          addCartAmount: addCartAmount,
-        };
-      });
+    // if (courseInfo !== null && storage[`c-${courseInfo[0].id}`]) {
+    //   setIfAddCart(true);
+    //   //如果課程已加入購物車，萬年曆人數要減相應人數
+    //   let addCartDate = storage[`c-${courseInfo[0].id}`].split("|")[4];
+    //   let addCartAmount = storage[`c-${courseInfo[0].id}`].split("|")[5];
+    //   setCustomerChoose((cur) => {
+    //     return {
+    //       ...cur,
+    //       addCartDate: addCartDate,
+    //       addCartAmount: addCartAmount,
+    //     };
+    //   });
+    // }
+    if (courseInfo !== null && userInfo !== null) {
+      if (userInfo.id) {
+        getCourseInCarts(
+          courseInfo[0].id,
+          userInfo.id,
+          setIfAddCart,
+          setCustomerChoose
+        );
+      } else {
+        getCourseInCarts(courseInfo[0].id, 0, setIfAddCart, setCustomerChoose);
+      }
     }
-  }, [courseInfo]);
+  }, [courseInfo, userInfo]);
 
   let storage = localStorage;
   // 為了不要讓addItemList在null的時候寫undefined
@@ -118,8 +136,8 @@ function AddCartFix({
               name="date"
               value={customerChoose.date}
               placeholder={
-                storage[`c-${courseInfo[0].id}`] && courseInfo !== null
-                  ? storage[`c-${courseInfo[0].id}`].split("|")[4]
+                customerChoose.addCartDate && courseInfo !== null
+                  ? customerChoose.addCartDate
                   : "選擇日期"
               }
               className={`date pl-4 ${ifAddCart && "text-secondary"}`}
@@ -158,8 +176,8 @@ function AddCartFix({
               name="number"
               value={customerChoose.number}
               placeholder={
-                storage[`c-${courseInfo[0].id}`] && courseInfo !== null
-                  ? storage[`c-${courseInfo[0].id}`].split("|")[5]
+                customerChoose.addCartAmount && courseInfo !== null
+                  ? customerChoose.addCartAmount
                   : 1
               }
               min="1"
@@ -191,7 +209,7 @@ function AddCartFix({
               className={ifAddCart ? "button-clicked" : ""}
               onClick={(e) => {
                 let itemId = `c-${courseInfo[0].id}`;
-                if (storage[itemId]) {
+                if (ifAddCart) {
                   // alert("您已將此物品加入購物車");
                   Swal.fire("您已將此物品加入購物車");
                 } else if (customerChoose.date === "") {
@@ -227,6 +245,31 @@ function AddCartFix({
                       addCartAmount: addCartAmount,
                     };
                   });
+                  if (courseInfo !== null && userInfo !== null) {
+                    if (userInfo.id) {
+                      let itemArr = [
+                        {
+                          memberId: userInfo.id,
+                          items: {
+                            courseDate: customerChoose.date,
+                            courseAmount: customerChoose.number,
+                          },
+                        },
+                      ];
+                      insertCartItems(userInfo.id, courseInfo[0].id, itemArr);
+                    } else {
+                      let itemArr = [
+                        {
+                          memberId: 0,
+                          items: {
+                            courseDate: customerChoose.date,
+                            courseAmount: customerChoose.number,
+                          },
+                        },
+                      ];
+                      insertCartItems(0, courseInfo[0].id, itemArr);
+                    }
+                  }
                 }
               }}
             >

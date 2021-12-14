@@ -35,9 +35,9 @@ const weekDayInLastMonth = (year, month) => {
     yearForLastMonth -= 1;
   }
   //上個月有幾天
-  let daysInLastMonth = daysInMonth(yearForLastMonth, lastMonth);
+  let daysInLastMonth = daysInMonth(yearForLastMonth, lastMonth); //30
   //這個月1號是星期幾
-  let firstDayInThisMonth = firstWeekday(year, month);
+  let firstDayInThisMonth = firstWeekday(year, month); //3
   let days = [];
   //本月要顯示幾天上個月的日期
   for (let i = 0; i < firstDayInThisMonth; i++) {
@@ -194,25 +194,42 @@ function DatesInMonth(props) {
     if (d < 10) d = `0${d}`;
     if (m < 10) m = `0${m}`;
     let theDate = `${y}-${m}-${d}`;
-
+    //狀態還沒loading完成前
     if (dailyCourseLeft === null) {
       return;
+      //日期小於今天的不顯示剩餘人數
     } else if (theDate < today) {
       return;
     } else {
+      //left = 已購買的課程剩餘人數
       if (dailyCourseLeft.hasOwnProperty(theDate)) {
         let left = stuLimit - dailyCourseLeft[theDate];
         if (left < 0) left = 0;
+        //已在購物車內尚未購買的人數(除登入者之外其他使用者的購物車)
+        if (
+          customerChoose.othersCart &&
+          customerChoose.othersCart.hasOwnProperty(theDate)
+        ) {
+          left -= customerChoose.othersCart[theDate];
+        }
+        //在登入者的購物車內的人數
         if (customerChoose.addCartDate == theDate) {
           return `剩${left - customerChoose.addCartAmount}人`;
         } else {
           return `剩${left}人`;
         }
       } else {
+        let stuLimitVar = stuLimit;
+        if (
+          customerChoose.othersCart &&
+          customerChoose.othersCart.hasOwnProperty(theDate)
+        ) {
+          stuLimitVar -= customerChoose.othersCart[theDate];
+        }
         if (customerChoose.addCartDate == theDate) {
-          return `剩${stuLimit - customerChoose.addCartAmount}人`;
+          return `剩${stuLimitVar - customerChoose.addCartAmount}人`;
         } else {
-          return `剩${stuLimit}人`;
+          return `剩${stuLimitVar}人`;
         }
       }
     }

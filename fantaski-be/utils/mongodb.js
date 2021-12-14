@@ -50,7 +50,7 @@ async function run(action) {
       };
       const result = await movies.updateMany(filter, updateDoc);
       console.log(`Updated ${result.modifiedCount} documents`);
-      //REPLACE DATA(將整個資料取代---舊資料如果沒有在薪資料理將不保留)
+      //REPLACE DATA(將整個資料取代---舊資料如果沒有在新資料理將不保留)
     } else if (action === "replace") {
       const database = client.db("sample_mflix");
       const movies = database.collection("movies");

@@ -1,6 +1,7 @@
 express = require("express");
 const router = express.Router();
 const connection = require("../utils/db");
+// const mongoInsertItems = require("../utils/mongodb");
 const { loginCheckMiddleware } = require("../middlewares/auth");
 
 //起始頁(沒做啥，確認api有沒有成功連上而已)
@@ -120,6 +121,84 @@ router.post("/getdailycourseleft", async (req, res) => {
   } catch (e) {
     console.log("update for comment failed:", e);
     res.json({ code: 9999, message: "資料庫讀取錯誤" });
+  }
+});
+
+//mongoDB連線
+const { MongoClient } = require("mongodb");
+const uri = `mongodb+srv://fantaski-new:${process.env.MONGODB_PASSWORD}@cluster0.bfytc.mongodb.net?retryWrites=true&w=majority`;
+const client = new MongoClient(uri);
+const database = client.db("cartItems");
+
+//取得購物車項目from mongoDB
+router.get("/getcartitems/:courseId?", async (req, res) => {
+  console.log("request for getCartItems");
+  let course_id = req.query.courseId;
+  let courseCartItem = database.collection(`courseId-${course_id}`);
+  try {
+    await client.connect();
+    const query = {};
+    let itemsIncart = await courseCartItem.find(query).toArray();
+    res.json(itemsIncart);
+  } catch (e) {
+    console.log("query for getCartItems failed:", e);
+    res.json({ code: 9999, message: "資料庫讀取錯誤" });
+  } finally {
+    await client.close();
+  }
+});
+
+//新增／修改放在購物車的項目到mongoDB
+router.post("/insertcartitems", async (req, res) => {
+  console.log("request for insertCartItems");
+  //member_id
+  let member_id = req.body.memberId;
+  //course_id
+  let courseId = req.body.courseId;
+  let courseCartItem = database.collection(`courseId-${courseId}`);
+  let itemArray = req.body.itemArray;
+  try {
+    await client.connect();
+    //設定TTL
+    courseCartItem.createIndex(
+      { createdAt: 1 },
+      { expireAfterSeconds: 60 * 60 } //s
+    );
+    const query = {
+      memberId: member_id,
+    };
+    //確認資料庫裡原本有沒有該會員購物車資料
+    const memberCartCount = await courseCartItem.countDocuments(query);
+    console.log("memberCartCount", memberCartCount);
+    if (memberCartCount >= 1 && member_id !== 0) {
+      const updateDoc = {
+        $set: {
+          items: { courseDate: "2021-11-11", courseAmount: 1 },
+          createdAt: new Date(),
+        },
+      };
+      const options = { upsert: true };
+      // create a new document that will be used to replace the existing document
+      const result = await courseCartItem.updateOne(query, updateDoc, options);
+      console.log(
+        `${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`
+      );
+      res.json({ code: 0, message: "購物車資料更新成功" });
+    } else {
+      // this option prevents additional documents from being inserted if one fails
+      const options = { ordered: true };
+      itemArray[0].createdAt = new Date();
+      itemArray[0].logEvent = 2;
+      itemArray[0].logMessage = "Success";
+      const result = await courseCartItem.insertMany(itemArray, options);
+      console.log(`${result.insertedCount} documents were inserted`);
+      res.json({ code: 0, message: "購物車資料加入成功" });
+    }
+  } catch (e) {
+    console.log("query for insertCartItems failed:", e);
+    res.json({ code: 9999, message: "資料庫讀取錯誤" });
+  } finally {
+    await client.close();
   }
 });
 
