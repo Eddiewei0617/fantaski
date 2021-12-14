@@ -136,56 +136,58 @@ function Products({
 
   return (
     <>
-      <CarouselP />
-      <ScrolldownIcon
-        onClick={() => {
-          scrollToProduct();
-        }}
-      />
-      <SwitchIcon setSquare={setSquare} square={square} />
-
-      <div className="d-flex main_area" ref={productSection}>
-        <NavSide
-          setCategoryId={setCategoryId}
-          setCollectUpdate={setCollectUpdate}
-          collected={collected}
-          handleCollect={handleCollect}
-          handleChecked={handleChecked}
-          handleAddNumber={handleAddNumber}
-          setSquare={setSquare}
+      <section className="product-ski-area">
+        <CarouselP />
+        <ScrolldownIcon
+          onClick={() => {
+            scrollToProduct();
+          }}
         />
-        {square ? (
-          <ProductSquare
-            setItemNumber={setItemNumber}
-            itemNumber={itemNumber}
-            categoryId={categoryId}
-            memberInfo={memberInfo}
-            collected={collected}
+        <SwitchIcon setSquare={setSquare} square={square} />
+
+        <div className="d-flex main_area" ref={productSection}>
+          <NavSide
+            setCategoryId={setCategoryId}
             setCollectUpdate={setCollectUpdate}
-            cartPositionState={cartPositionState}
+            collected={collected}
             handleCollect={handleCollect}
             handleChecked={handleChecked}
             handleAddNumber={handleAddNumber}
-            userInfo={userInfo}
-            alreadyinCart={alreadyinCart}
+            setSquare={setSquare}
           />
-        ) : (
-          <ProductList
-            setItemNumber={setItemNumber}
-            itemNumber={itemNumber}
-            onClick={() => {
-              scrollToProduct();
-            }}
-            categoryId={categoryId}
-            memberInfo={memberInfo}
-            collected={collected}
-            setCollectUpdate={setCollectUpdate}
-            handleCollect={handleCollect}
-            handleChecked={handleChecked}
-            handleAddNumber={handleAddNumber}
-          />
-        )}
-      </div>
+          {square ? (
+            <ProductSquare
+              setItemNumber={setItemNumber}
+              itemNumber={itemNumber}
+              categoryId={categoryId}
+              memberInfo={memberInfo}
+              collected={collected}
+              setCollectUpdate={setCollectUpdate}
+              cartPositionState={cartPositionState}
+              handleCollect={handleCollect}
+              handleChecked={handleChecked}
+              handleAddNumber={handleAddNumber}
+              userInfo={userInfo}
+              alreadyinCart={alreadyinCart}
+            />
+          ) : (
+            <ProductList
+              setItemNumber={setItemNumber}
+              itemNumber={itemNumber}
+              onClick={() => {
+                scrollToProduct();
+              }}
+              categoryId={categoryId}
+              memberInfo={memberInfo}
+              collected={collected}
+              setCollectUpdate={setCollectUpdate}
+              handleCollect={handleCollect}
+              handleChecked={handleChecked}
+              handleAddNumber={handleAddNumber}
+            />
+          )}
+        </div>
+      </section>
     </>
   );
 }

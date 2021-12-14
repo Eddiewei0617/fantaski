@@ -53,13 +53,13 @@ function HomeRentCarousel({ active, productList, setColorButton }) {
       observer: true, //修改swiper自己或子元素時，自動初始化swiper
       observeParents: true, //修改swiper的父元素時，自動初始化swiper
       direction: "horizontal", // 方向
-      loop: true, // 循環
+      loop: false, // 循環
       spaceBetween: 100,
       slidesPerView: 3,
       centeredSlides: true,
       // roundLengths: true,
       // loopAdditionalSlides: 30,
-      grabCursor: true, // 游標為手掌
+      // grabCursor: true, // 游標為手掌
       autoplay: {
         delay: 1000,
         disableOnInteraction: false,
@@ -69,7 +69,7 @@ function HomeRentCarousel({ active, productList, setColorButton }) {
   }, []);
 
   // 自動輪播
-  // Swiper.use([Autoplay]);
+  Swiper.use([Autoplay]);
 
   // console.log(productList.filter((e) => e.type === types[1]));
 

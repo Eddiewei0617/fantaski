@@ -250,7 +250,7 @@ function DatesInMonth(props) {
                     >
                       {vc.d}
                       <div className={`daily-left`}>
-                        {dailyLeft(vc.y, vc.m, vc.d)}
+                        <span>{dailyLeft(vc.y, vc.m, vc.d)}</span>
                       </div>
                     </td>
                   </>

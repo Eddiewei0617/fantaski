@@ -3,7 +3,7 @@ $hr-color: #c6c6c6;
 $forum-box-shadow: 0 0 30px rgba(19, 72, 101, 0.4);
 // ====================
 .forum-main {
-  margin-top: 10.5%;
+  margin-top: 7.5%;
   //   background: $assist-white;
 }
 .forum-container {
@@ -304,23 +304,24 @@ $forum-box-shadow: 0 0 30px rgba(19, 72, 101, 0.4);
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 1px solid rgba(19, 72, 101, 0.4);
+  border: 1px solid rgba(19, 72, 101, 0.2);
   overflow: hidden;
   margin-right: 8px;
+  // background-color: $main-text-darkblue;
   //   user 上傳圖檔不為svg時須做這設定
-  //   display: inline-flex;
-  //   align-items: inherit;
-  //   justify-content: center;
+  // display: inline-flex;
+  // align-items: inherit;
+  // justify-content: center;
   img {
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 }
 
 .forum-pop-threedot {
   margin: -1rem -1rem -1rem auto;
-  padding: 1rem 1rem;
+  padding: 1rem 0.86rem;
   transform: translate(335%, 80%);
   z-index: 1;
 }
@@ -351,6 +352,7 @@ $forum-box-shadow: 0 0 30px rgba(19, 72, 101, 0.4);
     padding: 0 60px;
     width: 95%;
     margin: 0 auto;
+    margin-top: 2%;
     hr {
       background: $hr-color;
       height: 3px;
@@ -377,6 +379,7 @@ $forum-box-shadow: 0 0 30px rgba(19, 72, 101, 0.4);
   align-items: inherit;
   justify-content: center;
   margin: 5% 0;
+  height: 400px;
 }
 
 .forum-p {
@@ -554,6 +557,13 @@ $forum-box-shadow: 0 0 30px rgba(19, 72, 101, 0.4);
   display: inline-block;
   height: 150px;
 }
+.post-btn-link {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+    color: $main-text-darkblue;
+  }
+}
 .cancle-btn {
   border: none;
   background: none;
@@ -562,14 +572,10 @@ $forum-box-shadow: 0 0 30px rgba(19, 72, 101, 0.4);
 .confrim-btn {
   border: none;
   background: $main-red;
-  color: $assist-white;
+  // color: $assist-white;
   border-radius: 5px;
   padding: 5px;
-}
-.post-btn-link {
-  text-decoration: none;
-  &:hover {
-    text-decoration: none;
-    color: $main-text-darkblue;
+  a {
+    color: $assist-white;
   }
 }

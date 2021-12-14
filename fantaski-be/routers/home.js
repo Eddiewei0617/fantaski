@@ -36,7 +36,6 @@ router.get("/idxcoursepricerateremain", async (req, res) => {
     WHERE c.valid = 1 and c.id != 5
     GROUP BY c.id;
     `);
-
     res.json(idxCoursePriceRateRemain);
   } catch (err) {
     console.error("query for idxCoursePriceRateRemain failed:", err);
