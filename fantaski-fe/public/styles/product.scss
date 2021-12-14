@@ -151,10 +151,15 @@
     color: $main-red;
   }
 }
-.product_image_s,
+.product_image_s {
+  width: 240px;
+  height: 350px;
+  position: relative;
+}
+// .product_image_s,
 .product_image_jackets {
-  width: 260px;
-  height: 330px;
+  width: 240px;
+  height: 300px;
   position: relative;
 }
 
@@ -203,7 +208,7 @@
   // left: 22%;
   padding: 0;
   color: $main-text-darkblue;
-  height: 230vh;
+  // height: 230vh;
   // height: 1000px;
 }
 .all_image_l li {
@@ -216,8 +221,8 @@
   }
 }
 .product_image_l {
-  width: 260px;
-  height: 300px;
+  width: 240px;
+  height: 350px;
   position: relative;
 }
 // .product_image_jackets {

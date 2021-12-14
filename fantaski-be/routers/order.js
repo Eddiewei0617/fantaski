@@ -50,7 +50,7 @@ router.post("/orderconfirm", async (req, res) => {
             "INSERT INTO order_product (order_id, product_id, amount, booking_date, created_at, valid) VALUES(?,?,?,?,?,?) ",
             [
               orderConfirm.insertId,
-              req.body.orderList[i].id.substr(2, 1),
+              req.body.orderList[i].id.substr(2, 2),
               req.body.orderList[i].number,
               req.body.orderList[i].date,
               created_at,
@@ -130,7 +130,7 @@ router.post("/orderconfirm", async (req, res) => {
             "INSERT INTO order_product (order_id, product_id, amount, booking_date, created_at, valid) VALUES(?,?,?,?,?,?) ",
             [
               orderConfirm.insertId,
-              req.body.orderList[i].id.substr(2, 1),
+              req.body.orderList[i].id.substr(2, 2),
               req.body.orderList[i].number,
               req.body.orderList[i].date,
               created_at,
