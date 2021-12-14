@@ -10,6 +10,6 @@
 
 專題 GOGO! 大家一起加油! 我們一定行!
 
-這是我們的專題 youtube 影片連結~
+這是我們的專題 youtube 影片連結
 
 https://www.youtube.com/watch?v=Yc3ch-NmZH4
