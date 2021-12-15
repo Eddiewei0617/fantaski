@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import { getDailyCourseLeft, courseIdName } from "../moduleList";
+import {
+  getDailyCourseLeft,
+  courseIdName,
+  getCourseInCarts,
+} from "../moduleList";
 import Swal from "sweetalert2";
 
 const today = moment().format("YYYY-MM-DD");
@@ -83,6 +87,8 @@ function DatesInMonth(props) {
     setShowCalendar,
     setShowCalendarFloat,
     ifAddCart,
+    userInfo,
+    setIfAddCart,
   } = props;
   const [dailyCourseLeft, setDailyCourseLeft] = useState(null);
   const [stuLimit, setStuLimit] = useState(0);
@@ -102,6 +108,16 @@ function DatesInMonth(props) {
       setStuLimit //課程人數上限
     );
   }, [selectedYear, selectedMonth, customerChoose]);
+  useEffect(() => {
+    if (userInfo && userInfo.code !== 1201) {
+      getCourseInCarts(
+        courseIdName[showCourse].id,
+        userInfo.id,
+        setIfAddCart,
+        setCustomerChoose
+      );
+    }
+  }, [userInfo]);
 
   let totalDaysLT = weekDayInLastMonth(selectedYear, selectedMonth).concat(
     daysInThisMonth(selectedYear, selectedMonth, day)
@@ -205,19 +221,20 @@ function DatesInMonth(props) {
       if (dailyCourseLeft.hasOwnProperty(theDate)) {
         let left = stuLimit - dailyCourseLeft[theDate];
         if (left < 0) left = 0;
-        //已在購物車內尚未購買的人數(除登入者之外其他使用者的購物車)
+        //已在購物車內尚未購買的人數
         if (
           customerChoose.othersCart &&
           customerChoose.othersCart.hasOwnProperty(theDate)
         ) {
           left -= customerChoose.othersCart[theDate];
         }
+        return `剩${left}人`;
         //在登入者的購物車內的人數
-        if (customerChoose.addCartDate == theDate) {
-          return `剩${left - customerChoose.addCartAmount}人`;
-        } else {
-          return `剩${left}人`;
-        }
+        // if (customerChoose.addCartDate == theDate) {
+        //   return `剩${left - customerChoose.addCartAmount}人`;
+        // } else {
+        //   return `剩${left}人`;
+        // }
       } else {
         let stuLimitVar = stuLimit;
         if (
@@ -226,11 +243,12 @@ function DatesInMonth(props) {
         ) {
           stuLimitVar -= customerChoose.othersCart[theDate];
         }
-        if (customerChoose.addCartDate == theDate) {
-          return `剩${stuLimitVar - customerChoose.addCartAmount}人`;
-        } else {
-          return `剩${stuLimitVar}人`;
-        }
+        return `剩${stuLimitVar}人`;
+        // if (customerChoose.addCartDate == theDate) {
+        //   return `剩${stuLimitVar - customerChoose.addCartAmount}人`;
+        // } else {
+        //   return `剩${stuLimitVar}人`;
+        // }
       }
     }
   }

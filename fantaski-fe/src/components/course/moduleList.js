@@ -160,6 +160,14 @@ export async function getCourseInCarts(
   let result = res.data;
   let resultObj = {};
   for (let i = 0; i < result.length; i++) {
+    let date = result[i].items.courseDate;
+    if (resultObj.hasOwnProperty(date)) {
+      resultObj[date] += result[i].items.courseAmount;
+    } else {
+      resultObj[date] = result[i].items.courseAmount;
+    }
+    console.log(resultObj);
+
     //if memeber have this course in cart
     if (memberId !== 0 && result[i].memberId === memberId) {
       setIfAddCart(true);
@@ -171,18 +179,20 @@ export async function getCourseInCarts(
         };
       });
     } else {
-      resultObj[result[i].items.courseDate] = result[i].items.courseAmount;
-      setIfAddCart(false);
       setCustomerChoose((cur) => {
         return {
           ...cur,
-          addCartDate: "",
-          addCartAmount: "",
-          othersCart: resultObj,
+          // othersCart: resultObj,
         };
       });
     }
   }
+  setCustomerChoose((cur) => {
+    return {
+      ...cur,
+      othersCart: resultObj,
+    };
+  });
 }
 
 //存取購物車資料到mongoDB

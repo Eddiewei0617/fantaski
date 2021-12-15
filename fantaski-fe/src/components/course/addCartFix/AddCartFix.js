@@ -52,7 +52,7 @@ function AddCartFix({
     });
   }, []);
 
-  useEffect(() => {
+  useEffect(async () => {
     // if (courseInfo !== null && storage[`c-${courseInfo[0].id}`]) {
     //   setIfAddCart(true);
     //   //如果課程已加入購物車，萬年曆人數要減相應人數
@@ -75,7 +75,25 @@ function AddCartFix({
           setCustomerChoose
         );
       } else {
-        getCourseInCarts(courseInfo[0].id, 0, setIfAddCart, setCustomerChoose);
+        await getCourseInCarts(
+          courseInfo[0].id,
+          0,
+          setIfAddCart,
+          setCustomerChoose
+        );
+        if (courseInfo !== null && storage[`c-${courseInfo[0].id}`]) {
+          setIfAddCart(true);
+          //如果課程已加入購物車，萬年曆人數要減相應人數
+          let addCartDate = storage[`c-${courseInfo[0].id}`].split("|")[4];
+          let addCartAmount = storage[`c-${courseInfo[0].id}`].split("|")[5];
+          setCustomerChoose((cur) => {
+            return {
+              ...cur,
+              addCartDate: addCartDate,
+              addCartAmount: addCartAmount,
+            };
+          });
+        }
       }
     }
   }, [courseInfo, userInfo]);
@@ -165,6 +183,8 @@ function AddCartFix({
                   setCustomerChoose={setCustomerChoose}
                   setShowCalendar={setShowCalendar}
                   ifAddCart={ifAddCart}
+                  userInfo={userInfo}
+                  setIfAddCart={setIfAddCart}
                 />
               </div>
             )}
@@ -238,6 +258,7 @@ function AddCartFix({
                     storage[`c-${courseInfo[0].id}`].split("|")[4];
                   let addCartAmount =
                     storage[`c-${courseInfo[0].id}`].split("|")[5];
+                  console.log(addCartDate);
                   setCustomerChoose((cur) => {
                     return {
                       ...cur,

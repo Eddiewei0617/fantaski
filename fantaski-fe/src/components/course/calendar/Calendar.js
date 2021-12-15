@@ -18,6 +18,8 @@ function Calendar(props) {
     setShowCalendarFloat,
     showCourse,
     ifAddCart,
+    setIfAddCart,
+    userInfo,
   } = props;
   return (
     <>
@@ -40,6 +42,8 @@ function Calendar(props) {
           setShowCalendar={setShowCalendar}
           setShowCalendarFloat={setShowCalendarFloat}
           ifAddCart={ifAddCart}
+          userInfo={userInfo}
+          setIfAddCart={setIfAddCart}
         />
       </div>
     </>
