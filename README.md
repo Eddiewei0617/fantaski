@@ -13,3 +13,4 @@
 這是我們的專題 youtube 影片連結
 
 https://www.youtube.com/watch?v=Yc3ch-NmZH4
+- 影片請從 3:38:45 開始
